@@ -15,7 +15,6 @@
         overflow-x: hidden;
     }
 
-    /* Фоновое свечение */
     body::before {
         content: "";
         position: fixed;
@@ -193,6 +192,65 @@
         line-height: 1.6;
     }
 
+    /* Команды */
+    .commands {
+        margin: 80px 0;
+    }
+    .commands h2 {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #fff;
+    }
+    .cmd-group {
+        background: #1a1d29;
+        border: 1px solid #262a3a;
+        border-radius: 12px;
+        padding: 24px;
+        margin-bottom: 16px;
+    }
+    .cmd-group h3 {
+        font-size: 18px;
+        color: #fff;
+        margin-bottom: 16px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .cmd-group h3::before {
+        content: "";
+        width: 4px;
+        height: 20px;
+        background: #5865F2;
+        border-radius: 2px;
+    }
+    .cmd-list {
+        list-style: none;
+    }
+    .cmd-list li {
+        padding: 10px 0;
+        border-bottom: 1px solid #262a3a;
+        font-size: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+    .cmd-list li:last-child { border-bottom: none; }
+    .cmd-name {
+        font-family: 'Consolas', monospace;
+        color: #8B5CF6;
+        background: #13161f;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+    .cmd-desc {
+        color: #a8b1c7;
+        font-size: 14px;
+    }
+
     /* CTA */
     .cta {
         text-align: center;
@@ -237,6 +295,7 @@
             <div class="logo">🤖 Юрика-Бот</div>
             <div class="nav-links">
                 <a href="#features">Возможности</a>
+                <a href="#commands">Команды</a>
                 <a href="#stats">Статистика</a>
                 <a href="#invite">Добавить</a>
             </div>
@@ -314,10 +373,47 @@
             </div>
         </section>
 
+        <section class="commands" id="commands">
+            <h2>Команды бота</h2>
+
+            <div class="cmd-group">
+                <h3>🎲 Развлечения</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name">!coinflip</span><span class="cmd-desc">Подбросить монетку</span></li>
+                    <li><span class="cmd-name">!roll [число]</span><span class="cmd-desc">Бросить кубик с N сторонами</span></li>
+                    <li><span class="cmd-name">!8ball [вопрос]</span><span class="cmd-desc">Магический шар ответит на вопрос</span></li>
+                    <li><span class="cmd-name">!choose [варианты]</span><span class="cmd-desc">Выбрать один из вариантов</span></li>
+                    <li><span class="cmd-name">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
+                    <li><span class="cmd-name">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага с ботом</span></li>
+                </ul>
+            </div>
+
+            <div class="cmd-group">
+                <h3>🛡️ Модерация</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника с сервера</span></li>
+                    <li><span class="cmd-name">!ban @user [причина]</span><span class="cmd-desc">Забанить участника</span></li>
+                    <li><span class="cmd-name">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
+                    <li><span class="cmd-name">!mute @user [минуты]</span><span class="cmd-desc">Замьютить на время</span></li>
+                    <li><span class="cmd-name">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
+                    <li><span class="cmd-name">!clear [число]</span><span class="cmd-desc">Удалить N сообщений</span></li>
+                    <li><span class="cmd-name">!warn @user [причина]</span><span class="cmd-desc">Выдать предупреждение</span></li>
+                </ul>
+            </div>
+
+            <div class="cmd-group">
+                <h3>🔧 Утилиты</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе</span></li>
+                    <li><span class="cmd-name">!help</span><span class="cmd-desc">Интерактивное меню команд</span></li>
+                </ul>
+            </div>
+        </section>
+
         <section class="cta" id="invite">
             <h2>Готов добавить бота?</h2>
             <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
-            <a href="https://discord.com/api/oauth2/authorize?client_id=ВАШ_CLIENT_ID&scope=bot&permissions=8"
+            <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
                target="_blank" class="btn btn-primary">
                 ➕ Добавить на сервер
             </a>
