@@ -1,31 +1,69 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Юрика-Бот — Официальный сайт</title>
+<title>Юрика-Бот — Твой помощник на сервере Lolka</title>
+<meta name="description" content="Модерация, развлечения и утилиты — всё в одном боте для Lolka. Установка за 10 секунд, полностью бесплатно.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 <style>
+    /* ---------- Переменные темы ---------- */
+    :root, [data-theme="dark"] {
+        --bg: #0f1117;
+        --bg-2: #1a1d29;
+        --bg-3: #13161f;
+        --border: #262a3a;
+        --text: #e6e8eb;
+        --text-muted: #a8b1c7;
+        --text-dim: #8a92a6;
+        --text-faint: #5a6072;
+        --accent-1: #5865F2;
+        --accent-2: #8B5CF6;
+        --card-hover-border: var(--accent-1);
+        --shadow-accent: rgba(88,101,242,0.35);
+    }
+    [data-theme="light"] {
+        --bg: #f5f7fb;
+        --bg-2: #ffffff;
+        --bg-3: #eef1f7;
+        --border: #dde2ec;
+        --text: #14172b;
+        --text-muted: #4a5169;
+        --text-dim: #6b7286;
+        --text-faint: #9aa1b6;
+        --shadow-accent: rgba(88,101,242,0.25);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
 
     body {
         font-family: 'Segoe UI', Tahoma, sans-serif;
-        background: #0f1117;
-        color: #e6e8eb;
+        background: var(--bg);
+        color: var(--text);
         min-height: 100vh;
         overflow-x: hidden;
+        transition: background 0.3s, color 0.3s;
     }
 
+    /* Фоновое свечение */
     body::before {
         content: "";
         position: fixed;
-        top: -50%;
-        left: -50%;
-        width: 200%;
-        height: 200%;
-        background: radial-gradient(circle at 30% 20%, rgba(88,101,242,0.15), transparent 50%),
-                    radial-gradient(circle at 70% 80%, rgba(139,92,246,0.15), transparent 50%);
+        top: -50%; left: -50%;
+        width: 200%; height: 200%;
+        background:
+            radial-gradient(circle at 30% 20%, rgba(88,101,242,0.15), transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(139,92,246,0.15), transparent 50%);
         z-index: -1;
         animation: float 20s ease-in-out infinite;
+        pointer-events: none;
+    }
+    [data-theme="light"] body::before {
+        background:
+            radial-gradient(circle at 30% 20%, rgba(88,101,242,0.10), transparent 50%),
+            radial-gradient(circle at 70% 80%, rgba(139,92,246,0.10), transparent 50%);
     }
     @keyframes float {
         0%, 100% { transform: translate(0, 0); }
@@ -34,32 +72,89 @@
 
     .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-    /* Навигация */
+    /* ---------- Навигация ---------- */
     nav {
-        padding: 20px 0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        padding: 16px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        flex-wrap: wrap;
         gap: 16px;
+        transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+        border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+        background: color-mix(in srgb, var(--bg) 80%, transparent);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom-color: var(--border);
     }
     .logo {
         font-size: 22px;
         font-weight: 700;
-        background: linear-gradient(90deg, #5865F2, #8B5CF6);
+        background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
+        cursor: pointer;
+    }
+    .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 24px;
     }
     .nav-links a {
-        color: #a8b1c7;
+        color: var(--text-muted);
         text-decoration: none;
-        margin-left: 24px;
         font-size: 15px;
+        font-weight: 500;
         transition: color 0.2s;
+        position: relative;
     }
-    .nav-links a:hover { color: #fff; }
+    .nav-links a::after {
+        content: "";
+        position: absolute;
+        left: 0; bottom: -4px;
+        width: 0; height: 2px;
+        background: var(--accent-1);
+        border-radius: 2px;
+        transition: width 0.25s;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { width: 100%; }
 
-    /* Hero */
+    .theme-toggle {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s, transform 0.15s;
+    }
+    .theme-toggle:hover {
+        border-color: var(--accent-1);
+        transform: scale(1.05);
+    }
+
+    .burger {
+        display: none;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 40px; height: 40px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    /* ---------- Hero ---------- */
     .hero {
         text-align: center;
         padding: 80px 0 60px;
@@ -69,14 +164,21 @@
         font-weight: 700;
         line-height: 1.15;
         margin-bottom: 24px;
-        background: linear-gradient(90deg, #fff, #8B5CF6);
+        background: linear-gradient(90deg, var(--text), var(--accent-2), var(--accent-1), var(--text));
+        background-size: 300% 100%;
         -webkit-background-clip: text;
+        background-clip: text;
         -webkit-text-fill-color: transparent;
+        animation: gradientShift 8s ease-in-out infinite;
+    }
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
     }
     .hero p {
         font-size: 18px;
-        color: #a8b1c7;
-        max-width: 600px;
+        color: var(--text-muted);
+        max-width: 620px;
         margin: 0 auto 40px;
         line-height: 1.6;
     }
@@ -96,30 +198,30 @@
         font-weight: 600;
         font-size: 16px;
         text-decoration: none;
-        transition: transform 0.15s, box-shadow 0.15s;
+        transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
         cursor: pointer;
         border: none;
     }
     .btn-primary {
-        background: linear-gradient(90deg, #5865F2, #8B5CF6);
+        background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
         color: #fff;
-        box-shadow: 0 4px 20px rgba(88,101,242,0.35);
+        box-shadow: 0 4px 20px var(--shadow-accent);
     }
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 6px 24px rgba(88,101,242,0.55);
+        box-shadow: 0 8px 28px var(--shadow-accent);
     }
     .btn-secondary {
-        background: #1a1d29;
-        color: #e6e8eb;
-        border: 1px solid #262a3a;
+        background: var(--bg-2);
+        color: var(--text);
+        border: 1px solid var(--border);
     }
     .btn-secondary:hover {
-        border-color: #5865F2;
+        border-color: var(--accent-1);
         transform: translateY(-2px);
     }
 
-    /* Статистика */
+    /* ---------- Статистика ---------- */
     .stats {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -127,8 +229,8 @@
         margin: 60px 0;
     }
     .stat-card {
-        background: #1a1d29;
-        border: 1px solid #262a3a;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 24px;
         text-align: center;
@@ -136,82 +238,79 @@
     }
     .stat-card:hover {
         transform: translateY(-4px);
-        border-color: #5865F2;
+        border-color: var(--card-hover-border);
     }
     .stat-value {
         font-size: 32px;
         font-weight: 700;
-        color: #fff;
+        color: var(--text);
         margin-bottom: 6px;
     }
     .stat-label {
         font-size: 13px;
-        color: #8a92a6;
+        color: var(--text-dim);
         text-transform: uppercase;
         letter-spacing: 0.5px;
     }
 
-    /* Возможности */
-    .features {
-        margin: 80px 0;
-    }
-    .features h2 {
-        font-size: 32px;
+    /* ---------- Секции (общее) ---------- */
+    section h2 {
+        font-size: clamp(26px, 4vw, 32px);
         text-align: center;
         margin-bottom: 40px;
-        color: #fff;
+        color: var(--text);
     }
+
+    .features, .commands { margin: 80px 0; }
+
+    /* ---------- Возможности ---------- */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
         gap: 20px;
     }
     .feature-card {
-        background: #1a1d29;
-        border: 1px solid #262a3a;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 28px;
         transition: transform 0.15s, border-color 0.15s;
     }
     .feature-card:hover {
         transform: translateY(-4px);
-        border-color: #5865F2;
+        border-color: var(--card-hover-border);
     }
     .feature-icon {
         font-size: 36px;
         margin-bottom: 16px;
+        display: inline-block;
+        transition: transform 0.3s;
     }
+    .feature-card:hover .feature-icon { transform: scale(1.15) rotate(-5deg); }
     .feature-card h3 {
         font-size: 18px;
-        color: #fff;
+        color: var(--text);
         margin-bottom: 10px;
     }
     .feature-card p {
-        color: #a8b1c7;
+        color: var(--text-muted);
         font-size: 14px;
         line-height: 1.6;
     }
 
-    /* Команды */
-    .commands {
-        margin: 80px 0;
-    }
-    .commands h2 {
-        font-size: 32px;
-        text-align: center;
-        margin-bottom: 40px;
-        color: #fff;
-    }
+    /* ---------- Команды ---------- */
     .cmd-group {
-        background: #1a1d29;
-        border: 1px solid #262a3a;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
         border-radius: 12px;
         padding: 24px;
         margin-bottom: 16px;
+        transition: border-color 0.2s;
     }
+    .cmd-group:hover { border-color: color-mix(in srgb, var(--accent-1) 40%, var(--border)); }
     .cmd-group h3 {
         font-size: 18px;
-        color: #fff;
+        color: var(--text);
         margin-bottom: 16px;
         display: flex;
         align-items: center;
@@ -221,15 +320,13 @@
         content: "";
         width: 4px;
         height: 20px;
-        background: #5865F2;
+        background: var(--accent-1);
         border-radius: 2px;
     }
-    .cmd-list {
-        list-style: none;
-    }
+    .cmd-list { list-style: none; }
     .cmd-list li {
         padding: 10px 0;
-        border-bottom: 1px solid #262a3a;
+        border-bottom: 1px solid var(--border);
         font-size: 14px;
         display: flex;
         justify-content: space-between;
@@ -239,68 +336,181 @@
     }
     .cmd-list li:last-child { border-bottom: none; }
     .cmd-name {
-        font-family: 'Consolas', monospace;
-        color: #8B5CF6;
-        background: #13161f;
-        padding: 4px 10px;
+        font-family: 'Consolas', 'Courier New', monospace;
+        color: var(--accent-2);
+        background: var(--bg-3);
+        padding: 5px 12px;
         border-radius: 6px;
         font-size: 13px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+        user-select: none;
+        position: relative;
+    }
+    .cmd-name:hover {
+        background: var(--accent-1);
+        color: #fff;
+    }
+    .cmd-name.copied::after {
+        content: "✓ скопировано";
+        position: absolute;
+        top: -28px; left: 50%;
+        transform: translateX(-50%);
+        background: var(--accent-1);
+        color: #fff;
+        padding: 3px 8px;
+        border-radius: 6px;
+        font-size: 11px;
+        white-space: nowrap;
+        animation: fadeUp 1.2s ease forwards;
+    }
+    @keyframes fadeUp {
+        0% { opacity: 0; transform: translate(-50%, 5px); }
+        20% { opacity: 1; transform: translate(-50%, 0); }
+        80% { opacity: 1; }
+        100% { opacity: 0; transform: translate(-50%, -5px); }
     }
     .cmd-desc {
-        color: #a8b1c7;
+        color: var(--text-muted);
         font-size: 14px;
     }
 
-    /* CTA */
+    /* ---------- CTA ---------- */
     .cta {
         text-align: center;
         padding: 60px 24px;
-        background: linear-gradient(135deg, #1a1d29, #232742);
-        border: 1px solid #5865F2;
+        background: linear-gradient(135deg, var(--bg-2), color-mix(in srgb, var(--accent-1) 15%, var(--bg-2)));
+        border: 1px solid var(--accent-1);
         border-radius: 16px;
         margin: 60px 0;
     }
     .cta h2 {
         font-size: 28px;
         margin-bottom: 16px;
-        color: #fff;
+        color: var(--text);
     }
     .cta p {
-        color: #a8b1c7;
+        color: var(--text-muted);
         margin-bottom: 28px;
         font-size: 16px;
     }
 
-    /* Футер */
+    /* ---------- Футер ---------- */
     footer {
         text-align: center;
         padding: 40px 0;
-        color: #5a6072;
+        color: var(--text-faint);
         font-size: 13px;
-        border-top: 1px solid #262a3a;
+        border-top: 1px solid var(--border);
         margin-top: 60px;
     }
-    footer a { color: #8B5CF6; text-decoration: none; }
+    footer a { color: var(--accent-2); text-decoration: none; }
     footer a:hover { text-decoration: underline; }
+    .footer-links {
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+        margin-bottom: 16px;
+        flex-wrap: wrap;
+    }
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+    }
 
-    @media (max-width: 600px) {
-        .nav-links a { margin-left: 12px; font-size: 14px; }
+    /* ---------- Кнопка «Наверх» ---------- */
+    #toTop {
+        position: fixed;
+        right: 24px; bottom: 24px;
+        width: 48px; height: 48px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        color: #fff;
+        border: none;
+        font-size: 20px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 20px var(--shadow-accent);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(20px);
+        transition: opacity 0.3s, transform 0.3s;
+        z-index: 99;
+    }
+    #toTop.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    #toTop:hover { transform: translateY(-3px) scale(1.05); }
+
+    /* ---------- Анимация появления ---------- */
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    /* ---------- Мобильное меню ---------- */
+    @media (max-width: 700px) {
+        .burger { display: flex; align-items: center; justify-content: center; }
+        .nav-links {
+            position: absolute;
+            top: 100%; left: 0; right: 0;
+            flex-direction: column;
+            gap: 0;
+            background: var(--bg-2);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 8px;
+            margin: 0 24px;
+            transform: scaleY(0);
+            transform-origin: top;
+            opacity: 0;
+            pointer-events: none;
+            transition: transform 0.2s, opacity 0.2s;
+        }
+        .nav-links.open {
+            transform: scaleY(1);
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .nav-links a {
+            padding: 12px 16px;
+            width: 100%;
+            border-radius: 8px;
+        }
+        .nav-links a::after { display: none; }
+        .nav-links a:hover { background: var(--bg-3); }
         .hero { padding: 50px 0 40px; }
+        .btn { width: 100%; justify-content: center; }
+        .buttons { flex-direction: column; align-items: stretch; }
     }
 </style>
 </head>
 <body>
     <div class="container">
-        <nav>
+        <!-- Навигация -->
+        <nav id="nav">
             <div class="logo">🤖 Юрика-Бот</div>
-            <div class="nav-links">
+            <button class="burger" id="burger" aria-label="Меню">☰</button>
+            <div class="nav-links" id="navLinks">
                 <a href="#features">Возможности</a>
                 <a href="#commands">Команды</a>
                 <a href="#stats">Статистика</a>
                 <a href="#invite">Добавить</a>
+                <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
             </div>
         </nav>
 
+        <!-- Hero -->
         <section class="hero">
             <h1>Твой помощник<br>на сервере Lolka</h1>
             <p>
@@ -309,7 +519,7 @@
             </p>
             <div class="buttons">
                 <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-                   target="_blank" class="btn btn-primary">
+                   target="_blank" rel="noopener" class="btn btn-primary">
                     ➕ Пригласить бота
                 </a>
                 <a href="#features" class="btn btn-secondary">
@@ -318,26 +528,28 @@
             </div>
         </section>
 
-        <section class="stats" id="stats">
+        <!-- Статистика -->
+        <section class="stats reveal" id="stats">
             <div class="stat-card">
-                <div class="stat-value">17+</div>
+                <div class="stat-value" data-target="17">0</div>
                 <div class="stat-label">Команд</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">4</div>
+                <div class="stat-value" data-target="4">0</div>
                 <div class="stat-label">Категории</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">24/7</div>
+                <div class="stat-value" data-text="24/7">—</div>
                 <div class="stat-label">Онлайн</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value">0 ₽</div>
+                <div class="stat-value" data-text="0 ₽">—</div>
                 <div class="stat-label">Бесплатно</div>
             </div>
         </section>
 
-        <section class="features" id="features">
+        <!-- Возможности -->
+        <section class="features reveal" id="features">
             <h2>Что умеет бот</h2>
             <div class="features-grid">
                 <div class="feature-card">
@@ -373,56 +585,164 @@
             </div>
         </section>
 
-        <section class="commands" id="commands">
+        <!-- Команды -->
+        <section class="commands reveal" id="commands">
             <h2>Команды бота</h2>
 
             <div class="cmd-group">
                 <h3>🎲 Развлечения</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name">!coinflip</span><span class="cmd-desc">Подбросить монетку</span></li>
-                    <li><span class="cmd-name">!roll [число]</span><span class="cmd-desc">Бросить кубик с N сторонами</span></li>
-                    <li><span class="cmd-name">!8ball [вопрос]</span><span class="cmd-desc">Магический шар ответит на вопрос</span></li>
-                    <li><span class="cmd-name">!choose [варианты]</span><span class="cmd-desc">Выбрать один из вариантов</span></li>
-                    <li><span class="cmd-name">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
-                    <li><span class="cmd-name">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага с ботом</span></li>
+                    <li><span class="cmd-name" data-copy="!coinflip">!coinflip</span><span class="cmd-desc">Подбросить монетку</span></li>
+                    <li><span class="cmd-name" data-copy="!roll 20">!roll [число]</span><span class="cmd-desc">Бросить кубик с N сторонами</span></li>
+                    <li><span class="cmd-name" data-copy="!8ball">!8ball [вопрос]</span><span class="cmd-desc">Магический шар ответит на вопрос</span></li>
+                    <li><span class="cmd-name" data-copy="!choose">!choose [варианты]</span><span class="cmd-desc">Выбрать один из вариантов</span></li>
+                    <li><span class="cmd-name" data-copy="!joke">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
+                    <li><span class="cmd-name" data-copy="!rps камень">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага с ботом</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
                 <h3>🛡️ Модерация</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника с сервера</span></li>
-                    <li><span class="cmd-name">!ban @user [причина]</span><span class="cmd-desc">Забанить участника</span></li>
-                    <li><span class="cmd-name">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
-                    <li><span class="cmd-name">!mute @user [минуты]</span><span class="cmd-desc">Замьютить на время</span></li>
-                    <li><span class="cmd-name">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
-                    <li><span class="cmd-name">!clear [число]</span><span class="cmd-desc">Удалить N сообщений</span></li>
-                    <li><span class="cmd-name">!warn @user [причина]</span><span class="cmd-desc">Выдать предупреждение</span></li>
+                    <li><span class="cmd-name" data-copy="!kick @user">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника с сервера</span></li>
+                    <li><span class="cmd-name" data-copy="!ban @user">!ban @user [причина]</span><span class="cmd-desc">Забанить участника</span></li>
+                    <li><span class="cmd-name" data-copy="!unban">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
+                    <li><span class="cmd-name" data-copy="!mute @user 10">!mute @user [минуты]</span><span class="cmd-desc">Замьютить на время</span></li>
+                    <li><span class="cmd-name" data-copy="!unmute @user">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
+                    <li><span class="cmd-name" data-copy="!clear 10">!clear [число]</span><span class="cmd-desc">Удалить N сообщений</span></li>
+                    <li><span class="cmd-name" data-copy="!warn @user">!warn @user [причина]</span><span class="cmd-desc">Выдать предупреждение</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
                 <h3>🔧 Утилиты</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе</span></li>
-                    <li><span class="cmd-name">!help</span><span class="cmd-desc">Интерактивное меню команд</span></li>
+                    <li><span class="cmd-name" data-copy="!userinfo">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе</span></li>
+                    <li><span class="cmd-name" data-copy="!help">!help</span><span class="cmd-desc">Интерактивное меню команд</span></li>
                 </ul>
             </div>
         </section>
 
-        <section class="cta" id="invite">
+        <!-- CTA -->
+        <section class="cta reveal" id="invite">
             <h2>Готов добавить бота?</h2>
             <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
             <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-               target="_blank" class="btn btn-primary">
+               target="_blank" rel="noopener" class="btn btn-primary">
                 ➕ Добавить на сервер
             </a>
         </section>
 
+        <!-- Футер -->
         <footer>
-            © 2026 Юрика-Бот · Сделано с ❤️ на Python ·
-            <a href="https://github.com/GiantCraft18/Yurika_Site">GitHub</a>
+            <div class="footer-links">
+                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
+                   target="_blank" rel="noopener">📨 Добавить бота</a>
+                <a href="https://github.com/GiantCraft18/Yurika_Site" target="_blank" rel="noopener">💻 GitHub</a>
+                <a href="#commands">📖 Команды</a>
+            </div>
+            © 2026 Юрика-Бот · Сделано с ❤️ на Python
         </footer>
     </div>
+
+    <!-- Кнопка «Наверх» -->
+    <button id="toTop" title="Наверх">↑</button>
+
+    <script>
+    (function () {
+        'use strict';
+
+        /* ---------- Тема ---------- */
+        const html = document.documentElement;
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('theme', next);
+        });
+
+        /* ---------- Липкая навигация ---------- */
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 20);
+            document.getElementById('toTop').classList.toggle('visible', window.scrollY > 400);
+        }, { passive: true });
+
+        /* ---------- Мобильное меню ---------- */
+        const burger = document.getElementById('burger');
+        const navLinks = document.getElementById('navLinks');
+        burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => navLinks.classList.remove('open'));
+        });
+
+        /* ---------- Кнопка «Наверх» ---------- */
+        document.getElementById('toTop').addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ---------- Копирование команд ---------- */
+        document.querySelectorAll('.cmd-name').forEach(el => {
+            el.addEventListener('click', () => {
+                const text = el.dataset.copy || el.textContent;
+                navigator.clipboard.writeText(text).then(() => {
+                    el.classList.add('copied');
+                    setTimeout(() => el.classList.remove('copied'), 1200);
+                });
+            });
+        });
+
+        /* ---------- Анимация появления секций ---------- */
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        /* ---------- Анимированные счётчики ---------- */
+        const counters = document.querySelectorAll('.stat-value[data-target]');
+        const counterObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.dataset.target, 10);
+                const duration = 1200;
+                const start = performance.now();
+                function step(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = Math.round(target * eased);
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+                counterObserver.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        counters.forEach(el => counterObserver.observe(el));
+
+        /* ---------- Текстовые статические значения ---------- */
+        document.querySelectorAll('.stat-value[data-text]').forEach(el => {
+            const txtObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        el.textContent = el.dataset.text;
+                        txtObserver.unobserve(el);
+                    }
+                });
+            }, { threshold: 0.5 });
+            txtObserver.observe(el);
+        });
+    })();
+    </script>
 </body>
 </html>
