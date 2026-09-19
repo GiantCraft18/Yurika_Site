@@ -11,6 +11,19 @@ log = logging.getLogger("web")
 web_app = Flask(__name__)
 web_app.config["JSON_AS_ASCII"] = False
 
+# =========================================================
+#  Настройки веб-панели
+# =========================================================
+# Ссылка для приглашения бота на сервер Lolka.
+# Замените CLIENT_ID на ID приложения вашего бота.
+# Домен discord.com замените на домен Lolka, если он другой.
+BOT_INVITE_URL = (
+    "https://discord.com/api/oauth2/authorize"
+    "?client_id=ВАШ_CLIENT_ID"
+    "&scope=bot%20applications.commands"
+    "&permissions=8"
+)
+
 
 # =========================================================
 #  Общие данные (бот обновляет их в реальном времени)
@@ -145,6 +158,41 @@ DASHBOARD_HTML = """
             border-radius: 2px;
         }
 
+        .invite-section {
+            text-align: center;
+            background: linear-gradient(135deg, #1a1d29, #232742);
+            border: 1px solid #5865F2;
+        }
+        .invite-section h2 {
+            justify-content: center;
+        }
+        .invite-section h2::before {
+            display: none;
+        }
+        .invite-text {
+            color: #a8b1c7;
+            font-size: 15px;
+            margin-bottom: 20px;
+        }
+        .invite-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            background: linear-gradient(90deg, #5865F2, #8B5CF6);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.35);
+        }
+        .invite-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(88, 101, 242, 0.55);
+        }
+
         .cmd-list { list-style: none; }
         .cmd-item {
             display: flex;
@@ -195,6 +243,17 @@ DASHBOARD_HTML = """
                 <span id="statusText">Загрузка...</span>
             </div>
         </header>
+
+        <!-- Секция приглашения бота -->
+        <div class="section invite-section">
+            <h2>📨 Добавить бота на сервер</h2>
+            <p class="invite-text">
+                Нажмите кнопку ниже, чтобы пригласить Юрика-Бота на ваш сервер Lolka.
+            </p>
+            <a href="{{ invite_url }}" target="_blank" class="invite-btn">
+                ➕ Пригласить бота
+            </a>
+        </div>
 
         <div class="grid">
             <div class="card">
@@ -310,7 +369,7 @@ DASHBOARD_HTML = """
 # =========================================================
 @web_app.route('/')
 def home():
-    return render_template_string(DASHBOARD_HTML)
+    return render_template_string(DASHBOARD_HTML, invite_url=BOT_INVITE_URL)
 
 
 @web_app.route('/api/status')
@@ -325,6 +384,12 @@ def api_health():
         "time": datetime.now().isoformat(),
         "status": bot_status_data.get("status", "unknown"),
     })
+
+
+@web_app.route('/api/invite')
+def api_invite():
+    """Отдаёт ссылку-приглашение бота в JSON."""
+    return jsonify({"invite_url": BOT_INVITE_URL})
 
 
 # =========================================================
