@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Юрика-Бот — Официальный сайт</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        background: #0f1117;
+        color: #e6e8eb;
+        min-height: 100vh;
+        overflow-x: hidden;
+    }
+
+    /* Фоновое свечение */
+    body::before {
+        content: "";
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 30% 20%, rgba(88,101,242,0.15), transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(139,92,246,0.15), transparent 50%);
+        z-index: -1;
+        animation: float 20s ease-in-out infinite;
+    }
+    @keyframes float {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-30px, -30px); }
+    }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+    /* Навигация */
+    nav {
+        padding: 20px 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 16px;
+    }
+    .logo {
+        font-size: 22px;
+        font-weight: 700;
+        background: linear-gradient(90deg, #5865F2, #8B5CF6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .nav-links a {
+        color: #a8b1c7;
+        text-decoration: none;
+        margin-left: 24px;
+        font-size: 15px;
+        transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #fff; }
+
+    /* Hero */
+    .hero {
+        text-align: center;
+        padding: 80px 0 60px;
+    }
+    .hero h1 {
+        font-size: clamp(32px, 5vw, 56px);
+        font-weight: 700;
+        line-height: 1.15;
+        margin-bottom: 24px;
+        background: linear-gradient(90deg, #fff, #8B5CF6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .hero p {
+        font-size: 18px;
+        color: #a8b1c7;
+        max-width: 600px;
+        margin: 0 auto 40px;
+        line-height: 1.6;
+    }
+
+    .buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 32px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 16px;
+        text-decoration: none;
+        transition: transform 0.15s, box-shadow 0.15s;
+        cursor: pointer;
+        border: none;
+    }
+    .btn-primary {
+        background: linear-gradient(90deg, #5865F2, #8B5CF6);
+        color: #fff;
+        box-shadow: 0 4px 20px rgba(88,101,242,0.35);
+    }
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 24px rgba(88,101,242,0.55);
+    }
+    .btn-secondary {
+        background: #1a1d29;
+        color: #e6e8eb;
+        border: 1px solid #262a3a;
+    }
+    .btn-secondary:hover {
+        border-color: #5865F2;
+        transform: translateY(-2px);
+    }
+
+    /* Статистика */
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 16px;
+        margin: 60px 0;
+    }
+    .stat-card {
+        background: #1a1d29;
+        border: 1px solid #262a3a;
+        border-radius: 12px;
+        padding: 24px;
+        text-align: center;
+        transition: transform 0.15s, border-color 0.15s;
+    }
+    .stat-card:hover {
+        transform: translateY(-4px);
+        border-color: #5865F2;
+    }
+    .stat-value {
+        font-size: 32px;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 6px;
+    }
+    .stat-label {
+        font-size: 13px;
+        color: #8a92a6;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    /* Возможности */
+    .features {
+        margin: 80px 0;
+    }
+    .features h2 {
+        font-size: 32px;
+        text-align: center;
+        margin-bottom: 40px;
+        color: #fff;
+    }
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 20px;
+    }
+    .feature-card {
+        background: #1a1d29;
+        border: 1px solid #262a3a;
+        border-radius: 12px;
+        padding: 28px;
+        transition: transform 0.15s, border-color 0.15s;
+    }
+    .feature-card:hover {
+        transform: translateY(-4px);
+        border-color: #5865F2;
+    }
+    .feature-icon {
+        font-size: 36px;
+        margin-bottom: 16px;
+    }
+    .feature-card h3 {
+        font-size: 18px;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+    .feature-card p {
+        color: #a8b1c7;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    /* CTA */
+    .cta {
+        text-align: center;
+        padding: 60px 24px;
+        background: linear-gradient(135deg, #1a1d29, #232742);
+        border: 1px solid #5865F2;
+        border-radius: 16px;
+        margin: 60px 0;
+    }
+    .cta h2 {
+        font-size: 28px;
+        margin-bottom: 16px;
+        color: #fff;
+    }
+    .cta p {
+        color: #a8b1c7;
+        margin-bottom: 28px;
+        font-size: 16px;
+    }
+
+    /* Футер */
+    footer {
+        text-align: center;
+        padding: 40px 0;
+        color: #5a6072;
+        font-size: 13px;
+        border-top: 1px solid #262a3a;
+        margin-top: 60px;
+    }
+    footer a { color: #8B5CF6; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    @media (max-width: 600px) {
+        .nav-links a { margin-left: 12px; font-size: 14px; }
+        .hero { padding: 50px 0 40px; }
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">🤖 Юрика-Бот</div>
+            <div class="nav-links">
+                <a href="#features">Возможности</a>
+                <a href="#stats">Статистика</a>
+                <a href="#invite">Добавить</a>
+            </div>
+        </nav>
+
+        <section class="hero">
+            <h1>Твой помощник<br>на сервере Lolka</h1>
+            <p>
+                Модерация, развлечения, утилиты и удобное меню команд —
+                всё в одном боте. Установка занимает 10 секунд.
+            </p>
+            <div class="buttons">
+                <a href="https://discord.com/api/oauth2/authorize?client_id=ВАШ_CLIENT_ID&scope=bot&permissions=8"
+                   target="_blank" class="btn btn-primary">
+                    ➕ Пригласить бота
+                </a>
+                <a href="#features" class="btn btn-secondary">
+                    📖 Узнать больше
+                </a>
+            </div>
+        </section>
+
+        <section class="stats" id="stats">
+            <div class="stat-card">
+                <div class="stat-value">17+</div>
+                <div class="stat-label">Команд</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">4</div>
+                <div class="stat-label">Категории</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Онлайн</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">0 ₽</div>
+                <div class="stat-label">Бесплатно</div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <h2>Что умеет бот</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Модерация</h3>
+                    <p>Кик, бан, мут, очистка чата, предупреждения. Полный контроль над порядком на сервере.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎲</div>
+                    <h3>Развлечения</h3>
+                    <p>Монетка, кубик, магический шар, камень-ножницы-бумага и случайные шутки — чтобы чат не скучал.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔧</div>
+                    <h3>Утилиты</h3>
+                    <p>Информация о пользователях, аватары, серверная статистика — всё под рукой одной командой.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📖</div>
+                    <h3>Умное меню</h3>
+                    <p>Интерактивный <code>!help</code> с кнопками. Все команды разложены по категориям — не запутаешься.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Быстрый</h3>
+                    <p>Написан на современном Python с асинхронной библиотекой. Отвечает мгновенно.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>Безопасный</h3>
+                    <p>Токен хранится в <code>.env</code>, права проверяются на каждой команде.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" id="invite">
+            <h2>Готов добавить бота?</h2>
+            <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
+            <a href="https://discord.com/api/oauth2/authorize?client_id=ВАШ_CLIENT_ID&scope=bot&permissions=8"
+               target="_blank" class="btn btn-primary">
+                ➕ Добавить на сервер
+            </a>
+        </section>
+
+        <footer>
+            © 2026 Юрика-Бот · Сделано с ❤️ на Python ·
+            <a href="https://github.com/GiantCraft18/Yurika_Site">GitHub</a>
+        </footer>
+    </div>
+</body>
+</html>
