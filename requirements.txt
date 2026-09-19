@@ -1,0 +1,4 @@
+lolka-py
+python-dotenv
+flask
+uv
