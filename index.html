@@ -28,6 +28,8 @@
         --accent-glow: rgba(124, 92, 252, 0.4);
         --success: #34d399;
         --success-glow: rgba(52, 211, 153, 0.4);
+        --error: #f87171;
+        --error-glow: rgba(248, 113, 113, 0.3);
         --card-hover-border: rgba(124, 92, 252, 0.5);
         --shadow-soft: rgba(0, 0, 0, 0.4);
         --code-bg: #0d0f17;
@@ -50,6 +52,8 @@
         --accent-glow: rgba(109, 74, 255, 0.25);
         --success: #059669;
         --success-glow: rgba(5, 150, 105, 0.25);
+        --error: #dc2626;
+        --error-glow: rgba(220, 38, 38, 0.25);
         --card-hover-border: rgba(109, 74, 255, 0.4);
         --shadow-soft: rgba(20, 30, 60, 0.08);
         --code-bg: #f0f2f8;
@@ -74,7 +78,6 @@
         transition: background 0.3s, color 0.3s;
     }
 
-    /* Фоновое свечение */
     body::before {
         content: "";
         position: fixed;
@@ -218,27 +221,415 @@
         transform: scale(1.06);
         background: var(--bg-elevated);
     }
-    .theme-toggle:focus-visible,
-    .btn:focus-visible,
-    .burger:focus-visible,
-    .cmd-name:focus-visible,
-    #toTop:focus-visible {
-        outline: 2px solid var(--accent-1);
-        outline-offset: 2px;
+
+    /* ---------- Кнопки авторизации в навигации ---------- */
+    .auth-nav-btn {
+        background: var(--lolka-gradient);
+        color: #fff;
+        border: none;
+        padding: 9px 18px;
+        border-radius: 10px;
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        transition: transform 0.15s, box-shadow 0.2s;
+        box-shadow: 0 4px 16px var(--accent-glow);
+        margin-left: 6px;
+        white-space: nowrap;
+    }
+    .auth-nav-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 6px 22px var(--accent-glow);
+    }
+    .auth-nav-btn svg {
+        width: 16px;
+        height: 16px;
     }
 
-    .burger {
+    .user-menu {
         display: none;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text);
-        width: 38px; height: 38px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
+        align-items: center;
+        gap: 8px;
+        margin-left: 6px;
+    }
+    .user-menu.visible { display: flex; }
+    .user-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: var(--lolka-gradient);
+        display: flex;
         align-items: center;
         justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        cursor: pointer;
+        border: 2px solid var(--border);
+        transition: border-color 0.2s, transform 0.15s;
+        text-transform: uppercase;
     }
+    .user-avatar:hover {
+        border-color: var(--accent-1);
+        transform: scale(1.05);
+    }
+    .logout-btn {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+        width: 36px; height: 36px;
+        border-radius: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .logout-btn:hover {
+        border-color: var(--error);
+        color: var(--error);
+        background: var(--bg-elevated);
+    }
+    .logout-btn svg { width: 16px; height: 16px; }
+
+    /* ---------- Модальное окно авторизации ---------- */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s;
+    }
+    .modal-overlay.open {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    .modal {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        width: 100%;
+        max-width: 440px;
+        padding: 36px;
+        position: relative;
+        transform: translateY(20px) scale(0.97);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+    }
+    .modal-overlay.open .modal {
+        transform: translateY(0) scale(1);
+    }
+    .modal::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 1px;
+        background: linear-gradient(135deg, rgba(124, 92, 252, 0.4), rgba(167, 139, 250, 0.2));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
+    }
+    .modal-close {
+        position: absolute;
+        top: 16px; right: 16px;
+        background: transparent;
+        border: none;
+        color: var(--text-dim);
+        font-size: 22px;
+        cursor: pointer;
+        width: 32px; height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, color 0.2s;
+    }
+    .modal-close:hover {
+        background: var(--bg-3);
+        color: var(--text);
+    }
+
+    .modal-logo {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
+    .modal-logo .logo-icon {
+        width: 56px; height: 56px;
+        font-size: 26px;
+        border-radius: 14px;
+    }
+    .modal-title {
+        font-size: 22px;
+        font-weight: 800;
+        text-align: center;
+        letter-spacing: -0.02em;
+        margin-bottom: 6px;
+    }
+    .modal-subtitle {
+        font-size: 14px;
+        color: var(--text-muted);
+        text-align: center;
+        margin-bottom: 24px;
+    }
+
+    .auth-tabs {
+        display: flex;
+        gap: 4px;
+        background: var(--bg-3);
+        padding: 4px;
+        border-radius: 12px;
+        margin-bottom: 24px;
+    }
+    .auth-tab {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-weight: 600;
+        font-family: inherit;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    .auth-tab.active {
+        background: var(--bg-2);
+        color: var(--text);
+        box-shadow: 0 2px 8px var(--shadow-soft);
+    }
+
+    .auth-form { display: none; }
+    .auth-form.active { display: block; }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+    .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--text-muted);
+        margin-bottom: 8px;
+    }
+    .form-input {
+        width: 100%;
+        padding: 12px 14px;
+        background: var(--bg-3);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        color: var(--text);
+        font-size: 14px;
+        font-family: inherit;
+        transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        outline: none;
+    }
+    .form-input:focus {
+        border-color: var(--accent-1);
+        background: var(--bg-2);
+        box-shadow: 0 0 0 3px var(--accent-glow);
+    }
+    .form-input::placeholder { color: var(--text-faint); }
+    .form-input.error {
+        border-color: var(--error);
+        box-shadow: 0 0 0 3px var(--error-glow);
+    }
+
+    .form-error {
+        color: var(--error);
+        font-size: 12.5px;
+        margin-top: 6px;
+        display: none;
+        align-items: center;
+        gap: 6px;
+    }
+    .form-error.visible { display: flex; }
+    .form-error svg { flex-shrink: 0; }
+
+    .form-message {
+        padding: 12px 14px;
+        border-radius: 10px;
+        font-size: 13.5px;
+        margin-bottom: 16px;
+        display: none;
+        align-items: flex-start;
+        gap: 10px;
+        line-height: 1.5;
+    }
+    .form-message.visible { display: flex; }
+    .form-message.error {
+        background: rgba(248, 113, 113, 0.1);
+        border: 1px solid rgba(248, 113, 113, 0.3);
+        color: var(--error);
+    }
+    .form-message.success {
+        background: rgba(52, 211, 153, 0.1);
+        border: 1px solid rgba(52, 211, 153, 0.3);
+        color: var(--success);
+    }
+    .form-message svg { flex-shrink: 0; margin-top: 1px; }
+
+    .auth-submit {
+        width: 100%;
+        padding: 13px;
+        border-radius: 10px;
+        background: var(--lolka-gradient);
+        color: #fff;
+        border: none;
+        font-size: 15px;
+        font-weight: 600;
+        font-family: inherit;
+        cursor: pointer;
+        transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+        box-shadow: 0 4px 20px var(--accent-glow);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 8px;
+    }
+    .auth-submit:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 28px var(--accent-glow);
+    }
+    .auth-submit:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+    }
+    .auth-submit .spinner {
+        width: 16px; height: 16px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #fff;
+        border-radius: 50%;
+        animation: spin 0.7s linear infinite;
+        display: none;
+    }
+    .auth-submit.loading .spinner { display: block; }
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
+    .auth-links {
+        display: flex;
+        justify-content: center;
+        margin-top: 18px;
+        font-size: 13px;
+    }
+    .auth-links button {
+        background: transparent;
+        border: none;
+        color: var(--accent-2);
+        font-family: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 6px;
+        transition: background 0.2s, color 0.2s;
+        text-decoration: none;
+        font-weight: 500;
+    }
+    .auth-links button:hover {
+        background: var(--bg-3);
+        color: var(--accent-1);
+        text-decoration: underline;
+    }
+
+    .auth-footer {
+        text-align: center;
+        font-size: 12px;
+        color: var(--text-faint);
+        margin-top: 20px;
+        line-height: 1.5;
+    }
+
+    /* ---------- Меню пользователя (выпадающее) ---------- */
+    .user-dropdown {
+        position: absolute;
+        top: calc(100% + 8px);
+        right: 0;
+        min-width: 240px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 8px;
+        box-shadow: 0 20px 40px var(--shadow-soft);
+        opacity: 0;
+        transform: translateY(-8px) scale(0.98);
+        pointer-events: none;
+        transition: opacity 0.2s, transform 0.2s;
+        z-index: 101;
+    }
+    .user-dropdown.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+    .user-dropdown-header {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border-soft);
+        margin-bottom: 6px;
+    }
+    .user-dropdown-label {
+        font-size: 11px;
+        color: var(--text-faint);
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        font-weight: 600;
+        margin-bottom: 4px;
+    }
+    .user-dropdown-email {
+        font-size: 13.5px;
+        color: var(--text);
+        word-break: break-all;
+        font-weight: 500;
+    }
+    .user-dropdown-item {
+        width: 100%;
+        text-align: left;
+        padding: 10px 14px;
+        background: transparent;
+        border: none;
+        color: var(--text-muted);
+        font-size: 14px;
+        font-family: inherit;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .user-dropdown-item:hover {
+        background: var(--bg-3);
+        color: var(--text);
+    }
+    .user-dropdown-item.danger:hover {
+        background: rgba(248, 113, 113, 0.1);
+        color: var(--error);
+    }
+    .user-dropdown-item svg {
+        width: 16px; height: 16px;
+        flex-shrink: 0;
+    }
+
+    .user-menu-wrapper { position: relative; }
 
     /* ---------- Hero ---------- */
     .hero {
@@ -876,7 +1267,7 @@
     }
 
     /* ---------- Мобильное меню ---------- */
-    @media (max-width: 760px) {
+    @media (max-width: 900px) {
         .burger { display: flex; }
         .nav-links {
             position: absolute;
@@ -909,6 +1300,9 @@
         .nav-links a.active::after { display: none; }
         .nav-links a:hover { background: var(--bg-3); }
         .theme-toggle { margin-left: 0; margin-top: 4px; width: 100%; }
+        .auth-nav-btn { margin-left: 0; margin-top: 4px; width: 100%; justify-content: center; }
+        .user-menu { margin-left: 0; margin-top: 4px; width: 100%; justify-content: center; }
+        .user-menu-wrapper { width: 100%; }
 
         .hero { padding: 60px 0 40px; }
         .btn { width: 100%; }
@@ -924,6 +1318,7 @@
         .about-lolka { padding: 28px 20px; }
         .lolka-features { grid-template-columns: 1fr; }
         .about-lolka-cta { flex-direction: column; align-items: stretch; }
+        .modal { padding: 28px 22px; }
     }
 
     /* ---------- Уважение к prefers-reduced-motion ---------- */
@@ -940,11 +1335,9 @@
 </style>
 </head>
 <body>
-    <!-- Прогресс-бар чтения -->
     <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
     <header class="container">
-        <!-- Навигация -->
         <nav id="nav" aria-label="Основная навигация">
             <a href="#" class="logo" aria-label="Юрика-Бот — на главную">
                 <span class="logo-icon">🤖</span>
@@ -957,6 +1350,34 @@
                 <a href="#stats">Статистика</a>
                 <a href="#invite">Добавить</a>
                 <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">🌙</button>
+                <!-- Кнопка входа (показывается, когда НЕ авторизован) -->
+                <button class="auth-nav-btn" id="authOpenBtn" type="button">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                    <span>Войти</span>
+                </button>
+                <!-- Меню пользователя (показывается, когда авторизован) -->
+                <div class="user-menu" id="userMenu">
+                    <div class="user-menu-wrapper">
+                        <div class="user-avatar" id="userAvatar" title="Личный кабинет" tabindex="0">?</div>
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="user-dropdown-header">
+                                <div class="user-dropdown-label">Вы вошли как</div>
+                                <div class="user-dropdown-email" id="userEmail">—</div>
+                            </div>
+                            <button class="user-dropdown-item danger" id="logoutBtn" type="button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                    <polyline points="16 17 21 12 16 7"></polyline>
+                                    <line x1="21" y1="12" x2="9" y2="12"></line>
+                                </svg>
+                                Выйти из аккаунта
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -1247,7 +1668,6 @@
         </section>
     </main>
 
-    <!-- Футер -->
     <footer>
         <div class="container">
             <div class="footer-brand">
@@ -1289,17 +1709,384 @@
         </div>
     </footer>
 
-    <!-- Кнопка «Наверх» -->
     <button id="toTop" title="Наверх" aria-label="Наверх">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
             <path d="M12 19V5M5 12l7-7 7 7"/>
         </svg>
     </button>
 
-    <script>
-    (function () {
-        'use strict';
+    <!-- ================= МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ ================= -->
+    <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+        <div class="modal">
+            <button class="modal-close" id="authClose" type="button" aria-label="Закрыть">×</button>
+            <div class="modal-logo">
+                <span class="logo-icon">🤖</span>
+            </div>
+            <h2 class="modal-title" id="authTitle">Добро пожаловать</h2>
+            <p class="modal-subtitle" id="authSubtitle">Войдите или создайте аккаунт, чтобы продолжить</p>
 
+            <div class="auth-tabs" role="tablist">
+                <button class="auth-tab active" id="tabLogin" role="tab" aria-selected="true" type="button">Вход</button>
+                <button class="auth-tab" id="tabRegister" role="tab" aria-selected="false" type="button">Регистрация</button>
+            </div>
+
+            <!-- Общее сообщение -->
+            <div class="form-message" id="authMessage" role="alert"></div>
+
+            <!-- ФОРМА ВХОДА -->
+            <form class="auth-form active" id="loginForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">Email</label>
+                    <input class="form-input" type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" required>
+                    <div class="form-error" id="loginEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="loginPassword">Пароль</label>
+                    <input class="form-input" type="password" id="loginPassword" placeholder="Минимум 6 символов" autocomplete="current-password" required>
+                    <div class="form-error" id="loginPasswordError"></div>
+                </div>
+                <button class="auth-submit" id="loginSubmit" type="submit">
+                    <span class="spinner"></span>
+                    <span class="btn-label">Войти</span>
+                </button>
+                <div class="auth-links">
+                    <button type="button" id="forgotPasswordBtn">Забыли пароль?</button>
+                </div>
+            </form>
+
+            <!-- ФОРМА РЕГИСТРАЦИИ -->
+            <form class="auth-form" id="registerForm" novalidate>
+                <div class="form-group">
+                    <label class="form-label" for="registerEmail">Email</label>
+                    <input class="form-input" type="email" id="registerEmail" placeholder="you@example.com" autocomplete="email" required>
+                    <div class="form-error" id="registerEmailError"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerPassword">Пароль</label>
+                    <input class="form-input" type="password" id="registerPassword" placeholder="Минимум 6 символов" autocomplete="new-password" required>
+                    <div class="form-error" id="registerPasswordError"></div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="registerConfirm">Повторите пароль</label>
+                    <input class="form-input" type="password" id="registerConfirm" placeholder="Повторите пароль" autocomplete="new-password" required>
+                    <div class="form-error" id="registerConfirmError"></div>
+                </div>
+                <button class="auth-submit" id="registerSubmit" type="submit">
+                    <span class="spinner"></span>
+                    <span class="btn-label">Создать аккаунт</span>
+                </button>
+                <div class="auth-links">
+                    <span style="color: var(--text-faint); font-size: 13px;">Уже есть аккаунт? </span>
+                    <button type="button" id="switchToLogin">Войти</button>
+                </div>
+            </form>
+
+            <div class="auth-footer">
+                Регистрируясь, вы соглашаетесь с правилами использования сервиса
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        /* ================= FIREBASE ================= */
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
+            signOut,
+            onAuthStateChanged,
+            sendPasswordResetEmail
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
+            authDomain: "yurika-bot.firebaseapp.com",
+            projectId: "yurika-bot",
+            storageBucket: "yurika-bot.firebasestorage.app",
+            messagingSenderId: "686871342456",
+            appId: "1:686871342456:web:8fc8327c4d311993adac8d",
+            measurementId: "G-M1W6BLMP4H"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        /* ================= УТИЛИТЫ ================= */
+        const $ = (sel) => document.querySelector(sel);
+
+        // Словарь ошибок Firebase → русский
+        const errorMessages = {
+            'auth/email-already-in-use': 'Этот email уже зарегистрирован. Попробуйте войти.',
+            'auth/invalid-email': 'Некорректный email. Проверьте адрес.',
+            'auth/weak-password': 'Слишком слабый пароль. Минимум 6 символов.',
+            'auth/user-not-found': 'Пользователь с таким email не найден.',
+            'auth/wrong-password': 'Неверный пароль. Попробуйте ещё раз.',
+            'auth/invalid-credential': 'Неверный email или пароль.',
+            'auth/too-many-requests': 'Слишком много попыток. Подождите немного и попробуйте снова.',
+            'auth/network-request-failed': 'Ошибка сети. Проверьте подключение к интернету.',
+            'auth/operation-not-allowed': 'Вход по email/паролю отключён в настройках Firebase.',
+            'auth/user-disabled': 'Этот аккаунт заблокирован.',
+            'auth/requires-recent-login': 'Требуется повторный вход для этой операции.',
+            'auth/missing-password': 'Введите пароль.'
+        };
+
+        function getErrorMessage(error) {
+            return errorMessages[error.code] || 'Произошла ошибка: ' + (error.message || 'попробуйте ещё раз.');
+        }
+
+        function isValidEmail(email) {
+            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+        }
+
+        /* ================= МОДАЛЬНОЕ ОКНО ================= */
+        const authModal = $('#authModal');
+        const authOpenBtn = $('#authOpenBtn');
+        const authClose = $('#authClose');
+        const tabLogin = $('#tabLogin');
+        const tabRegister = $('#tabRegister');
+        const loginForm = $('#loginForm');
+        const registerForm = $('#registerForm');
+        const authMessage = $('#authMessage');
+
+        function openModal(tab = 'login') {
+            authModal.classList.add('open');
+            authModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            clearAllErrors();
+            clearMessage();
+            if (tab === 'register') switchTab('register');
+            else switchTab('login');
+        }
+
+        function closeModal() {
+            authModal.classList.remove('open');
+            authModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            clearAllErrors();
+            clearMessage();
+        }
+
+        function switchTab(tab) {
+            const isLogin = tab === 'login';
+            tabLogin.classList.toggle('active', isLogin);
+            tabRegister.classList.toggle('active', !isLogin);
+            tabLogin.setAttribute('aria-selected', String(isLogin));
+            tabRegister.setAttribute('aria-selected', String(!isLogin));
+            loginForm.classList.toggle('active', isLogin);
+            registerForm.classList.toggle('active', !isLogin);
+            $('#authTitle').textContent = isLogin ? 'Добро пожаловать' : 'Создать аккаунт';
+            $('#authSubtitle').textContent = isLogin
+                ? 'Войдите в свой аккаунт, чтобы продолжить'
+                : 'Заполните форму — это займёт меньше минуты';
+            clearAllErrors();
+            clearMessage();
+        }
+
+        authOpenBtn.addEventListener('click', () => openModal('login'));
+        authClose.addEventListener('click', closeModal);
+        authModal.addEventListener('click', (e) => {
+            if (e.target === authModal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && authModal.classList.contains('open')) closeModal();
+        });
+        tabLogin.addEventListener('click', () => switchTab('login'));
+        tabRegister.addEventListener('click', () => switchTab('register'));
+        $('#switchToLogin').addEventListener('click', () => switchTab('login'));
+
+        /* ================= ОШИБКИ / СООБЩЕНИЯ ================= */
+        function clearAllErrors() {
+            document.querySelectorAll('.form-error').forEach(el => {
+                el.classList.remove('visible');
+                el.textContent = '';
+            });
+            document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+        }
+
+        function clearMessage() {
+            authMessage.classList.remove('visible', 'error', 'success');
+            authMessage.innerHTML = '';
+        }
+
+        function showFieldError(fieldId, message) {
+            const input = document.getElementById(fieldId);
+            const errorEl = document.getElementById(fieldId + 'Error');
+            if (input) input.classList.add('error');
+            if (errorEl) {
+                errorEl.textContent = message;
+                errorEl.classList.add('visible');
+            }
+        }
+
+        function showMessage(text, type = 'error') {
+            authMessage.className = 'form-message visible ' + type;
+            authMessage.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
+        }
+
+        /* ================= ВАЛИДАЦИЯ ================= */
+        function validateLoginForm() {
+            clearAllErrors();
+            let valid = true;
+            const email = $('#loginEmail').value.trim();
+            const password = $('#loginPassword').value;
+
+            if (!email) { showFieldError('loginEmail', 'Введите email'); valid = false; }
+            else if (!isValidEmail(email)) { showFieldError('loginEmail', 'Некорректный email'); valid = false; }
+            if (!password) { showFieldError('loginPassword', 'Введите пароль'); valid = false; }
+            return valid;
+        }
+
+        function validateRegisterForm() {
+            clearAllErrors();
+            let valid = true;
+            const email = $('#registerEmail').value.trim();
+            const password = $('#registerPassword').value;
+            const confirm = $('#registerConfirm').value;
+
+            if (!email) { showFieldError('registerEmail', 'Введите email'); valid = false; }
+            else if (!isValidEmail(email)) { showFieldError('registerEmail', 'Некорректный email'); valid = false; }
+            if (!password) { showFieldError('registerPassword', 'Введите пароль'); valid = false; }
+            else if (password.length < 6) { showFieldError('registerPassword', 'Пароль должен быть не меньше 6 символов'); valid = false; }
+            if (!confirm) { showFieldError('registerConfirm', 'Повторите пароль'); valid = false; }
+            else if (password !== confirm) { showFieldError('registerConfirm', 'Пароли не совпадают'); valid = false; }
+            return valid;
+        }
+
+        /* ================= ЗАГРУЗКА КНОПКИ ================= */
+        function setLoading(button, loading, defaultLabel) {
+            button.disabled = loading;
+            button.classList.toggle('loading', loading);
+            button.querySelector('.btn-label').textContent = loading ? 'Подождите…' : defaultLabel;
+        }
+
+        /* ================= ВХОД ================= */
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateLoginForm()) return;
+            const submitBtn = $('#loginSubmit');
+            setLoading(submitBtn, true, 'Войти');
+            clearMessage();
+
+            try {
+                await signInWithEmailAndPassword(
+                    auth,
+                    $('#loginEmail').value.trim(),
+                    $('#loginPassword').value
+                );
+                // Успех — onAuthStateChanged закроет окно
+            } catch (error) {
+                showMessage(getErrorMessage(error), 'error');
+            } finally {
+                setLoading(submitBtn, false, 'Войти');
+            }
+        });
+
+        /* ================= РЕГИСТРАЦИЯ ================= */
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateRegisterForm()) return;
+            const submitBtn = $('#registerSubmit');
+            setLoading(submitBtn, true, 'Создать аккаунт');
+            clearMessage();
+
+            try {
+                await createUserWithEmailAndPassword(
+                    auth,
+                    $('#registerEmail').value.trim(),
+                    $('#registerPassword').value
+                );
+                // Успех — onAuthStateChanged закроет окно
+            } catch (error) {
+                showMessage(getErrorMessage(error), 'error');
+            } finally {
+                setLoading(submitBtn, false, 'Создать аккаунт');
+            }
+        });
+
+        /* ================= СБРОС ПАРОЛЯ ================= */
+        $('#forgotPasswordBtn').addEventListener('click', async () => {
+            const email = $('#loginEmail').value.trim() || prompt('Введите ваш email для сброса пароля:');
+            if (!email) return;
+            if (!isValidEmail(email)) {
+                showMessage('Некорректный email', 'error');
+                return;
+            }
+            clearMessage();
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showMessage('Письмо для сброса пароля отправлено на ' + email + '. Проверьте почту (включая папку «Спам»).', 'success');
+            } catch (error) {
+                showMessage(getErrorMessage(error), 'error');
+            }
+        });
+
+        /* ================= СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ ================= */
+        const userMenu = $('#userMenu');
+        const userAvatar = $('#userAvatar');
+        const userEmail = $('#userEmail');
+        const userDropdown = $('#userDropdown');
+
+        userAvatar.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown.classList.toggle('open');
+        });
+        userAvatar.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                userDropdown.classList.toggle('open');
+            }
+        });
+        document.addEventListener('click', (e) => {
+            if (!userDropdown.contains(e.target)) {
+                userDropdown.classList.remove('open');
+            }
+        });
+
+        $('#logoutBtn').addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+            } catch (error) {
+                console.error('Ошибка выхода:', error);
+            }
+        });
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Пользователь вошёл
+                const email = user.email || 'пользователь';
+                authOpenBtn.style.display = 'none';
+                userMenu.classList.add('visible');
+                userAvatar.textContent = email[0].toUpperCase();
+                userEmail.textContent = email;
+                userAvatar.title = 'Вы вошли как ' + email;
+
+                // Закрываем модалку, если была открыта
+                if (authModal.classList.contains('open')) {
+                    closeModal();
+                }
+            } else {
+                // Пользователь вышел
+                authOpenBtn.style.display = '';
+                userMenu.classList.remove('visible');
+                userDropdown.classList.remove('open');
+            }
+        });
+
+        // Закрытие мобильного меню при клике на пустое место в навигации
+        document.addEventListener('click', (e) => {
+            const burger = $('#burger');
+            const navLinksEl = $('#navLinks');
+            if (navLinksEl && navLinksEl.classList.contains('open')) {
+                if (!navLinksEl.contains(e.target) && e.target !== burger) {
+                    navLinksEl.classList.remove('open');
+                    burger.setAttribute('aria-expanded', 'false');
+                    burger.textContent = '☰';
+                }
+            }
+        });
+
+        /* ================= ОСТАЛЬНАЯ ЛОГИКА САЙТА ================= */
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         /* ---------- Тема ---------- */
@@ -1344,7 +2131,8 @@
         /* ---------- Мобильное меню ---------- */
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
-        burger.addEventListener('click', () => {
+        burger.addEventListener('click', (e) => {
+            e.stopPropagation();
             const isOpen = navLinks.classList.toggle('open');
             burger.setAttribute('aria-expanded', String(isOpen));
             burger.textContent = isOpen ? '✕' : '☰';
@@ -1438,7 +2226,6 @@
             }, { threshold: 0.5 });
             counters.forEach(el => counterObserver.observe(el));
 
-            /* Текстовые статические значения */
             document.querySelectorAll('.stat-value[data-text]').forEach(el => {
                 const txtObserver = new IntersectionObserver(entries => {
                     entries.forEach(entry => {
@@ -1457,7 +2244,7 @@
             });
         }
 
-        /* ---------- Scroll-spy для активной ссылки ---------- */
+        /* ---------- Scroll-spy ---------- */
         const sections = document.querySelectorAll('section[id]');
         const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
@@ -1474,7 +2261,6 @@
             }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
             sections.forEach(s => spyObserver.observe(s));
         }
-    })();
     </script>
 </body>
 </html>
