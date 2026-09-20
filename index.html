@@ -10,7 +10,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-    /* ---------- Переменные темы ---------- */
     :root, [data-theme="dark"] {
         --bg: #0a0b12;
         --bg-2: #12141f;
@@ -101,7 +100,6 @@
 
     .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
 
-    /* ---------- Прогресс-бар ---------- */
     .progress-bar {
         position: fixed;
         top: 0; left: 0;
@@ -113,7 +111,6 @@
         box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    /* ---------- Навигация ---------- */
     nav {
         position: sticky;
         top: 0;
@@ -237,7 +234,6 @@
         background: var(--bg-elevated);
     }
 
-    /* ---------- Кнопки авторизации в навигации ---------- */
     .auth-nav-btn {
         background: var(--lolka-gradient);
         color: #fff;
@@ -287,13 +283,14 @@
         border: 2px solid var(--border);
         transition: border-color 0.2s, transform 0.15s;
         text-transform: uppercase;
+        background-size: cover;
+        background-position: center;
     }
     .user-avatar:hover {
         border-color: var(--accent-1);
         transform: scale(1.05);
     }
 
-    /* ---------- Модальное окно авторизации ---------- */
     .modal-overlay {
         position: fixed;
         inset: 0;
@@ -327,6 +324,7 @@
         overflow-y: auto;
         box-shadow: 0 24px 60px rgba(0,0,0,0.5);
     }
+    .modal.profile-modal { max-width: 560px; }
     .modal-overlay.open .modal {
         transform: translateY(0) scale(1);
     }
@@ -435,6 +433,7 @@
         font-family: inherit;
         transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
         outline: none;
+        resize: vertical;
     }
     .form-input:focus {
         border-color: var(--accent-1);
@@ -445,6 +444,12 @@
     .form-input.error {
         border-color: var(--error);
         box-shadow: 0 0 0 3px var(--error-glow);
+    }
+    .form-hint {
+        font-size: 11.5px;
+        color: var(--text-faint);
+        margin-top: 6px;
+        line-height: 1.4;
     }
 
     .form-error {
@@ -533,7 +538,6 @@
         padding: 4px 6px;
         border-radius: 6px;
         transition: background 0.2s, color 0.2s;
-        text-decoration: none;
         font-weight: 500;
     }
     .auth-links button:hover {
@@ -549,6 +553,116 @@
         margin-top: 20px;
         line-height: 1.5;
     }
+
+    /* ---------- Профиль ---------- */
+    .profile-tabs {
+        display: flex;
+        gap: 4px;
+        background: var(--bg-3);
+        padding: 4px;
+        border-radius: 12px;
+        margin-bottom: 22px;
+    }
+    .profile-tab {
+        flex: 1;
+        padding: 10px;
+        border: none;
+        background: transparent;
+        color: var(--text-muted);
+        font-size: 13.5px;
+        font-weight: 600;
+        font-family: inherit;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.2s, color 0.2s;
+    }
+    .profile-tab.active {
+        background: var(--bg-2);
+        color: var(--text);
+        box-shadow: 0 2px 8px var(--shadow-soft);
+    }
+
+    .profile-panel { display: none; }
+    .profile-panel.active { display: block; }
+
+    .profile-avatar-row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        margin-bottom: 18px;
+    }
+    .profile-avatar-preview {
+        width: 72px;
+        height: 72px;
+        border-radius: 50%;
+        background: var(--lolka-gradient);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 700;
+        font-size: 26px;
+        flex-shrink: 0;
+        text-transform: uppercase;
+        border: 3px solid var(--border);
+        background-size: cover;
+        background-position: center;
+    }
+    .profile-avatar-fields { flex: 1; min-width: 0; }
+
+    .profile-info-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-soft);
+        font-size: 13.5px;
+    }
+    .profile-info-row:last-child { border-bottom: none; }
+    .profile-info-label { color: var(--text-dim); }
+    .profile-info-value {
+        color: var(--text);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+        word-break: break-all;
+        text-align: right;
+        margin-left: 12px;
+    }
+
+    .danger-zone {
+        margin-top: 20px;
+        padding: 16px;
+        background: rgba(248, 113, 113, 0.06);
+        border: 1px solid rgba(248, 113, 113, 0.25);
+        border-radius: 12px;
+    }
+    .danger-zone h4 {
+        font-size: 14px;
+        font-weight: 700;
+        color: var(--error);
+        margin-bottom: 10px;
+    }
+    .btn-danger {
+        width: 100%;
+        padding: 12px;
+        border-radius: 10px;
+        background: transparent;
+        color: var(--error);
+        border: 1px solid rgba(248, 113, 113, 0.4);
+        font-family: inherit;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, border-color 0.2s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    .btn-danger:hover {
+        background: rgba(248, 113, 113, 0.12);
+        border-color: var(--error);
+    }
+    .btn-danger svg { width: 16px; height: 16px; }
 
     /* ---------- Меню пользователя (выпадающее) ---------- */
     .user-dropdown {
@@ -732,16 +846,6 @@
         box-shadow: 0 10px 36px var(--accent-glow);
     }
     .btn-primary:hover::before { opacity: 1; }
-    .btn-secondary {
-        background: var(--bg-2);
-        color: var(--text);
-        border-color: var(--border);
-    }
-    .btn-secondary:hover {
-        border-color: var(--accent-1);
-        transform: translateY(-2px);
-        background: var(--bg-elevated);
-    }
     .btn-download {
         background: transparent;
         color: var(--text);
@@ -762,7 +866,6 @@
         50% { transform: translateY(2px); }
     }
 
-    /* ---------- Статистика ---------- */
     .stats {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -815,7 +918,6 @@
         font-weight: 600;
     }
 
-    /* ---------- Секции (общее) ---------- */
     section { scroll-margin-top: 90px; }
     .section-header {
         text-align: center;
@@ -837,7 +939,6 @@
 
     .features, .commands, .about-lolka { margin: 90px 0; }
 
-    /* ---------- Возможности ---------- */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -914,7 +1015,6 @@
         border: 1px solid var(--border-soft);
     }
 
-    /* ---------- О Lolka ---------- */
     .about-lolka {
         background: var(--bg-2);
         border: 1px solid var(--border);
@@ -1012,7 +1112,6 @@
         min-width: 200px;
     }
 
-    /* ---------- Команды ---------- */
     .cmd-group {
         background: var(--bg-2);
         border: 1px solid var(--border);
@@ -1138,7 +1237,6 @@
         margin-top: 3px;
     }
 
-    /* ---------- События ---------- */
     .events-list {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -1170,7 +1268,6 @@
         margin-bottom: 2px;
     }
 
-    /* ---------- CTA ---------- */
     .cta {
         text-align: center;
         padding: 56px 32px;
@@ -1212,7 +1309,6 @@
         margin-right: auto;
     }
 
-    /* ---------- Футер ---------- */
     footer {
         text-align: center;
         padding: 44px 0 30px;
@@ -1265,7 +1361,6 @@
     }
     .footer-copy { color: var(--text-faint); }
 
-    /* ---------- Кнопка «Наверх» ---------- */
     #toTop {
         position: fixed;
         right: 24px; bottom: 24px;
@@ -1297,7 +1392,6 @@
         color: #fff;
     }
 
-    /* ---------- Анимация появления ---------- */
     .reveal {
         opacity: 0;
         transform: translateY(28px);
@@ -1308,7 +1402,6 @@
         transform: translateY(0);
     }
 
-    /* ---------- Мобильное меню ---------- */
     @media (max-width: 900px) {
         .burger { display: flex; }
         .nav-links {
@@ -1345,6 +1438,7 @@
         .auth-nav-btn { margin-left: 0; margin-top: 4px; width: 100%; justify-content: center; }
         .user-menu { margin-left: 0; margin-top: 4px; width: 100%; justify-content: center; }
         .user-menu-wrapper { width: 100%; }
+        .user-dropdown { right: auto; left: 0; right: 0; }
 
         .hero { padding: 60px 0 40px; }
         .btn { width: 100%; }
@@ -1361,8 +1455,11 @@
         .lolka-features { grid-template-columns: 1fr; }
         .about-lolka-cta { flex-direction: column; align-items: stretch; }
         .modal { padding: 28px 22px; }
+        .modal.profile-modal { padding: 28px 22px; }
         .cmd-group h3 { font-size: 15px; }
         .cmd-group h3 .count { margin-left: 0; }
+        .profile-avatar-row { flex-direction: column; text-align: center; }
+        .profile-avatar-fields { width: 100%; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1408,6 +1505,13 @@
                                 <div class="user-dropdown-label">Вы вошли как</div>
                                 <div class="user-dropdown-email" id="userEmail">—</div>
                             </div>
+                            <button class="user-dropdown-item" id="openProfileBtn" type="button">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                Личный кабинет
+                            </button>
                             <button class="user-dropdown-item danger" id="logoutBtn" type="button">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
@@ -1424,7 +1528,6 @@
     </header>
 
     <main class="container">
-        <!-- Hero -->
         <section class="hero" aria-labelledby="hero-title">
             <div class="hero-badge">
                 <span class="pulse-dot" aria-hidden="true"></span>
@@ -1456,7 +1559,6 @@
             </div>
         </section>
 
-        <!-- Статистика -->
         <section class="stats reveal" id="stats" aria-label="Статистика бота">
             <div class="stat-card">
                 <div class="stat-value" data-target="16">0</div>
@@ -1476,7 +1578,6 @@
             </div>
         </section>
 
-        <!-- О платформе Lolka -->
         <section class="about-lolka reveal" aria-labelledby="about-title">
             <h2 id="about-title">🎮 Что такое Lolka?</h2>
             <p>
@@ -1574,7 +1675,6 @@
             </div>
         </section>
 
-        <!-- Возможности -->
         <section class="features reveal" id="features" aria-labelledby="features-title">
             <div class="section-header">
                 <h2 id="features-title">Что умеет бот</h2>
@@ -1641,14 +1741,12 @@
             </div>
         </section>
 
-        <!-- Команды -->
         <section class="commands reveal" id="commands" aria-labelledby="commands-title">
             <div class="section-header">
                 <h2 id="commands-title">Команды бота</h2>
                 <p>Нажми на команду, чтобы скопировать её в буфер обмена</p>
             </div>
 
-            <!-- 🟢 ОСНОВНОЕ -->
             <div class="cmd-group info">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">🟢</span>
@@ -1675,7 +1773,6 @@
                 </ul>
             </div>
 
-            <!-- 👤 ПОЛЬЗОВАТЕЛИ -->
             <div class="cmd-group">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">👤</span>
@@ -1698,7 +1795,6 @@
                 </ul>
             </div>
 
-            <!-- 🛡️ МОДЕРАЦИЯ -->
             <div class="cmd-group mod">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">🛡️</span>
@@ -1721,7 +1817,6 @@
                 </ul>
             </div>
 
-            <!-- ⚙️ КОНФИГУРАЦИЯ -->
             <div class="cmd-group admin">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">⚙️</span>
@@ -1752,7 +1847,6 @@
                 </ul>
             </div>
 
-            <!-- 📖 СПРАВКА -->
             <div class="cmd-group fun">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">📖</span>
@@ -1767,7 +1861,6 @@
                 </ul>
             </div>
 
-            <!-- 🔔 СОБЫТИЯ -->
             <div class="cmd-group">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">🔔</span>
@@ -1823,7 +1916,6 @@
                 </div>
             </div>
 
-            <!-- ИТОГО -->
             <div class="cmd-group">
                 <h3>
                     <span class="icon-badge" aria-hidden="true">📊</span>
@@ -1840,7 +1932,6 @@
             </div>
         </section>
 
-        <!-- CTA -->
         <section class="cta reveal" id="invite" aria-labelledby="cta-title">
             <h2 id="cta-title">Готов добавить бота?</h2>
             <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
@@ -1982,6 +2073,121 @@
         </div>
     </div>
 
+    <!-- ================= МОДАЛЬНОЕ ОКНО ПРОФИЛЯ ================= -->
+    <div class="modal-overlay" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle" aria-hidden="true">
+        <div class="modal profile-modal">
+            <button class="modal-close" id="profileClose" type="button" aria-label="Закрыть">×</button>
+            <h2 class="modal-title" id="profileTitle">Личный кабинет</h2>
+            <p class="modal-subtitle">Управляйте своим профилем</p>
+
+            <div class="form-message" id="profileMessage" role="alert"></div>
+
+            <div class="profile-tabs" role="tablist">
+                <button class="profile-tab active" data-tab="general" type="button">Профиль</button>
+                <button class="profile-tab" data-tab="security" type="button">Безопасность</button>
+                <button class="profile-tab" data-tab="account" type="button">Аккаунт</button>
+            </div>
+
+            <!-- Панель: Профиль -->
+            <div class="profile-panel active" data-panel="general">
+                <form id="profileForm">
+                    <div class="profile-avatar-row">
+                        <div class="profile-avatar-preview" id="profileAvatarPreview">U</div>
+                        <div class="profile-avatar-fields">
+                            <label class="form-label" for="profileAvatarUrl">Ссылка на аватар</label>
+                            <input class="form-input" type="url" id="profileAvatarUrl" placeholder="https://example.com/avatar.png">
+                            <div class="form-hint">Вставьте прямую ссылку на изображение (http/https)</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="profileDisplayName">Отображаемое имя</label>
+                        <input class="form-input" type="text" id="profileDisplayName" placeholder="Ваше имя" maxlength="32">
+                        <div class="form-hint">До 32 символов</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="profileBio">О себе</label>
+                        <textarea class="form-input" id="profileBio" rows="3" placeholder="Расскажите немного о себе" maxlength="200"></textarea>
+                        <div class="form-hint">До 200 символов</div>
+                    </div>
+
+                    <button class="auth-submit" id="profileSaveBtn" type="submit">
+                        <span class="spinner"></span>
+                        <span class="btn-label">Сохранить изменения</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Панель: Безопасность -->
+            <div class="profile-panel" data-panel="security">
+                <form id="changePasswordForm">
+                    <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--text);">Смена пароля</h4>
+                    <div class="form-group">
+                        <label class="form-label" for="currentPassword">Текущий пароль</label>
+                        <input class="form-input" type="password" id="currentPassword" placeholder="Введите текущий пароль" autocomplete="current-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="newPassword">Новый пароль</label>
+                        <input class="form-input" type="password" id="newPassword" placeholder="Минимум 6 символов" autocomplete="new-password" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="confirmNewPassword">Повторите новый пароль</label>
+                        <input class="form-input" type="password" id="confirmNewPassword" placeholder="Повторите пароль" autocomplete="new-password" required>
+                    </div>
+                    <button class="auth-submit" id="changePasswordBtn" type="submit">
+                        <span class="spinner"></span>
+                        <span class="btn-label">Сменить пароль</span>
+                    </button>
+                </form>
+
+                <form id="changeEmailForm" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-soft);">
+                    <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--text);">Смена email</h4>
+                    <div class="form-group">
+                        <label class="form-label" for="newEmail">Новый email</label>
+                        <input class="form-input" type="email" id="newEmail" placeholder="new@example.com" autocomplete="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="currentEmailPassword">Текущий пароль</label>
+                        <input class="form-input" type="password" id="currentEmailPassword" placeholder="Введите пароль для подтверждения" autocomplete="current-password" required>
+                    </div>
+                    <button class="auth-submit" id="changeEmailBtn" type="submit">
+                        <span class="spinner"></span>
+                        <span class="btn-label">Сменить email</span>
+                    </button>
+                </form>
+            </div>
+
+            <!-- Панель: Аккаунт -->
+            <div class="profile-panel" data-panel="account">
+                <div class="profile-info-row">
+                    <span class="profile-info-label">Email</span>
+                    <span class="profile-info-value" id="profileEmailDisplay">—</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-info-label">UID</span>
+                    <span class="profile-info-value" id="profileUidDisplay">—</span>
+                </div>
+                <div class="profile-info-row">
+                    <span class="profile-info-label">Дата регистрации</span>
+                    <span class="profile-info-value" id="profileCreatedDisplay">—</span>
+                </div>
+
+                <div class="danger-zone">
+                    <h4>Выход из аккаунта</h4>
+                    <button class="btn-danger" id="profileLogoutBtn" type="button">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16 17 21 12 16 7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                        Выйти из аккаунта
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="module">
         /* ================= FIREBASE ================= */
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
@@ -1991,8 +2197,20 @@
             signInWithEmailAndPassword,
             signOut,
             onAuthStateChanged,
-            sendPasswordResetEmail
+            sendPasswordResetEmail,
+            updateProfile,
+            updatePassword,
+            updateEmail,
+            EmailAuthProvider,
+            reauthenticateWithCredential
         } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            getDoc,
+            setDoc,
+            serverTimestamp
+        } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
@@ -2006,6 +2224,7 @@
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
         /* ================= УТИЛИТЫ ================= */
         const $ = (sel) => document.querySelector(sel);
@@ -2033,7 +2252,7 @@
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
 
-        /* ================= МОДАЛЬНОЕ ОКНО ================= */
+        /* ================= МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ ================= */
         const authModal = $('#authModal');
         const authOpenBtn = $('#authOpenBtn');
         const authClose = $('#authClose');
@@ -2151,7 +2370,37 @@
         function setLoading(button, loading, defaultLabel) {
             button.disabled = loading;
             button.classList.toggle('loading', loading);
-            button.querySelector('.btn-label').textContent = loading ? 'Подождите…' : defaultLabel;
+            const label = button.querySelector('.btn-label');
+            if (label) label.textContent = loading ? 'Подождите…' : defaultLabel;
+        }
+
+        /* ================= FIRESTORE ================= */
+        async function ensureUserDoc(user) {
+            if (!user) return null;
+            const ref = doc(db, 'users', user.uid);
+            const snap = await getDoc(ref);
+            if (!snap.exists()) {
+                const initial = {
+                    displayName: user.displayName || '',
+                    bio: '',
+                    avatarUrl: '',
+                    createdAt: serverTimestamp()
+                };
+                await setDoc(ref, initial, { merge: true });
+                return initial;
+            }
+            return snap.data();
+        }
+
+        async function saveUserDoc(uid, data) {
+            const ref = doc(db, 'users', uid);
+            await setDoc(ref, data, { merge: true });
+        }
+
+        async function loadUserDoc(uid) {
+            const ref = doc(db, 'users', uid);
+            const snap = await getDoc(ref);
+            return snap.exists() ? snap.data() : null;
         }
 
         /* ================= ВХОД ================= */
@@ -2184,11 +2433,12 @@
             clearMessage();
 
             try {
-                await createUserWithEmailAndPassword(
+                const cred = await createUserWithEmailAndPassword(
                     auth,
                     $('#registerEmail').value.trim(),
                     $('#registerPassword').value
                 );
+                await ensureUserDoc(cred.user);
             } catch (error) {
                 showMessage(getErrorMessage(error), 'error');
             } finally {
@@ -2243,41 +2493,269 @@
             }
         });
 
-        onAuthStateChanged(auth, (user) => {
+        $('#openProfileBtn').addEventListener('click', () => {
+            userDropdown.classList.remove('open');
+            openProfileModal();
+        });
+
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
                 const email = user.email || 'пользователь';
                 authOpenBtn.style.display = 'none';
                 userMenu.classList.add('visible');
-                userAvatar.textContent = email[0].toUpperCase();
                 userEmail.textContent = email;
                 userAvatar.title = 'Вы вошли как ' + email;
 
-                if (authModal.classList.contains('open')) {
-                    closeModal();
+                let profile = await loadUserDoc(user.uid);
+                if (!profile) profile = await ensureUserDoc(user);
+
+                const displayName = profile?.displayName?.trim();
+                const initial = displayName ? displayName[0] : email[0];
+                if (profile?.avatarUrl) {
+                    userAvatar.style.backgroundImage = `url("${profile.avatarUrl}")`;
+                    userAvatar.style.backgroundSize = 'cover';
+                    userAvatar.style.backgroundPosition = 'center';
+                    userAvatar.textContent = '';
+                } else {
+                    userAvatar.style.backgroundImage = '';
+                    userAvatar.textContent = initial.toUpperCase();
                 }
+
+                if (authModal.classList.contains('open')) closeModal();
             } else {
                 authOpenBtn.style.display = '';
                 userMenu.classList.remove('visible');
                 userDropdown.classList.remove('open');
+                userAvatar.style.backgroundImage = '';
             }
         });
 
-        document.addEventListener('click', (e) => {
-            const burger = $('#burger');
-            const navLinksEl = $('#navLinks');
-            if (navLinksEl && navLinksEl.classList.contains('open')) {
-                if (!navLinksEl.contains(e.target) && e.target !== burger) {
-                    navLinksEl.classList.remove('open');
-                    burger.setAttribute('aria-expanded', 'false');
-                    burger.textContent = '☰';
+        /* ================= МОДАЛЬНОЕ ОКНО ПРОФИЛЯ ================= */
+        const profileModal = $('#profileModal');
+        const profileClose = $('#profileClose');
+        const profileForm = $('#profileForm');
+        const profileMessage = $('#profileMessage');
+        const profileSaveBtn = $('#profileSaveBtn');
+        const profileLogoutBtn = $('#profileLogoutBtn');
+        const profileEmailDisplay = $('#profileEmailDisplay');
+        const profileUidDisplay = $('#profileUidDisplay');
+        const profileCreatedDisplay = $('#profileCreatedDisplay');
+        const profileAvatarPreview = $('#profileAvatarPreview');
+
+        function openProfileModal() {
+            if (!auth.currentUser) return;
+            profileModal.classList.add('open');
+            profileModal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+            clearProfileMessage();
+            fillProfileForm();
+            switchProfileTab('general');
+        }
+
+        function closeProfileModal() {
+            profileModal.classList.remove('open');
+            profileModal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+            clearProfileMessage();
+        }
+
+        profileClose.addEventListener('click', closeProfileModal);
+        profileModal.addEventListener('click', (e) => {
+            if (e.target === profileModal) closeProfileModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && profileModal.classList.contains('open')) closeProfileModal();
+        });
+
+        function clearProfileMessage() {
+            profileMessage.classList.remove('visible', 'error', 'success');
+            profileMessage.innerHTML = '';
+        }
+
+        function showProfileMessage(text, type = 'error') {
+            profileMessage.className = 'form-message visible ' + type;
+            profileMessage.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
+        }
+
+        async function fillProfileForm() {
+            const user = auth.currentUser;
+            if (!user) return;
+
+            profileEmailDisplay.textContent = user.email || '—';
+            profileUidDisplay.textContent = user.uid;
+
+            const profile = await loadUserDoc(user.uid);
+            if (profile?.createdAt?.toDate) {
+                profileCreatedDisplay.textContent = profile.createdAt.toDate().toLocaleDateString('ru-RU');
+            } else {
+                profileCreatedDisplay.textContent = '—';
+            }
+
+            $('#profileDisplayName').value = profile?.displayName || user.displayName || '';
+            $('#profileBio').value = profile?.bio || '';
+            $('#profileAvatarUrl').value = profile?.avatarUrl || '';
+
+            updateAvatarPreview(profile?.avatarUrl || '', profile?.displayName || user.email || 'U');
+        }
+
+        function updateAvatarPreview(url, fallbackText) {
+            if (url && /^https?:\/\//.test(url)) {
+                profileAvatarPreview.style.backgroundImage = `url("${url}")`;
+                profileAvatarPreview.style.backgroundSize = 'cover';
+                profileAvatarPreview.style.backgroundPosition = 'center';
+                profileAvatarPreview.textContent = '';
+            } else {
+                profileAvatarPreview.style.backgroundImage = '';
+                profileAvatarPreview.textContent = (fallbackText || 'U')[0].toUpperCase();
+            }
+        }
+
+        $('#profileAvatarUrl').addEventListener('input', (e) => {
+            const url = e.target.value.trim();
+            const fallback = $('#profileDisplayName').value.trim() || auth.currentUser?.email || 'U';
+            updateAvatarPreview(url, fallback);
+        });
+
+        $('#profileDisplayName').addEventListener('input', (e) => {
+            const url = $('#profileAvatarUrl').value.trim();
+            if (!url) updateAvatarPreview('', e.target.value || 'U');
+        });
+
+        function switchProfileTab(name) {
+            document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.profile-panel').forEach(p => p.classList.remove('active'));
+            document.querySelector(`.profile-tab[data-tab="${name}"]`)?.classList.add('active');
+            document.querySelector(`.profile-panel[data-panel="${name}"]`)?.classList.add('active');
+        }
+
+        document.querySelectorAll('.profile-tab').forEach(tab => {
+            tab.addEventListener('click', () => switchProfileTab(tab.dataset.tab));
+        });
+
+        profileForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            clearProfileMessage();
+            setLoading(profileSaveBtn, true, 'Сохранить изменения');
+
+            try {
+                const displayName = $('#profileDisplayName').value.trim().slice(0, 32);
+                const bio = $('#profileBio').value.trim().slice(0, 200);
+                const avatarUrl = $('#profileAvatarUrl').value.trim();
+
+                if (avatarUrl && !/^https?:\/\//.test(avatarUrl)) {
+                    throw new Error('Ссылка на аватар должна начинаться с http:// или https://');
                 }
+
+                await saveUserDoc(user.uid, {
+                    displayName,
+                    bio,
+                    avatarUrl,
+                    updatedAt: serverTimestamp()
+                });
+
+                if (displayName && displayName !== user.displayName) {
+                    await updateProfile(user, { displayName });
+                }
+
+                const initial = displayName ? displayName[0] : (user.email || 'U')[0];
+                if (avatarUrl) {
+                    userAvatar.style.backgroundImage = `url("${avatarUrl}")`;
+                    userAvatar.style.backgroundSize = 'cover';
+                    userAvatar.style.backgroundPosition = 'center';
+                    userAvatar.textContent = '';
+                } else {
+                    userAvatar.style.backgroundImage = '';
+                    userAvatar.textContent = initial.toUpperCase();
+                }
+
+                showProfileMessage('Профиль сохранён', 'success');
+            } catch (error) {
+                showProfileMessage(error.message || getErrorMessage(error), 'error');
+            } finally {
+                setLoading(profileSaveBtn, false, 'Сохранить изменения');
+            }
+        });
+
+        profileLogoutBtn.addEventListener('click', async () => {
+            await signOut(auth);
+            closeProfileModal();
+        });
+
+        /* Смена пароля */
+        $('#changePasswordForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearProfileMessage();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const current = $('#currentPassword').value;
+            const next = $('#newPassword').value;
+            const confirm = $('#confirmNewPassword').value;
+
+            if (next.length < 6) {
+                showProfileMessage('Пароль должен быть минимум 6 символов', 'error');
+                return;
+            }
+            if (next !== confirm) {
+                showProfileMessage('Новые пароли не совпадают', 'error');
+                return;
+            }
+
+            const btn = $('#changePasswordBtn');
+            setLoading(btn, true, 'Сменить пароль');
+
+            try {
+                const cred = EmailAuthProvider.credential(user.email, current);
+                await reauthenticateWithCredential(user, cred);
+                await updatePassword(user, next);
+                showProfileMessage('Пароль успешно изменён', 'success');
+                $('#changePasswordForm').reset();
+            } catch (error) {
+                showProfileMessage(getErrorMessage(error), 'error');
+            } finally {
+                setLoading(btn, false, 'Сменить пароль');
+            }
+        });
+
+        /* Смена email */
+        $('#changeEmailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            clearProfileMessage();
+            const user = auth.currentUser;
+            if (!user) return;
+
+            const current = $('#currentEmailPassword').value;
+            const newEmail = $('#newEmail').value.trim();
+
+            if (!isValidEmail(newEmail)) {
+                showProfileMessage('Некорректный новый email', 'error');
+                return;
+            }
+
+            const btn = $('#changeEmailBtn');
+            setLoading(btn, true, 'Сменить email');
+
+            try {
+                const cred = EmailAuthProvider.credential(user.email, current);
+                await reauthenticateWithCredential(user, cred);
+                await updateEmail(user, newEmail);
+                showProfileMessage('Email изменён. Возможно, потребуется подтверждение.', 'success');
+                profileEmailDisplay.textContent = newEmail;
+                $('#changeEmailForm').reset();
+            } catch (error) {
+                showProfileMessage(getErrorMessage(error), 'error');
+            } finally {
+                setLoading(btn, false, 'Сменить email');
             }
         });
 
         /* ================= ОСТАЛЬНАЯ ЛОГИКА САЙТА ================= */
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-        /* ---------- Тема ---------- */
+        /* Тема */
         const html = document.documentElement;
         const themeToggle = document.getElementById('themeToggle');
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -2292,7 +2770,7 @@
             localStorage.setItem('theme', next);
         });
 
-        /* ---------- Прогресс + липкая навигация + кнопка «Наверх» ---------- */
+        /* Прогресс + липкая навигация + кнопка «Наверх» */
         const nav = document.getElementById('nav');
         const progressBar = document.getElementById('progressBar');
         const toTop = document.getElementById('toTop');
@@ -2316,7 +2794,7 @@
             }
         }, { passive: true });
 
-        /* ---------- Мобильное меню ---------- */
+        /* Мобильное меню */
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
         burger.addEventListener('click', (e) => {
@@ -2333,12 +2811,24 @@
             });
         });
 
-        /* ---------- Кнопка «Наверх» ---------- */
+        document.addEventListener('click', (e) => {
+            const burger = $('#burger');
+            const navLinksEl = $('#navLinks');
+            if (navLinksEl && navLinksEl.classList.contains('open')) {
+                if (!navLinksEl.contains(e.target) && e.target !== burger) {
+                    navLinksEl.classList.remove('open');
+                    burger.setAttribute('aria-expanded', 'false');
+                    burger.textContent = '☰';
+                }
+            }
+        });
+
+        /* Кнопка «Наверх» */
         toTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         });
 
-        /* ---------- Копирование команд ---------- */
+        /* Копирование команд */
         document.querySelectorAll('.cmd-name').forEach(el => {
             const copy = () => {
                 const text = el.dataset.copy || el.textContent;
@@ -2372,7 +2862,7 @@
             document.body.removeChild(ta);
         }
 
-        /* ---------- Анимация появления секций ---------- */
+        /* Анимация появления секций */
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -2387,7 +2877,7 @@
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
-        /* ---------- Анимированные счётчики ---------- */
+        /* Анимированные счётчики */
         const counters = document.querySelectorAll('.stat-value[data-target]');
         const runCounter = (el) => {
             const target = parseInt(el.dataset.target, 10);
@@ -2432,7 +2922,7 @@
             });
         }
 
-        /* ---------- Scroll-spy ---------- */
+        /* Scroll-spy */
         const sections = document.querySelectorAll('section[id]');
         const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
 
