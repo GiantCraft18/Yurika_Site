@@ -60,11 +60,7 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 90px;
-    }
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
@@ -181,14 +177,8 @@
         transition: color 0.2s, background 0.2s;
         position: relative;
     }
-    .nav-links a:hover {
-        color: var(--text);
-        background: var(--bg-2);
-    }
-    .nav-links a.active {
-        color: var(--text);
-        background: var(--bg-2);
-    }
+    .nav-links a:hover { color: var(--text); background: var(--bg-2); }
+    .nav-links a.active { color: var(--text); background: var(--bg-2); }
     .nav-links a.active::after {
         content: "";
         position: absolute;
@@ -256,10 +246,7 @@
         transform: translateY(-1px);
         box-shadow: 0 6px 22px var(--accent-glow);
     }
-    .auth-nav-btn svg {
-        width: 16px;
-        height: 16px;
-    }
+    .auth-nav-btn svg { width: 16px; height: 16px; }
 
     .user-menu {
         display: none;
@@ -285,6 +272,8 @@
         text-transform: uppercase;
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
+        overflow: hidden;
     }
     .user-avatar:hover {
         border-color: var(--accent-1);
@@ -306,10 +295,7 @@
         pointer-events: none;
         transition: opacity 0.25s;
     }
-    .modal-overlay.open {
-        opacity: 1;
-        pointer-events: auto;
-    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
     .modal {
         background: var(--bg-2);
         border: 1px solid var(--border);
@@ -325,9 +311,7 @@
         box-shadow: 0 24px 60px rgba(0,0,0,0.5);
     }
     .modal.profile-modal { max-width: 560px; }
-    .modal-overlay.open .modal {
-        transform: translateY(0) scale(1);
-    }
+    .modal-overlay.open .modal { transform: translateY(0) scale(1); }
     .modal::before {
         content: "";
         position: absolute;
@@ -354,11 +338,9 @@
         align-items: center;
         justify-content: center;
         transition: background 0.2s, color 0.2s;
+        z-index: 1;
     }
-    .modal-close:hover {
-        background: var(--bg-3);
-        color: var(--text);
-    }
+    .modal-close:hover { background: var(--bg-3); color: var(--text); }
 
     .modal-logo {
         display: flex;
@@ -507,10 +489,7 @@
         transform: translateY(-1px);
         box-shadow: 0 8px 28px var(--accent-glow);
     }
-    .auth-submit:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-    }
+    .auth-submit:disabled { opacity: 0.7; cursor: not-allowed; }
     .auth-submit .spinner {
         width: 16px; height: 16px;
         border: 2px solid rgba(255,255,255,0.3);
@@ -554,7 +533,7 @@
         line-height: 1.5;
     }
 
-    /* ---------- Профиль ---------- */
+    /* Профиль */
     .profile-tabs {
         display: flex;
         gap: 4px;
@@ -607,6 +586,7 @@
         border: 3px solid var(--border);
         background-size: cover;
         background-position: center;
+        background-repeat: no-repeat;
     }
     .profile-avatar-fields { flex: 1; min-width: 0; }
 
@@ -664,7 +644,6 @@
     }
     .btn-danger svg { width: 16px; height: 16px; }
 
-    /* ---------- Меню пользователя (выпадающее) ---------- */
     .user-dropdown {
         position: absolute;
         top: calc(100% + 8px);
@@ -721,27 +700,16 @@
         gap: 10px;
         transition: background 0.2s, color 0.2s;
     }
-    .user-dropdown-item:hover {
-        background: var(--bg-3);
-        color: var(--text);
-    }
+    .user-dropdown-item:hover { background: var(--bg-3); color: var(--text); }
     .user-dropdown-item.danger:hover {
         background: rgba(248, 113, 113, 0.1);
         color: var(--error);
     }
-    .user-dropdown-item svg {
-        width: 16px; height: 16px;
-        flex-shrink: 0;
-    }
+    .user-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
     .user-menu-wrapper { position: relative; }
 
-    /* ---------- Hero ---------- */
-    .hero {
-        text-align: center;
-        padding: 90px 0 50px;
-        position: relative;
-    }
+    .hero { text-align: center; padding: 90px 0 50px; position: relative; }
     .hero-badge {
         display: inline-flex;
         align-items: center;
@@ -841,10 +809,7 @@
         transition: opacity 0.3s;
     }
     .btn-primary > * { position: relative; z-index: 1; }
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 36px var(--accent-glow);
-    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px var(--accent-glow); }
     .btn-primary:hover::before { opacity: 1; }
     .btn-download {
         background: transparent;
@@ -858,9 +823,7 @@
         transform: translateY(-2px);
         background: var(--bg-2);
     }
-    .btn-download svg {
-        animation: bounceDown 2.5s ease-in-out infinite;
-    }
+    .btn-download svg { animation: bounceDown 2.5s ease-in-out infinite; }
     @keyframes bounceDown {
         0%, 100% { transform: translateY(0); }
         50% { transform: translateY(2px); }
@@ -919,10 +882,7 @@
     }
 
     section { scroll-margin-top: 90px; }
-    .section-header {
-        text-align: center;
-        margin-bottom: 44px;
-    }
+    .section-header { text-align: center; margin-bottom: 44px; }
     .section-header h2 {
         font-size: clamp(26px, 4vw, 38px);
         font-weight: 800;
@@ -967,10 +927,7 @@
         transition: opacity 0.3s;
         pointer-events: none;
     }
-    .feature-card:hover {
-        transform: translateY(-4px);
-        box-shadow: 0 14px 36px var(--shadow-soft);
-    }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px var(--shadow-soft); }
     .feature-card:hover::after { opacity: 1; }
     .feature-icon {
         width: 52px;
@@ -990,9 +947,7 @@
         stroke-width: 1.8;
         fill: none;
     }
-    .feature-card:hover .feature-icon {
-        transform: scale(1.08) rotate(-5deg);
-    }
+    .feature-card:hover .feature-icon { transform: scale(1.08) rotate(-5deg); }
     .feature-card h3 {
         font-size: 17px;
         font-weight: 700;
@@ -1000,11 +955,7 @@
         margin-bottom: 8px;
         letter-spacing: -0.01em;
     }
-    .feature-card p {
-        color: var(--text-muted);
-        font-size: 14px;
-        line-height: 1.6;
-    }
+    .feature-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
     .feature-card code {
         background: var(--code-bg);
         padding: 2px 6px;
@@ -1033,12 +984,7 @@
         background: radial-gradient(circle, rgba(124, 92, 252, 0.1), transparent 70%);
         pointer-events: none;
     }
-    .about-lolka h2 {
-        font-size: 26px;
-        font-weight: 800;
-        margin-bottom: 12px;
-        letter-spacing: -0.02em;
-    }
+    .about-lolka h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
     .about-lolka > p {
         color: var(--text-muted);
         font-size: 15px;
@@ -1046,10 +992,7 @@
         max-width: 720px;
         margin-bottom: 28px;
     }
-    .about-lolka > p strong {
-        color: var(--text);
-        font-weight: 600;
-    }
+    .about-lolka > p strong { color: var(--text); font-weight: 600; }
     .lolka-features {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -1066,9 +1009,7 @@
         border: 1px solid var(--border-soft);
         transition: border-color 0.2s;
     }
-    .lolka-feature:hover {
-        border-color: var(--card-hover-border);
-    }
+    .lolka-feature:hover { border-color: var(--card-hover-border); }
     .lolka-feature-icon {
         width: 36px;
         height: 36px;
@@ -1086,17 +1027,8 @@
         stroke-width: 2;
         fill: none;
     }
-    .lolka-feature-text h4 {
-        font-size: 14px;
-        font-weight: 600;
-        color: var(--text);
-        margin-bottom: 4px;
-    }
-    .lolka-feature-text p {
-        font-size: 12.5px;
-        color: var(--text-muted);
-        line-height: 1.5;
-    }
+    .lolka-feature-text h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+    .lolka-feature-text p { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
     .about-lolka-cta {
         display: flex;
         flex-wrap: wrap;
@@ -1105,12 +1037,7 @@
         border-top: 1px solid var(--border-soft);
         align-items: center;
     }
-    .about-lolka-cta .note {
-        color: var(--text-dim);
-        font-size: 13px;
-        flex: 1;
-        min-width: 200px;
-    }
+    .about-lolka-cta .note { color: var(--text-dim); font-size: 13px; flex: 1; min-width: 200px; }
 
     .cmd-group {
         background: var(--bg-2);
@@ -1195,11 +1122,7 @@
         transform: translateY(-1px);
     }
     .cmd-name:active { transform: translateY(0); }
-    .cmd-name.copied {
-        background: var(--success);
-        color: #fff;
-        border-color: var(--success);
-    }
+    .cmd-name.copied { background: var(--success); color: #fff; border-color: var(--success); }
     .cmd-name.copied::after {
         content: "✓ Скопировано";
         position: absolute;
@@ -1230,12 +1153,7 @@
         flex: 1;
         min-width: 140px;
     }
-    .cmd-aliases {
-        color: var(--text-faint);
-        font-size: 12px;
-        display: block;
-        margin-top: 3px;
-    }
+    .cmd-aliases { color: var(--text-faint); font-size: 12px; display: block; margin-top: 3px; }
 
     .events-list {
         display: grid;
@@ -1252,15 +1170,8 @@
         border-radius: 10px;
         border: 1px solid var(--border-soft);
     }
-    .event-icon {
-        font-size: 20px;
-        flex-shrink: 0;
-    }
-    .event-text {
-        font-size: 13.5px;
-        color: var(--text-muted);
-        line-height: 1.5;
-    }
+    .event-icon { font-size: 20px; flex-shrink: 0; }
+    .event-text { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
     .event-text strong {
         color: var(--text);
         font-weight: 600;
@@ -1326,11 +1237,7 @@
         font-weight: 700;
         margin-bottom: 20px;
     }
-    .footer-brand .logo-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 16px;
-    }
+    .footer-brand .logo-icon { width: 32px; height: 32px; font-size: 16px; }
     .footer-brand span:last-child {
         background: var(--lolka-gradient);
         -webkit-background-clip: text;
@@ -1355,10 +1262,7 @@
         transition: background 0.2s, color 0.2s;
         font-weight: 500;
     }
-    .footer-links a:hover {
-        background: var(--bg-2);
-        color: var(--text);
-    }
+    .footer-links a:hover { background: var(--bg-2); color: var(--text); }
     .footer-copy { color: var(--text-faint); }
 
     #toTop {
@@ -1380,11 +1284,7 @@
         transition: opacity 0.3s, transform 0.3s, background 0.2s, border-color 0.2s;
         z-index: 99;
     }
-    #toTop.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
+    #toTop.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
     #toTop:hover {
         transform: translateY(-3px);
         background: var(--lolka-gradient);
@@ -1397,10 +1297,7 @@
         transform: translateY(28px);
         transition: opacity 0.7s ease, transform 0.7s ease;
     }
-    .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 900px) {
         .burger { display: flex; }
@@ -1427,11 +1324,7 @@
             opacity: 1;
             pointer-events: auto;
         }
-        .nav-links a {
-            padding: 12px 16px;
-            width: 100%;
-            border-radius: 9px;
-        }
+        .nav-links a { padding: 12px 16px; width: 100%; border-radius: 9px; }
         .nav-links a.active::after { display: none; }
         .nav-links a:hover { background: var(--bg-3); }
         .theme-toggle { margin-left: 0; margin-top: 4px; width: 100%; }
@@ -1534,10 +1427,7 @@
                 <span>Работает на сервере Lolka</span>
             </div>
             <h1 id="hero-title">Твой помощник<br>на сервере Lolka</h1>
-            <p>
-                Модерация, утилиты, конфигурация и удобное меню команд —
-                всё в одном боте. Установка занимает 10 секунд.
-            </p>
+            <p>Модерация, утилиты, конфигурация и удобное меню команд — всё в одном боте. Установка занимает 10 секунд.</p>
             <div class="buttons">
                 <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
                    target="_blank" rel="noopener" class="btn btn-primary">
@@ -1547,8 +1437,7 @@
                     </svg>
                     <span>Пригласить бота</span>
                 </a>
-                <a href="https://lolka.app/#platforms"
-                   target="_blank" rel="noopener" class="btn btn-download">
+                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-download">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1663,8 +1552,7 @@
             </div>
             <div class="about-lolka-cta">
                 <span class="note">💡 Нет аккаунта в Lolka? Скачай приложение для своей платформы — это бесплатно.</span>
-                <a href="https://lolka.app/#platforms"
-                   target="_blank" rel="noopener" class="btn btn-download">
+                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-download">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1748,179 +1636,86 @@
             </div>
 
             <div class="cmd-group info">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">🟢</span>
-                    Основное
-                    <span class="count">4</span>
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">🟢</span>Основное<span class="count">4</span></h3>
                 <ul class="cmd-list">
-                    <li>
-                        <span class="cmd-name" data-copy="/ping" tabindex="0">/ping</span>
-                        <span class="cmd-desc">Проверка связи (pong 🏓)</span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/hello" tabindex="0">/hello</span>
-                        <span class="cmd-desc">Приветствие пользователя<span class="cmd-aliases">Алиасы: !hi, !привет</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/info" tabindex="0">/info</span>
-                        <span class="cmd-desc">Информация о боте (пинг, аптайм, сервер, канал)</span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/latency" tabindex="0">/latency</span>
-                        <span class="cmd-desc">Задержка бота в миллисекундах</span>
-                    </li>
+                    <li><span class="cmd-name" data-copy="/ping" tabindex="0">/ping</span><span class="cmd-desc">Проверка связи (pong 🏓)</span></li>
+                    <li><span class="cmd-name" data-copy="/hello" tabindex="0">/hello</span><span class="cmd-desc">Приветствие пользователя<span class="cmd-aliases">Алиасы: !hi, !привет</span></span></li>
+                    <li><span class="cmd-name" data-copy="/info" tabindex="0">/info</span><span class="cmd-desc">Информация о боте (пинг, аптайм, сервер, канал)</span></li>
+                    <li><span class="cmd-name" data-copy="/latency" tabindex="0">/latency</span><span class="cmd-desc">Задержка бота в миллисекундах</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">👤</span>
-                    Пользователи
-                    <span class="count">3</span>
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">👤</span>Пользователи<span class="count">3</span></h3>
                 <ul class="cmd-list">
-                    <li>
-                        <span class="cmd-name" data-copy="/user" tabindex="0">/user [@user]</span>
-                        <span class="cmd-desc">Карточка пользователя (имя, ID, роли, статус, даты)<span class="cmd-aliases">Алиасы: !u, !юзер</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/avatar" tabindex="0">/avatar [@user]</span>
-                        <span class="cmd-desc">Показать аватар<span class="cmd-aliases">Алиасы: !av, !аватар</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/debug_user" tabindex="0">/debug_user [@user]</span>
-                        <span class="cmd-desc">Отладка: список атрибутов (скрыта из меню)</span>
-                    </li>
+                    <li><span class="cmd-name" data-copy="/user" tabindex="0">/user [@user]</span><span class="cmd-desc">Карточка пользователя (имя, ID, роли, статус, даты)<span class="cmd-aliases">Алиасы: !u, !юзер</span></span></li>
+                    <li><span class="cmd-name" data-copy="/avatar" tabindex="0">/avatar [@user]</span><span class="cmd-desc">Показать аватар<span class="cmd-aliases">Алиасы: !av, !аватар</span></span></li>
+                    <li><span class="cmd-name" data-copy="/debug_user" tabindex="0">/debug_user [@user]</span><span class="cmd-desc">Отладка: список атрибутов (скрыта из меню)</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group mod">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">🛡️</span>
-                    Модерация
-                    <span class="count">3</span>
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация<span class="count">3</span></h3>
                 <ul class="cmd-list">
-                    <li>
-                        <span class="cmd-name" data-copy="/purge 10" tabindex="0">/purge [число]</span>
-                        <span class="cmd-desc">Удалить N сообщений (1–100)<span class="cmd-aliases">Алиасы: !clear, !очистить · Права: Manage Messages</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/kick @user" tabindex="0">/kick @user [причина]</span>
-                        <span class="cmd-desc">Кикнуть участника<span class="cmd-aliases">Алиасы: !кик · Права: Kick Members</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/mute @user 10m" tabindex="0">/mute @user [время]</span>
-                        <span class="cmd-desc">Заглушить (в разработке)<span class="cmd-aliases">Алиасы: !мут · Права: Manage Roles</span></span>
-                    </li>
+                    <li><span class="cmd-name" data-copy="/purge 10" tabindex="0">/purge [число]</span><span class="cmd-desc">Удалить N сообщений (1–100)<span class="cmd-aliases">Алиасы: !clear, !очистить · Права: Manage Messages</span></span></li>
+                    <li><span class="cmd-name" data-copy="/kick @user" tabindex="0">/kick @user [причина]</span><span class="cmd-desc">Кикнуть участника<span class="cmd-aliases">Алиасы: !кик · Права: Kick Members</span></span></li>
+                    <li><span class="cmd-name" data-copy="/mute @user 10m" tabindex="0">/mute @user [время]</span><span class="cmd-desc">Заглушить (в разработке)<span class="cmd-aliases">Алиасы: !мут · Права: Manage Roles</span></span></li>
                 </ul>
             </div>
 
             <div class="cmd-group admin">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">⚙️</span>
-                    Конфигурация
-                    <span class="count">5</span>
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">⚙️</span>Конфигурация<span class="count">5</span></h3>
                 <ul class="cmd-list">
-                    <li>
-                        <span class="cmd-name" data-copy="/конфиг" tabindex="0">/конфиг</span>
-                        <span class="cmd-desc">Показать текущие настройки сервера<span class="cmd-aliases">Алиасы: !config · Только администратор</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/конфиг префикс ?" tabindex="0">/конфиг префикс [символ]</span>
-                        <span class="cmd-desc">Изменить префикс (до 5 символов)<span class="cmd-aliases">Алиасы: !конфиг prefix</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/конфиг приветствие #канал" tabindex="0">/конфиг приветствие [#канал]</span>
-                        <span class="cmd-desc">Установить канал приветствий<span class="cmd-aliases">Алиасы: !конфиг welcome</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/конфиг лог #канал" tabindex="0">/конфиг лог [#канал]</span>
-                        <span class="cmd-desc">Установить канал логов<span class="cmd-aliases">Алиасы: !конфиг log</span></span>
-                    </li>
-                    <li>
-                        <span class="cmd-name" data-copy="/конфиг роль @Роль" tabindex="0">/конфиг роль [@Роль]</span>
-                        <span class="cmd-desc">Авто-роль новым участникам<span class="cmd-aliases">Алиасы: !конфиг autorole</span></span>
-                    </li>
+                    <li><span class="cmd-name" data-copy="/конфиг" tabindex="0">/конфиг</span><span class="cmd-desc">Показать текущие настройки сервера<span class="cmd-aliases">Алиасы: !config · Только администратор</span></span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг префикс ?" tabindex="0">/конфиг префикс [символ]</span><span class="cmd-desc">Изменить префикс (до 5 символов)<span class="cmd-aliases">Алиасы: !конфиг prefix</span></span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг приветствие #канал" tabindex="0">/конфиг приветствие [#канал]</span><span class="cmd-desc">Установить канал приветствий<span class="cmd-aliases">Алиасы: !конфиг welcome</span></span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг лог #канал" tabindex="0">/конфиг лог [#канал]</span><span class="cmd-desc">Установить канал логов<span class="cmd-aliases">Алиасы: !конфиг log</span></span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг роль @Роль" tabindex="0">/конфиг роль [@Роль]</span><span class="cmd-desc">Авто-роль новым участникам<span class="cmd-aliases">Алиасы: !конфиг autorole</span></span></li>
                 </ul>
             </div>
 
             <div class="cmd-group fun">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">📖</span>
-                    Справка
-                    <span class="count">1</span>
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">📖</span>Справка<span class="count">1</span></h3>
                 <ul class="cmd-list">
-                    <li>
-                        <span class="cmd-name" data-copy="/команды" tabindex="0">/команды</span>
-                        <span class="cmd-desc">Список всех команд с группировкой по категориям<span class="cmd-aliases">Алиасы: !помощь, !help, !h</span></span>
-                    </li>
+                    <li><span class="cmd-name" data-copy="/команды" tabindex="0">/команды</span><span class="cmd-desc">Список всех команд с группировкой по категориям<span class="cmd-aliases">Алиасы: !помощь, !help, !h</span></span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">🔔</span>
-                    События
-                    <span class="count">6</span>
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">🔔</span>События<span class="count">6</span></h3>
                 <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 12px;">
                     Работают автоматически, если в <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-2);">/конфиг</code> заданы каналы
                 </p>
                 <div class="events-list">
                     <div class="event-item">
                         <span class="event-icon">📥</span>
-                        <div class="event-text">
-                            <strong>Вход участника</strong>
-                            Приветствие + авто-роль + лог
-                        </div>
+                        <div class="event-text"><strong>Вход участника</strong>Приветствие + авто-роль + лог</div>
                     </div>
                     <div class="event-item">
                         <span class="event-icon">📤</span>
-                        <div class="event-text">
-                            <strong>Выход участника</strong>
-                            Лог с ролями
-                        </div>
+                        <div class="event-text"><strong>Выход участника</strong>Лог с ролями</div>
                     </div>
                     <div class="event-item">
                         <span class="event-icon">🗑</span>
-                        <div class="event-text">
-                            <strong>Удаление сообщения</strong>
-                            Лог в канал логов
-                        </div>
+                        <div class="event-text"><strong>Удаление сообщения</strong>Лог в канал логов</div>
                     </div>
                     <div class="event-item">
                         <span class="event-icon">✏️</span>
-                        <div class="event-text">
-                            <strong>Изменение сообщения</strong>
-                            Лог «Было → Стало»
-                        </div>
+                        <div class="event-text"><strong>Изменение сообщения</strong>Лог «Было → Стало»</div>
                     </div>
                     <div class="event-item">
                         <span class="event-icon">🔨</span>
-                        <div class="event-text">
-                            <strong>Бан</strong>
-                            Лог в канал логов
-                        </div>
+                        <div class="event-text"><strong>Бан</strong>Лог в канал логов</div>
                     </div>
                     <div class="event-item">
                         <span class="event-icon">🔓</span>
-                        <div class="event-text">
-                            <strong>Разбан</strong>
-                            Лог в канал логов
-                        </div>
+                        <div class="event-text"><strong>Разбан</strong>Лог в канал логов</div>
                     </div>
                 </div>
             </div>
 
             <div class="cmd-group">
-                <h3>
-                    <span class="icon-badge" aria-hidden="true">📊</span>
-                    Итого
-                </h3>
+                <h3><span class="icon-badge" aria-hidden="true">📊</span>Итого</h3>
                 <ul class="cmd-list">
                     <li><span class="cmd-name" style="cursor: default;">Основное</span><span class="cmd-desc">4 команды</span></li>
                     <li><span class="cmd-name" style="cursor: default;">Пользователи</span><span class="cmd-desc">3 команды</span></li>
@@ -1944,8 +1739,7 @@
                     </svg>
                     <span>Добавить на сервер</span>
                 </a>
-                <a href="https://lolka.app/#platforms"
-                   target="_blank" rel="noopener" class="btn btn-download">
+                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-download">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                         <polyline points="7 10 12 15 17 10"></polyline>
@@ -1964,8 +1758,7 @@
                 <span>Юрика-Бот</span>
             </div>
             <div class="footer-links">
-                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-                   target="_blank" rel="noopener">
+                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <line x1="12" y1="5" x2="12" y2="19"></line>
                         <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -2004,7 +1797,7 @@
         </svg>
     </button>
 
-    <!-- ================= МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ ================= -->
+    <!-- Модальное окно авторизации -->
     <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
         <div class="modal">
             <button class="modal-close" id="authClose" type="button" aria-label="Закрыть">×</button>
@@ -2067,13 +1860,11 @@
                 </div>
             </form>
 
-            <div class="auth-footer">
-                Регистрируясь, вы соглашаетесь с правилами использования сервиса
-            </div>
+            <div class="auth-footer">Регистрируясь, вы соглашаетесь с правилами использования сервиса</div>
         </div>
     </div>
 
-    <!-- ================= МОДАЛЬНОЕ ОКНО ПРОФИЛЯ ================= -->
+    <!-- Модальное окно профиля -->
     <div class="modal-overlay" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle" aria-hidden="true">
         <div class="modal profile-modal">
             <button class="modal-close" id="profileClose" type="button" aria-label="Закрыть">×</button>
@@ -2088,7 +1879,6 @@
                 <button class="profile-tab" data-tab="account" type="button">Аккаунт</button>
             </div>
 
-            <!-- Панель: Профиль -->
             <div class="profile-panel active" data-panel="general">
                 <form id="profileForm">
                     <div class="profile-avatar-row">
@@ -2119,7 +1909,6 @@
                 </form>
             </div>
 
-            <!-- Панель: Безопасность -->
             <div class="profile-panel" data-panel="security">
                 <form id="changePasswordForm">
                     <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--text);">Смена пароля</h4>
@@ -2158,7 +1947,6 @@
                 </form>
             </div>
 
-            <!-- Панель: Аккаунт -->
             <div class="profile-panel" data-panel="account">
                 <div class="profile-info-row">
                     <span class="profile-info-label">Email</span>
@@ -2189,7 +1977,6 @@
     </div>
 
     <script type="module">
-        /* ================= FIREBASE ================= */
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
         import {
             getAuth,
@@ -2226,7 +2013,6 @@
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        /* ================= УТИЛИТЫ ================= */
         const $ = (sel) => document.querySelector(sel);
 
         const errorMessages = {
@@ -2236,11 +2022,11 @@
             'auth/user-not-found': 'Пользователь с таким email не найден.',
             'auth/wrong-password': 'Неверный пароль. Попробуйте ещё раз.',
             'auth/invalid-credential': 'Неверный email или пароль.',
-            'auth/too-many-requests': 'Слишком много попыток. Подождите немного и попробуйте снова.',
-            'auth/network-request-failed': 'Ошибка сети. Проверьте подключение к интернету.',
-            'auth/operation-not-allowed': 'Вход по email/паролю отключён в настройках Firebase.',
+            'auth/too-many-requests': 'Слишком много попыток. Подождите немного.',
+            'auth/network-request-failed': 'Ошибка сети. Проверьте интернет.',
+            'auth/operation-not-allowed': 'Вход по email/паролю отключён.',
             'auth/user-disabled': 'Этот аккаунт заблокирован.',
-            'auth/requires-recent-login': 'Требуется повторный вход для этой операции.',
+            'auth/requires-recent-login': 'Требуется повторный вход.',
             'auth/missing-password': 'Введите пароль.'
         };
 
@@ -2252,7 +2038,7 @@
             return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
         }
 
-        /* ================= МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ ================= */
+        /* ===== АВТОРИЗАЦИЯ ===== */
         const authModal = $('#authModal');
         const authOpenBtn = $('#authOpenBtn');
         const authClose = $('#authClose');
@@ -2268,8 +2054,7 @@
             document.body.style.overflow = 'hidden';
             clearAllErrors();
             clearMessage();
-            if (tab === 'register') switchTab('register');
-            else switchTab('login');
+            switchTab(tab);
         }
 
         function closeModal() {
@@ -2298,9 +2083,7 @@
 
         authOpenBtn.addEventListener('click', () => openModal('login'));
         authClose.addEventListener('click', closeModal);
-        authModal.addEventListener('click', (e) => {
-            if (e.target === authModal) closeModal();
-        });
+        authModal.addEventListener('click', (e) => { if (e.target === authModal) closeModal(); });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && authModal.classList.contains('open')) closeModal();
         });
@@ -2308,7 +2091,6 @@
         tabRegister.addEventListener('click', () => switchTab('register'));
         $('#switchToLogin').addEventListener('click', () => switchTab('login'));
 
-        /* ================= ОШИБКИ / СООБЩЕНИЯ ================= */
         function clearAllErrors() {
             document.querySelectorAll('.form-error').forEach(el => {
                 el.classList.remove('visible');
@@ -2337,13 +2119,11 @@
             authMessage.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
         }
 
-        /* ================= ВАЛИДАЦИЯ ================= */
         function validateLoginForm() {
             clearAllErrors();
             let valid = true;
             const email = $('#loginEmail').value.trim();
             const password = $('#loginPassword').value;
-
             if (!email) { showFieldError('loginEmail', 'Введите email'); valid = false; }
             else if (!isValidEmail(email)) { showFieldError('loginEmail', 'Некорректный email'); valid = false; }
             if (!password) { showFieldError('loginPassword', 'Введите пароль'); valid = false; }
@@ -2356,17 +2136,15 @@
             const email = $('#registerEmail').value.trim();
             const password = $('#registerPassword').value;
             const confirm = $('#registerConfirm').value;
-
             if (!email) { showFieldError('registerEmail', 'Введите email'); valid = false; }
             else if (!isValidEmail(email)) { showFieldError('registerEmail', 'Некорректный email'); valid = false; }
             if (!password) { showFieldError('registerPassword', 'Введите пароль'); valid = false; }
-            else if (password.length < 6) { showFieldError('registerPassword', 'Пароль должен быть не меньше 6 символов'); valid = false; }
+            else if (password.length < 6) { showFieldError('registerPassword', 'Минимум 6 символов'); valid = false; }
             if (!confirm) { showFieldError('registerConfirm', 'Повторите пароль'); valid = false; }
             else if (password !== confirm) { showFieldError('registerConfirm', 'Пароли не совпадают'); valid = false; }
             return valid;
         }
 
-        /* ================= ЗАГРУЗКА КНОПКИ ================= */
         function setLoading(button, loading, defaultLabel) {
             button.disabled = loading;
             button.classList.toggle('loading', loading);
@@ -2374,22 +2152,16 @@
             if (label) label.textContent = loading ? 'Подождите…' : defaultLabel;
         }
 
-        /* ================= FIRESTORE ================= */
-        async function ensureUserDoc(user) {
-            if (!user) return null;
-            const ref = doc(db, 'users', user.uid);
-            const snap = await getDoc(ref);
-            if (!snap.exists()) {
-                const initial = {
-                    displayName: user.displayName || '',
-                    bio: '',
-                    avatarUrl: '',
-                    createdAt: serverTimestamp()
-                };
-                await setDoc(ref, initial, { merge: true });
-                return initial;
+        /* ===== FIRESTORE ===== */
+        async function loadUserDoc(uid) {
+            try {
+                const ref = doc(db, 'users', uid);
+                const snap = await getDoc(ref);
+                return snap.exists() ? snap.data() : null;
+            } catch (e) {
+                console.warn('Ошибка загрузки профиля:', e);
+                return null;
             }
-            return snap.data();
         }
 
         async function saveUserDoc(uid, data) {
@@ -2397,26 +2169,29 @@
             await setDoc(ref, data, { merge: true });
         }
 
-        async function loadUserDoc(uid) {
-            const ref = doc(db, 'users', uid);
-            const snap = await getDoc(ref);
-            return snap.exists() ? snap.data() : null;
+        async function ensureUserDoc(user) {
+            if (!user) return null;
+            const existing = await loadUserDoc(user.uid);
+            if (existing) return existing;
+            const initial = {
+                displayName: user.displayName || '',
+                bio: '',
+                avatarUrl: '',
+                createdAt: serverTimestamp()
+            };
+            await saveUserDoc(user.uid, initial);
+            return initial;
         }
 
-        /* ================= ВХОД ================= */
+        /* ===== ВХОД / РЕГИСТРАЦИЯ ===== */
         loginForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!validateLoginForm()) return;
             const submitBtn = $('#loginSubmit');
             setLoading(submitBtn, true, 'Войти');
             clearMessage();
-
             try {
-                await signInWithEmailAndPassword(
-                    auth,
-                    $('#loginEmail').value.trim(),
-                    $('#loginPassword').value
-                );
+                await signInWithEmailAndPassword(auth, $('#loginEmail').value.trim(), $('#loginPassword').value);
             } catch (error) {
                 showMessage(getErrorMessage(error), 'error');
             } finally {
@@ -2424,20 +2199,14 @@
             }
         });
 
-        /* ================= РЕГИСТРАЦИЯ ================= */
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             if (!validateRegisterForm()) return;
             const submitBtn = $('#registerSubmit');
             setLoading(submitBtn, true, 'Создать аккаунт');
             clearMessage();
-
             try {
-                const cred = await createUserWithEmailAndPassword(
-                    auth,
-                    $('#registerEmail').value.trim(),
-                    $('#registerPassword').value
-                );
+                const cred = await createUserWithEmailAndPassword(auth, $('#registerEmail').value.trim(), $('#registerPassword').value);
                 await ensureUserDoc(cred.user);
             } catch (error) {
                 showMessage(getErrorMessage(error), 'error');
@@ -2446,24 +2215,20 @@
             }
         });
 
-        /* ================= СБРОС ПАРОЛЯ ================= */
         $('#forgotPasswordBtn').addEventListener('click', async () => {
             const email = $('#loginEmail').value.trim() || prompt('Введите ваш email для сброса пароля:');
             if (!email) return;
-            if (!isValidEmail(email)) {
-                showMessage('Некорректный email', 'error');
-                return;
-            }
+            if (!isValidEmail(email)) { showMessage('Некорректный email', 'error'); return; }
             clearMessage();
             try {
                 await sendPasswordResetEmail(auth, email);
-                showMessage('Письмо для сброса пароля отправлено на ' + email + '. Проверьте почту (включая папку «Спам»).', 'success');
+                showMessage('Письмо отправлено на ' + email + '. Проверьте почту.', 'success');
             } catch (error) {
                 showMessage(getErrorMessage(error), 'error');
             }
         });
 
-        /* ================= СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ ================= */
+        /* ===== СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ ===== */
         const userMenu = $('#userMenu');
         const userAvatar = $('#userAvatar');
         const userEmail = $('#userEmail');
@@ -2480,23 +2245,29 @@
             }
         });
         document.addEventListener('click', (e) => {
-            if (!userDropdown.contains(e.target)) {
-                userDropdown.classList.remove('open');
-            }
+            if (!userDropdown.contains(e.target)) userDropdown.classList.remove('open');
         });
 
         $('#logoutBtn').addEventListener('click', async () => {
-            try {
-                await signOut(auth);
-            } catch (error) {
-                console.error('Ошибка выхода:', error);
-            }
+            try { await signOut(auth); } catch (e) { console.error(e); }
         });
 
         $('#openProfileBtn').addEventListener('click', () => {
             userDropdown.classList.remove('open');
             openProfileModal();
         });
+
+        function applyAvatarToHeader(profile, fallbackEmail) {
+            const displayName = profile?.displayName?.trim();
+            const initial = displayName ? displayName[0] : (fallbackEmail || 'U')[0];
+            if (profile?.avatarUrl) {
+                userAvatar.style.backgroundImage = `url("${profile.avatarUrl}")`;
+                userAvatar.textContent = '';
+            } else {
+                userAvatar.style.backgroundImage = '';
+                userAvatar.textContent = initial.toUpperCase();
+            }
+        }
 
         onAuthStateChanged(auth, async (user) => {
             if (user) {
@@ -2506,20 +2277,8 @@
                 userEmail.textContent = email;
                 userAvatar.title = 'Вы вошли как ' + email;
 
-                let profile = await loadUserDoc(user.uid);
-                if (!profile) profile = await ensureUserDoc(user);
-
-                const displayName = profile?.displayName?.trim();
-                const initial = displayName ? displayName[0] : email[0];
-                if (profile?.avatarUrl) {
-                    userAvatar.style.backgroundImage = `url("${profile.avatarUrl}")`;
-                    userAvatar.style.backgroundSize = 'cover';
-                    userAvatar.style.backgroundPosition = 'center';
-                    userAvatar.textContent = '';
-                } else {
-                    userAvatar.style.backgroundImage = '';
-                    userAvatar.textContent = initial.toUpperCase();
-                }
+                const profile = await ensureUserDoc(user);
+                applyAvatarToHeader(profile, email);
 
                 if (authModal.classList.contains('open')) closeModal();
             } else {
@@ -2530,7 +2289,7 @@
             }
         });
 
-        /* ================= МОДАЛЬНОЕ ОКНО ПРОФИЛЯ ================= */
+        /* ===== ПРОФИЛЬ ===== */
         const profileModal = $('#profileModal');
         const profileClose = $('#profileClose');
         const profileForm = $('#profileForm');
@@ -2548,8 +2307,8 @@
             profileModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
             clearProfileMessage();
-            fillProfileForm();
             switchProfileTab('general');
+            fillProfileForm();
         }
 
         function closeProfileModal() {
@@ -2560,9 +2319,7 @@
         }
 
         profileClose.addEventListener('click', closeProfileModal);
-        profileModal.addEventListener('click', (e) => {
-            if (e.target === profileModal) closeProfileModal();
-        });
+        profileModal.addEventListener('click', (e) => { if (e.target === profileModal) closeProfileModal(); });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && profileModal.classList.contains('open')) closeProfileModal();
         });
@@ -2585,11 +2342,19 @@
             profileUidDisplay.textContent = user.uid;
 
             const profile = await loadUserDoc(user.uid);
-            if (profile?.createdAt?.toDate) {
-                profileCreatedDisplay.textContent = profile.createdAt.toDate().toLocaleDateString('ru-RU');
-            } else {
-                profileCreatedDisplay.textContent = '—';
+
+            let createdText = '—';
+            const created = profile?.createdAt;
+            if (created) {
+                if (typeof created.toDate === 'function') {
+                    createdText = created.toDate().toLocaleDateString('ru-RU');
+                } else if (created instanceof Date) {
+                    createdText = created.toLocaleDateString('ru-RU');
+                } else if (typeof created === 'string') {
+                    createdText = new Date(created).toLocaleDateString('ru-RU');
+                }
             }
+            profileCreatedDisplay.textContent = createdText;
 
             $('#profileDisplayName').value = profile?.displayName || user.displayName || '';
             $('#profileBio').value = profile?.bio || '';
@@ -2601,8 +2366,6 @@
         function updateAvatarPreview(url, fallbackText) {
             if (url && /^https?:\/\//.test(url)) {
                 profileAvatarPreview.style.backgroundImage = `url("${url}")`;
-                profileAvatarPreview.style.backgroundSize = 'cover';
-                profileAvatarPreview.style.backgroundPosition = 'center';
                 profileAvatarPreview.textContent = '';
             } else {
                 profileAvatarPreview.style.backgroundImage = '';
@@ -2622,10 +2385,8 @@
         });
 
         function switchProfileTab(name) {
-            document.querySelectorAll('.profile-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.profile-panel').forEach(p => p.classList.remove('active'));
-            document.querySelector(`.profile-tab[data-tab="${name}"]`)?.classList.add('active');
-            document.querySelector(`.profile-panel[data-panel="${name}"]`)?.classList.add('active');
+            document.querySelectorAll('.profile-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+            document.querySelectorAll('.profile-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === name));
         }
 
         document.querySelectorAll('.profile-tab').forEach(tab => {
@@ -2657,20 +2418,14 @@
                 });
 
                 if (displayName && displayName !== user.displayName) {
-                    await updateProfile(user, { displayName });
+                    try {
+                        await updateProfile(user, { displayName });
+                    } catch (e) {
+                        console.warn('Не удалось обновить displayName в Auth:', e);
+                    }
                 }
 
-                const initial = displayName ? displayName[0] : (user.email || 'U')[0];
-                if (avatarUrl) {
-                    userAvatar.style.backgroundImage = `url("${avatarUrl}")`;
-                    userAvatar.style.backgroundSize = 'cover';
-                    userAvatar.style.backgroundPosition = 'center';
-                    userAvatar.textContent = '';
-                } else {
-                    userAvatar.style.backgroundImage = '';
-                    userAvatar.textContent = initial.toUpperCase();
-                }
-
+                applyAvatarToHeader({ displayName, avatarUrl }, user.email);
                 showProfileMessage('Профиль сохранён', 'success');
             } catch (error) {
                 showProfileMessage(error.message || getErrorMessage(error), 'error');
@@ -2695,14 +2450,8 @@
             const next = $('#newPassword').value;
             const confirm = $('#confirmNewPassword').value;
 
-            if (next.length < 6) {
-                showProfileMessage('Пароль должен быть минимум 6 символов', 'error');
-                return;
-            }
-            if (next !== confirm) {
-                showProfileMessage('Новые пароли не совпадают', 'error');
-                return;
-            }
+            if (next.length < 6) { showProfileMessage('Пароль должен быть минимум 6 символов', 'error'); return; }
+            if (next !== confirm) { showProfileMessage('Новые пароли не совпадают', 'error'); return; }
 
             const btn = $('#changePasswordBtn');
             setLoading(btn, true, 'Сменить пароль');
@@ -2730,10 +2479,7 @@
             const current = $('#currentEmailPassword').value;
             const newEmail = $('#newEmail').value.trim();
 
-            if (!isValidEmail(newEmail)) {
-                showProfileMessage('Некорректный новый email', 'error');
-                return;
-            }
+            if (!isValidEmail(newEmail)) { showProfileMessage('Некорректный новый email', 'error'); return; }
 
             const btn = $('#changeEmailBtn');
             setLoading(btn, true, 'Сменить email');
@@ -2744,6 +2490,7 @@
                 await updateEmail(user, newEmail);
                 showProfileMessage('Email изменён. Возможно, потребуется подтверждение.', 'success');
                 profileEmailDisplay.textContent = newEmail;
+                userEmail.textContent = newEmail;
                 $('#changeEmailForm').reset();
             } catch (error) {
                 showProfileMessage(getErrorMessage(error), 'error');
@@ -2752,10 +2499,8 @@
             }
         });
 
-        /* ================= ОСТАЛЬНАЯ ЛОГИКА САЙТА ================= */
+        /* ===== ОСТАЛЬНОЕ ===== */
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-        /* Тема */
         const html = document.documentElement;
         const themeToggle = document.getElementById('themeToggle');
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -2770,7 +2515,6 @@
             localStorage.setItem('theme', next);
         });
 
-        /* Прогресс + липкая навигация + кнопка «Наверх» */
         const nav = document.getElementById('nav');
         const progressBar = document.getElementById('progressBar');
         const toTop = document.getElementById('toTop');
@@ -2780,7 +2524,6 @@
             const scrollY = window.scrollY;
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
-
             progressBar.style.width = progress + '%';
             nav.classList.toggle('scrolled', scrollY > 20);
             toTop.classList.toggle('visible', scrollY > 400);
@@ -2794,7 +2537,6 @@
             }
         }, { passive: true });
 
-        /* Мобильное меню */
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
         burger.addEventListener('click', (e) => {
@@ -2812,23 +2554,21 @@
         });
 
         document.addEventListener('click', (e) => {
-            const burger = $('#burger');
+            const burgerEl = $('#burger');
             const navLinksEl = $('#navLinks');
             if (navLinksEl && navLinksEl.classList.contains('open')) {
-                if (!navLinksEl.contains(e.target) && e.target !== burger) {
+                if (!navLinksEl.contains(e.target) && e.target !== burgerEl) {
                     navLinksEl.classList.remove('open');
-                    burger.setAttribute('aria-expanded', 'false');
-                    burger.textContent = '☰';
+                    burgerEl.setAttribute('aria-expanded', 'false');
+                    burgerEl.textContent = '☰';
                 }
             }
         });
 
-        /* Кнопка «Наверх» */
         toTop.addEventListener('click', () => {
             window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         });
 
-        /* Копирование команд */
         document.querySelectorAll('.cmd-name').forEach(el => {
             const copy = () => {
                 const text = el.dataset.copy || el.textContent;
@@ -2862,7 +2602,6 @@
             document.body.removeChild(ta);
         }
 
-        /* Анимация появления секций */
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -2877,7 +2616,6 @@
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
-        /* Анимированные счётчики */
         const counters = document.querySelectorAll('.stat-value[data-target]');
         const runCounter = (el) => {
             const target = parseInt(el.dataset.target, 10);
@@ -2922,10 +2660,8 @@
             });
         }
 
-        /* Scroll-spy */
         const sections = document.querySelectorAll('section[id]');
         const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
-
         if ('IntersectionObserver' in window) {
             const spyObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
