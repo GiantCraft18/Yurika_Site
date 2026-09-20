@@ -1046,6 +1046,8 @@
     }
     .cmd-group.fun h3 .icon-badge { background: color-mix(in srgb, var(--accent-2) 15%, transparent); }
     .cmd-group.mod h3 .icon-badge { background: color-mix(in srgb, var(--success) 15%, transparent); }
+    .cmd-group.admin h3 .icon-badge { background: color-mix(in srgb, #9b59b6 15%, transparent); }
+    .cmd-group.info h3 .icon-badge { background: color-mix(in srgb, #1abc9c 15%, transparent); }
 
     .cmd-list { list-style: none; }
     .cmd-list li {
@@ -1406,12 +1408,12 @@
         <!-- Статистика -->
         <section class="stats reveal" id="stats" aria-label="Статистика бота">
             <div class="stat-card">
-                <div class="stat-value" data-target="46">0</div>
+                <div class="stat-value" data-target="56">0</div>
                 <div class="stat-label">Команд</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" data-target="4">0</div>
-                <div class="stat-label">Категории</div>
+                <div class="stat-value" data-target="6">0</div>
+                <div class="stat-label">Категорий</div>
             </div>
             <div class="stat-card">
                 <div class="stat-value small-text" data-text="Работает локально">—</div>
@@ -1657,6 +1659,28 @@
                     <li><span class="cmd-name" data-copy="!userinfo" tabindex="0">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе (ID, даты, роли)</span></li>
                     <li><span class="cmd-name" data-copy="!botinfo" tabindex="0">!botinfo</span><span class="cmd-desc">Информация о боте (пинг, аптайм, коги)</span></li>
                     <li><span class="cmd-name" data-copy="!serverinfo" tabindex="0">!serverinfo</span><span class="cmd-desc">Информация о сервере (участники, каналы)</span></li>
+                </ul>
+            </div>
+
+            <div class="cmd-group admin">
+                <h3><span class="icon-badge" aria-hidden="true">⚙️</span>Управление · 5</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name" data-copy="!reload fun" tabindex="0">!reload [ког]</span><span class="cmd-desc">Перезагрузить ког (владелец)</span></li>
+                    <li><span class="cmd-name" data-copy="!reloadall" tabindex="0">!reloadall</span><span class="cmd-desc">Перезагрузить все коги (владелец)</span></li>
+                    <li><span class="cmd-name" data-copy="!load fun" tabindex="0">!load [ког]</span><span class="cmd-desc">Загрузить ког (владелец)</span></li>
+                    <li><span class="cmd-name" data-copy="!unload fun" tabindex="0">!unload [ког]</span><span class="cmd-desc">Выгрузить ког (владелец)</span></li>
+                    <li><span class="cmd-name" data-copy="!shutdown" tabindex="0">!shutdown</span><span class="cmd-desc">Корректно выключить бота (владелец)</span></li>
+                </ul>
+            </div>
+
+            <div class="cmd-group info">
+                <h3><span class="icon-badge" aria-hidden="true">📢</span>Информация · 5</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name" data-copy="!ping" tabindex="0">!ping</span><span class="cmd-desc">Показать задержку бота</span></li>
+                    <li><span class="cmd-name" data-copy="!uptime" tabindex="0">!uptime</span><span class="cmd-desc">Сколько бот уже онлайн</span></li>
+                    <li><span class="cmd-name" data-copy="!invite" tabindex="0">!invite</span><span class="cmd-desc">Ссылка для приглашения бота</span></li>
+                    <li><span class="cmd-name" data-copy="!about" tabindex="0">!about</span><span class="cmd-desc">Информация о боте</span></li>
+                    <li><span class="cmd-name" data-copy="!stats" tabindex="0">!stats</span><span class="cmd-desc">Статистика бота</span></li>
                 </ul>
             </div>
         </section>
