@@ -9,41 +9,61 @@
 <style>
     /* ---------- Переменные темы ---------- */
     :root, [data-theme="dark"] {
-        --bg: #0f1117;
-        --bg-2: #1a1d29;
-        --bg-3: #13161f;
-        --border: #262a3a;
-        --text: #e6e8eb;
-        --text-muted: #a8b1c7;
-        --text-dim: #8a92a6;
-        --text-faint: #5a6072;
+        --bg: #0b0d14;
+        --bg-2: #141822;
+        --bg-3: #0f1219;
+        --bg-elevated: #1a1f2e;
+        --border: #232838;
+        --border-soft: #1c2130;
+        --text: #eef0f4;
+        --text-muted: #a4adc4;
+        --text-dim: #7e879e;
+        --text-faint: #545b70;
         --accent-1: #5865F2;
         --accent-2: #8B5CF6;
-        --card-hover-border: var(--accent-1);
-        --shadow-accent: rgba(88,101,242,0.35);
+        --accent-3: #a855f7;
+        --success: #23a55a;
+        --card-hover-border: rgba(88,101,242,0.6);
+        --shadow-accent: rgba(88,101,242,0.4);
+        --shadow-soft: rgba(0,0,0,0.35);
+        --code-bg: #0a0c11;
     }
     [data-theme="light"] {
-        --bg: #f5f7fb;
+        --bg: #f6f8fc;
         --bg-2: #ffffff;
         --bg-3: #eef1f7;
+        --bg-elevated: #ffffff;
         --border: #dde2ec;
-        --text: #14172b;
+        --border-soft: #e8ecf4;
+        --text: #131728;
         --text-muted: #4a5169;
         --text-dim: #6b7286;
         --text-faint: #9aa1b6;
+        --accent-1: #5865F2;
+        --accent-2: #7c3aed;
+        --accent-3: #8b5cf6;
+        --success: #1a7f4b;
+        --card-hover-border: rgba(88,101,242,0.5);
         --shadow-accent: rgba(88,101,242,0.25);
+        --shadow-soft: rgba(20,30,60,0.08);
+        --code-bg: #f0f2f8;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { scroll-behavior: smooth; }
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+    }
 
     body {
-        font-family: 'Segoe UI', Tahoma, sans-serif;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Inter', Tahoma, sans-serif;
         background: var(--bg);
         color: var(--text);
         min-height: 100vh;
         overflow-x: hidden;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
         transition: background 0.3s, color 0.3s;
     }
 
@@ -51,96 +71,139 @@
     body::before {
         content: "";
         position: fixed;
-        top: -50%; left: -50%;
-        width: 200%; height: 200%;
+        inset: -50%;
         background:
-            radial-gradient(circle at 30% 20%, rgba(88,101,242,0.15), transparent 50%),
-            radial-gradient(circle at 70% 80%, rgba(139,92,246,0.15), transparent 50%);
+            radial-gradient(circle at 20% 10%, rgba(88,101,242,0.18), transparent 45%),
+            radial-gradient(circle at 80% 90%, rgba(139,92,246,0.15), transparent 45%),
+            radial-gradient(circle at 50% 50%, rgba(88,101,242,0.05), transparent 60%);
         z-index: -1;
-        animation: float 20s ease-in-out infinite;
+        animation: float 24s ease-in-out infinite;
         pointer-events: none;
     }
     [data-theme="light"] body::before {
         background:
-            radial-gradient(circle at 30% 20%, rgba(88,101,242,0.10), transparent 50%),
-            radial-gradient(circle at 70% 80%, rgba(139,92,246,0.10), transparent 50%);
+            radial-gradient(circle at 20% 10%, rgba(88,101,242,0.10), transparent 45%),
+            radial-gradient(circle at 80% 90%, rgba(139,92,246,0.10), transparent 45%);
     }
     @keyframes float {
-        0%, 100% { transform: translate(0, 0); }
-        50% { transform: translate(-30px, -30px); }
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        50% { transform: translate(-40px, -40px) scale(1.05); }
     }
 
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .container { max-width: 1140px; margin: 0 auto; padding: 0 24px; }
+
+    /* ---------- Прогресс-бар ---------- */
+    .progress-bar {
+        position: fixed;
+        top: 0; left: 0;
+        height: 3px;
+        width: 0%;
+        background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+        z-index: 200;
+        transition: width 0.1s linear;
+        box-shadow: 0 0 10px var(--shadow-accent);
+    }
 
     /* ---------- Навигация ---------- */
     nav {
         position: sticky;
         top: 0;
         z-index: 100;
-        padding: 16px 0;
+        padding: 14px 0;
         display: flex;
         justify-content: space-between;
         align-items: center;
         gap: 16px;
-        transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
+        transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s, padding 0.3s;
         border-bottom: 1px solid transparent;
     }
     nav.scrolled {
-        background: color-mix(in srgb, var(--bg) 80%, transparent);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
+        background: color-mix(in srgb, var(--bg) 75%, transparent);
+        backdrop-filter: blur(16px) saturate(180%);
+        -webkit-backdrop-filter: blur(16px) saturate(180%);
         border-bottom-color: var(--border);
+        padding: 10px 0;
     }
     .logo {
-        font-size: 22px;
-        font-weight: 700;
-        background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 20px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        background: linear-gradient(90deg, var(--accent-1), var(--accent-2), var(--accent-3));
+        background-size: 200% 100%;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
         cursor: pointer;
+        transition: background-position 0.5s;
+    }
+    .logo:hover { background-position: 100% 0; }
+    .logo-emoji {
+        -webkit-text-fill-color: initial;
+        font-size: 22px;
+        filter: drop-shadow(0 0 8px var(--shadow-accent));
     }
     .nav-links {
         display: flex;
         align-items: center;
-        gap: 24px;
+        gap: 6px;
     }
     .nav-links a {
         color: var(--text-muted);
         text-decoration: none;
-        font-size: 15px;
+        font-size: 14px;
         font-weight: 500;
-        transition: color 0.2s;
+        padding: 8px 14px;
+        border-radius: 8px;
+        transition: color 0.2s, background 0.2s;
         position: relative;
     }
-    .nav-links a::after {
+    .nav-links a:hover {
+        color: var(--text);
+        background: var(--bg-2);
+    }
+    .nav-links a.active {
+        color: var(--text);
+        background: var(--bg-2);
+    }
+    .nav-links a.active::after {
         content: "";
         position: absolute;
-        left: 0; bottom: -4px;
-        width: 0; height: 2px;
-        background: var(--accent-1);
+        bottom: 2px; left: 50%;
+        transform: translateX(-50%);
+        width: 16px; height: 2px;
+        background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
         border-radius: 2px;
-        transition: width 0.25s;
     }
-    .nav-links a:hover { color: var(--text); }
-    .nav-links a:hover::after { width: 100%; }
 
     .theme-toggle {
         background: var(--bg-2);
         border: 1px solid var(--border);
         color: var(--text);
-        width: 40px; height: 40px;
+        width: 38px; height: 38px;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
-        transition: border-color 0.2s, transform 0.15s;
+        transition: border-color 0.2s, transform 0.15s, background 0.2s;
+        margin-left: 8px;
     }
     .theme-toggle:hover {
         border-color: var(--accent-1);
-        transform: scale(1.05);
+        transform: scale(1.06);
+        background: var(--bg-elevated);
+    }
+    .theme-toggle:focus-visible,
+    .btn:focus-visible,
+    .burger:focus-visible,
+    .cmd-name:focus-visible,
+    #toTop:focus-visible {
+        outline: 2px solid var(--accent-1);
+        outline-offset: 2px;
     }
 
     .burger {
@@ -148,296 +211,495 @@
         background: var(--bg-2);
         border: 1px solid var(--border);
         color: var(--text);
-        width: 40px; height: 40px;
+        width: 38px; height: 38px;
         border-radius: 10px;
         cursor: pointer;
-        font-size: 18px;
+        font-size: 16px;
+        align-items: center;
+        justify-content: center;
     }
 
     /* ---------- Hero ---------- */
     .hero {
         text-align: center;
-        padding: 80px 0 60px;
+        padding: 90px 0 60px;
+        position: relative;
     }
+    .hero-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 14px;
+        border-radius: 100px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        font-size: 13px;
+        color: var(--text-muted);
+        margin-bottom: 28px;
+        animation: fadeInDown 0.6s ease both;
+    }
+    .pulse-dot {
+        width: 8px; height: 8px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 0 rgba(35,165,90,0.6);
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(35,165,90,0.6); }
+        70% { box-shadow: 0 0 0 10px rgba(35,165,90,0); }
+        100% { box-shadow: 0 0 0 0 rgba(35,165,90,0); }
+    }
+    @keyframes fadeInDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
     .hero h1 {
-        font-size: clamp(32px, 5vw, 56px);
-        font-weight: 700;
-        line-height: 1.15;
+        font-size: clamp(34px, 6vw, 64px);
+        font-weight: 800;
+        line-height: 1.08;
+        letter-spacing: -0.03em;
         margin-bottom: 24px;
-        background: linear-gradient(90deg, var(--text), var(--accent-2), var(--accent-1), var(--text));
+        background: linear-gradient(110deg, var(--text) 20%, var(--accent-2) 50%, var(--accent-1) 70%, var(--text) 90%);
         background-size: 300% 100%;
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: gradientShift 8s ease-in-out infinite;
+        animation: gradientShift 8s ease-in-out infinite, fadeInUp 0.7s ease 0.1s both;
     }
     @keyframes gradientShift {
         0%, 100% { background-position: 0% 50%; }
         50% { background-position: 100% 50%; }
     }
+    @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
     .hero p {
-        font-size: 18px;
+        font-size: clamp(15px, 2vw, 18px);
         color: var(--text-muted);
         max-width: 620px;
         margin: 0 auto 40px;
-        line-height: 1.6;
+        line-height: 1.65;
+        animation: fadeInUp 0.7s ease 0.2s both;
     }
 
     .buttons {
         display: flex;
-        gap: 16px;
+        gap: 14px;
         justify-content: center;
         flex-wrap: wrap;
+        animation: fadeInUp 0.7s ease 0.3s both;
     }
     .btn {
         display: inline-flex;
         align-items: center;
+        justify-content: center;
         gap: 10px;
-        padding: 14px 32px;
-        border-radius: 10px;
+        padding: 14px 30px;
+        border-radius: 12px;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 15px;
         text-decoration: none;
-        transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+        transition: transform 0.15s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
         cursor: pointer;
-        border: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
     }
     .btn-primary {
-        background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
         color: #fff;
         box-shadow: 0 4px 20px var(--shadow-accent);
+        position: relative;
+        overflow: hidden;
     }
+    .btn-primary::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .btn-primary > * { position: relative; z-index: 1; }
     .btn-primary:hover {
         transform: translateY(-2px);
-        box-shadow: 0 8px 28px var(--shadow-accent);
+        box-shadow: 0 10px 32px var(--shadow-accent);
     }
+    .btn-primary:hover::before { opacity: 1; }
     .btn-secondary {
         background: var(--bg-2);
         color: var(--text);
-        border: 1px solid var(--border);
+        border-color: var(--border);
     }
     .btn-secondary:hover {
         border-color: var(--accent-1);
         transform: translateY(-2px);
+        background: var(--bg-elevated);
     }
 
     /* ---------- Статистика ---------- */
     .stats {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 16px;
-        margin: 60px 0;
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 14px;
+        margin: 70px 0;
     }
     .stat-card {
         background: var(--bg-2);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 24px;
+        border-radius: 14px;
+        padding: 26px 20px;
         text-align: center;
-        transition: transform 0.15s, border-color 0.15s;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+    }
+    .stat-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent-1), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
     }
     .stat-card:hover {
         transform: translateY(-4px);
         border-color: var(--card-hover-border);
+        box-shadow: 0 12px 30px var(--shadow-soft);
     }
+    .stat-card:hover::before { opacity: 1; }
     .stat-value {
-        font-size: 32px;
-        font-weight: 700;
+        font-size: 34px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
         color: var(--text);
-        margin-bottom: 6px;
+        margin-bottom: 4px;
+        line-height: 1.1;
+    }
+    .stat-value.small-text {
+        font-size: 18px;
+        padding-top: 8px;
+        padding-bottom: 8px;
     }
     .stat-label {
-        font-size: 13px;
+        font-size: 12px;
         color: var(--text-dim);
         text-transform: uppercase;
-        letter-spacing: 0.5px;
+        letter-spacing: 0.8px;
+        font-weight: 600;
     }
 
     /* ---------- Секции (общее) ---------- */
-    section h2 {
-        font-size: clamp(26px, 4vw, 32px);
+    section { scroll-margin-top: 90px; }
+    .section-header {
         text-align: center;
-        margin-bottom: 40px;
+        margin-bottom: 44px;
+    }
+    .section-header h2 {
+        font-size: clamp(26px, 4vw, 38px);
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        margin-bottom: 10px;
         color: var(--text);
     }
+    .section-header p {
+        color: var(--text-muted);
+        font-size: 16px;
+        max-width: 540px;
+        margin: 0 auto;
+    }
 
-    .features, .commands { margin: 80px 0; }
+    .features, .commands { margin: 90px 0; }
 
     /* ---------- Возможности ---------- */
     .features-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
     }
     .feature-card {
         background: var(--bg-2);
         border: 1px solid var(--border);
-        border-radius: 12px;
+        border-radius: 14px;
         padding: 28px;
-        transition: transform 0.15s, border-color 0.15s;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        position: relative;
+        overflow: hidden;
+    }
+    .feature-card::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 14px;
+        padding: 1px;
+        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        opacity: 0;
+        transition: opacity 0.3s;
+        pointer-events: none;
     }
     .feature-card:hover {
         transform: translateY(-4px);
-        border-color: var(--card-hover-border);
+        box-shadow: 0 14px 34px var(--shadow-soft);
     }
+    .feature-card:hover::after { opacity: 1; }
     .feature-icon {
-        font-size: 36px;
+        font-size: 32px;
         margin-bottom: 16px;
-        display: inline-block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 56px; height: 56px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 15%, transparent), color-mix(in srgb, var(--accent-2) 15%, transparent));
         transition: transform 0.3s;
     }
-    .feature-card:hover .feature-icon { transform: scale(1.15) rotate(-5deg); }
+    .feature-card:hover .feature-icon {
+        transform: scale(1.08) rotate(-5deg);
+    }
     .feature-card h3 {
-        font-size: 18px;
+        font-size: 17px;
+        font-weight: 700;
         color: var(--text);
-        margin-bottom: 10px;
+        margin-bottom: 8px;
+        letter-spacing: -0.01em;
     }
     .feature-card p {
         color: var(--text-muted);
         font-size: 14px;
         line-height: 1.6;
     }
+    .feature-card code {
+        background: var(--code-bg);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: 'JetBrains Mono', 'Consolas', monospace;
+        font-size: 12px;
+        color: var(--accent-2);
+        border: 1px solid var(--border-soft);
+    }
 
     /* ---------- Команды ---------- */
     .cmd-group {
         background: var(--bg-2);
         border: 1px solid var(--border);
-        border-radius: 12px;
-        padding: 24px;
+        border-radius: 14px;
+        padding: 26px;
         margin-bottom: 16px;
-        transition: border-color 0.2s;
+        transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .cmd-group:hover { border-color: color-mix(in srgb, var(--accent-1) 40%, var(--border)); }
+    .cmd-group:hover {
+        border-color: color-mix(in srgb, var(--accent-1) 40%, var(--border));
+        box-shadow: 0 8px 24px var(--shadow-soft);
+    }
     .cmd-group h3 {
-        font-size: 18px;
+        font-size: 17px;
+        font-weight: 700;
         color: var(--text);
-        margin-bottom: 16px;
+        margin-bottom: 18px;
         display: flex;
         align-items: center;
         gap: 10px;
+        letter-spacing: -0.01em;
     }
-    .cmd-group h3::before {
-        content: "";
-        width: 4px;
-        height: 20px;
-        background: var(--accent-1);
-        border-radius: 2px;
+    .cmd-group h3 .icon-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px; height: 32px;
+        border-radius: 9px;
+        font-size: 15px;
+        background: color-mix(in srgb, var(--accent-1) 15%, transparent);
     }
+    .cmd-group.fun h3 .icon-badge { background: color-mix(in srgb, var(--accent-2) 15%, transparent); }
+    .cmd-group.mod h3 .icon-badge { background: color-mix(in srgb, var(--success) 15%, transparent); }
+
     .cmd-list { list-style: none; }
     .cmd-list li {
-        padding: 10px 0;
-        border-bottom: 1px solid var(--border);
+        padding: 11px 0;
+        border-bottom: 1px solid var(--border-soft);
         font-size: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
-        gap: 8px;
+        gap: 10px;
+        transition: padding 0.2s;
     }
     .cmd-list li:last-child { border-bottom: none; }
+    .cmd-list li:hover { padding-left: 6px; }
     .cmd-name {
-        font-family: 'Consolas', 'Courier New', monospace;
+        font-family: 'JetBrains Mono', 'Consolas', 'Courier New', monospace;
         color: var(--accent-2);
-        background: var(--bg-3);
+        background: var(--code-bg);
         padding: 5px 12px;
-        border-radius: 6px;
-        font-size: 13px;
+        border-radius: 7px;
+        font-size: 12.5px;
+        font-weight: 500;
         cursor: pointer;
-        transition: background 0.2s, color 0.2s;
+        transition: background 0.2s, color 0.2s, transform 0.15s;
         user-select: none;
         position: relative;
+        border: 1px solid var(--border-soft);
+        white-space: nowrap;
     }
     .cmd-name:hover {
         background: var(--accent-1);
         color: #fff;
+        border-color: var(--accent-1);
+        transform: translateY(-1px);
+    }
+    .cmd-name:active { transform: translateY(0); }
+    .cmd-name.copied {
+        background: var(--success);
+        color: #fff;
+        border-color: var(--success);
     }
     .cmd-name.copied::after {
-        content: "✓ скопировано";
+        content: "✓ Скопировано";
         position: absolute;
-        top: -28px; left: 50%;
+        top: -32px; left: 50%;
         transform: translateX(-50%);
-        background: var(--accent-1);
+        background: var(--success);
         color: #fff;
-        padding: 3px 8px;
-        border-radius: 6px;
+        padding: 4px 10px;
+        border-radius: 7px;
         font-size: 11px;
+        font-family: -apple-system, sans-serif;
+        font-weight: 600;
         white-space: nowrap;
-        animation: fadeUp 1.2s ease forwards;
+        animation: fadeUp 1.3s ease forwards;
+        pointer-events: none;
+        box-shadow: 0 4px 12px rgba(35,165,90,0.3);
     }
     @keyframes fadeUp {
         0% { opacity: 0; transform: translate(-50%, 5px); }
         20% { opacity: 1; transform: translate(-50%, 0); }
         80% { opacity: 1; }
-        100% { opacity: 0; transform: translate(-50%, -5px); }
+        100% { opacity: 0; transform: translate(-50%, -6px); }
     }
     .cmd-desc {
         color: var(--text-muted);
-        font-size: 14px;
+        font-size: 13.5px;
+        text-align: right;
+        flex: 1;
+        min-width: 140px;
     }
 
     /* ---------- CTA ---------- */
     .cta {
         text-align: center;
-        padding: 60px 24px;
-        background: linear-gradient(135deg, var(--bg-2), color-mix(in srgb, var(--accent-1) 15%, var(--bg-2)));
-        border: 1px solid var(--accent-1);
-        border-radius: 16px;
-        margin: 60px 0;
+        padding: 60px 32px;
+        background:
+            radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--accent-1) 20%, transparent), transparent 55%),
+            radial-gradient(circle at 80% 70%, color-mix(in srgb, var(--accent-2) 20%, transparent), transparent 55%),
+            var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        margin: 80px 0 40px;
+        position: relative;
+        overflow: hidden;
+    }
+    .cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 20px;
+        padding: 1px;
+        background: linear-gradient(135deg, color-mix(in srgb, var(--accent-1) 60%, transparent), color-mix(in srgb, var(--accent-2) 60%, transparent));
+        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+        -webkit-mask-composite: xor;
+        mask-composite: exclude;
+        pointer-events: none;
     }
     .cta h2 {
-        font-size: 28px;
-        margin-bottom: 16px;
+        font-size: clamp(24px, 3.5vw, 32px);
+        font-weight: 800;
+        margin-bottom: 12px;
         color: var(--text);
+        letter-spacing: -0.02em;
     }
     .cta p {
         color: var(--text-muted);
         margin-bottom: 28px;
         font-size: 16px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     /* ---------- Футер ---------- */
     footer {
         text-align: center;
-        padding: 40px 0;
+        padding: 44px 0 30px;
         color: var(--text-faint);
         font-size: 13px;
         border-top: 1px solid var(--border);
         margin-top: 60px;
     }
-    footer a { color: var(--accent-2); text-decoration: none; }
-    footer a:hover { text-decoration: underline; }
+    .footer-brand {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .footer-brand .logo-emoji {
+        -webkit-text-fill-color: initial;
+    }
     .footer-links {
         display: flex;
-        gap: 20px;
+        gap: 8px;
         justify-content: center;
-        margin-bottom: 16px;
+        margin-bottom: 20px;
         flex-wrap: wrap;
     }
     .footer-links a {
         display: inline-flex;
         align-items: center;
         gap: 6px;
+        color: var(--text-muted);
+        text-decoration: none;
+        padding: 8px 14px;
+        border-radius: 9px;
+        transition: background 0.2s, color 0.2s;
+        font-weight: 500;
     }
+    .footer-links a:hover {
+        background: var(--bg-2);
+        color: var(--text);
+    }
+    .footer-copy { color: var(--text-faint); }
 
     /* ---------- Кнопка «Наверх» ---------- */
     #toTop {
         position: fixed;
         right: 24px; bottom: 24px;
-        width: 48px; height: 48px;
-        border-radius: 50%;
-        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
-        color: #fff;
-        border: none;
-        font-size: 20px;
+        width: 46px; height: 46px;
+        border-radius: 14px;
+        background: var(--bg-2);
+        color: var(--text);
+        border: 1px solid var(--border);
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 6px 20px var(--shadow-accent);
+        box-shadow: 0 6px 20px var(--shadow-soft);
         opacity: 0;
         pointer-events: none;
         transform: translateY(20px);
-        transition: opacity 0.3s, transform 0.3s;
+        transition: opacity 0.3s, transform 0.3s, background 0.2s, border-color 0.2s;
         z-index: 99;
     }
     #toTop.visible {
@@ -445,74 +707,117 @@
         pointer-events: auto;
         transform: translateY(0);
     }
-    #toTop:hover { transform: translateY(-3px) scale(1.05); }
+    #toTop:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+        border-color: transparent;
+        color: #fff;
+    }
 
     /* ---------- Анимация появления ---------- */
     .reveal {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(28px);
         transition: opacity 0.7s ease, transform 0.7s ease;
     }
     .reveal.visible {
         opacity: 1;
         transform: translateY(0);
     }
+    .reveal.delay-1 { transition-delay: 0.05s; }
+    .reveal.delay-2 { transition-delay: 0.1s; }
+    .reveal.delay-3 { transition-delay: 0.15s; }
 
     /* ---------- Мобильное меню ---------- */
-    @media (max-width: 700px) {
-        .burger { display: flex; align-items: center; justify-content: center; }
+    @media (max-width: 760px) {
+        .burger { display: flex; }
         .nav-links {
             position: absolute;
-            top: 100%; left: 0; right: 0;
+            top: calc(100% + 8px);
+            left: 0; right: 0;
             flex-direction: column;
-            gap: 0;
+            gap: 4px;
             background: var(--bg-2);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 8px;
-            margin: 0 24px;
-            transform: scaleY(0);
+            border-radius: 14px;
+            padding: 10px;
+            margin: 0;
+            transform: translateY(-10px) scale(0.98);
             transform-origin: top;
             opacity: 0;
             pointer-events: none;
             transition: transform 0.2s, opacity 0.2s;
+            box-shadow: 0 20px 40px var(--shadow-soft);
         }
         .nav-links.open {
-            transform: scaleY(1);
+            transform: translateY(0) scale(1);
             opacity: 1;
             pointer-events: auto;
         }
         .nav-links a {
             padding: 12px 16px;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 9px;
         }
-        .nav-links a::after { display: none; }
+        .nav-links a.active::after { display: none; }
         .nav-links a:hover { background: var(--bg-3); }
-        .hero { padding: 50px 0 40px; }
-        .btn { width: 100%; justify-content: center; }
+        .theme-toggle { margin-left: 0; margin-top: 4px; width: 100%; }
+
+        .hero { padding: 60px 0 40px; }
+        .btn { width: 100%; }
         .buttons { flex-direction: column; align-items: stretch; }
+        .stats { margin: 50px 0; }
+        .features, .commands { margin: 60px 0; }
+        .cmd-list li { flex-direction: column; align-items: flex-start; gap: 6px; }
+        .cmd-desc { text-align: left; }
+        .cmd-group { padding: 20px; }
+        .cta { padding: 44px 24px; margin: 60px 0 30px; }
+        .stat-value { font-size: 28px; }
+        #toTop { right: 16px; bottom: 16px; }
+    }
+
+    /* ---------- Уважение к prefers-reduced-motion ---------- */
+    @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+        .reveal { opacity: 1; transform: none; }
     }
 </style>
 </head>
 <body>
-    <div class="container">
+    <!-- Прогресс-бар чтения -->
+    <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
+
+    <header class="container">
         <!-- Навигация -->
-        <nav id="nav">
-            <div class="logo">🤖 Юрика-Бот</div>
-            <button class="burger" id="burger" aria-label="Меню">☰</button>
+        <nav id="nav" aria-label="Основная навигация">
+            <a href="#" class="logo" aria-label="Юрика-Бот — на главную">
+                <span class="logo-emoji">🤖</span>
+                <span>Юрика-Бот</span>
+            </a>
+            <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navLinks">☰</button>
             <div class="nav-links" id="navLinks">
                 <a href="#features">Возможности</a>
                 <a href="#commands">Команды</a>
                 <a href="#stats">Статистика</a>
                 <a href="#invite">Добавить</a>
-                <button class="theme-toggle" id="themeToggle" title="Сменить тему">🌙</button>
+                <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">🌙</button>
             </div>
         </nav>
+    </header>
 
+    <main class="container">
         <!-- Hero -->
-        <section class="hero">
-            <h1>Твой помощник<br>на сервере Lolka</h1>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="hero-badge">
+                <span class="pulse-dot" aria-hidden="true"></span>
+                <span>Работает на сервере Lolka</span>
+            </div>
+            <h1 id="hero-title">Твой помощник<br>на сервере Lolka</h1>
             <p>
                 Модерация, развлечения, утилиты и удобное меню команд —
                 всё в одном боте. Установка занимает 10 секунд.
@@ -520,16 +825,16 @@
             <div class="buttons">
                 <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
                    target="_blank" rel="noopener" class="btn btn-primary">
-                    ➕ Пригласить бота
+                    <span>➕</span><span>Пригласить бота</span>
                 </a>
                 <a href="#features" class="btn btn-secondary">
-                    📖 Узнать больше
+                    <span>📖</span><span>Узнать больше</span>
                 </a>
             </div>
         </section>
 
         <!-- Статистика -->
-        <section class="stats reveal" id="stats">
+        <section class="stats reveal" id="stats" aria-label="Статистика бота">
             <div class="stat-card">
                 <div class="stat-value" data-target="16">0</div>
                 <div class="stat-label">Команд</div>
@@ -539,118 +844,136 @@
                 <div class="stat-label">Категории</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" data-text="Работает локально">—</div>
+                <div class="stat-value small-text" data-text="Работает локально">—</div>
                 <div class="stat-label">Онлайн</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" data-text="0 ₽">—</div>
+                <div class="stat-value small-text" data-text="0 ₽">—</div>
                 <div class="stat-label">Бесплатно</div>
             </div>
         </section>
 
         <!-- Возможности -->
-        <section class="features reveal" id="features">
-            <h2>Что умеет бот</h2>
+        <section class="features reveal" id="features" aria-labelledby="features-title">
+            <div class="section-header">
+                <h2 id="features-title">Что умеет бот</h2>
+                <p>Полный набор инструментов для комфортного общения на сервере</p>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">🛡️</div>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🛡️</div>
                     <h3>Модерация</h3>
                     <p>Кик, бан, мут, очистка чата, предупреждения. Полный контроль над порядком на сервере.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🎲</div>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🎲</div>
                     <h3>Развлечения</h3>
                     <p>Монетка, кубик, магический шар, камень-ножницы-бумага и случайные шутки — чтобы чат не скучал.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔧</div>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🔧</div>
                     <h3>Утилиты</h3>
                     <p>Информация о пользователях, аватары, серверная статистика — всё под рукой одной командой.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">📖</div>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">📖</div>
                     <h3>Умное меню</h3>
                     <p>Интерактивный <code>!help</code> с кнопками. Все команды разложены по категориям — не запутаешься.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">⚡</div>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">⚡</div>
                     <h3>Быстрый</h3>
                     <p>Написан на современном Python с асинхронной библиотекой. Отвечает мгновенно.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">🔒</div>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">🔒</div>
                     <h3>Безопасный</h3>
                     <p>Токен хранится в <code>.env</code>, права проверяются на каждой команде.</p>
-                </div>
+                </article>
             </div>
         </section>
 
         <!-- Команды -->
-        <section class="commands reveal" id="commands">
-            <h2>Команды бота</h2>
+        <section class="commands reveal" id="commands" aria-labelledby="commands-title">
+            <div class="section-header">
+                <h2 id="commands-title">Команды бота</h2>
+                <p>Нажми на команду, чтобы скопировать её в буфер обмена</p>
+            </div>
 
-            <div class="cmd-group">
-                <h3>🎲 Развлечения</h3>
+            <div class="cmd-group fun">
+                <h3><span class="icon-badge" aria-hidden="true">🎲</span>Развлечения</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!coinflip">!coinflip</span><span class="cmd-desc">Подбросить монетку</span></li>
-                    <li><span class="cmd-name" data-copy="!roll 20">!roll [число]</span><span class="cmd-desc">Бросить кубик с N сторонами</span></li>
-                    <li><span class="cmd-name" data-copy="!8ball">!8ball [вопрос]</span><span class="cmd-desc">Магический шар ответит на вопрос</span></li>
-                    <li><span class="cmd-name" data-copy="!choose">!choose [варианты]</span><span class="cmd-desc">Выбрать один из вариантов</span></li>
-                    <li><span class="cmd-name" data-copy="!joke">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
-                    <li><span class="cmd-name" data-copy="!rps камень">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага с ботом</span></li>
+                    <li><span class="cmd-name" data-copy="!coinflip" tabindex="0">!coinflip</span><span class="cmd-desc">Подбросить монетку</span></li>
+                    <li><span class="cmd-name" data-copy="!roll 20" tabindex="0">!roll [число]</span><span class="cmd-desc">Бросить кубик с N сторонами</span></li>
+                    <li><span class="cmd-name" data-copy="!8ball" tabindex="0">!8ball [вопрос]</span><span class="cmd-desc">Магический шар ответит на вопрос</span></li>
+                    <li><span class="cmd-name" data-copy="!choose" tabindex="0">!choose [варианты]</span><span class="cmd-desc">Выбрать один из вариантов</span></li>
+                    <li><span class="cmd-name" data-copy="!joke" tabindex="0">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
+                    <li><span class="cmd-name" data-copy="!rps камень" tabindex="0">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага с ботом</span></li>
+                </ul>
+            </div>
+
+            <div class="cmd-group mod">
+                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name" data-copy="!kick @user" tabindex="0">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника с сервера</span></li>
+                    <li><span class="cmd-name" data-copy="!ban @user" tabindex="0">!ban @user [причина]</span><span class="cmd-desc">Забанить участника</span></li>
+                    <li><span class="cmd-name" data-copy="!unban" tabindex="0">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
+                    <li><span class="cmd-name" data-copy="!mute @user 10" tabindex="0">!mute @user [минуты]</span><span class="cmd-desc">Замьютить на время</span></li>
+                    <li><span class="cmd-name" data-copy="!unmute @user" tabindex="0">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
+                    <li><span class="cmd-name" data-copy="!clear 10" tabindex="0">!clear [число]</span><span class="cmd-desc">Удалить N сообщений</span></li>
+                    <li><span class="cmd-name" data-copy="!warn @user" tabindex="0">!warn @user [причина]</span><span class="cmd-desc">Выдать предупреждение</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
-                <h3>🛡️ Модерация</h3>
+                <h3><span class="icon-badge" aria-hidden="true">🔧</span>Утилиты</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!kick @user">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника с сервера</span></li>
-                    <li><span class="cmd-name" data-copy="!ban @user">!ban @user [причина]</span><span class="cmd-desc">Забанить участника</span></li>
-                    <li><span class="cmd-name" data-copy="!unban">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
-                    <li><span class="cmd-name" data-copy="!mute @user 10">!mute @user [минуты]</span><span class="cmd-desc">Замьютить на время</span></li>
-                    <li><span class="cmd-name" data-copy="!unmute @user">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
-                    <li><span class="cmd-name" data-copy="!clear 10">!clear [число]</span><span class="cmd-desc">Удалить N сообщений</span></li>
-                    <li><span class="cmd-name" data-copy="!warn @user">!warn @user [причина]</span><span class="cmd-desc">Выдать предупреждение</span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group">
-                <h3>🔧 Утилиты</h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!userinfo">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе</span></li>
-                    <li><span class="cmd-name" data-copy="!help">!help</span><span class="cmd-desc">Интерактивное меню команд</span></li>
+                    <li><span class="cmd-name" data-copy="!userinfo" tabindex="0">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе</span></li>
+                    <li><span class="cmd-name" data-copy="!help" tabindex="0">!help</span><span class="cmd-desc">Интерактивное меню команд</span></li>
                 </ul>
             </div>
         </section>
 
         <!-- CTA -->
-        <section class="cta reveal" id="invite">
-            <h2>Готов добавить бота?</h2>
+        <section class="cta reveal" id="invite" aria-labelledby="cta-title">
+            <h2 id="cta-title">Готов добавить бота?</h2>
             <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
             <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
                target="_blank" rel="noopener" class="btn btn-primary">
-                ➕ Добавить на сервер
+                <span>➕</span><span>Добавить на сервер</span>
             </a>
         </section>
+    </main>
 
-        <!-- Футер -->
-        <footer>
+    <!-- Футер -->
+    <footer>
+        <div class="container">
+            <div class="footer-brand">
+                <span class="logo-emoji">🤖</span>
+                <span>Юрика-Бот</span>
+            </div>
             <div class="footer-links">
                 <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
                    target="_blank" rel="noopener">📨 Добавить бота</a>
                 <a href="https://github.com/GiantCraft18/Yurika_Site" target="_blank" rel="noopener">💻 GitHub</a>
                 <a href="#commands">📖 Команды</a>
             </div>
-            © 2026 Юрика-Бот · Сделано с ❤️ на Python
-        </footer>
-    </div>
+            <div class="footer-copy">© 2026 Юрика-Бот · Сделано с ❤️ на Python</div>
+        </div>
+    </footer>
 
     <!-- Кнопка «Наверх» -->
-    <button id="toTop" title="Наверх">↑</button>
+    <button id="toTop" title="Наверх" aria-label="Наверх">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
 
     <script>
     (function () {
         'use strict';
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         /* ---------- Тема ---------- */
         const html = document.documentElement;
@@ -667,81 +990,163 @@
             localStorage.setItem('theme', next);
         });
 
-        /* ---------- Липкая навигация ---------- */
+        /* ---------- Прогресс + липкая навигация + кнопка «Наверх» ---------- */
         const nav = document.getElementById('nav');
+        const progressBar = document.getElementById('progressBar');
+        const toTop = document.getElementById('toTop');
+        let ticking = false;
+
+        function onScroll() {
+            const scrollY = window.scrollY;
+            const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
+
+            progressBar.style.width = progress + '%';
+            nav.classList.toggle('scrolled', scrollY > 20);
+            toTop.classList.toggle('visible', scrollY > 400);
+            ticking = false;
+        }
+
         window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 20);
-            document.getElementById('toTop').classList.toggle('visible', window.scrollY > 400);
+            if (!ticking) {
+                window.requestAnimationFrame(onScroll);
+                ticking = true;
+            }
         }, { passive: true });
 
         /* ---------- Мобильное меню ---------- */
         const burger = document.getElementById('burger');
         const navLinks = document.getElementById('navLinks');
-        burger.addEventListener('click', () => navLinks.classList.toggle('open'));
+        burger.addEventListener('click', () => {
+            const isOpen = navLinks.classList.toggle('open');
+            burger.setAttribute('aria-expanded', String(isOpen));
+            burger.textContent = isOpen ? '✕' : '☰';
+        });
         navLinks.querySelectorAll('a').forEach(a => {
-            a.addEventListener('click', () => navLinks.classList.remove('open'));
+            a.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                burger.setAttribute('aria-expanded', 'false');
+                burger.textContent = '☰';
+            });
         });
 
         /* ---------- Кнопка «Наверх» ---------- */
-        document.getElementById('toTop').addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        toTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         });
 
         /* ---------- Копирование команд ---------- */
         document.querySelectorAll('.cmd-name').forEach(el => {
-            el.addEventListener('click', () => {
+            const copy = () => {
                 const text = el.dataset.copy || el.textContent;
-                navigator.clipboard.writeText(text).then(() => {
+                const done = () => {
                     el.classList.add('copied');
-                    setTimeout(() => el.classList.remove('copied'), 1200);
-                });
+                    setTimeout(() => el.classList.remove('copied'), 1300);
+                };
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+                } else {
+                    fallbackCopy(text, done);
+                }
+            };
+            el.addEventListener('click', copy);
+            el.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    copy();
+                }
             });
         });
 
+        function fallbackCopy(text, callback) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); callback(); } catch (e) {}
+            document.body.removeChild(ta);
+        }
+
         /* ---------- Анимация появления секций ---------- */
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        if ('IntersectionObserver' in window && !prefersReducedMotion) {
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        } else {
+            document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
+        }
 
         /* ---------- Анимированные счётчики ---------- */
         const counters = document.querySelectorAll('.stat-value[data-target]');
-        const counterObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                const el = entry.target;
-                const target = parseInt(el.dataset.target, 10);
-                const duration = 1200;
-                const start = performance.now();
-                function step(now) {
-                    const p = Math.min((now - start) / duration, 1);
-                    const eased = 1 - Math.pow(1 - p, 3);
-                    el.textContent = Math.round(target * eased);
-                    if (p < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-                counterObserver.unobserve(el);
-            });
-        }, { threshold: 0.5 });
-        counters.forEach(el => counterObserver.observe(el));
+        const runCounter = (el) => {
+            const target = parseInt(el.dataset.target, 10);
+            if (prefersReducedMotion) { el.textContent = target; return; }
+            const duration = 1200;
+            const start = performance.now();
+            function step(now) {
+                const p = Math.min((now - start) / duration, 1);
+                const eased = 1 - Math.pow(1 - p, 3);
+                el.textContent = Math.round(target * eased);
+                if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+        };
 
-        /* ---------- Текстовые статические значения ---------- */
-        document.querySelectorAll('.stat-value[data-text]').forEach(el => {
-            const txtObserver = new IntersectionObserver(entries => {
+        if ('IntersectionObserver' in window) {
+            const counterObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        el.textContent = el.dataset.text;
-                        txtObserver.unobserve(el);
+                        runCounter(entry.target);
+                        counterObserver.unobserve(entry.target);
                     }
                 });
             }, { threshold: 0.5 });
-            txtObserver.observe(el);
-        });
+            counters.forEach(el => counterObserver.observe(el));
+
+            /* Текстовые статические значения */
+            document.querySelectorAll('.stat-value[data-text]').forEach(el => {
+                const txtObserver = new IntersectionObserver(entries => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            el.textContent = el.dataset.text;
+                            txtObserver.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.5 });
+                txtObserver.observe(el);
+            });
+        } else {
+            counters.forEach(runCounter);
+            document.querySelectorAll('.stat-value[data-text]').forEach(el => {
+                el.textContent = el.dataset.text;
+            });
+        }
+
+        /* ---------- Scroll-spy для активной ссылки ---------- */
+        const sections = document.querySelectorAll('section[id]');
+        const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+
+        if ('IntersectionObserver' in window) {
+            const spyObserver = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        navAnchors.forEach(a => {
+                            a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+                        });
+                    }
+                });
+            }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+            sections.forEach(s => spyObserver.observe(s));
+        }
     })();
     </script>
 </body>
