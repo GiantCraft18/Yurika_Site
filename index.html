@@ -202,6 +202,21 @@
         border-radius: 2px;
     }
 
+    .burger {
+        display: none;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        width: 38px; height: 38px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        align-items: center;
+        justify-content: center;
+        transition: border-color 0.2s, background 0.2s;
+    }
+    .burger:hover { border-color: var(--accent-1); }
+
     .theme-toggle {
         background: var(--bg-2);
         border: 1px solid var(--border);
@@ -277,24 +292,6 @@
         border-color: var(--accent-1);
         transform: scale(1.05);
     }
-    .logout-btn {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text-muted);
-        width: 36px; height: 36px;
-        border-radius: 10px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: border-color 0.2s, color 0.2s, background 0.2s;
-    }
-    .logout-btn:hover {
-        border-color: var(--error);
-        color: var(--error);
-        background: var(--bg-elevated);
-    }
-    .logout-btn svg { width: 16px; height: 16px; }
 
     /* ---------- Модальное окно авторизации ---------- */
     .modal-overlay {
@@ -419,9 +416,7 @@
     .auth-form { display: none; }
     .auth-form.active { display: block; }
 
-    .form-group {
-        margin-bottom: 16px;
-    }
+    .form-group { margin-bottom: 16px; }
     .form-label {
         display: block;
         font-size: 13px;
@@ -461,7 +456,6 @@
         gap: 6px;
     }
     .form-error.visible { display: flex; }
-    .form-error svg { flex-shrink: 0; }
 
     .form-message {
         padding: 12px 14px;
@@ -484,7 +478,6 @@
         border: 1px solid rgba(52, 211, 153, 0.3);
         color: var(--success);
     }
-    .form-message svg { flex-shrink: 0; margin-top: 1px; }
 
     .auth-submit {
         width: 100%;
@@ -522,9 +515,7 @@
         display: none;
     }
     .auth-submit.loading .spinner { display: block; }
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .auth-links {
         display: flex;
@@ -1321,7 +1312,6 @@
         .modal { padding: 28px 22px; }
     }
 
-    /* ---------- Уважение к prefers-reduced-motion ---------- */
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
             animation-duration: 0.01ms !important;
@@ -1350,7 +1340,6 @@
                 <a href="#stats">Статистика</a>
                 <a href="#invite">Добавить</a>
                 <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">🌙</button>
-                <!-- Кнопка входа (показывается, когда НЕ авторизован) -->
                 <button class="auth-nav-btn" id="authOpenBtn" type="button">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -1358,7 +1347,6 @@
                     </svg>
                     <span>Войти</span>
                 </button>
-                <!-- Меню пользователя (показывается, когда авторизован) -->
                 <div class="user-menu" id="userMenu">
                     <div class="user-menu-wrapper">
                         <div class="user-avatar" id="userAvatar" title="Личный кабинет" tabindex="0">?</div>
@@ -1418,11 +1406,11 @@
         <!-- Статистика -->
         <section class="stats reveal" id="stats" aria-label="Статистика бота">
             <div class="stat-card">
-                <div class="stat-value" data-target="16">0</div>
+                <div class="stat-value" data-target="46">0</div>
                 <div class="stat-label">Команд</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" data-target="3">0</div>
+                <div class="stat-value" data-target="4">0</div>
                 <div class="stat-label">Категории</div>
             </div>
             <div class="stat-card">
@@ -1609,35 +1597,66 @@
             </div>
 
             <div class="cmd-group fun">
-                <h3><span class="icon-badge" aria-hidden="true">🎲</span>Развлечения</h3>
+                <h3><span class="icon-badge" aria-hidden="true">🎲</span>Развлечения · 27</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!coinflip" tabindex="0">!coinflip</span><span class="cmd-desc">Подбросить монетку</span></li>
-                    <li><span class="cmd-name" data-copy="!roll 20" tabindex="0">!roll [число]</span><span class="cmd-desc">Бросить кубик с N сторонами</span></li>
-                    <li><span class="cmd-name" data-copy="!8ball" tabindex="0">!8ball [вопрос]</span><span class="cmd-desc">Магический шар ответит на вопрос</span></li>
-                    <li><span class="cmd-name" data-copy="!choose" tabindex="0">!choose [варианты]</span><span class="cmd-desc">Выбрать один из вариантов</span></li>
+                    <li><span class="cmd-name" data-copy="!coinflip" tabindex="0">!coinflip [N]</span><span class="cmd-desc">Подбросить N монет (до 20)</span></li>
+                    <li><span class="cmd-name" data-copy="!roll 20" tabindex="0">!roll [NdM+K]</span><span class="cmd-desc">Кубик: 20, 2d6, 3d8+2, adv</span></li>
+                    <li><span class="cmd-name" data-copy="!8ball" tabindex="0">!8ball [вопрос]</span><span class="cmd-desc">Магический шар</span></li>
+                    <li><span class="cmd-name" data-copy="!choose пицца суши" tabindex="0">!choose [варианты]</span><span class="cmd-desc">Выбрать из вариантов</span></li>
+                    <li><span class="cmd-name" data-copy="!random 1 100" tabindex="0">!random [min] [max]</span><span class="cmd-desc">Случайное число</span></li>
                     <li><span class="cmd-name" data-copy="!joke" tabindex="0">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
-                    <li><span class="cmd-name" data-copy="!rps камень" tabindex="0">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага с ботом</span></li>
+                    <li><span class="cmd-name" data-copy="!rps камень" tabindex="0">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага</span></li>
+                    <li><span class="cmd-name" data-copy="!rate пицца" tabindex="0">!rate [что-то]</span><span class="cmd-desc">Оценка по 10-балльной шкале</span></li>
+                    <li><span class="cmd-name" data-copy="!love @user" tabindex="0">!love [@u1] [@u2]</span><span class="cmd-desc">Совместимость двух пользователей</span></li>
+                    <li><span class="cmd-name" data-copy="!ship @user1 @user2" tabindex="0">!ship @u1 @u2</span><span class="cmd-desc">Шипперить двух участников</span></li>
+                    <li><span class="cmd-name" data-copy="!hug @user" tabindex="0">!hug [@user]</span><span class="cmd-desc">Обнять пользователя</span></li>
+                    <li><span class="cmd-name" data-copy="!pat @user" tabindex="0">!pat [@user]</span><span class="cmd-desc">Погладить по голове</span></li>
+                    <li><span class="cmd-name" data-copy="!slap @user" tabindex="0">!slap @user</span><span class="cmd-desc">Шлёпнуть</span></li>
+                    <li><span class="cmd-name" data-copy="!poke @user" tabindex="0">!poke @user</span><span class="cmd-desc">Ткнуть пальцем</span></li>
+                    <li><span class="cmd-name" data-copy="!say привет" tabindex="0">!say [текст]</span><span class="cmd-desc">Сказать от лица бота</span></li>
+                    <li><span class="cmd-name" data-copy="!reverse привет" tabindex="0">!reverse [текст]</span><span class="cmd-desc">Перевернуть текст</span></li>
+                    <li><span class="cmd-name" data-copy="!mock привет" tabindex="0">!mock [текст]</span><span class="cmd-desc">SpOnGeBoB-регистр</span></li>
+                    <li><span class="cmd-name" data-copy="!password 16" tabindex="0">!password [длина]</span><span class="cmd-desc">Сгенерировать пароль</span></li>
+                    <li><span class="cmd-name" data-copy="!uuid" tabindex="0">!uuid</span><span class="cmd-desc">Сгенерировать UUID</span></li>
+                    <li><span class="cmd-name" data-copy="!guess" tabindex="0">!guess [число]</span><span class="cmd-desc">Игра «Угадай число» (1–100)</span></li>
+                    <li><span class="cmd-name" data-copy="!stopguess" tabindex="0">!stopguess</span><span class="cmd-desc">Прекратить игру</span></li>
+                    <li><span class="cmd-name" data-copy="!truth" tabindex="0">!truth</span><span class="cmd-desc">Правда или действие: правда</span></li>
+                    <li><span class="cmd-name" data-copy="!dare" tabindex="0">!dare</span><span class="cmd-desc">Правда или действие: действие</span></li>
+                    <li><span class="cmd-name" data-copy="!wyr" tabindex="0">!wyr</span><span class="cmd-desc">Что бы ты выбрал?</span></li>
+                    <li><span class="cmd-name" data-copy="!topic" tabindex="0">!topic</span><span class="cmd-desc">Случайная тема для разговора</span></li>
+                    <li><span class="cmd-name" data-copy="!кто" tabindex="0">!кто</span><span class="cmd-desc">Случайный участник сервера</span></li>
+                    <li><span class="cmd-name" data-copy="!ктоиз" tabindex="0">!ктоиз [варианты]</span><span class="cmd-desc">Случайный из списка</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group mod">
-                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация</h3>
+                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация · 16</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!kick @user" tabindex="0">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника с сервера</span></li>
-                    <li><span class="cmd-name" data-copy="!ban @user" tabindex="0">!ban @user [причина]</span><span class="cmd-desc">Забанить участника</span></li>
-                    <li><span class="cmd-name" data-copy="!unban" tabindex="0">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
-                    <li><span class="cmd-name" data-copy="!mute @user 10" tabindex="0">!mute @user [минуты]</span><span class="cmd-desc">Замьютить на время</span></li>
+                    <li><span class="cmd-name" data-copy="!kick @user" tabindex="0">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника или бота</span></li>
+                    <li><span class="cmd-name" data-copy="!ban @user" tabindex="0">!ban @user [причина]</span><span class="cmd-desc">Забанить участника или бота</span></li>
+                    <li><span class="cmd-name" data-copy="!tempban @user 30" tabindex="0">!tempban @user [мин]</span><span class="cmd-desc">Временный бан (до 7 дней)</span></li>
+                    <li><span class="cmd-name" data-copy="!unban 123456789" tabindex="0">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
+                    <li><span class="cmd-name" data-copy="!softban @user" tabindex="0">!softban @user [причина]</span><span class="cmd-desc">Бан + разбан + удаление сообщений</span></li>
+                    <li><span class="cmd-name" data-copy="!mute @user 10" tabindex="0">!mute @user [мин]</span><span class="cmd-desc">Мут на N минут (до 28 дней)</span></li>
                     <li><span class="cmd-name" data-copy="!unmute @user" tabindex="0">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
-                    <li><span class="cmd-name" data-copy="!clear 10" tabindex="0">!clear [число]</span><span class="cmd-desc">Удалить N сообщений</span></li>
-                    <li><span class="cmd-name" data-copy="!warn @user" tabindex="0">!warn @user [причина]</span><span class="cmd-desc">Выдать предупреждение</span></li>
+                    <li><span class="cmd-name" data-copy="!unmuteall" tabindex="0">!unmuteall</span><span class="cmd-desc">Снять мут со всех (админ)</span></li>
+                    <li><span class="cmd-name" data-copy="!warn @user" tabindex="0">!warn @user [причина]</span><span class="cmd-desc">Предупреждение (3 → авто-мут)</span></li>
+                    <li><span class="cmd-name" data-copy="!warns @user" tabindex="0">!warns [@user]</span><span class="cmd-desc">Список предупреждений</span></li>
+                    <li><span class="cmd-name" data-copy="!clearwarns @user" tabindex="0">!clearwarns @user</span><span class="cmd-desc">Очистить варны (админ)</span></li>
+                    <li><span class="cmd-name" data-copy="!clear 20" tabindex="0">!clear [число]</span><span class="cmd-desc">Удалить N последних сообщений</span></li>
+                    <li><span class="cmd-name" data-copy="!clearfrom @user 30" tabindex="0">!clearfrom @user [N]</span><span class="cmd-desc">Удалить N сообщений от пользователя</span></li>
+                    <li><span class="cmd-name" data-copy="!slowmode 5" tabindex="0">!slowmode [сек]</span><span class="cmd-desc">Медленный режим в канале</span></li>
+                    <li><span class="cmd-name" data-copy="!lock" tabindex="0">!lock</span><span class="cmd-desc">Закрыть канал для @everyone</span></li>
+                    <li><span class="cmd-name" data-copy="!unlock" tabindex="0">!unlock</span><span class="cmd-desc">Открыть канал для @everyone</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
-                <h3><span class="icon-badge" aria-hidden="true">🔧</span>Утилиты</h3>
+                <h3><span class="icon-badge" aria-hidden="true">🔧</span>Утилиты · 3</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!userinfo" tabindex="0">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе</span></li>
-                    <li><span class="cmd-name" data-copy="!help" tabindex="0">!help</span><span class="cmd-desc">Интерактивное меню команд</span></li>
+                    <li><span class="cmd-name" data-copy="!userinfo" tabindex="0">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе (ID, даты, роли)</span></li>
+                    <li><span class="cmd-name" data-copy="!botinfo" tabindex="0">!botinfo</span><span class="cmd-desc">Информация о боте (пинг, аптайм, коги)</span></li>
+                    <li><span class="cmd-name" data-copy="!serverinfo" tabindex="0">!serverinfo</span><span class="cmd-desc">Информация о сервере (участники, каналы)</span></li>
                 </ul>
             </div>
         </section>
@@ -1730,10 +1749,8 @@
                 <button class="auth-tab" id="tabRegister" role="tab" aria-selected="false" type="button">Регистрация</button>
             </div>
 
-            <!-- Общее сообщение -->
             <div class="form-message" id="authMessage" role="alert"></div>
 
-            <!-- ФОРМА ВХОДА -->
             <form class="auth-form active" id="loginForm" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="loginEmail">Email</label>
@@ -1754,7 +1771,6 @@
                 </div>
             </form>
 
-            <!-- ФОРМА РЕГИСТРАЦИИ -->
             <form class="auth-form" id="registerForm" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="registerEmail">Email</label>
@@ -1815,7 +1831,6 @@
         /* ================= УТИЛИТЫ ================= */
         const $ = (sel) => document.querySelector(sel);
 
-        // Словарь ошибок Firebase → русский
         const errorMessages = {
             'auth/email-already-in-use': 'Этот email уже зарегистрирован. Попробуйте войти.',
             'auth/invalid-email': 'Некорректный email. Проверьте адрес.',
@@ -1974,7 +1989,6 @@
                     $('#loginEmail').value.trim(),
                     $('#loginPassword').value
                 );
-                // Успех — onAuthStateChanged закроет окно
             } catch (error) {
                 showMessage(getErrorMessage(error), 'error');
             } finally {
@@ -1996,7 +2010,6 @@
                     $('#registerEmail').value.trim(),
                     $('#registerPassword').value
                 );
-                // Успех — onAuthStateChanged закроет окно
             } catch (error) {
                 showMessage(getErrorMessage(error), 'error');
             } finally {
@@ -2053,7 +2066,6 @@
 
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                // Пользователь вошёл
                 const email = user.email || 'пользователь';
                 authOpenBtn.style.display = 'none';
                 userMenu.classList.add('visible');
@@ -2061,19 +2073,16 @@
                 userEmail.textContent = email;
                 userAvatar.title = 'Вы вошли как ' + email;
 
-                // Закрываем модалку, если была открыта
                 if (authModal.classList.contains('open')) {
                     closeModal();
                 }
             } else {
-                // Пользователь вышел
                 authOpenBtn.style.display = '';
                 userMenu.classList.remove('visible');
                 userDropdown.classList.remove('open');
             }
         });
 
-        // Закрытие мобильного меню при клике на пустое место в навигации
         document.addEventListener('click', (e) => {
             const burger = $('#burger');
             const navLinksEl = $('#navLinks');
