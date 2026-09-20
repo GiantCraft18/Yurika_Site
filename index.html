@@ -1381,7 +1381,7 @@
             </div>
             <h1 id="hero-title">Твой помощник<br>на сервере Lolka</h1>
             <p>
-                Модерация, развлечения, утилиты и удобное меню команд —
+                Модерация, утилиты, конфигурация и удобное меню команд —
                 всё в одном боте. Установка занимает 10 секунд.
             </p>
             <div class="buttons">
@@ -1408,11 +1408,11 @@
         <!-- Статистика -->
         <section class="stats reveal" id="stats" aria-label="Статистика бота">
             <div class="stat-card">
-                <div class="stat-value" data-target="56">0</div>
+                <div class="stat-value" data-target="15">0</div>
                 <div class="stat-label">Команд</div>
             </div>
             <div class="stat-card">
-                <div class="stat-value" data-target="6">0</div>
+                <div class="stat-value" data-target="5">0</div>
                 <div class="stat-label">Категорий</div>
             </div>
             <div class="stat-card">
@@ -1537,18 +1537,7 @@
                         </svg>
                     </div>
                     <h3>Модерация</h3>
-                    <p>Кик, бан, мут, очистка чата, предупреждения. Полный контроль над порядком на сервере.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <circle cx="12" cy="12" r="6"></circle>
-                            <circle cx="12" cy="12" r="2"></circle>
-                        </svg>
-                    </div>
-                    <h3>Развлечения</h3>
-                    <p>Монетка, кубик, магический шар, камень-ножницы-бумага и случайные шутки — чтобы чат не скучал.</p>
+                    <p>Кик, мут, очистка чата — базовые инструменты для поддержания порядка на сервере.</p>
                 </article>
                 <article class="feature-card">
                     <div class="feature-icon" aria-hidden="true">
@@ -1557,7 +1546,17 @@
                         </svg>
                     </div>
                     <h3>Утилиты</h3>
-                    <p>Информация о пользователях, аватары, серверная статистика — всё под рукой одной командой.</p>
+                    <p>Карточка пользователя, аватар, отладка — вся информация под рукой одной командой.</p>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                        </svg>
+                    </div>
+                    <h3>Конфигурация</h3>
+                    <p>Свой префикс, канал приветствий, канал логов и авто-роль — настраивается прямо в чате.</p>
                 </article>
                 <article class="feature-card">
                     <div class="feature-icon" aria-hidden="true">
@@ -1567,7 +1566,7 @@
                         </svg>
                     </div>
                     <h3>Умное меню</h3>
-                    <p>Интерактивный <code>!help</code> с кнопками. Все команды разложены по категориям — не запутаешься.</p>
+                    <p>Интерактивный <code>/команды</code> со всеми командами, сгруппированными по категориям.</p>
                 </article>
                 <article class="feature-card">
                     <div class="feature-icon" aria-hidden="true">
@@ -1598,89 +1597,49 @@
                 <p>Нажми на команду, чтобы скопировать её в буфер обмена</p>
             </div>
 
-            <div class="cmd-group fun">
-                <h3><span class="icon-badge" aria-hidden="true">🎲</span>Развлечения · 27</h3>
+            <div class="cmd-group info">
+                <h3><span class="icon-badge" aria-hidden="true">📢</span>Основное · 4</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!coinflip" tabindex="0">!coinflip [N]</span><span class="cmd-desc">Подбросить N монет (до 20)</span></li>
-                    <li><span class="cmd-name" data-copy="!roll 20" tabindex="0">!roll [NdM+K]</span><span class="cmd-desc">Кубик: 20, 2d6, 3d8+2, adv</span></li>
-                    <li><span class="cmd-name" data-copy="!8ball" tabindex="0">!8ball [вопрос]</span><span class="cmd-desc">Магический шар</span></li>
-                    <li><span class="cmd-name" data-copy="!choose пицца суши" tabindex="0">!choose [варианты]</span><span class="cmd-desc">Выбрать из вариантов</span></li>
-                    <li><span class="cmd-name" data-copy="!random 1 100" tabindex="0">!random [min] [max]</span><span class="cmd-desc">Случайное число</span></li>
-                    <li><span class="cmd-name" data-copy="!joke" tabindex="0">!joke</span><span class="cmd-desc">Случайная шутка</span></li>
-                    <li><span class="cmd-name" data-copy="!rps камень" tabindex="0">!rps [камень/ножницы/бумага]</span><span class="cmd-desc">Камень-ножницы-бумага</span></li>
-                    <li><span class="cmd-name" data-copy="!rate пицца" tabindex="0">!rate [что-то]</span><span class="cmd-desc">Оценка по 10-балльной шкале</span></li>
-                    <li><span class="cmd-name" data-copy="!love @user" tabindex="0">!love [@u1] [@u2]</span><span class="cmd-desc">Совместимость двух пользователей</span></li>
-                    <li><span class="cmd-name" data-copy="!ship @user1 @user2" tabindex="0">!ship @u1 @u2</span><span class="cmd-desc">Шипперить двух участников</span></li>
-                    <li><span class="cmd-name" data-copy="!hug @user" tabindex="0">!hug [@user]</span><span class="cmd-desc">Обнять пользователя</span></li>
-                    <li><span class="cmd-name" data-copy="!pat @user" tabindex="0">!pat [@user]</span><span class="cmd-desc">Погладить по голове</span></li>
-                    <li><span class="cmd-name" data-copy="!slap @user" tabindex="0">!slap @user</span><span class="cmd-desc">Шлёпнуть</span></li>
-                    <li><span class="cmd-name" data-copy="!poke @user" tabindex="0">!poke @user</span><span class="cmd-desc">Ткнуть пальцем</span></li>
-                    <li><span class="cmd-name" data-copy="!say привет" tabindex="0">!say [текст]</span><span class="cmd-desc">Сказать от лица бота</span></li>
-                    <li><span class="cmd-name" data-copy="!reverse привет" tabindex="0">!reverse [текст]</span><span class="cmd-desc">Перевернуть текст</span></li>
-                    <li><span class="cmd-name" data-copy="!mock привет" tabindex="0">!mock [текст]</span><span class="cmd-desc">SpOnGeBoB-регистр</span></li>
-                    <li><span class="cmd-name" data-copy="!password 16" tabindex="0">!password [длина]</span><span class="cmd-desc">Сгенерировать пароль</span></li>
-                    <li><span class="cmd-name" data-copy="!uuid" tabindex="0">!uuid</span><span class="cmd-desc">Сгенерировать UUID</span></li>
-                    <li><span class="cmd-name" data-copy="!guess" tabindex="0">!guess [число]</span><span class="cmd-desc">Игра «Угадай число» (1–100)</span></li>
-                    <li><span class="cmd-name" data-copy="!stopguess" tabindex="0">!stopguess</span><span class="cmd-desc">Прекратить игру</span></li>
-                    <li><span class="cmd-name" data-copy="!truth" tabindex="0">!truth</span><span class="cmd-desc">Правда или действие: правда</span></li>
-                    <li><span class="cmd-name" data-copy="!dare" tabindex="0">!dare</span><span class="cmd-desc">Правда или действие: действие</span></li>
-                    <li><span class="cmd-name" data-copy="!wyr" tabindex="0">!wyr</span><span class="cmd-desc">Что бы ты выбрал?</span></li>
-                    <li><span class="cmd-name" data-copy="!topic" tabindex="0">!topic</span><span class="cmd-desc">Случайная тема для разговора</span></li>
-                    <li><span class="cmd-name" data-copy="!кто" tabindex="0">!кто</span><span class="cmd-desc">Случайный участник сервера</span></li>
-                    <li><span class="cmd-name" data-copy="!ктоиз" tabindex="0">!ктоиз [варианты]</span><span class="cmd-desc">Случайный из списка</span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group mod">
-                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация · 16</h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!kick @user" tabindex="0">!kick @user [причина]</span><span class="cmd-desc">Выгнать участника или бота</span></li>
-                    <li><span class="cmd-name" data-copy="!ban @user" tabindex="0">!ban @user [причина]</span><span class="cmd-desc">Забанить участника или бота</span></li>
-                    <li><span class="cmd-name" data-copy="!tempban @user 30" tabindex="0">!tempban @user [мин]</span><span class="cmd-desc">Временный бан (до 7 дней)</span></li>
-                    <li><span class="cmd-name" data-copy="!unban 123456789" tabindex="0">!unban [ID]</span><span class="cmd-desc">Разбанить по ID</span></li>
-                    <li><span class="cmd-name" data-copy="!softban @user" tabindex="0">!softban @user [причина]</span><span class="cmd-desc">Бан + разбан + удаление сообщений</span></li>
-                    <li><span class="cmd-name" data-copy="!mute @user 10" tabindex="0">!mute @user [мин]</span><span class="cmd-desc">Мут на N минут (до 28 дней)</span></li>
-                    <li><span class="cmd-name" data-copy="!unmute @user" tabindex="0">!unmute @user</span><span class="cmd-desc">Снять мут</span></li>
-                    <li><span class="cmd-name" data-copy="!unmuteall" tabindex="0">!unmuteall</span><span class="cmd-desc">Снять мут со всех (админ)</span></li>
-                    <li><span class="cmd-name" data-copy="!warn @user" tabindex="0">!warn @user [причина]</span><span class="cmd-desc">Предупреждение (3 → авто-мут)</span></li>
-                    <li><span class="cmd-name" data-copy="!warns @user" tabindex="0">!warns [@user]</span><span class="cmd-desc">Список предупреждений</span></li>
-                    <li><span class="cmd-name" data-copy="!clearwarns @user" tabindex="0">!clearwarns @user</span><span class="cmd-desc">Очистить варны (админ)</span></li>
-                    <li><span class="cmd-name" data-copy="!clear 20" tabindex="0">!clear [число]</span><span class="cmd-desc">Удалить N последних сообщений</span></li>
-                    <li><span class="cmd-name" data-copy="!clearfrom @user 30" tabindex="0">!clearfrom @user [N]</span><span class="cmd-desc">Удалить N сообщений от пользователя</span></li>
-                    <li><span class="cmd-name" data-copy="!slowmode 5" tabindex="0">!slowmode [сек]</span><span class="cmd-desc">Медленный режим в канале</span></li>
-                    <li><span class="cmd-name" data-copy="!lock" tabindex="0">!lock</span><span class="cmd-desc">Закрыть канал для @everyone</span></li>
-                    <li><span class="cmd-name" data-copy="!unlock" tabindex="0">!unlock</span><span class="cmd-desc">Открыть канал для @everyone</span></li>
+                    <li><span class="cmd-name" data-copy="/ping" tabindex="0">/ping</span><span class="cmd-desc">Проверка связи</span></li>
+                    <li><span class="cmd-name" data-copy="/hello" tabindex="0">/hello</span><span class="cmd-desc">Приветствие</span></li>
+                    <li><span class="cmd-name" data-copy="/info" tabindex="0">/info</span><span class="cmd-desc">Информация о боте (пинг, аптайм)</span></li>
+                    <li><span class="cmd-name" data-copy="/latency" tabindex="0">/latency</span><span class="cmd-desc">Задержка бота в миллисекундах</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group">
-                <h3><span class="icon-badge" aria-hidden="true">🔧</span>Утилиты · 3</h3>
+                <h3><span class="icon-badge" aria-hidden="true">🔧</span>Пользователи · 3</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!userinfo" tabindex="0">!userinfo [@user]</span><span class="cmd-desc">Информация о пользователе (ID, даты, роли)</span></li>
-                    <li><span class="cmd-name" data-copy="!botinfo" tabindex="0">!botinfo</span><span class="cmd-desc">Информация о боте (пинг, аптайм, коги)</span></li>
-                    <li><span class="cmd-name" data-copy="!serverinfo" tabindex="0">!serverinfo</span><span class="cmd-desc">Информация о сервере (участники, каналы)</span></li>
+                    <li><span class="cmd-name" data-copy="/user" tabindex="0">/user [@user]</span><span class="cmd-desc">Карточка пользователя: ID, роли, статус</span></li>
+                    <li><span class="cmd-name" data-copy="/avatar" tabindex="0">/avatar [@user]</span><span class="cmd-desc">Показать аватар пользователя</span></li>
+                    <li><span class="cmd-name" data-copy="/debug_user" tabindex="0">/debug_user [@user]</span><span class="cmd-desc">Отладка: список атрибутов пользователя</span></li>
+                </ul>
+            </div>
+
+            <div class="cmd-group mod">
+                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация · 3</h3>
+                <ul class="cmd-list">
+                    <li><span class="cmd-name" data-copy="/purge 10" tabindex="0">/purge [число]</span><span class="cmd-desc">Удалить N последних сообщений (1–100)</span></li>
+                    <li><span class="cmd-name" data-copy="/kick @user" tabindex="0">/kick @user [причина]</span><span class="cmd-desc">Кикнуть участника с указанием причины</span></li>
+                    <li><span class="cmd-name" data-copy="/mute @user 10m" tabindex="0">/mute @user [время]</span><span class="cmd-desc">Заглушить участника (в разработке)</span></li>
                 </ul>
             </div>
 
             <div class="cmd-group admin">
-                <h3><span class="icon-badge" aria-hidden="true">⚙️</span>Управление · 5</h3>
+                <h3><span class="icon-badge" aria-hidden="true">⚙️</span>Конфигурация · 5</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!reload fun" tabindex="0">!reload [ког]</span><span class="cmd-desc">Перезагрузить ког (владелец)</span></li>
-                    <li><span class="cmd-name" data-copy="!reloadall" tabindex="0">!reloadall</span><span class="cmd-desc">Перезагрузить все коги (владелец)</span></li>
-                    <li><span class="cmd-name" data-copy="!load fun" tabindex="0">!load [ког]</span><span class="cmd-desc">Загрузить ког (владелец)</span></li>
-                    <li><span class="cmd-name" data-copy="!unload fun" tabindex="0">!unload [ког]</span><span class="cmd-desc">Выгрузить ког (владелец)</span></li>
-                    <li><span class="cmd-name" data-copy="!shutdown" tabindex="0">!shutdown</span><span class="cmd-desc">Корректно выключить бота (владелец)</span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг" tabindex="0">/конфиг</span><span class="cmd-desc">Показать текущие настройки сервера</span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг префикс ?" tabindex="0">/конфиг префикс [символ]</span><span class="cmd-desc">Изменить префикс команд (до 5 символов)</span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг приветствие #канал" tabindex="0">/конфиг приветствие [#канал]</span><span class="cmd-desc">Установить канал приветствий</span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг лог #канал" tabindex="0">/конфиг лог [#канал]</span><span class="cmd-desc">Установить канал логов</span></li>
+                    <li><span class="cmd-name" data-copy="/конфиг роль @Роль" tabindex="0">/конфиг роль [@Роль]</span><span class="cmd-desc">Установить авто-роль новым участникам</span></li>
                 </ul>
             </div>
 
-            <div class="cmd-group info">
-                <h3><span class="icon-badge" aria-hidden="true">📢</span>Информация · 5</h3>
+            <div class="cmd-group fun">
+                <h3><span class="icon-badge" aria-hidden="true">📖</span>Справка · 1</h3>
                 <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="!ping" tabindex="0">!ping</span><span class="cmd-desc">Показать задержку бота</span></li>
-                    <li><span class="cmd-name" data-copy="!uptime" tabindex="0">!uptime</span><span class="cmd-desc">Сколько бот уже онлайн</span></li>
-                    <li><span class="cmd-name" data-copy="!invite" tabindex="0">!invite</span><span class="cmd-desc">Ссылка для приглашения бота</span></li>
-                    <li><span class="cmd-name" data-copy="!about" tabindex="0">!about</span><span class="cmd-desc">Информация о боте</span></li>
-                    <li><span class="cmd-name" data-copy="!stats" tabindex="0">!stats</span><span class="cmd-desc">Статистика бота</span></li>
+                    <li><span class="cmd-name" data-copy="/команды" tabindex="0">/команды</span><span class="cmd-desc">Список всех команд бота</span></li>
                 </ul>
             </div>
         </section>
