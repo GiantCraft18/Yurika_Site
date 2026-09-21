@@ -8,278 +8,945 @@
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+    /* ═══════════════════════════════════════════════════
+       1. ПЕРЕМЕННЫЕ ТЕМЫ
+       ═══════════════════════════════════════════════════ */
     :root, [data-theme="dark"] {
-        --bg: #0a0b12;
-        --bg-2: #12141f;
-        --bg-3: #0d0f17;
-        --bg-elevated: #1a1d2b;
-        --border: #252836;
-        --border-soft: #1c1f2e;
-        --text: #f0f1f5;
-        --text-muted: #a2a8be;
+        --bg: #08090f;
+        --bg-2: #0f1119;
+        --bg-3: #151824;
+        --bg-elevated: #1a1e2c;
+        --bg-hover: #202433;
+
+        --border: #22273a;
+        --border-soft: #1a1e2b;
+        --border-strong: #2e3450;
+
+        --text: #f4f5fa;
+        --text-muted: #a8afc9;
         --text-dim: #7a8199;
-        --text-faint: #525873;
-        --accent-1: #7c5cfc;
-        --accent-2: #a78bfa;
-        --accent-3: #c4b5fd;
-        --accent-glow: rgba(124, 92, 252, 0.4);
+        --text-faint: #4d5470;
+
+        --accent: #7c5cfc;
+        --accent-hover: #8b6efd;
+        --accent-soft: #a78bfa;
+        --accent-glow: rgba(124, 92, 252, 0.35);
+        --accent-subtle: rgba(124, 92, 252, 0.12);
+
         --success: #34d399;
-        --success-glow: rgba(52, 211, 153, 0.4);
+        --success-subtle: rgba(52, 211, 153, 0.12);
         --error: #f87171;
-        --error-glow: rgba(248, 113, 113, 0.3);
-        --card-hover-border: rgba(124, 92, 252, 0.5);
-        --shadow-soft: rgba(0, 0, 0, 0.4);
-        --code-bg: #0d0f17;
-        --lolka-gradient: linear-gradient(135deg, #7c5cfc, #a78bfa, #c4b5fd);
+        --error-subtle: rgba(248, 113, 113, 0.1);
+        --warning: #fbbf24;
+        --warning-subtle: rgba(251, 191, 36, 0.1);
+
+        --gradient: linear-gradient(135deg, #7c5cfc 0%, #a78bfa 50%, #c4b5fd 100%);
+        --gradient-soft: linear-gradient(135deg, rgba(124,92,252,0.14), rgba(167,139,250,0.08));
+
+        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
+        --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
+        --shadow-lg: 0 12px 32px rgba(0,0,0,0.45);
+        --shadow-xl: 0 24px 60px rgba(0,0,0,0.6);
+
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 20px;
     }
+
     [data-theme="light"] {
-        --bg: #f8f9fc;
+        --bg: #fafbff;
         --bg-2: #ffffff;
-        --bg-3: #f0f2f8;
+        --bg-3: #f3f5fb;
         --bg-elevated: #ffffff;
-        --border: #e2e5ef;
-        --border-soft: #eaedf5;
-        --text: #12142a;
+        --bg-hover: #eef1f9;
+
+        --border: #e4e8f2;
+        --border-soft: #eef1f8;
+        --border-strong: #d5daea;
+
+        --text: #0d1023;
         --text-muted: #4d5470;
         --text-dim: #6b7290;
         --text-faint: #9aa1b8;
-        --accent-1: #6d4aff;
-        --accent-2: #8b5cf6;
-        --accent-3: #a78bfa;
-        --accent-glow: rgba(109, 74, 255, 0.25);
+
+        --accent: #6d4aff;
+        --accent-hover: #7d5cff;
+        --accent-soft: #8b5cf6;
+        --accent-glow: rgba(109, 74, 255, 0.22);
+        --accent-subtle: rgba(109, 74, 255, 0.08);
+
         --success: #059669;
-        --success-glow: rgba(5, 150, 105, 0.25);
+        --success-subtle: rgba(5, 150, 105, 0.08);
         --error: #dc2626;
-        --error-glow: rgba(220, 38, 38, 0.25);
-        --card-hover-border: rgba(109, 74, 255, 0.4);
-        --shadow-soft: rgba(20, 30, 60, 0.08);
-        --code-bg: #f0f2f8;
-        --lolka-gradient: linear-gradient(135deg, #6d4aff, #8b5cf6, #a78bfa);
+        --error-subtle: rgba(220, 38, 38, 0.06);
+        --warning: #d97706;
+        --warning-subtle: rgba(217, 119, 6, 0.08);
+
+        --gradient: linear-gradient(135deg, #6d4aff 0%, #8b5cf6 50%, #a78bfa 100%);
+        --gradient-soft: linear-gradient(135deg, rgba(109,74,255,0.08), rgba(139,92,246,0.04));
+
+        --shadow-sm: 0 1px 2px rgba(20,30,60,0.04);
+        --shadow-md: 0 4px 16px rgba(20,30,60,0.06);
+        --shadow-lg: 0 12px 32px rgba(20,30,60,0.1);
+        --shadow-xl: 0 24px 60px rgba(20,30,60,0.14);
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+    /* ═══════════════════════════════════════════════════
+       2. СБРОС И БАЗОВЫЕ СТИЛИ
+       ═══════════════════════════════════════════════════ */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 90px;
+        -webkit-text-size-adjust: 100%;
+    }
 
     body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Tahoma, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         background: var(--bg);
         color: var(--text);
         min-height: 100vh;
         overflow-x: hidden;
-        line-height: 1.5;
+        line-height: 1.6;
         -webkit-font-smoothing: antialiased;
-        transition: background 0.3s, color 0.3s;
+        -moz-osx-font-smoothing: grayscale;
+        transition: background 0.3s ease, color 0.3s ease;
     }
 
     body::before {
         content: "";
         position: fixed;
-        inset: -50%;
+        inset: 0;
         background:
-            radial-gradient(circle at 25% 15%, rgba(124, 92, 252, 0.15), transparent 45%),
-            radial-gradient(circle at 75% 85%, rgba(167, 139, 250, 0.12), transparent 45%);
+            radial-gradient(circle at 15% 10%, var(--accent-subtle), transparent 42%),
+            radial-gradient(circle at 85% 90%, rgba(167, 139, 250, 0.1), transparent 42%);
         z-index: -1;
-        animation: float 28s ease-in-out infinite;
         pointer-events: none;
+        animation: floatSlow 30s ease-in-out infinite;
     }
     [data-theme="light"] body::before {
         background:
-            radial-gradient(circle at 25% 15%, rgba(109, 74, 255, 0.08), transparent 45%),
-            radial-gradient(circle at 75% 85%, rgba(139, 92, 246, 0.08), transparent 45%);
+            radial-gradient(circle at 15% 10%, rgba(109, 74, 255, 0.06), transparent 42%),
+            radial-gradient(circle at 85% 90%, rgba(139, 92, 246, 0.05), transparent 42%);
     }
-    @keyframes float {
+    @keyframes floatSlow {
         0%, 100% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(-30px, -30px) scale(1.03); }
+        50% { transform: translate(-20px, -20px) scale(1.04); }
     }
 
-    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    img, svg { display: block; max-width: 100%; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+    a { color: inherit; text-decoration: none; }
+    input, textarea { font-family: inherit; }
 
+    ::selection { background: var(--accent); color: #fff; }
+
+    /* ═══════════════════════════════════════════════════
+       3. ТИПОГРАФИКА
+       ═══════════════════════════════════════════════════ */
+    h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.02em; }
+
+    .container {
+        width: 100%;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 24px;
+    }
+
+    code, .mono {
+        font-family: 'JetBrains Mono', 'Consolas', monospace;
+        font-size: 0.9em;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       4. КОМПОНЕНТЫ
+       ═══════════════════════════════════════════════════ */
+
+    /* ---------- Прогресс-бар ---------- */
     .progress-bar {
         position: fixed;
         top: 0; left: 0;
-        height: 3px;
+        height: 2px;
         width: 0%;
-        background: var(--lolka-gradient);
+        background: var(--gradient);
         z-index: 200;
         transition: width 0.1s linear;
         box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    nav {
+    /* ---------- Кнопки ---------- */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 12px 22px;
+        border-radius: var(--radius-md);
+        font-size: 14.5px;
+        font-weight: 600;
+        white-space: nowrap;
+        transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+        cursor: pointer;
+        border: 1px solid transparent;
+    }
+    .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
+
+    .btn-primary {
+        background: var(--gradient);
+        color: #fff;
+        box-shadow: 0 4px 20px var(--accent-glow);
+    }
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 32px var(--accent-glow);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    .btn-outline {
+        background: transparent;
+        color: var(--text);
+        border-color: var(--border);
+    }
+    .btn-outline:hover {
+        background: var(--bg-2);
+        border-color: var(--accent);
+        color: var(--accent);
+        transform: translateY(-2px);
+    }
+
+    /* ---------- Карточки ---------- */
+    .card {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+    .card:hover {
+        transform: translateY(-3px);
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow-lg);
+    }
+
+    /* ---------- Бейджи ---------- */
+    .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 5px 12px;
+        border-radius: 100px;
+        font-size: 12.5px;
+        font-weight: 600;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text-muted);
+    }
+
+    .badge-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 0 var(--success);
+        animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+        0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
+        70% { box-shadow: 0 0 0 8px transparent; }
+        100% { box-shadow: 0 0 0 0 transparent; }
+    }
+
+    /* ═══════════════════════════════════════════════════
+       5. НАВИГАЦИЯ
+       ═══════════════════════════════════════════════════ */
+    .site-header {
         position: sticky;
         top: 0;
         z-index: 100;
-        padding: 14px 0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-        transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s, padding 0.3s;
+        padding: 12px 0;
         border-bottom: 1px solid transparent;
+        transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s, padding 0.3s;
     }
-    nav.scrolled {
-        background: color-mix(in srgb, var(--bg) 78%, transparent);
-        backdrop-filter: blur(18px) saturate(180%);
-        -webkit-backdrop-filter: blur(18px) saturate(180%);
+    .site-header.scrolled {
+        background: color-mix(in srgb, var(--bg) 82%, transparent);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
         border-bottom-color: var(--border);
-        padding: 10px 0;
+        padding: 8px 0;
     }
-    .logo {
+
+    .nav {
         display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+    }
+
+    .logo {
+        display: inline-flex;
         align-items: center;
         gap: 10px;
-        font-size: 20px;
+        font-size: 19px;
         font-weight: 800;
         letter-spacing: -0.02em;
-        text-decoration: none;
         cursor: pointer;
     }
     .logo-icon {
         width: 36px;
         height: 36px;
-        border-radius: 10px;
-        background: var(--lolka-gradient);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        border-radius: var(--radius-md);
+        background: var(--gradient);
+        display: grid;
+        place-items: center;
         font-size: 18px;
         box-shadow: 0 4px 16px var(--accent-glow);
-        transition: transform 0.3s, box-shadow 0.3s;
+        transition: transform 0.3s;
     }
-    .logo:hover .logo-icon {
-        transform: scale(1.08) rotate(-5deg);
-        box-shadow: 0 6px 24px var(--accent-glow);
-    }
+    .logo:hover .logo-icon { transform: scale(1.08) rotate(-6deg); }
     .logo-text {
-        background: var(--lolka-gradient);
-        background-size: 200% 100%;
+        background: var(--gradient);
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
+        background-size: 200% 100%;
         transition: background-position 0.5s;
     }
     .logo:hover .logo-text { background-position: 100% 0; }
 
-    .nav-links {
+    .nav-list {
         display: flex;
         align-items: center;
         gap: 4px;
+        list-style: none;
     }
-    .nav-links a {
-        color: var(--text-muted);
-        text-decoration: none;
+    .nav-link {
+        padding: 8px 14px;
+        border-radius: var(--radius-sm);
         font-size: 14px;
         font-weight: 500;
-        padding: 8px 14px;
-        border-radius: 8px;
+        color: var(--text-muted);
         transition: color 0.2s, background 0.2s;
         position: relative;
     }
-    .nav-links a:hover { color: var(--text); background: var(--bg-2); }
-    .nav-links a.active { color: var(--text); background: var(--bg-2); }
-    .nav-links a.active::after {
+    .nav-link:hover { color: var(--text); background: var(--bg-2); }
+    .nav-link.active {
+        color: var(--text);
+        background: var(--bg-2);
+    }
+    .nav-link.active::after {
         content: "";
         position: absolute;
-        bottom: 2px; left: 50%;
+        bottom: 3px; left: 50%;
         transform: translateX(-50%);
-        width: 16px; height: 2px;
-        background: var(--lolka-gradient);
+        width: 14px; height: 2px;
+        background: var(--gradient);
         border-radius: 2px;
     }
 
-    .burger {
-        display: none;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text);
-        width: 38px; height: 38px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
-        align-items: center;
-        justify-content: center;
-        transition: border-color 0.2s, background 0.2s;
-    }
-    .burger:hover { border-color: var(--accent-1); }
-
-    .theme-toggle {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text);
-        width: 38px; height: 38px;
-        border-radius: 10px;
-        cursor: pointer;
-        font-size: 16px;
+    .nav-actions {
         display: flex;
         align-items: center;
-        justify-content: center;
+        gap: 6px;
+    }
+
+    .icon-btn {
+        width: 38px;
+        height: 38px;
+        border-radius: var(--radius-md);
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 15px;
+        display: grid;
+        place-items: center;
         transition: border-color 0.2s, transform 0.15s, background 0.2s;
-        margin-left: 6px;
     }
-    .theme-toggle:hover {
-        border-color: var(--accent-1);
-        transform: scale(1.06);
+    .icon-btn:hover {
+        border-color: var(--accent);
         background: var(--bg-elevated);
+        transform: scale(1.05);
     }
 
-    .auth-nav-btn {
-        background: var(--lolka-gradient);
-        color: #fff;
-        border: none;
-        padding: 9px 18px;
-        border-radius: 10px;
-        font-size: 14px;
-        font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        transition: transform 0.15s, box-shadow 0.2s;
-        box-shadow: 0 4px 16px var(--accent-glow);
-        margin-left: 6px;
-        white-space: nowrap;
-    }
-    .auth-nav-btn:hover {
-        transform: translateY(-1px);
-        box-shadow: 0 6px 22px var(--accent-glow);
-    }
-    .auth-nav-btn svg { width: 16px; height: 16px; }
+    .burger { display: none; }
 
+    /* ---------- Аватар пользователя ---------- */
     .user-menu {
         display: none;
         align-items: center;
-        gap: 8px;
-        margin-left: 6px;
+        margin-left: 4px;
     }
     .user-menu.visible { display: flex; }
+    .user-menu-wrapper { position: relative; }
+
     .user-avatar {
-        width: 36px;
-        height: 36px;
+        width: 38px;
+        height: 38px;
         border-radius: 50%;
-        background: var(--lolka-gradient);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: var(--gradient);
         color: #fff;
         font-weight: 700;
         font-size: 14px;
         cursor: pointer;
         border: 2px solid var(--border);
-        transition: border-color 0.2s, transform 0.15s;
+        display: grid;
+        place-items: center;
         text-transform: uppercase;
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        transition: border-color 0.2s, transform 0.15s;
         overflow: hidden;
     }
     .user-avatar:hover {
-        border-color: var(--accent-1);
-        transform: scale(1.05);
+        border-color: var(--accent);
+        transform: scale(1.06);
     }
 
+    .user-dropdown {
+        position: absolute;
+        top: calc(100% + 10px);
+        right: 0;
+        min-width: 250px;
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 6px;
+        box-shadow: var(--shadow-xl);
+        opacity: 0;
+        transform: translateY(-6px) scale(0.98);
+        pointer-events: none;
+        transition: opacity 0.18s, transform 0.18s;
+        z-index: 101;
+    }
+    .user-dropdown.open {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+    }
+
+    .user-dropdown-header {
+        padding: 12px 14px;
+        border-bottom: 1px solid var(--border-soft);
+        margin-bottom: 4px;
+    }
+    .user-dropdown-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        font-weight: 600;
+        color: var(--text-faint);
+        margin-bottom: 3px;
+    }
+    .user-dropdown-email {
+        font-size: 13.5px;
+        color: var(--text);
+        font-weight: 500;
+        word-break: break-all;
+    }
+
+    .user-dropdown-item {
+        width: 100%;
+        text-align: left;
+        padding: 10px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 14px;
+        color: var(--text-muted);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: background 0.15s, color 0.15s;
+    }
+    .user-dropdown-item:hover {
+        background: var(--bg-3);
+        color: var(--text);
+    }
+    .user-dropdown-item.danger:hover {
+        background: var(--error-subtle);
+        color: var(--error);
+    }
+    .user-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* ═══════════════════════════════════════════════════
+       6. HERO
+       ═══════════════════════════════════════════════════ */
+    .hero {
+        text-align: center;
+        padding: 90px 0 40px;
+    }
+    .hero .badge { margin-bottom: 24px; }
+
+    .hero-title {
+        font-size: clamp(36px, 6vw, 68px);
+        font-weight: 800;
+        line-height: 1.05;
+        letter-spacing: -0.035em;
+        margin-bottom: 20px;
+        background: linear-gradient(110deg, var(--text) 20%, var(--accent-soft) 50%, var(--accent) 70%, var(--text) 90%);
+        background-size: 250% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: gradientShift 8s ease-in-out infinite;
+    }
+    @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+    }
+
+    .hero-subtitle {
+        font-size: clamp(15px, 2vw, 18px);
+        color: var(--text-muted);
+        max-width: 620px;
+        margin: 0 auto 36px;
+        line-height: 1.65;
+    }
+
+    .hero-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       7. СТАТИСТИКА
+       ═══════════════════════════════════════════════════ */
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 14px;
+        margin: 64px 0;
+    }
+
+    .stat {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px 20px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+    }
+    .stat::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: var(--gradient);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .stat:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow-md);
+    }
+    .stat:hover::before { opacity: 1; }
+
+    .stat-value {
+        font-size: 36px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        line-height: 1;
+        margin-bottom: 8px;
+        color: var(--text);
+    }
+    .stat-value.small { font-size: 18px; padding: 9px 0; }
+    .stat-label {
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        font-weight: 600;
+        color: var(--text-dim);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       8. СЕКЦИИ
+       ═══════════════════════════════════════════════════ */
+    .section { padding: 80px 0; }
+    .section-header {
+        text-align: center;
+        max-width: 620px;
+        margin: 0 auto 48px;
+    }
+    .section-title {
+        font-size: clamp(28px, 4vw, 40px);
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+    .section-subtitle {
+        font-size: 16px;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    /* ---------- Возможности ---------- */
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 18px;
+    }
+    .feature {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 28px;
+        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+    .feature:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: var(--shadow-md);
+    }
+    .feature-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: var(--radius-md);
+        background: var(--gradient-soft);
+        display: grid;
+        place-items: center;
+        margin-bottom: 18px;
+    }
+    .feature-icon svg {
+        width: 24px;
+        height: 24px;
+        stroke: var(--accent);
+        stroke-width: 1.8;
+        fill: none;
+    }
+    .feature h3 {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 8px;
+    }
+    .feature p {
+        font-size: 14px;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    /* ---------- О Lolka ---------- */
+    .about-card {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        padding: 44px;
+        position: relative;
+        overflow: hidden;
+    }
+    .about-card::before {
+        content: "";
+        position: absolute;
+        top: -40%; right: -20%;
+        width: 380px; height: 380px;
+        background: radial-gradient(circle, var(--accent-subtle), transparent 70%);
+        pointer-events: none;
+    }
+    .about-card h2 {
+        font-size: 26px;
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+    .about-card > p {
+        font-size: 15px;
+        color: var(--text-muted);
+        line-height: 1.7;
+        max-width: 700px;
+        margin-bottom: 28px;
+    }
+    .about-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 14px;
+        margin-bottom: 28px;
+    }
+    .about-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 16px;
+        background: var(--bg-3);
+        border: 1px solid var(--border-soft);
+        border-radius: var(--radius-md);
+        transition: border-color 0.2s;
+    }
+    .about-item:hover { border-color: var(--accent); }
+    .about-item-icon {
+        width: 34px; height: 34px;
+        border-radius: var(--radius-sm);
+        background: var(--gradient-soft);
+        display: grid;
+        place-items: center;
+        flex-shrink: 0;
+    }
+    .about-item-icon svg {
+        width: 17px; height: 17px;
+        stroke: var(--accent);
+        stroke-width: 2;
+        fill: none;
+    }
+    .about-item h4 {
+        font-size: 13.5px;
+        font-weight: 600;
+        margin-bottom: 3px;
+    }
+    .about-item p {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        line-height: 1.5;
+    }
+    .about-footer {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding-top: 22px;
+        border-top: 1px solid var(--border-soft);
+        align-items: center;
+    }
+    .about-footer .note {
+        flex: 1;
+        min-width: 220px;
+        font-size: 13px;
+        color: var(--text-dim);
+    }
+
+    /* ---------- Команды ---------- */
+    .commands-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+        gap: 16px;
+    }
+
+    .cmd-card {
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .cmd-card:hover {
+        border-color: var(--border-strong);
+        box-shadow: var(--shadow-md);
+    }
+
+    .cmd-card-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid var(--border-soft);
+    }
+    .cmd-card-icon {
+        width: 38px; height: 38px;
+        border-radius: var(--radius-md);
+        display: grid;
+        place-items: center;
+        font-size: 17px;
+        background: var(--accent-subtle);
+        flex-shrink: 0;
+    }
+    .cmd-card-title {
+        font-size: 15.5px;
+        font-weight: 700;
+        flex: 1;
+    }
+    .cmd-card-count {
+        font-size: 12px;
+        font-weight: 700;
+        color: var(--text-dim);
+        background: var(--bg-3);
+        padding: 4px 10px;
+        border-radius: 100px;
+        border: 1px solid var(--border-soft);
+    }
+
+    .cmd-card.moder .cmd-card-icon { background: var(--success-subtle); }
+    .cmd-card.config .cmd-card-icon { background: rgba(155, 89, 182, 0.12); }
+    .cmd-card.help .cmd-card-icon { background: var(--warning-subtle); }
+
+    .cmd-list {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+    }
+
+    .cmd-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        padding: 10px 12px;
+        border-radius: var(--radius-sm);
+        transition: background 0.15s;
+        cursor: pointer;
+        font-size: 13.5px;
+    }
+    .cmd-item:hover { background: var(--bg-3); }
+
+    .cmd-name {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 12.5px;
+        font-weight: 500;
+        color: var(--accent-soft);
+        background: var(--bg-3);
+        padding: 4px 10px;
+        border-radius: 6px;
+        border: 1px solid var(--border-soft);
+        white-space: nowrap;
+        transition: background 0.2s, color 0.2s, transform 0.15s;
+        position: relative;
+        flex-shrink: 0;
+    }
+    .cmd-item:hover .cmd-name {
+        background: var(--accent);
+        color: #fff;
+        border-color: var(--accent);
+    }
+    .cmd-name.copied {
+        background: var(--success) !important;
+        color: #fff !important;
+        border-color: var(--success) !important;
+    }
+    .cmd-name.copied::after {
+        content: "✓";
+        position: absolute;
+        top: -8px; right: -8px;
+        width: 16px; height: 16px;
+        background: var(--success);
+        color: #fff;
+        border-radius: 50%;
+        font-size: 10px;
+        display: grid;
+        place-items: center;
+        font-weight: 700;
+        animation: popIn 0.25s ease;
+    }
+    @keyframes popIn {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+
+    .cmd-desc {
+        font-size: 12.5px;
+        color: var(--text-muted);
+        text-align: right;
+        line-height: 1.45;
+    }
+
+    /* ---------- CTA ---------- */
+    .cta-card {
+        text-align: center;
+        padding: 60px 32px;
+        background:
+            radial-gradient(circle at 20% 30%, var(--accent-subtle), transparent 55%),
+            radial-gradient(circle at 80% 70%, rgba(167, 139, 250, 0.08), transparent 55%),
+            var(--bg-2);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-xl);
+        margin: 60px 0 40px;
+    }
+    .cta-card h2 {
+        font-size: clamp(24px, 3.5vw, 34px);
+        font-weight: 800;
+        margin-bottom: 12px;
+    }
+    .cta-card p {
+        color: var(--text-muted);
+        margin-bottom: 28px;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    /* ═══════════════════════════════════════════════════
+       9. ФУТЕР
+       ═══════════════════════════════════════════════════ */
+    .site-footer {
+        padding: 44px 0 30px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+    }
+    .footer-brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+    .footer-brand .logo-icon {
+        width: 30px; height: 30px;
+        font-size: 15px;
+    }
+    .footer-brand span:last-child {
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    .footer-links {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-bottom: 20px;
+    }
+    .footer-links a {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
+        font-weight: 500;
+        color: var(--text-muted);
+        transition: background 0.2s, color 0.2s;
+    }
+    .footer-links a:hover { background: var(--bg-2); color: var(--text); }
+    .footer-copy {
+        font-size: 12.5px;
+        color: var(--text-faint);
+    }
+
+    /* ---------- Наверх ---------- */
+    .to-top {
+        position: fixed;
+        right: 24px; bottom: 24px;
+        width: 44px; height: 44px;
+        border-radius: var(--radius-md);
+        background: var(--bg-2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        display: grid;
+        place-items: center;
+        box-shadow: var(--shadow-md);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(16px);
+        transition: opacity 0.3s, transform 0.3s, background 0.2s, border-color 0.2s;
+        z-index: 99;
+    }
+    .to-top.visible {
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+    }
+    .to-top:hover {
+        background: var(--gradient);
+        border-color: transparent;
+        color: #fff;
+        transform: translateY(-3px);
+    }
+
+    /* ═══════════════════════════════════════════════════
+       10. МОДАЛЬНЫЕ ОКНА
+       ═══════════════════════════════════════════════════ */
     .modal-overlay {
         position: fixed;
         inset: 0;
@@ -287,76 +954,50 @@
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
         z-index: 1000;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: grid;
+        place-items: center;
         padding: 20px;
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.25s;
+        transition: opacity 0.2s;
     }
     .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
     .modal {
         background: var(--bg-2);
         border: 1px solid var(--border);
-        border-radius: 20px;
+        border-radius: var(--radius-xl);
         width: 100%;
         max-width: 440px;
-        padding: 36px;
+        padding: 34px;
         position: relative;
-        transform: translateY(20px) scale(0.97);
-        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transform: translateY(16px) scale(0.97);
+        transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         max-height: 90vh;
         overflow-y: auto;
-        box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+        box-shadow: var(--shadow-xl);
     }
-    .modal.profile-modal { max-width: 560px; }
     .modal-overlay.open .modal { transform: translateY(0) scale(1); }
-    .modal::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 20px;
-        padding: 1px;
-        background: linear-gradient(135deg, rgba(124, 92, 252, 0.4), rgba(167, 139, 250, 0.2));
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-    }
+    .modal.wide { max-width: 560px; }
+
     .modal-close {
         position: absolute;
-        top: 16px; right: 16px;
-        background: transparent;
-        border: none;
+        top: 14px; right: 14px;
+        width: 34px; height: 34px;
+        border-radius: var(--radius-sm);
+        display: grid;
+        place-items: center;
         color: var(--text-dim);
         font-size: 22px;
-        cursor: pointer;
-        width: 32px; height: 32px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
         transition: background 0.2s, color 0.2s;
         z-index: 1;
     }
     .modal-close:hover { background: var(--bg-3); color: var(--text); }
 
-    .modal-logo {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-    .modal-logo .logo-icon {
-        width: 56px; height: 56px;
-        font-size: 26px;
-        border-radius: 14px;
-    }
     .modal-title {
         font-size: 22px;
         font-weight: 800;
         text-align: center;
-        letter-spacing: -0.02em;
         margin-bottom: 6px;
     }
     .modal-subtitle {
@@ -366,36 +1007,42 @@
         margin-bottom: 24px;
     }
 
-    .auth-tabs {
+    .modal-logo {
+        display: grid;
+        place-items: center;
+        margin-bottom: 20px;
+    }
+    .modal-logo .logo-icon {
+        width: 56px; height: 56px;
+        font-size: 26px;
+        border-radius: var(--radius-lg);
+    }
+
+    /* ---------- Табы ---------- */
+    .tabs {
         display: flex;
         gap: 4px;
         background: var(--bg-3);
         padding: 4px;
-        border-radius: 12px;
-        margin-bottom: 24px;
+        border-radius: var(--radius-md);
+        margin-bottom: 22px;
     }
-    .auth-tab {
+    .tab {
         flex: 1;
-        padding: 10px;
-        border: none;
-        background: transparent;
-        color: var(--text-muted);
-        font-size: 14px;
+        padding: 10px 12px;
+        border-radius: var(--radius-sm);
+        font-size: 13.5px;
         font-weight: 600;
-        font-family: inherit;
-        border-radius: 8px;
-        cursor: pointer;
+        color: var(--text-muted);
         transition: background 0.2s, color 0.2s;
     }
-    .auth-tab.active {
+    .tab.active {
         background: var(--bg-2);
         color: var(--text);
-        box-shadow: 0 2px 8px var(--shadow-soft);
+        box-shadow: var(--shadow-sm);
     }
 
-    .auth-form { display: none; }
-    .auth-form.active { display: block; }
-
+    /* ---------- Формы ---------- */
     .form-group { margin-bottom: 16px; }
     .form-label {
         display: block;
@@ -409,88 +1056,80 @@
         padding: 12px 14px;
         background: var(--bg-3);
         border: 1px solid var(--border);
-        border-radius: 10px;
+        border-radius: var(--radius-md);
         color: var(--text);
         font-size: 14px;
-        font-family: inherit;
         transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
         outline: none;
         resize: vertical;
     }
     .form-input:focus {
-        border-color: var(--accent-1);
+        border-color: var(--accent);
         background: var(--bg-2);
         box-shadow: 0 0 0 3px var(--accent-glow);
     }
     .form-input::placeholder { color: var(--text-faint); }
     .form-input.error {
         border-color: var(--error);
-        box-shadow: 0 0 0 3px var(--error-glow);
+        box-shadow: 0 0 0 3px var(--error-subtle);
     }
+
     .form-hint {
         font-size: 11.5px;
         color: var(--text-faint);
         margin-top: 6px;
-        line-height: 1.4;
     }
-
     .form-error {
+        display: none;
         color: var(--error);
         font-size: 12.5px;
         margin-top: 6px;
-        display: none;
-        align-items: center;
-        gap: 6px;
     }
-    .form-error.visible { display: flex; }
+    .form-error.visible { display: block; }
 
     .form-message {
+        display: none;
         padding: 12px 14px;
-        border-radius: 10px;
+        border-radius: var(--radius-md);
         font-size: 13.5px;
         margin-bottom: 16px;
-        display: none;
-        align-items: flex-start;
-        gap: 10px;
         line-height: 1.5;
     }
-    .form-message.visible { display: flex; }
+    .form-message.visible { display: block; }
     .form-message.error {
-        background: rgba(248, 113, 113, 0.1);
+        background: var(--error-subtle);
         border: 1px solid rgba(248, 113, 113, 0.3);
         color: var(--error);
     }
     .form-message.success {
-        background: rgba(52, 211, 153, 0.1);
+        background: var(--success-subtle);
         border: 1px solid rgba(52, 211, 153, 0.3);
         color: var(--success);
     }
 
-    .auth-submit {
+    .form-submit {
         width: 100%;
         padding: 13px;
-        border-radius: 10px;
-        background: var(--lolka-gradient);
+        border-radius: var(--radius-md);
+        background: var(--gradient);
         color: #fff;
-        border: none;
         font-size: 15px;
         font-weight: 600;
-        font-family: inherit;
-        cursor: pointer;
-        transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
-        box-shadow: 0 4px 20px var(--accent-glow);
         display: flex;
         align-items: center;
         justify-content: center;
         gap: 10px;
+        box-shadow: 0 4px 20px var(--accent-glow);
+        transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
         margin-top: 8px;
     }
-    .auth-submit:hover:not(:disabled) {
+    .form-submit:hover:not(:disabled) {
         transform: translateY(-1px);
         box-shadow: 0 8px 28px var(--accent-glow);
     }
-    .auth-submit:disabled { opacity: 0.7; cursor: not-allowed; }
-    .auth-submit .spinner {
+    .form-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+
+    .spinner {
         width: 16px; height: 16px;
         border: 2px solid rgba(255,255,255,0.3);
         border-top-color: #fff;
@@ -498,861 +1137,194 @@
         animation: spin 0.7s linear infinite;
         display: none;
     }
-    .auth-submit.loading .spinner { display: block; }
+    .form-submit.loading .spinner { display: block; }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    .auth-links {
+    .form-links {
         display: flex;
         justify-content: center;
-        margin-top: 18px;
+        gap: 4px;
+        margin-top: 16px;
         font-size: 13px;
     }
-    .auth-links button {
-        background: transparent;
-        border: none;
-        color: var(--accent-2);
-        font-family: inherit;
+    .form-links button {
+        color: var(--accent-soft);
         font-size: 13px;
-        cursor: pointer;
+        font-weight: 500;
         padding: 4px 6px;
         border-radius: 6px;
         transition: background 0.2s, color 0.2s;
-        font-weight: 500;
     }
-    .auth-links button:hover {
+    .form-links button:hover {
         background: var(--bg-3);
-        color: var(--accent-1);
+        color: var(--accent);
         text-decoration: underline;
     }
+    .form-links span { color: var(--text-faint); }
 
-    .auth-footer {
+    .form-footer {
         text-align: center;
         font-size: 12px;
         color: var(--text-faint);
-        margin-top: 20px;
-        line-height: 1.5;
+        margin-top: 18px;
     }
 
-    /* Профиль */
-    .profile-tabs {
+    .form-panel { display: none; }
+    .form-panel.active { display: block; }
+
+    /* ---------- Профиль ---------- */
+    .avatar-row {
         display: flex;
-        gap: 4px;
-        background: var(--bg-3);
-        padding: 4px;
-        border-radius: 12px;
-        margin-bottom: 22px;
-    }
-    .profile-tab {
-        flex: 1;
-        padding: 10px;
-        border: none;
-        background: transparent;
-        color: var(--text-muted);
-        font-size: 13.5px;
-        font-weight: 600;
-        font-family: inherit;
-        border-radius: 8px;
-        cursor: pointer;
-        transition: background 0.2s, color 0.2s;
-    }
-    .profile-tab.active {
-        background: var(--bg-2);
-        color: var(--text);
-        box-shadow: 0 2px 8px var(--shadow-soft);
-    }
-
-    .profile-panel { display: none; }
-    .profile-panel.active { display: block; }
-
-    .profile-avatar-row {
-        display: flex;
+        align-items: center;
         gap: 16px;
-        align-items: center;
-        margin-bottom: 18px;
+        margin-bottom: 20px;
     }
-    .profile-avatar-preview {
-        width: 72px;
-        height: 72px;
+    .avatar-preview {
+        width: 72px; height: 72px;
         border-radius: 50%;
-        background: var(--lolka-gradient);
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        background: var(--gradient);
         color: #fff;
         font-weight: 700;
         font-size: 26px;
-        flex-shrink: 0;
+        display: grid;
+        place-items: center;
         text-transform: uppercase;
         border: 3px solid var(--border);
         background-size: cover;
         background-position: center;
-        background-repeat: no-repeat;
+        flex-shrink: 0;
     }
-    .profile-avatar-fields { flex: 1; min-width: 0; }
+    .avatar-fields { flex: 1; min-width: 0; }
 
-    .profile-info-row {
+    .info-row {
         display: flex;
         justify-content: space-between;
-        padding: 10px 0;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
         border-bottom: 1px solid var(--border-soft);
         font-size: 13.5px;
     }
-    .profile-info-row:last-child { border-bottom: none; }
-    .profile-info-label { color: var(--text-dim); }
-    .profile-info-value {
-        color: var(--text);
+    .info-row:last-child { border-bottom: none; }
+    .info-row-label { color: var(--text-dim); flex-shrink: 0; }
+    .info-row-value {
         font-family: 'JetBrains Mono', monospace;
         font-size: 12.5px;
-        word-break: break-all;
+        color: var(--text);
         text-align: right;
-        margin-left: 12px;
+        word-break: break-all;
     }
 
     .danger-zone {
         margin-top: 20px;
         padding: 16px;
-        background: rgba(248, 113, 113, 0.06);
+        background: var(--error-subtle);
         border: 1px solid rgba(248, 113, 113, 0.25);
-        border-radius: 12px;
+        border-radius: var(--radius-md);
     }
     .danger-zone h4 {
         font-size: 14px;
         font-weight: 700;
         color: var(--error);
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
     .btn-danger {
         width: 100%;
         padding: 12px;
-        border-radius: 10px;
+        border-radius: var(--radius-md);
         background: transparent;
         color: var(--error);
         border: 1px solid rgba(248, 113, 113, 0.4);
-        font-family: inherit;
         font-size: 14px;
         font-weight: 600;
-        cursor: pointer;
-        transition: background 0.2s, border-color 0.2s;
-        display: inline-flex;
+        display: flex;
         align-items: center;
         justify-content: center;
         gap: 8px;
+        transition: background 0.2s, border-color 0.2s;
     }
     .btn-danger:hover {
-        background: rgba(248, 113, 113, 0.12);
+        background: rgba(248, 113, 113, 0.15);
         border-color: var(--error);
     }
     .btn-danger svg { width: 16px; height: 16px; }
 
-    .user-dropdown {
-        position: absolute;
-        top: calc(100% + 8px);
-        right: 0;
-        min-width: 240px;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 8px;
-        box-shadow: 0 20px 40px var(--shadow-soft);
-        opacity: 0;
-        transform: translateY(-8px) scale(0.98);
-        pointer-events: none;
-        transition: opacity 0.2s, transform 0.2s;
-        z-index: 101;
-    }
-    .user-dropdown.open {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-    }
-    .user-dropdown-header {
-        padding: 12px 14px;
-        border-bottom: 1px solid var(--border-soft);
-        margin-bottom: 6px;
-    }
-    .user-dropdown-label {
-        font-size: 11px;
-        color: var(--text-faint);
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-        font-weight: 600;
-        margin-bottom: 4px;
-    }
-    .user-dropdown-email {
-        font-size: 13.5px;
-        color: var(--text);
-        word-break: break-all;
-        font-weight: 500;
-    }
-    .user-dropdown-item {
-        width: 100%;
-        text-align: left;
-        padding: 10px 14px;
-        background: transparent;
-        border: none;
-        color: var(--text-muted);
-        font-size: 14px;
-        font-family: inherit;
-        border-radius: 8px;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        transition: background 0.2s, color 0.2s;
-    }
-    .user-dropdown-item:hover { background: var(--bg-3); color: var(--text); }
-    .user-dropdown-item.danger:hover {
-        background: rgba(248, 113, 113, 0.1);
-        color: var(--error);
-    }
-    .user-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-    .user-menu-wrapper { position: relative; }
-
-    .hero { text-align: center; padding: 90px 0 50px; position: relative; }
-    .hero-badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 8px;
-        padding: 6px 16px;
-        border-radius: 100px;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        font-size: 13px;
-        color: var(--text-muted);
-        margin-bottom: 28px;
-        animation: fadeInDown 0.6s ease both;
-    }
-    .pulse-dot {
-        width: 8px; height: 8px;
-        border-radius: 50%;
-        background: var(--success);
-        box-shadow: 0 0 0 0 var(--success-glow);
-        animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-        0% { box-shadow: 0 0 0 0 var(--success-glow); }
-        70% { box-shadow: 0 0 0 10px transparent; }
-        100% { box-shadow: 0 0 0 0 transparent; }
-    }
-    @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero h1 {
-        font-size: clamp(34px, 6vw, 62px);
-        font-weight: 800;
-        line-height: 1.06;
-        letter-spacing: -0.035em;
-        margin-bottom: 22px;
-        background: linear-gradient(110deg, var(--text) 15%, var(--accent-2) 45%, var(--accent-1) 65%, var(--text) 90%);
-        background-size: 300% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientShift 8s ease-in-out infinite, fadeInUp 0.7s ease 0.1s both;
-    }
-    @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
-    @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .hero p {
-        font-size: clamp(15px, 2vw, 18px);
-        color: var(--text-muted);
-        max-width: 600px;
-        margin: 0 auto 40px;
-        line-height: 1.65;
-        animation: fadeInUp 0.7s ease 0.2s both;
-    }
-
-    .buttons {
-        display: flex;
-        gap: 14px;
-        justify-content: center;
-        flex-wrap: wrap;
-        animation: fadeInUp 0.7s ease 0.3s both;
-    }
-    .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        padding: 14px 28px;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 15px;
-        text-decoration: none;
-        transition: transform 0.15s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
-        cursor: pointer;
-        border: 1px solid transparent;
-        white-space: nowrap;
-    }
-    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
-    .btn-primary {
-        background: var(--lolka-gradient);
-        color: #fff;
-        box-shadow: 0 4px 24px var(--accent-glow);
-        position: relative;
-        overflow: hidden;
-    }
-    .btn-primary::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(135deg, var(--accent-2), var(--accent-3));
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    .btn-primary > * { position: relative; z-index: 1; }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 36px var(--accent-glow); }
-    .btn-primary:hover::before { opacity: 1; }
-    .btn-download {
-        background: transparent;
-        color: var(--text);
-        border-color: var(--border);
-        position: relative;
-    }
-    .btn-download:hover {
-        border-color: var(--accent-2);
-        color: var(--accent-2);
-        transform: translateY(-2px);
-        background: var(--bg-2);
-    }
-    .btn-download svg { animation: bounceDown 2.5s ease-in-out infinite; }
-    @keyframes bounceDown {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(2px); }
-    }
-
-    .stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-        gap: 14px;
-        margin: 70px 0;
-    }
-    .stat-card {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 26px 20px;
-        text-align: center;
-        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-        position: relative;
-        overflow: hidden;
-    }
-    .stat-card::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 2px;
-        background: var(--lolka-gradient);
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-    .stat-card:hover {
-        transform: translateY(-4px);
-        border-color: var(--card-hover-border);
-        box-shadow: 0 12px 32px var(--shadow-soft);
-    }
-    .stat-card:hover::before { opacity: 1; }
-    .stat-value {
-        font-size: 34px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        color: var(--text);
-        margin-bottom: 4px;
-        line-height: 1.1;
-    }
-    .stat-value.small-text {
-        font-size: 17px;
-        padding-top: 9px;
-        padding-bottom: 9px;
-    }
-    .stat-label {
-        font-size: 12px;
-        color: var(--text-dim);
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        font-weight: 600;
-    }
-
-    section { scroll-margin-top: 90px; }
-    .section-header { text-align: center; margin-bottom: 44px; }
-    .section-header h2 {
-        font-size: clamp(26px, 4vw, 38px);
-        font-weight: 800;
-        letter-spacing: -0.025em;
-        margin-bottom: 10px;
-        color: var(--text);
-    }
-    .section-header p {
-        color: var(--text-muted);
-        font-size: 16px;
-        max-width: 540px;
-        margin: 0 auto;
-    }
-
-    .features, .commands, .about-lolka { margin: 90px 0; }
-
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 18px;
-    }
-    .feature-card {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 28px;
-        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
-        position: relative;
-        overflow: hidden;
-    }
-    .feature-card::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 14px;
-        padding: 1px;
-        background: var(--lolka-gradient);
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        opacity: 0;
-        transition: opacity 0.3s;
-        pointer-events: none;
-    }
-    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px var(--shadow-soft); }
-    .feature-card:hover::after { opacity: 1; }
-    .feature-icon {
-        width: 52px;
-        height: 52px;
-        border-radius: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 16px;
-        background: linear-gradient(135deg, rgba(124, 92, 252, 0.15), rgba(167, 139, 250, 0.1));
-        transition: transform 0.3s;
-    }
-    .feature-icon svg {
-        width: 26px;
-        height: 26px;
-        stroke: var(--accent-1);
-        stroke-width: 1.8;
-        fill: none;
-    }
-    .feature-card:hover .feature-icon { transform: scale(1.08) rotate(-5deg); }
-    .feature-card h3 {
-        font-size: 17px;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 8px;
-        letter-spacing: -0.01em;
-    }
-    .feature-card p { color: var(--text-muted); font-size: 14px; line-height: 1.6; }
-    .feature-card code {
-        background: var(--code-bg);
-        padding: 2px 6px;
-        border-radius: 4px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12px;
-        color: var(--accent-2);
-        border: 1px solid var(--border-soft);
-    }
-
-    .about-lolka {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: 18px;
-        padding: 40px;
-        position: relative;
-        overflow: hidden;
-    }
-    .about-lolka::before {
-        content: "";
-        position: absolute;
-        top: -50%;
-        right: -20%;
-        width: 400px;
-        height: 400px;
-        background: radial-gradient(circle, rgba(124, 92, 252, 0.1), transparent 70%);
-        pointer-events: none;
-    }
-    .about-lolka h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; letter-spacing: -0.02em; }
-    .about-lolka > p {
-        color: var(--text-muted);
-        font-size: 15px;
-        line-height: 1.7;
-        max-width: 720px;
-        margin-bottom: 28px;
-    }
-    .about-lolka > p strong { color: var(--text); font-weight: 600; }
-    .lolka-features {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 16px;
-        margin-bottom: 28px;
-    }
-    .lolka-feature {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 16px;
-        background: var(--bg-3);
-        border-radius: 12px;
-        border: 1px solid var(--border-soft);
-        transition: border-color 0.2s;
-    }
-    .lolka-feature:hover { border-color: var(--card-hover-border); }
-    .lolka-feature-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: 9px;
-        background: linear-gradient(135deg, rgba(124, 92, 252, 0.15), rgba(167, 139, 250, 0.1));
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-    .lolka-feature-icon svg {
-        width: 18px;
-        height: 18px;
-        stroke: var(--accent-1);
-        stroke-width: 2;
-        fill: none;
-    }
-    .lolka-feature-text h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-    .lolka-feature-text p { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
-    .about-lolka-cta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding-top: 24px;
-        border-top: 1px solid var(--border-soft);
-        align-items: center;
-    }
-    .about-lolka-cta .note { color: var(--text-dim); font-size: 13px; flex: 1; min-width: 200px; }
-
-    .cmd-group {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: 14px;
-        padding: 26px;
-        margin-bottom: 16px;
-        transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    .cmd-group:hover {
-        border-color: color-mix(in srgb, var(--accent-1) 40%, var(--border));
-        box-shadow: 0 8px 28px var(--shadow-soft);
-    }
-    .cmd-group h3 {
-        font-size: 17px;
-        font-weight: 700;
-        color: var(--text);
-        margin-bottom: 18px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        letter-spacing: -0.01em;
-        flex-wrap: wrap;
-    }
-    .cmd-group h3 .icon-badge {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 32px; height: 32px;
-        border-radius: 9px;
-        font-size: 15px;
-        background: color-mix(in srgb, var(--accent-1) 15%, transparent);
-    }
-    .cmd-group h3 .count {
-        margin-left: auto;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--text-dim);
-        background: var(--bg-3);
-        padding: 4px 10px;
-        border-radius: 8px;
-        border: 1px solid var(--border-soft);
-    }
-    .cmd-group.fun h3 .icon-badge { background: color-mix(in srgb, var(--accent-2) 15%, transparent); }
-    .cmd-group.mod h3 .icon-badge { background: color-mix(in srgb, var(--success) 15%, transparent); }
-    .cmd-group.admin h3 .icon-badge { background: color-mix(in srgb, #9b59b6 15%, transparent); }
-    .cmd-group.info h3 .icon-badge { background: color-mix(in srgb, #1abc9c 15%, transparent); }
-
-    .cmd-list { list-style: none; }
-    .cmd-list li {
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-soft);
-        font-size: 14px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 10px;
-        transition: padding 0.2s;
-    }
-    .cmd-list li:last-child { border-bottom: none; }
-    .cmd-list li:hover { padding-left: 6px; }
-    .cmd-name {
-        font-family: 'JetBrains Mono', monospace;
-        color: var(--accent-2);
-        background: var(--code-bg);
-        padding: 5px 12px;
-        border-radius: 7px;
-        font-size: 12.5px;
-        font-weight: 500;
-        cursor: pointer;
-        transition: background 0.2s, color 0.2s, transform 0.15s;
-        user-select: none;
-        position: relative;
-        border: 1px solid var(--border-soft);
-        white-space: nowrap;
-    }
-    .cmd-name:hover {
-        background: var(--accent-1);
-        color: #fff;
-        border-color: var(--accent-1);
-        transform: translateY(-1px);
-    }
-    .cmd-name:active { transform: translateY(0); }
-    .cmd-name.copied { background: var(--success); color: #fff; border-color: var(--success); }
-    .cmd-name.copied::after {
-        content: "✓ Скопировано";
-        position: absolute;
-        top: -32px; left: 50%;
-        transform: translateX(-50%);
-        background: var(--success);
-        color: #fff;
-        padding: 4px 10px;
-        border-radius: 7px;
-        font-size: 11px;
-        font-family: 'Inter', sans-serif;
-        font-weight: 600;
-        white-space: nowrap;
-        animation: fadeUp 1.3s ease forwards;
-        pointer-events: none;
-        box-shadow: 0 4px 12px var(--success-glow);
-    }
-    @keyframes fadeUp {
-        0% { opacity: 0; transform: translate(-50%, 5px); }
-        20% { opacity: 1; transform: translate(-50%, 0); }
-        80% { opacity: 1; }
-        100% { opacity: 0; transform: translate(-50%, -6px); }
-    }
-    .cmd-desc {
-        color: var(--text-muted);
-        font-size: 13.5px;
-        text-align: right;
-        flex: 1;
-        min-width: 140px;
-    }
-    .cmd-aliases { color: var(--text-faint); font-size: 12px; display: block; margin-top: 3px; }
-
-    .events-list {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 12px;
-        margin-top: 12px;
-    }
-    .event-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 14px 16px;
-        background: var(--bg-3);
-        border-radius: 10px;
-        border: 1px solid var(--border-soft);
-    }
-    .event-icon { font-size: 20px; flex-shrink: 0; }
-    .event-text { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
-    .event-text strong {
-        color: var(--text);
-        font-weight: 600;
-        display: block;
-        margin-bottom: 2px;
-    }
-
-    .cta {
-        text-align: center;
-        padding: 56px 32px;
-        background:
-            radial-gradient(circle at 20% 30%, rgba(124, 92, 252, 0.12), transparent 55%),
-            radial-gradient(circle at 80% 70%, rgba(167, 139, 250, 0.1), transparent 55%),
-            var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: 20px;
-        margin: 80px 0 40px;
-        position: relative;
-        overflow: hidden;
-    }
-    .cta::before {
-        content: "";
-        position: absolute;
-        inset: 0;
-        border-radius: 20px;
-        padding: 1px;
-        background: linear-gradient(135deg, rgba(124, 92, 252, 0.5), rgba(167, 139, 250, 0.4));
-        -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-        -webkit-mask-composite: xor;
-        mask-composite: exclude;
-        pointer-events: none;
-    }
-    .cta h2 {
-        font-size: clamp(24px, 3.5vw, 32px);
-        font-weight: 800;
-        margin-bottom: 12px;
-        color: var(--text);
-        letter-spacing: -0.02em;
-    }
-    .cta p {
-        color: var(--text-muted);
-        margin-bottom: 28px;
-        font-size: 16px;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    footer {
-        text-align: center;
-        padding: 44px 0 30px;
-        color: var(--text-faint);
-        font-size: 13px;
-        border-top: 1px solid var(--border);
-        margin-top: 60px;
-    }
-    .footer-brand {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-    .footer-brand .logo-icon { width: 32px; height: 32px; font-size: 16px; }
-    .footer-brand span:last-child {
-        background: var(--lolka-gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .footer-links {
-        display: flex;
-        gap: 8px;
-        justify-content: center;
-        margin-bottom: 20px;
-        flex-wrap: wrap;
-    }
-    .footer-links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        color: var(--text-muted);
-        text-decoration: none;
-        padding: 8px 14px;
-        border-radius: 9px;
-        transition: background 0.2s, color 0.2s;
-        font-weight: 500;
-    }
-    .footer-links a:hover { background: var(--bg-2); color: var(--text); }
-    .footer-copy { color: var(--text-faint); }
-
-    #toTop {
-        position: fixed;
-        right: 24px; bottom: 24px;
-        width: 46px; height: 46px;
-        border-radius: 14px;
-        background: var(--bg-2);
-        color: var(--text);
-        border: 1px solid var(--border);
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 6px 20px var(--shadow-soft);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(20px);
-        transition: opacity 0.3s, transform 0.3s, background 0.2s, border-color 0.2s;
-        z-index: 99;
-    }
-    #toTop.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
-    #toTop:hover {
-        transform: translateY(-3px);
-        background: var(--lolka-gradient);
-        border-color: transparent;
-        color: #fff;
-    }
-
+    /* ═══════════════════════════════════════════════════
+       11. АНИМАЦИИ ПОЯВЛЕНИЯ
+       ═══════════════════════════════════════════════════ */
     .reveal {
         opacity: 0;
-        transform: translateY(28px);
-        transition: opacity 0.7s ease, transform 0.7s ease;
+        transform: translateY(20px);
+        transition: opacity 0.6s ease, transform 0.6s ease;
     }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
 
+    /* ═══════════════════════════════════════════════════
+       12. АДАПТИВНОСТЬ
+       ═══════════════════════════════════════════════════ */
     @media (max-width: 900px) {
-        .burger { display: flex; }
-        .nav-links {
+        .burger { display: grid; }
+
+        .nav-list {
             position: absolute;
             top: calc(100% + 8px);
             left: 0; right: 0;
             flex-direction: column;
+            align-items: stretch;
             gap: 4px;
+            padding: 10px;
             background: var(--bg-2);
             border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 10px;
-            margin: 0;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
             transform: translateY(-10px) scale(0.98);
             transform-origin: top;
             opacity: 0;
             pointer-events: none;
             transition: transform 0.2s, opacity 0.2s;
-            box-shadow: 0 20px 40px var(--shadow-soft);
         }
-        .nav-links.open {
+        .nav-list.open {
             transform: translateY(0) scale(1);
             opacity: 1;
             pointer-events: auto;
         }
-        .nav-links a { padding: 12px 16px; width: 100%; border-radius: 9px; }
-        .nav-links a.active::after { display: none; }
-        .nav-links a:hover { background: var(--bg-3); }
-        .theme-toggle { margin-left: 0; margin-top: 4px; width: 100%; }
-        .auth-nav-btn { margin-left: 0; margin-top: 4px; width: 100%; justify-content: center; }
-        .user-menu { margin-left: 0; margin-top: 4px; width: 100%; justify-content: center; }
-        .user-menu-wrapper { width: 100%; }
-        .user-dropdown { right: auto; left: 0; right: 0; }
+        .nav-list li { width: 100%; }
+        .nav-link {
+            display: block;
+            padding: 12px 16px;
+            width: 100%;
+            border-radius: var(--radius-md);
+        }
+        .nav-link.active::after { display: none; }
 
-        .hero { padding: 60px 0 40px; }
+        .nav-actions { width: 100%; flex-direction: column; align-items: stretch; margin-top: 4px; }
+        .icon-btn { width: 100%; }
+        .user-menu { width: 100%; }
+        .user-menu-wrapper { width: 100%; }
+        .user-dropdown { left: 0; right: 0; }
+
+        .hero { padding: 56px 0 30px; }
+        .hero-actions { flex-direction: column; align-items: stretch; }
         .btn { width: 100%; }
-        .buttons { flex-direction: column; align-items: stretch; }
-        .stats { margin: 50px 0; }
-        .features, .commands, .about-lolka { margin: 60px 0; }
-        .cmd-list li { flex-direction: column; align-items: flex-start; gap: 6px; }
+
+        .stats-grid { margin: 48px 0; }
+        .section { padding: 56px 0; }
+        .about-card { padding: 28px 20px; }
+        .about-grid { grid-template-columns: 1fr; }
+        .about-footer { flex-direction: column; align-items: stretch; }
+
+        .commands-grid { grid-template-columns: 1fr; }
+        .cmd-item { flex-direction: column; align-items: flex-start; gap: 6px; }
         .cmd-desc { text-align: left; }
-        .cmd-group { padding: 20px; }
-        .cta { padding: 44px 24px; margin: 60px 0 30px; }
-        .stat-value { font-size: 28px; }
-        #toTop { right: 16px; bottom: 16px; }
-        .about-lolka { padding: 28px 20px; }
-        .lolka-features { grid-template-columns: 1fr; }
-        .about-lolka-cta { flex-direction: column; align-items: stretch; }
-        .modal { padding: 28px 22px; }
-        .modal.profile-modal { padding: 28px 22px; }
-        .cmd-group h3 { font-size: 15px; }
-        .cmd-group h3 .count { margin-left: 0; }
-        .profile-avatar-row { flex-direction: column; text-align: center; }
-        .profile-avatar-fields { width: 100%; }
+
+        .cta-card { padding: 40px 24px; }
+        .modal { padding: 26px 20px; }
+        .avatar-row { flex-direction: column; text-align: center; }
+        .avatar-fields { width: 100%; }
+        .to-top { right: 16px; bottom: 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1363,458 +1335,531 @@
             scroll-behavior: auto !important;
         }
         .reveal { opacity: 1; transform: none; }
-        .btn-download svg { animation: none; }
     }
 </style>
 </head>
 <body>
     <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
-    <header class="container">
-        <nav id="nav" aria-label="Основная навигация">
-            <a href="#" class="logo" aria-label="Юрика-Бот — на главную">
-                <span class="logo-icon">🤖</span>
-                <span class="logo-text">Юрика-Бот</span>
-            </a>
-            <button class="burger" id="burger" aria-label="Открыть меню" aria-expanded="false" aria-controls="navLinks">☰</button>
-            <div class="nav-links" id="navLinks">
-                <a href="#features">Возможности</a>
-                <a href="#commands">Команды</a>
-                <a href="#stats">Статистика</a>
-                <a href="#invite">Добавить</a>
-                <button class="theme-toggle" id="themeToggle" title="Сменить тему" aria-label="Сменить тему">🌙</button>
-                <button class="auth-nav-btn" id="authOpenBtn" type="button">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                        <circle cx="12" cy="7" r="4"></circle>
-                    </svg>
-                    <span>Войти</span>
-                </button>
-                <div class="user-menu" id="userMenu">
-                    <div class="user-menu-wrapper">
-                        <div class="user-avatar" id="userAvatar" title="Личный кабинет" tabindex="0">?</div>
-                        <div class="user-dropdown" id="userDropdown">
-                            <div class="user-dropdown-header">
-                                <div class="user-dropdown-label">Вы вошли как</div>
-                                <div class="user-dropdown-email" id="userEmail">—</div>
+    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <nav class="nav" aria-label="Основная навигация">
+                <a href="#" class="logo" aria-label="Юрика-Бот — на главную">
+                    <span class="logo-icon">🤖</span>
+                    <span class="logo-text">Юрика-Бот</span>
+                </a>
+
+                <button class="icon-btn burger" id="burger" aria-label="Открыть меню" aria-expanded="false">☰</button>
+
+                <ul class="nav-list" id="navList">
+                    <li><a href="#features" class="nav-link">Возможности</a></li>
+                    <li><a href="#commands" class="nav-link">Команды</a></li>
+                    <li><a href="#stats" class="nav-link">Статистика</a></li>
+                    <li><a href="#invite" class="nav-link">Добавить</a></li>
+                    <li class="nav-actions">
+                        <button class="icon-btn" id="themeToggle" aria-label="Сменить тему">🌙</button>
+                        <button class="btn btn-primary" id="authOpenBtn" type="button">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <span>Войти</span>
+                        </button>
+                        <div class="user-menu" id="userMenu">
+                            <div class="user-menu-wrapper">
+                                <div class="user-avatar" id="userAvatar" tabindex="0" role="button" aria-label="Личный кабинет">?</div>
+                                <div class="user-dropdown" id="userDropdown">
+                                    <div class="user-dropdown-header">
+                                        <div class="user-dropdown-label">Вы вошли как</div>
+                                        <div class="user-dropdown-email" id="userEmail">—</div>
+                                    </div>
+                                    <button class="user-dropdown-item" id="openProfileBtn" type="button">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                            <circle cx="12" cy="7" r="4"></circle>
+                                        </svg>
+                                        Личный кабинет
+                                    </button>
+                                    <button class="user-dropdown-item danger" id="logoutBtn" type="button">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                            <polyline points="16 17 21 12 16 7"></polyline>
+                                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                                        </svg>
+                                        Выйти
+                                    </button>
+                                </div>
                             </div>
-                            <button class="user-dropdown-item" id="openProfileBtn" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                                    <circle cx="12" cy="7" r="4"></circle>
-                                </svg>
-                                Личный кабинет
-                            </button>
-                            <button class="user-dropdown-item danger" id="logoutBtn" type="button">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-                                    <polyline points="16 17 21 12 16 7"></polyline>
-                                    <line x1="21" y1="12" x2="9" y2="12"></line>
-                                </svg>
-                                Выйти из аккаунта
-                            </button>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </nav>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
-    <main class="container">
-        <section class="hero" aria-labelledby="hero-title">
-            <div class="hero-badge">
-                <span class="pulse-dot" aria-hidden="true"></span>
-                <span>Работает на сервере Lolka</span>
-            </div>
-            <h1 id="hero-title">Твой помощник<br>на сервере Lolka</h1>
-            <p>Модерация, утилиты, конфигурация и удобное меню команд — всё в одном боте. Установка занимает 10 секунд.</p>
-            <div class="buttons">
-                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-                   target="_blank" rel="noopener" class="btn btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    <span>Пригласить бота</span>
-                </a>
-                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-download">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    <span>Скачать Lolka</span>
-                </a>
-            </div>
-        </section>
+    <main>
+        <!-- ═══════════ HERO ═══════════ -->
+        <section class="hero">
+            <div class="container">
+                <span class="badge">
+                    <span class="badge-dot"></span>
+                    Работает на сервере Lolka
+                </span>
 
-        <section class="stats reveal" id="stats" aria-label="Статистика бота">
-            <div class="stat-card">
-                <div class="stat-value" data-target="16">0</div>
-                <div class="stat-label">Команд</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" data-target="5">0</div>
-                <div class="stat-label">Категорий</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value" data-target="6">0</div>
-                <div class="stat-label">Событий</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-value small-text" data-text="0 ₽">—</div>
-                <div class="stat-label">Бесплатно</div>
-            </div>
-        </section>
+                <h1 class="hero-title">Твой помощник<br>на сервере Lolka</h1>
 
-        <section class="about-lolka reveal" aria-labelledby="about-title">
-            <h2 id="about-title">🎮 Что такое Lolka?</h2>
-            <p>
-                <strong>Lolka</strong> — российская платформа для общения в реальном времени, созданная как аналог Discord.
-                Серверы с текстовыми и голосовыми каналами, роли, трансляции экрана (до 5 одновременно),
-                ЛС и групповые чаты. Работает без VPN на всех популярных платформах.
-            </p>
-            <div class="lolka-features">
-                <div class="lolka-feature">
-                    <div class="lolka-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="23 7 16 12 23 17 23 7"></polygon>
-                            <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
-                        </svg>
-                    </div>
-                    <div class="lolka-feature-text">
-                        <h4>HD-трансляции</h4>
-                        <p>До 1440p 60fps, до 5 стримов одновременно</p>
-                    </div>
-                </div>
-                <div class="lolka-feature">
-                    <div class="lolka-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                    </div>
-                    <div class="lolka-feature-text">
-                        <h4>Серверы и роли</h4>
-                        <p>До 250 000 участников, 500 каналов, 250 ролей</p>
-                    </div>
-                </div>
-                <div class="lolka-feature">
-                    <div class="lolka-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="16 18 22 12 16 6"></polyline>
-                            <polyline points="8 6 2 12 8 18"></polyline>
-                        </svg>
-                    </div>
-                    <div class="lolka-feature-text">
-                        <h4>API для ботов</h4>
-                        <p>Библиотеки lolka.py и lolka.js для разработчиков</p>
-                    </div>
-                </div>
-                <div class="lolka-feature">
-                    <div class="lolka-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                        </svg>
-                    </div>
-                    <div class="lolka-feature-text">
-                        <h4>Импорт из Discord</h4>
-                        <p>Перенос ролей и структуры каналов</p>
-                    </div>
-                </div>
-                <div class="lolka-feature">
-                    <div class="lolka-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                            <line x1="8" y1="21" x2="16" y2="21"></line>
-                            <line x1="12" y1="17" x2="12" y2="21"></line>
-                        </svg>
-                    </div>
-                    <div class="lolka-feature-text">
-                        <h4>Все платформы</h4>
-                        <p>Windows, macOS, Linux, Android, iOS и браузер</p>
-                    </div>
-                </div>
-                <div class="lolka-feature">
-                    <div class="lolka-feature-icon">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                    </div>
-                    <div class="lolka-feature-text">
-                        <h4>Без VPN</h4>
-                        <p>Стабильная работа на территории России</p>
-                    </div>
-                </div>
-            </div>
-            <div class="about-lolka-cta">
-                <span class="note">💡 Нет аккаунта в Lolka? Скачай приложение для своей платформы — это бесплатно.</span>
-                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-download">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    <span>Скачать бесплатно</span>
-                </a>
-            </div>
-        </section>
-
-        <section class="features reveal" id="features" aria-labelledby="features-title">
-            <div class="section-header">
-                <h2 id="features-title">Что умеет бот</h2>
-                <p>Полный набор инструментов для комфортного общения на сервере</p>
-            </div>
-            <div class="features-grid">
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-                        </svg>
-                    </div>
-                    <h3>Модерация</h3>
-                    <p>Кик, мут, очистка чата — базовые инструменты для поддержания порядка на сервере.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
-                        </svg>
-                    </div>
-                    <h3>Утилиты</h3>
-                    <p>Карточка пользователя, аватар, отладка — вся информация под рукой одной командой.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="3"></circle>
-                            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
-                        </svg>
-                    </div>
-                    <h3>Конфигурация</h3>
-                    <p>Свой префикс, канал приветствий, канал логов и авто-роль — настраивается прямо в чате.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                        </svg>
-                    </div>
-                    <h3>Умное меню</h3>
-                    <p>Интерактивный <code>/команды</code> со всеми командами, сгруппированными по категориям.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                        </svg>
-                    </div>
-                    <h3>Быстрый</h3>
-                    <p>Написан на современном Python с асинхронной библиотекой. Отвечает мгновенно.</p>
-                </article>
-                <article class="feature-card">
-                    <div class="feature-icon" aria-hidden="true">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                        </svg>
-                    </div>
-                    <h3>Безопасный</h3>
-                    <p>Токен хранится в <code>.env</code>, права проверяются на каждой команде.</p>
-                </article>
-            </div>
-        </section>
-
-        <section class="commands reveal" id="commands" aria-labelledby="commands-title">
-            <div class="section-header">
-                <h2 id="commands-title">Команды бота</h2>
-                <p>Нажми на команду, чтобы скопировать её в буфер обмена</p>
-            </div>
-
-            <div class="cmd-group info">
-                <h3><span class="icon-badge" aria-hidden="true">🟢</span>Основное<span class="count">4</span></h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="/ping" tabindex="0">/ping</span><span class="cmd-desc">Проверка связи (pong 🏓)</span></li>
-                    <li><span class="cmd-name" data-copy="/hello" tabindex="0">/hello</span><span class="cmd-desc">Приветствие пользователя<span class="cmd-aliases">Алиасы: !hi, !привет</span></span></li>
-                    <li><span class="cmd-name" data-copy="/info" tabindex="0">/info</span><span class="cmd-desc">Информация о боте (пинг, аптайм, сервер, канал)</span></li>
-                    <li><span class="cmd-name" data-copy="/latency" tabindex="0">/latency</span><span class="cmd-desc">Задержка бота в миллисекундах</span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group">
-                <h3><span class="icon-badge" aria-hidden="true">👤</span>Пользователи<span class="count">3</span></h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="/user" tabindex="0">/user [@user]</span><span class="cmd-desc">Карточка пользователя (имя, ID, роли, статус, даты)<span class="cmd-aliases">Алиасы: !u, !юзер</span></span></li>
-                    <li><span class="cmd-name" data-copy="/avatar" tabindex="0">/avatar [@user]</span><span class="cmd-desc">Показать аватар<span class="cmd-aliases">Алиасы: !av, !аватар</span></span></li>
-                    <li><span class="cmd-name" data-copy="/debug_user" tabindex="0">/debug_user [@user]</span><span class="cmd-desc">Отладка: список атрибутов (скрыта из меню)</span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group mod">
-                <h3><span class="icon-badge" aria-hidden="true">🛡️</span>Модерация<span class="count">3</span></h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="/purge 10" tabindex="0">/purge [число]</span><span class="cmd-desc">Удалить N сообщений (1–100)<span class="cmd-aliases">Алиасы: !clear, !очистить · Права: Manage Messages</span></span></li>
-                    <li><span class="cmd-name" data-copy="/kick @user" tabindex="0">/kick @user [причина]</span><span class="cmd-desc">Кикнуть участника<span class="cmd-aliases">Алиасы: !кик · Права: Kick Members</span></span></li>
-                    <li><span class="cmd-name" data-copy="/mute @user 10m" tabindex="0">/mute @user [время]</span><span class="cmd-desc">Заглушить (в разработке)<span class="cmd-aliases">Алиасы: !мут · Права: Manage Roles</span></span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group admin">
-                <h3><span class="icon-badge" aria-hidden="true">⚙️</span>Конфигурация<span class="count">5</span></h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="/конфиг" tabindex="0">/конфиг</span><span class="cmd-desc">Показать текущие настройки сервера<span class="cmd-aliases">Алиасы: !config · Только администратор</span></span></li>
-                    <li><span class="cmd-name" data-copy="/конфиг префикс ?" tabindex="0">/конфиг префикс [символ]</span><span class="cmd-desc">Изменить префикс (до 5 символов)<span class="cmd-aliases">Алиасы: !конфиг prefix</span></span></li>
-                    <li><span class="cmd-name" data-copy="/конфиг приветствие #канал" tabindex="0">/конфиг приветствие [#канал]</span><span class="cmd-desc">Установить канал приветствий<span class="cmd-aliases">Алиасы: !конфиг welcome</span></span></li>
-                    <li><span class="cmd-name" data-copy="/конфиг лог #канал" tabindex="0">/конфиг лог [#канал]</span><span class="cmd-desc">Установить канал логов<span class="cmd-aliases">Алиасы: !конфиг log</span></span></li>
-                    <li><span class="cmd-name" data-copy="/конфиг роль @Роль" tabindex="0">/конфиг роль [@Роль]</span><span class="cmd-desc">Авто-роль новым участникам<span class="cmd-aliases">Алиасы: !конфиг autorole</span></span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group fun">
-                <h3><span class="icon-badge" aria-hidden="true">📖</span>Справка<span class="count">1</span></h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" data-copy="/команды" tabindex="0">/команды</span><span class="cmd-desc">Список всех команд с группировкой по категориям<span class="cmd-aliases">Алиасы: !помощь, !help, !h</span></span></li>
-                </ul>
-            </div>
-
-            <div class="cmd-group">
-                <h3><span class="icon-badge" aria-hidden="true">🔔</span>События<span class="count">6</span></h3>
-                <p style="color: var(--text-muted); font-size: 13.5px; margin-bottom: 12px;">
-                    Работают автоматически, если в <code style="background: var(--code-bg); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--accent-2);">/конфиг</code> заданы каналы
+                <p class="hero-subtitle">
+                    Модерация, утилиты, конфигурация и удобное меню команд —
+                    всё в одном боте. Установка занимает 10 секунд.
                 </p>
-                <div class="events-list">
-                    <div class="event-item">
-                        <span class="event-icon">📥</span>
-                        <div class="event-text"><strong>Вход участника</strong>Приветствие + авто-роль + лог</div>
-                    </div>
-                    <div class="event-item">
-                        <span class="event-icon">📤</span>
-                        <div class="event-text"><strong>Выход участника</strong>Лог с ролями</div>
-                    </div>
-                    <div class="event-item">
-                        <span class="event-icon">🗑</span>
-                        <div class="event-text"><strong>Удаление сообщения</strong>Лог в канал логов</div>
-                    </div>
-                    <div class="event-item">
-                        <span class="event-icon">✏️</span>
-                        <div class="event-text"><strong>Изменение сообщения</strong>Лог «Было → Стало»</div>
-                    </div>
-                    <div class="event-item">
-                        <span class="event-icon">🔨</span>
-                        <div class="event-text"><strong>Бан</strong>Лог в канал логов</div>
-                    </div>
-                    <div class="event-item">
-                        <span class="event-icon">🔓</span>
-                        <div class="event-text"><strong>Разбан</strong>Лог в канал логов</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="cmd-group">
-                <h3><span class="icon-badge" aria-hidden="true">📊</span>Итого</h3>
-                <ul class="cmd-list">
-                    <li><span class="cmd-name" style="cursor: default;">Основное</span><span class="cmd-desc">4 команды</span></li>
-                    <li><span class="cmd-name" style="cursor: default;">Пользователи</span><span class="cmd-desc">3 команды</span></li>
-                    <li><span class="cmd-name" style="cursor: default;">Модерация</span><span class="cmd-desc">3 команды</span></li>
-                    <li><span class="cmd-name" style="cursor: default;">Конфигурация</span><span class="cmd-desc">5 команд</span></li>
-                    <li><span class="cmd-name" style="cursor: default;">Справка</span><span class="cmd-desc">1 команда</span></li>
-                    <li><span class="cmd-name" style="cursor: default; background: var(--accent-1); color: #fff; border-color: var(--accent-1);">Всего</span><span class="cmd-desc"><strong style="color: var(--text);">16 команд</strong> + 6 событий</span></li>
-                </ul>
+                <div class="hero-actions">
+                    <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
+                       target="_blank" rel="noopener" class="btn btn-primary">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="5" x2="12" y2="19"></line>
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                        </svg>
+                        Пригласить бота
+                    </a>
+                    <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-outline">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7 10 12 15 17 10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Скачать Lolka
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section class="cta reveal" id="invite" aria-labelledby="cta-title">
-            <h2 id="cta-title">Готов добавить бота?</h2>
-            <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
-            <div class="buttons">
-                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-                   target="_blank" rel="noopener" class="btn btn-primary">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    <span>Добавить на сервер</span>
-                </a>
-                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-download">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    <span>Скачать Lolka</span>
-                </a>
+        <!-- ═══════════ СТАТИСТИКА ═══════════ -->
+        <section id="stats">
+            <div class="container">
+                <div class="stats-grid reveal">
+                    <div class="stat">
+                        <div class="stat-value" data-target="16">0</div>
+                        <div class="stat-label">Команд</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" data-target="5">0</div>
+                        <div class="stat-label">Категорий</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" data-target="6">0</div>
+                        <div class="stat-label">Событий</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value small" data-text="0 ₽">—</div>
+                        <div class="stat-label">Бесплатно</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ О LOLKA ═══════════ -->
+        <section class="section reveal">
+            <div class="container">
+                <div class="about-card">
+                    <h2>🎮 Что такое Lolka?</h2>
+                    <p>
+                        <strong>Lolka</strong> — российская платформа для общения в реальном времени, созданная как аналог Discord.
+                        Серверы с текстовыми и голосовыми каналами, роли, трансляции экрана (до 5 одновременно),
+                        ЛС и групповые чаты. Работает без VPN на всех популярных платформах.
+                    </p>
+
+                    <div class="about-grid">
+                        <div class="about-item">
+                            <div class="about-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>HD-трансляции</h4>
+                                <p>До 1440p 60fps, до 5 стримов одновременно</p>
+                            </div>
+                        </div>
+
+                        <div class="about-item">
+                            <div class="about-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="9" cy="7" r="4"></circle>
+                                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Серверы и роли</h4>
+                                <p>До 250 000 участников, 500 каналов, 250 ролей</p>
+                            </div>
+                        </div>
+
+                        <div class="about-item">
+                            <div class="about-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>API для ботов</h4>
+                                <p>Библиотеки lolka.py и lolka.js для разработчиков</p>
+                            </div>
+                        </div>
+
+                        <div class="about-item">
+                            <div class="about-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Импорт из Discord</h4>
+                                <p>Перенос ролей и структуры каналов</p>
+                            </div>
+                        </div>
+
+                        <div class="about-item">
+                            <div class="about-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                    <line x1="8" y1="21" x2="16" y2="21"></line>
+                                    <line x1="12" y1="17" x2="12" y2="21"></line>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Все платформы</h4>
+                                <p>Windows, macOS, Linux, Android, iOS и браузер</p>
+                            </div>
+                        </div>
+
+                        <div class="about-item">
+                            <div class="about-item-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <polyline points="12 6 12 12 16 14"></polyline>
+                                </svg>
+                            </div>
+                            <div>
+                                <h4>Без VPN</h4>
+                                <p>Стабильная работа на территории России</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="about-footer">
+                        <span class="note">💡 Нет аккаунта в Lolka? Скачай приложение для своей платформы.</span>
+                        <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-outline">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Скачать бесплатно
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ ВОЗМОЖНОСТИ ═══════════ -->
+        <section class="section reveal" id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Что умеет бот</h2>
+                    <p class="section-subtitle">Полный набор инструментов для комфортного общения</p>
+                </div>
+
+                <div class="features-grid">
+                    <article class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                            </svg>
+                        </div>
+                        <h3>Модерация</h3>
+                        <p>Кик, мут, очистка чата — базовые инструменты для поддержания порядка.</p>
+                    </article>
+
+                    <article class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                            </svg>
+                        </div>
+                        <h3>Утилиты</h3>
+                        <p>Карточка пользователя, аватар, отладка — вся информация под рукой.</p>
+                    </article>
+
+                    <article class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="3"></circle>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                            </svg>
+                        </div>
+                        <h3>Конфигурация</h3>
+                        <p>Свой префикс, канал приветствий, логи и авто-роль — настройка в чате.</p>
+                    </article>
+
+                    <article class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                            </svg>
+                        </div>
+                        <h3>Умное меню</h3>
+                        <p>Постраничный <code>/команды</code> со всеми командами по категориям.</p>
+                    </article>
+
+                    <article class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                            </svg>
+                        </div>
+                        <h3>Быстрый</h3>
+                        <p>Современный Python с асинхронной библиотекой. Отвечает мгновенно.</p>
+                    </article>
+
+                    <article class="feature">
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                        </div>
+                        <h3>Безопасный</h3>
+                        <p>Токен хранится в <code>.env</code>, права проверяются на каждой команде.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ КОМАНДЫ ═══════════ -->
+        <section class="section reveal" id="commands">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Команды бота</h2>
+                    <p class="section-subtitle">Нажми на команду, чтобы скопировать</p>
+                </div>
+
+                <div class="commands-grid">
+                    <!-- Основное -->
+                    <div class="cmd-card">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">🟢</div>
+                            <div class="cmd-card-title">Основное</div>
+                            <div class="cmd-card-count">4</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/ping">
+                                <span class="cmd-name">/ping</span>
+                                <span class="cmd-desc">Проверка связи</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/hello">
+                                <span class="cmd-name">/hello</span>
+                                <span class="cmd-desc">Приветствие</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/info">
+                                <span class="cmd-name">/info</span>
+                                <span class="cmd-desc">Информация о боте</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/latency">
+                                <span class="cmd-name">/latency</span>
+                                <span class="cmd-desc">Задержка в мс</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Пользователи -->
+                    <div class="cmd-card">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">👤</div>
+                            <div class="cmd-card-title">Пользователи</div>
+                            <div class="cmd-card-count">3</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/user">
+                                <span class="cmd-name">/user [@user]</span>
+                                <span class="cmd-desc">Карточка пользователя</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/avatar">
+                                <span class="cmd-name">/avatar [@user]</span>
+                                <span class="cmd-desc">Аватар</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/debug_user">
+                                <span class="cmd-name">/debug_user</span>
+                                <span class="cmd-desc">Отладка (скрыта)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Модерация -->
+                    <div class="cmd-card moder">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">🛡️</div>
+                            <div class="cmd-card-title">Модерация</div>
+                            <div class="cmd-card-count">3</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/purge 10">
+                                <span class="cmd-name">/purge N</span>
+                                <span class="cmd-desc">Удалить N сообщений</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/kick @user">
+                                <span class="cmd-name">/kick @user</span>
+                                <span class="cmd-desc">Кикнуть участника</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/mute @user 10m">
+                                <span class="cmd-name">/mute @user</span>
+                                <span class="cmd-desc">Заглушить</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Конфигурация -->
+                    <div class="cmd-card config">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">⚙️</div>
+                            <div class="cmd-card-title">Конфигурация</div>
+                            <div class="cmd-card-count">5</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/конфиг">
+                                <span class="cmd-name">/конфиг</span>
+                                <span class="cmd-desc">Текущие настройки</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/конфиг префикс ?">
+                                <span class="cmd-name">/конфиг префикс</span>
+                                <span class="cmd-desc">Сменить префикс</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/конфиг приветствие #канал">
+                                <span class="cmd-name">/конфиг приветствие</span>
+                                <span class="cmd-desc">Канал приветствий</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/конфиг лог #канал">
+                                <span class="cmd-name">/конфиг лог</span>
+                                <span class="cmd-desc">Канал логов</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/конфиг роль @Роль">
+                                <span class="cmd-name">/конфиг роль</span>
+                                <span class="cmd-desc">Авто-роль</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Справка -->
+                    <div class="cmd-card help">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">📖</div>
+                            <div class="cmd-card-title">Справка</div>
+                            <div class="cmd-card-count">1</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/команды">
+                                <span class="cmd-name">/команды</span>
+                                <span class="cmd-desc">Список команд</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- События -->
+                    <div class="cmd-card">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">🔔</div>
+                            <div class="cmd-card-title">События</div>
+                            <div class="cmd-card-count">6</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item"><span class="cmd-name">Вход</span><span class="cmd-desc">Приветствие + роль</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Выход</span><span class="cmd-desc">Лог с ролями</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Удаление</span><span class="cmd-desc">Лог сообщения</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Изменение</span><span class="cmd-desc">Было → Стало</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Бан</span><span class="cmd-desc">Лог в канал</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Разбан</span><span class="cmd-desc">Лог в канал</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════ CTA ═══════════ -->
+        <section class="reveal" id="invite">
+            <div class="container">
+                <div class="cta-card">
+                    <h2>Готов добавить бота?</h2>
+                    <p>Нажми кнопку — выбери сервер — и всё, бот готов к работе.</p>
+                    <div class="hero-actions">
+                        <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
+                           target="_blank" rel="noopener" class="btn btn-primary">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            Добавить на сервер
+                        </a>
+                        <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-outline">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7 10 12 15 17 10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Скачать Lolka
+                        </a>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
 
-    <footer>
+    <!-- ═══════════ ФУТЕР ═══════════ -->
+    <footer class="site-footer">
         <div class="container">
             <div class="footer-brand">
                 <span class="logo-icon">🤖</span>
                 <span>Юрика-Бот</span>
             </div>
             <div class="footer-links">
-                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    Добавить бота
-                </a>
-                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
-                    Скачать Lolka
-                </a>
-                <a href="https://github.com/GiantCraft18/Yurika_Site" target="_blank" rel="noopener">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
-                    GitHub
-                </a>
-                <a href="#commands">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-                    </svg>
-                    Команды
-                </a>
+                <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">Добавить бота</a>
+                <a href="https://lolka.app/#platforms" target="_blank" rel="noopener">Скачать Lolka</a>
+                <a href="https://github.com/GiantCraft18/Yurika_Site" target="_blank" rel="noopener">GitHub</a>
+                <a href="#commands">Команды</a>
             </div>
             <div class="footer-copy">© 2026 Юрика-Бот · Сделано с ❤️ на Python</div>
         </div>
     </footer>
 
-    <button id="toTop" title="Наверх" aria-label="Наверх">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <button class="to-top" id="toTop" aria-label="Наверх">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M12 19V5M5 12l7-7 7 7"/>
         </svg>
     </button>
 
-    <!-- Модальное окно авторизации -->
-    <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+    <!-- ═══════════ МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ ═══════════ -->
+    <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal">
-            <button class="modal-close" id="authClose" type="button" aria-label="Закрыть">×</button>
+            <button class="modal-close" id="authClose" aria-label="Закрыть">×</button>
             <div class="modal-logo">
                 <span class="logo-icon">🤖</span>
             </div>
             <h2 class="modal-title" id="authTitle">Добро пожаловать</h2>
-            <p class="modal-subtitle" id="authSubtitle">Войдите или создайте аккаунт, чтобы продолжить</p>
+            <p class="modal-subtitle" id="authSubtitle">Войдите или создайте аккаунт</p>
 
-            <div class="auth-tabs" role="tablist">
-                <button class="auth-tab active" id="tabLogin" role="tab" aria-selected="true" type="button">Вход</button>
-                <button class="auth-tab" id="tabRegister" role="tab" aria-selected="false" type="button">Регистрация</button>
+            <div class="tabs" role="tablist">
+                <button class="tab active" id="tabLogin" role="tab" aria-selected="true" type="button">Вход</button>
+                <button class="tab" id="tabRegister" role="tab" aria-selected="false" type="button">Регистрация</button>
             </div>
 
             <div class="form-message" id="authMessage" role="alert"></div>
 
-            <form class="auth-form active" id="loginForm" novalidate>
+            <form class="form-panel active" id="loginForm" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="loginEmail">Email</label>
                     <input class="form-input" type="email" id="loginEmail" placeholder="you@example.com" autocomplete="email" required>
@@ -1825,16 +1870,16 @@
                     <input class="form-input" type="password" id="loginPassword" placeholder="Минимум 6 символов" autocomplete="current-password" required>
                     <div class="form-error" id="loginPasswordError"></div>
                 </div>
-                <button class="auth-submit" id="loginSubmit" type="submit">
+                <button class="form-submit" id="loginSubmit" type="submit">
                     <span class="spinner"></span>
                     <span class="btn-label">Войти</span>
                 </button>
-                <div class="auth-links">
+                <div class="form-links">
                     <button type="button" id="forgotPasswordBtn">Забыли пароль?</button>
                 </div>
             </form>
 
-            <form class="auth-form" id="registerForm" novalidate>
+            <form class="form-panel" id="registerForm" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="registerEmail">Email</label>
                     <input class="form-input" type="email" id="registerEmail" placeholder="you@example.com" autocomplete="email" required>
@@ -1850,43 +1895,46 @@
                     <input class="form-input" type="password" id="registerConfirm" placeholder="Повторите пароль" autocomplete="new-password" required>
                     <div class="form-error" id="registerConfirmError"></div>
                 </div>
-                <button class="auth-submit" id="registerSubmit" type="submit">
+                <button class="form-submit" id="registerSubmit" type="submit">
                     <span class="spinner"></span>
                     <span class="btn-label">Создать аккаунт</span>
                 </button>
-                <div class="auth-links">
-                    <span style="color: var(--text-faint); font-size: 13px;">Уже есть аккаунт? </span>
+                <div class="form-links">
+                    <span>Уже есть аккаунт?</span>
                     <button type="button" id="switchToLogin">Войти</button>
                 </div>
             </form>
 
-            <div class="auth-footer">Регистрируясь, вы соглашаетесь с правилами использования сервиса</div>
+            <div class="form-footer">
+                Регистрируясь, вы соглашаетесь с правилами сервиса
+            </div>
         </div>
     </div>
 
-    <!-- Модальное окно профиля -->
-    <div class="modal-overlay" id="profileModal" role="dialog" aria-modal="true" aria-labelledby="profileTitle" aria-hidden="true">
-        <div class="modal profile-modal">
-            <button class="modal-close" id="profileClose" type="button" aria-label="Закрыть">×</button>
-            <h2 class="modal-title" id="profileTitle">Личный кабинет</h2>
+    <!-- ═══════════ МОДАЛЬНОЕ ОКНО ПРОФИЛЯ ═══════════ -->
+    <div class="modal-overlay" id="profileModal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal wide">
+            <button class="modal-close" id="profileClose" aria-label="Закрыть">×</button>
+            <h2 class="modal-title">Личный кабинет</h2>
             <p class="modal-subtitle">Управляйте своим профилем</p>
 
             <div class="form-message" id="profileMessage" role="alert"></div>
 
-            <div class="profile-tabs" role="tablist">
-                <button class="profile-tab active" data-tab="general" type="button">Профиль</button>
-                <button class="profile-tab" data-tab="security" type="button">Безопасность</button>
-                <button class="profile-tab" data-tab="account" type="button">Аккаунт</button>
+            <div class="tabs" role="tablist">
+                <button class="tab active" data-tab="general" type="button">Профиль</button>
+                <button class="tab" data-tab="security" type="button">Безопасность</button>
+                <button class="tab" data-tab="account" type="button">Аккаунт</button>
             </div>
 
-            <div class="profile-panel active" data-panel="general">
+            <!-- Профиль -->
+            <div class="form-panel active" data-panel="general">
                 <form id="profileForm">
-                    <div class="profile-avatar-row">
-                        <div class="profile-avatar-preview" id="profileAvatarPreview">U</div>
-                        <div class="profile-avatar-fields">
+                    <div class="avatar-row">
+                        <div class="avatar-preview" id="profileAvatarPreview">U</div>
+                        <div class="avatar-fields">
                             <label class="form-label" for="profileAvatarUrl">Ссылка на аватар</label>
                             <input class="form-input" type="url" id="profileAvatarUrl" placeholder="https://example.com/avatar.png">
-                            <div class="form-hint">Вставьте прямую ссылку на изображение (http/https)</div>
+                            <div class="form-hint">Прямая ссылка на изображение (http/https)</div>
                         </div>
                     </div>
 
@@ -1902,16 +1950,17 @@
                         <div class="form-hint">До 200 символов</div>
                     </div>
 
-                    <button class="auth-submit" id="profileSaveBtn" type="submit">
+                    <button class="form-submit" id="profileSaveBtn" type="submit">
                         <span class="spinner"></span>
-                        <span class="btn-label">Сохранить изменения</span>
+                        <span class="btn-label">Сохранить</span>
                     </button>
                 </form>
             </div>
 
-            <div class="profile-panel" data-panel="security">
+            <!-- Безопасность -->
+            <div class="form-panel" data-panel="security">
                 <form id="changePasswordForm">
-                    <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--text);">Смена пароля</h4>
+                    <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px;">Смена пароля</h4>
                     <div class="form-group">
                         <label class="form-label" for="currentPassword">Текущий пароль</label>
                         <input class="form-input" type="password" id="currentPassword" placeholder="Введите текущий пароль" autocomplete="current-password" required>
@@ -1921,44 +1970,45 @@
                         <input class="form-input" type="password" id="newPassword" placeholder="Минимум 6 символов" autocomplete="new-password" required>
                     </div>
                     <div class="form-group">
-                        <label class="form-label" for="confirmNewPassword">Повторите новый пароль</label>
+                        <label class="form-label" for="confirmNewPassword">Повторите пароль</label>
                         <input class="form-input" type="password" id="confirmNewPassword" placeholder="Повторите пароль" autocomplete="new-password" required>
                     </div>
-                    <button class="auth-submit" id="changePasswordBtn" type="submit">
+                    <button class="form-submit" id="changePasswordBtn" type="submit">
                         <span class="spinner"></span>
                         <span class="btn-label">Сменить пароль</span>
                     </button>
                 </form>
 
                 <form id="changeEmailForm" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-soft);">
-                    <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px; color: var(--text);">Смена email</h4>
+                    <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px;">Смена email</h4>
                     <div class="form-group">
                         <label class="form-label" for="newEmail">Новый email</label>
                         <input class="form-input" type="email" id="newEmail" placeholder="new@example.com" autocomplete="email" required>
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="currentEmailPassword">Текущий пароль</label>
-                        <input class="form-input" type="password" id="currentEmailPassword" placeholder="Введите пароль для подтверждения" autocomplete="current-password" required>
+                        <input class="form-input" type="password" id="currentEmailPassword" placeholder="Введите пароль" autocomplete="current-password" required>
                     </div>
-                    <button class="auth-submit" id="changeEmailBtn" type="submit">
+                    <button class="form-submit" id="changeEmailBtn" type="submit">
                         <span class="spinner"></span>
                         <span class="btn-label">Сменить email</span>
                     </button>
                 </form>
             </div>
 
-            <div class="profile-panel" data-panel="account">
-                <div class="profile-info-row">
-                    <span class="profile-info-label">Email</span>
-                    <span class="profile-info-value" id="profileEmailDisplay">—</span>
+            <!-- Аккаунт -->
+            <div class="form-panel" data-panel="account">
+                <div class="info-row">
+                    <span class="info-row-label">Email</span>
+                    <span class="info-row-value" id="profileEmailDisplay">—</span>
                 </div>
-                <div class="profile-info-row">
-                    <span class="profile-info-label">UID</span>
-                    <span class="profile-info-value" id="profileUidDisplay">—</span>
+                <div class="info-row">
+                    <span class="info-row-label">UID</span>
+                    <span class="info-row-value" id="profileUidDisplay">—</span>
                 </div>
-                <div class="profile-info-row">
-                    <span class="profile-info-label">Дата регистрации</span>
-                    <span class="profile-info-value" id="profileCreatedDisplay">—</span>
+                <div class="info-row">
+                    <span class="info-row-label">Дата регистрации</span>
+                    <span class="info-row-value" id="profileCreatedDisplay">—</span>
                 </div>
 
                 <div class="danger-zone">
@@ -1977,6 +2027,9 @@
     </div>
 
     <script type="module">
+        /* ═══════════════════════════════════════════════════
+           FIREBASE
+           ═══════════════════════════════════════════════════ */
         import { initializeApp } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
         import {
             getAuth,
@@ -2009,102 +2062,94 @@
             measurementId: "G-M1W6BLMP4H"
         };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+        const firebaseApp = initializeApp(firebaseConfig);
+        const auth = getAuth(firebaseApp);
+        const db = getFirestore(firebaseApp);
 
+        /* ═══════════════════════════════════════════════════
+           УТИЛИТЫ
+           ═══════════════════════════════════════════════════ */
         const $ = (sel) => document.querySelector(sel);
 
-        const errorMessages = {
+        const ERROR_MESSAGES = {
             'auth/email-already-in-use': 'Этот email уже зарегистрирован. Попробуйте войти.',
-            'auth/invalid-email': 'Некорректный email. Проверьте адрес.',
-            'auth/weak-password': 'Слишком слабый пароль. Минимум 6 символов.',
+            'auth/invalid-email': 'Некорректный email.',
+            'auth/weak-password': 'Слишком слабый пароль (минимум 6 символов).',
             'auth/user-not-found': 'Пользователь с таким email не найден.',
-            'auth/wrong-password': 'Неверный пароль. Попробуйте ещё раз.',
+            'auth/wrong-password': 'Неверный пароль.',
             'auth/invalid-credential': 'Неверный email или пароль.',
-            'auth/too-many-requests': 'Слишком много попыток. Подождите немного.',
-            'auth/network-request-failed': 'Ошибка сети. Проверьте интернет.',
-            'auth/operation-not-allowed': 'Вход по email/паролю отключён.',
-            'auth/user-disabled': 'Этот аккаунт заблокирован.',
+            'auth/too-many-requests': 'Слишком много попыток. Подождите.',
+            'auth/network-request-failed': 'Ошибка сети. Проверьте подключение.',
+            'auth/operation-not-allowed': 'Вход по email отключён.',
+            'auth/user-disabled': 'Аккаунт заблокирован.',
             'auth/requires-recent-login': 'Требуется повторный вход.',
             'auth/missing-password': 'Введите пароль.'
         };
 
-        function getErrorMessage(error) {
-            return errorMessages[error.code] || 'Произошла ошибка: ' + (error.message || 'попробуйте ещё раз.');
-        }
+        const getErrorMessage = (error) =>
+            ERROR_MESSAGES[error.code] || 'Ошибка: ' + (error.message || 'попробуйте ещё раз.');
 
-        function isValidEmail(email) {
-            return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-        }
+        const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-        /* ===== АВТОРИЗАЦИЯ ===== */
+        const setLoading = (btn, loading, label) => {
+            btn.disabled = loading;
+            btn.classList.toggle('loading', loading);
+            const l = btn.querySelector('.btn-label');
+            if (l) l.textContent = loading ? 'Подождите…' : label;
+        };
+
+        /* ═══════════════════════════════════════════════════
+           АВТОРИЗАЦИЯ
+           ═══════════════════════════════════════════════════ */
         const authModal = $('#authModal');
         const authOpenBtn = $('#authOpenBtn');
-        const authClose = $('#authClose');
-        const tabLogin = $('#tabLogin');
-        const tabRegister = $('#tabRegister');
         const loginForm = $('#loginForm');
         const registerForm = $('#registerForm');
         const authMessage = $('#authMessage');
 
-        function openModal(tab = 'login') {
+        function openAuthModal(tab = 'login') {
             authModal.classList.add('open');
             authModal.setAttribute('aria-hidden', 'false');
             document.body.style.overflow = 'hidden';
-            clearAllErrors();
-            clearMessage();
-            switchTab(tab);
+            clearAuthErrors();
+            clearAuthMessage();
+            switchAuthTab(tab);
         }
 
-        function closeModal() {
+        function closeAuthModal() {
             authModal.classList.remove('open');
             authModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
-            clearAllErrors();
-            clearMessage();
         }
 
-        function switchTab(tab) {
+        function switchAuthTab(tab) {
             const isLogin = tab === 'login';
-            tabLogin.classList.toggle('active', isLogin);
-            tabRegister.classList.toggle('active', !isLogin);
-            tabLogin.setAttribute('aria-selected', String(isLogin));
-            tabRegister.setAttribute('aria-selected', String(!isLogin));
+            $('#tabLogin').classList.toggle('active', isLogin);
+            $('#tabRegister').classList.toggle('active', !isLogin);
             loginForm.classList.toggle('active', isLogin);
             registerForm.classList.toggle('active', !isLogin);
             $('#authTitle').textContent = isLogin ? 'Добро пожаловать' : 'Создать аккаунт';
             $('#authSubtitle').textContent = isLogin
-                ? 'Войдите в свой аккаунт, чтобы продолжить'
-                : 'Заполните форму — это займёт меньше минуты';
-            clearAllErrors();
-            clearMessage();
+                ? 'Войдите в свой аккаунт'
+                : 'Заполните форму — это займёт минуту';
+            clearAuthErrors();
+            clearAuthMessage();
         }
 
-        authOpenBtn.addEventListener('click', () => openModal('login'));
-        authClose.addEventListener('click', closeModal);
-        authModal.addEventListener('click', (e) => { if (e.target === authModal) closeModal(); });
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && authModal.classList.contains('open')) closeModal();
-        });
-        tabLogin.addEventListener('click', () => switchTab('login'));
-        tabRegister.addEventListener('click', () => switchTab('register'));
-        $('#switchToLogin').addEventListener('click', () => switchTab('login'));
-
-        function clearAllErrors() {
-            document.querySelectorAll('.form-error').forEach(el => {
+        function clearAuthErrors() {
+            document.querySelectorAll('#authModal .form-error').forEach(el => {
                 el.classList.remove('visible');
                 el.textContent = '';
             });
-            document.querySelectorAll('.form-input').forEach(el => el.classList.remove('error'));
+            document.querySelectorAll('#authModal .form-input').forEach(el => el.classList.remove('error'));
         }
 
-        function clearMessage() {
+        function clearAuthMessage() {
             authMessage.classList.remove('visible', 'error', 'success');
-            authMessage.innerHTML = '';
+            authMessage.textContent = '';
         }
 
-        function showFieldError(fieldId, message) {
+        function showAuthFieldError(fieldId, message) {
             const input = document.getElementById(fieldId);
             const errorEl = document.getElementById(fieldId + 'Error');
             if (input) input.classList.add('error');
@@ -2114,50 +2159,108 @@
             }
         }
 
-        function showMessage(text, type = 'error') {
+        function showAuthMessage(text, type = 'error') {
             authMessage.className = 'form-message visible ' + type;
-            authMessage.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
+            authMessage.textContent = (type === 'error' ? '⚠️ ' : '✓ ') + text;
         }
 
-        function validateLoginForm() {
-            clearAllErrors();
-            let valid = true;
+        function validateLogin() {
+            clearAuthErrors();
+            let ok = true;
             const email = $('#loginEmail').value.trim();
             const password = $('#loginPassword').value;
-            if (!email) { showFieldError('loginEmail', 'Введите email'); valid = false; }
-            else if (!isValidEmail(email)) { showFieldError('loginEmail', 'Некорректный email'); valid = false; }
-            if (!password) { showFieldError('loginPassword', 'Введите пароль'); valid = false; }
-            return valid;
+            if (!email) { showAuthFieldError('loginEmail', 'Введите email'); ok = false; }
+            else if (!isValidEmail(email)) { showAuthFieldError('loginEmail', 'Некорректный email'); ok = false; }
+            if (!password) { showAuthFieldError('loginPassword', 'Введите пароль'); ok = false; }
+            return ok;
         }
 
-        function validateRegisterForm() {
-            clearAllErrors();
-            let valid = true;
+        function validateRegister() {
+            clearAuthErrors();
+            let ok = true;
             const email = $('#registerEmail').value.trim();
             const password = $('#registerPassword').value;
             const confirm = $('#registerConfirm').value;
-            if (!email) { showFieldError('registerEmail', 'Введите email'); valid = false; }
-            else if (!isValidEmail(email)) { showFieldError('registerEmail', 'Некорректный email'); valid = false; }
-            if (!password) { showFieldError('registerPassword', 'Введите пароль'); valid = false; }
-            else if (password.length < 6) { showFieldError('registerPassword', 'Минимум 6 символов'); valid = false; }
-            if (!confirm) { showFieldError('registerConfirm', 'Повторите пароль'); valid = false; }
-            else if (password !== confirm) { showFieldError('registerConfirm', 'Пароли не совпадают'); valid = false; }
-            return valid;
+            if (!email) { showAuthFieldError('registerEmail', 'Введите email'); ok = false; }
+            else if (!isValidEmail(email)) { showAuthFieldError('registerEmail', 'Некорректный email'); ok = false; }
+            if (!password) { showAuthFieldError('registerPassword', 'Введите пароль'); ok = false; }
+            else if (password.length < 6) { showAuthFieldError('registerPassword', 'Минимум 6 символов'); ok = false; }
+            if (!confirm) { showAuthFieldError('registerConfirm', 'Повторите пароль'); ok = false; }
+            else if (password !== confirm) { showAuthFieldError('registerConfirm', 'Пароли не совпадают'); ok = false; }
+            return ok;
         }
 
-        function setLoading(button, loading, defaultLabel) {
-            button.disabled = loading;
-            button.classList.toggle('loading', loading);
-            const label = button.querySelector('.btn-label');
-            if (label) label.textContent = loading ? 'Подождите…' : defaultLabel;
-        }
+        // Обработчики
+        authOpenBtn.addEventListener('click', () => openAuthModal('login'));
+        $('#authClose').addEventListener('click', closeAuthModal);
+        authModal.addEventListener('click', (e) => { if (e.target === authModal) closeAuthModal(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && authModal.classList.contains('open')) closeAuthModal();
+        });
+        $('#tabLogin').addEventListener('click', () => switchAuthTab('login'));
+        $('#tabRegister').addEventListener('click', () => switchAuthTab('register'));
+        $('#switchToLogin').addEventListener('click', () => switchAuthTab('login'));
 
-        /* ===== FIRESTORE ===== */
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateLogin()) return;
+            const btn = $('#loginSubmit');
+            setLoading(btn, true, 'Войти');
+            clearAuthMessage();
+            try {
+                await signInWithEmailAndPassword(auth, $('#loginEmail').value.trim(), $('#loginPassword').value);
+            } catch (err) {
+                showAuthMessage(getErrorMessage(err), 'error');
+            } finally {
+                setLoading(btn, false, 'Войти');
+            }
+        });
+
+        registerForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            if (!validateRegister()) return;
+            const btn = $('#registerSubmit');
+            setLoading(btn, true, 'Создать аккаунт');
+            clearAuthMessage();
+            try {
+                const cred = await createUserWithEmailAndPassword(auth, $('#registerEmail').value.trim(), $('#registerPassword').value);
+                await ensureUserDoc(cred.user);
+            } catch (err) {
+                showAuthMessage(getErrorMessage(err), 'error');
+            } finally {
+                setLoading(btn, false, 'Создать аккаунт');
+            }
+        });
+
+        $('#forgotPasswordBtn').addEventListener('click', async () => {
+            const email = $('#loginEmail').value.trim() || prompt('Введите ваш email:');
+            if (!email) return;
+            if (!isValidEmail(email)) { showAuthMessage('Некорректный email', 'error'); return; }
+            clearAuthMessage();
+            try {
+                await sendPasswordResetEmail(auth, email);
+                showAuthMessage('Письмо отправлено на ' + email, 'success');
+            } catch (err) {
+                showAuthMessage(getErrorMessage(err), 'error');
+            }
+        });
+
+        /* ═══════════════════════════════════════════════════
+           FIRESTORE — С КЭШЕМ
+           ═══════════════════════════════════════════════════ */
+        // Кэш профилей в памяти — избегаем повторных запросов
+        const profileCache = new Map();
+
         async function loadUserDoc(uid) {
+            // Проверяем кэш
+            if (profileCache.has(uid)) return profileCache.get(uid);
+
             try {
                 const ref = doc(db, 'users', uid);
                 const snap = await getDoc(ref);
-                return snap.exists() ? snap.data() : null;
+                const data = snap.exists() ? snap.data() : null;
+                if (data) profileCache.set(uid, data);
+                return data;
             } catch (e) {
                 console.warn('Ошибка загрузки профиля:', e);
                 return null;
@@ -2167,6 +2270,9 @@
         async function saveUserDoc(uid, data) {
             const ref = doc(db, 'users', uid);
             await setDoc(ref, data, { merge: true });
+            // Обновляем кэш
+            const existing = profileCache.get(uid) || {};
+            profileCache.set(uid, { ...existing, ...data });
         }
 
         async function ensureUserDoc(user) {
@@ -2183,52 +2289,9 @@
             return initial;
         }
 
-        /* ===== ВХОД / РЕГИСТРАЦИЯ ===== */
-        loginForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!validateLoginForm()) return;
-            const submitBtn = $('#loginSubmit');
-            setLoading(submitBtn, true, 'Войти');
-            clearMessage();
-            try {
-                await signInWithEmailAndPassword(auth, $('#loginEmail').value.trim(), $('#loginPassword').value);
-            } catch (error) {
-                showMessage(getErrorMessage(error), 'error');
-            } finally {
-                setLoading(submitBtn, false, 'Войти');
-            }
-        });
-
-        registerForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            if (!validateRegisterForm()) return;
-            const submitBtn = $('#registerSubmit');
-            setLoading(submitBtn, true, 'Создать аккаунт');
-            clearMessage();
-            try {
-                const cred = await createUserWithEmailAndPassword(auth, $('#registerEmail').value.trim(), $('#registerPassword').value);
-                await ensureUserDoc(cred.user);
-            } catch (error) {
-                showMessage(getErrorMessage(error), 'error');
-            } finally {
-                setLoading(submitBtn, false, 'Создать аккаунт');
-            }
-        });
-
-        $('#forgotPasswordBtn').addEventListener('click', async () => {
-            const email = $('#loginEmail').value.trim() || prompt('Введите ваш email для сброса пароля:');
-            if (!email) return;
-            if (!isValidEmail(email)) { showMessage('Некорректный email', 'error'); return; }
-            clearMessage();
-            try {
-                await sendPasswordResetEmail(auth, email);
-                showMessage('Письмо отправлено на ' + email + '. Проверьте почту.', 'success');
-            } catch (error) {
-                showMessage(getErrorMessage(error), 'error');
-            }
-        });
-
-        /* ===== СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ ===== */
+        /* ═══════════════════════════════════════════════════
+           СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ
+           ═══════════════════════════════════════════════════ */
         const userMenu = $('#userMenu');
         const userAvatar = $('#userAvatar');
         const userEmail = $('#userEmail');
@@ -2280,25 +2343,21 @@
                 const profile = await ensureUserDoc(user);
                 applyAvatarToHeader(profile, email);
 
-                if (authModal.classList.contains('open')) closeModal();
+                if (authModal.classList.contains('open')) closeAuthModal();
             } else {
                 authOpenBtn.style.display = '';
                 userMenu.classList.remove('visible');
                 userDropdown.classList.remove('open');
                 userAvatar.style.backgroundImage = '';
+                profileCache.clear();
             }
         });
 
-        /* ===== ПРОФИЛЬ ===== */
+        /* ═══════════════════════════════════════════════════
+           ПРОФИЛЬ
+           ═══════════════════════════════════════════════════ */
         const profileModal = $('#profileModal');
-        const profileClose = $('#profileClose');
-        const profileForm = $('#profileForm');
         const profileMessage = $('#profileMessage');
-        const profileSaveBtn = $('#profileSaveBtn');
-        const profileLogoutBtn = $('#profileLogoutBtn');
-        const profileEmailDisplay = $('#profileEmailDisplay');
-        const profileUidDisplay = $('#profileUidDisplay');
-        const profileCreatedDisplay = $('#profileCreatedDisplay');
         const profileAvatarPreview = $('#profileAvatarPreview');
 
         function openProfileModal() {
@@ -2315,10 +2374,9 @@
             profileModal.classList.remove('open');
             profileModal.setAttribute('aria-hidden', 'true');
             document.body.style.overflow = '';
-            clearProfileMessage();
         }
 
-        profileClose.addEventListener('click', closeProfileModal);
+        $('#profileClose').addEventListener('click', closeProfileModal);
         profileModal.addEventListener('click', (e) => { if (e.target === profileModal) closeProfileModal(); });
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && profileModal.classList.contains('open')) closeProfileModal();
@@ -2326,35 +2384,31 @@
 
         function clearProfileMessage() {
             profileMessage.classList.remove('visible', 'error', 'success');
-            profileMessage.innerHTML = '';
+            profileMessage.textContent = '';
         }
-
         function showProfileMessage(text, type = 'error') {
             profileMessage.className = 'form-message visible ' + type;
-            profileMessage.innerHTML = (type === 'error' ? '⚠️ ' : '✓ ') + text;
+            profileMessage.textContent = (type === 'error' ? '⚠️ ' : '✓ ') + text;
         }
 
         async function fillProfileForm() {
             const user = auth.currentUser;
             if (!user) return;
 
-            profileEmailDisplay.textContent = user.email || '—';
-            profileUidDisplay.textContent = user.uid;
+            $('#profileEmailDisplay').textContent = user.email || '—';
+            $('#profileUidDisplay').textContent = user.uid;
 
             const profile = await loadUserDoc(user.uid);
 
+            // Дата регистрации
             let createdText = '—';
             const created = profile?.createdAt;
             if (created) {
-                if (typeof created.toDate === 'function') {
-                    createdText = created.toDate().toLocaleDateString('ru-RU');
-                } else if (created instanceof Date) {
-                    createdText = created.toLocaleDateString('ru-RU');
-                } else if (typeof created === 'string') {
-                    createdText = new Date(created).toLocaleDateString('ru-RU');
-                }
+                if (typeof created.toDate === 'function') createdText = created.toDate().toLocaleDateString('ru-RU');
+                else if (created instanceof Date) createdText = created.toLocaleDateString('ru-RU');
+                else if (typeof created === 'string') createdText = new Date(created).toLocaleDateString('ru-RU');
             }
-            profileCreatedDisplay.textContent = createdText;
+            $('#profileCreatedDisplay').textContent = createdText;
 
             $('#profileDisplayName').value = profile?.displayName || user.displayName || '';
             $('#profileBio').value = profile?.bio || '';
@@ -2385,21 +2439,24 @@
         });
 
         function switchProfileTab(name) {
-            document.querySelectorAll('.profile-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
-            document.querySelectorAll('.profile-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === name));
+            document.querySelectorAll('#profileModal .tab').forEach(t =>
+                t.classList.toggle('active', t.dataset.tab === name));
+            document.querySelectorAll('#profileModal .form-panel').forEach(p =>
+                p.classList.toggle('active', p.dataset.panel === name));
         }
 
-        document.querySelectorAll('.profile-tab').forEach(tab => {
+        document.querySelectorAll('#profileModal .tab').forEach(tab => {
             tab.addEventListener('click', () => switchProfileTab(tab.dataset.tab));
         });
 
-        profileForm.addEventListener('submit', async (e) => {
+        $('#profileForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const user = auth.currentUser;
             if (!user) return;
 
             clearProfileMessage();
-            setLoading(profileSaveBtn, true, 'Сохранить изменения');
+            const btn = $('#profileSaveBtn');
+            setLoading(btn, true, 'Сохранить');
 
             try {
                 const displayName = $('#profileDisplayName').value.trim().slice(0, 32);
@@ -2418,28 +2475,24 @@
                 });
 
                 if (displayName && displayName !== user.displayName) {
-                    try {
-                        await updateProfile(user, { displayName });
-                    } catch (e) {
-                        console.warn('Не удалось обновить displayName в Auth:', e);
-                    }
+                    try { await updateProfile(user, { displayName }); } catch (e) { console.warn(e); }
                 }
 
                 applyAvatarToHeader({ displayName, avatarUrl }, user.email);
                 showProfileMessage('Профиль сохранён', 'success');
-            } catch (error) {
-                showProfileMessage(error.message || getErrorMessage(error), 'error');
+            } catch (err) {
+                showProfileMessage(err.message || getErrorMessage(err), 'error');
             } finally {
-                setLoading(profileSaveBtn, false, 'Сохранить изменения');
+                setLoading(btn, false, 'Сохранить');
             }
         });
 
-        profileLogoutBtn.addEventListener('click', async () => {
+        $('#profileLogoutBtn').addEventListener('click', async () => {
             await signOut(auth);
             closeProfileModal();
         });
 
-        /* Смена пароля */
+        // Смена пароля
         $('#changePasswordForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
@@ -2451,7 +2504,7 @@
             const confirm = $('#confirmNewPassword').value;
 
             if (next.length < 6) { showProfileMessage('Пароль должен быть минимум 6 символов', 'error'); return; }
-            if (next !== confirm) { showProfileMessage('Новые пароли не совпадают', 'error'); return; }
+            if (next !== confirm) { showProfileMessage('Пароли не совпадают', 'error'); return; }
 
             const btn = $('#changePasswordBtn');
             setLoading(btn, true, 'Сменить пароль');
@@ -2460,16 +2513,16 @@
                 const cred = EmailAuthProvider.credential(user.email, current);
                 await reauthenticateWithCredential(user, cred);
                 await updatePassword(user, next);
-                showProfileMessage('Пароль успешно изменён', 'success');
+                showProfileMessage('Пароль изменён', 'success');
                 $('#changePasswordForm').reset();
-            } catch (error) {
-                showProfileMessage(getErrorMessage(error), 'error');
+            } catch (err) {
+                showProfileMessage(getErrorMessage(err), 'error');
             } finally {
                 setLoading(btn, false, 'Сменить пароль');
             }
         });
 
-        /* Смена email */
+        // Смена email
         $('#changeEmailForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
@@ -2479,7 +2532,7 @@
             const current = $('#currentEmailPassword').value;
             const newEmail = $('#newEmail').value.trim();
 
-            if (!isValidEmail(newEmail)) { showProfileMessage('Некорректный новый email', 'error'); return; }
+            if (!isValidEmail(newEmail)) { showProfileMessage('Некорректный email', 'error'); return; }
 
             const btn = $('#changeEmailBtn');
             setLoading(btn, true, 'Сменить email');
@@ -2488,36 +2541,39 @@
                 const cred = EmailAuthProvider.credential(user.email, current);
                 await reauthenticateWithCredential(user, cred);
                 await updateEmail(user, newEmail);
-                showProfileMessage('Email изменён. Возможно, потребуется подтверждение.', 'success');
-                profileEmailDisplay.textContent = newEmail;
+                showProfileMessage('Email изменён', 'success');
+                $('#profileEmailDisplay').textContent = newEmail;
                 userEmail.textContent = newEmail;
                 $('#changeEmailForm').reset();
-            } catch (error) {
-                showProfileMessage(getErrorMessage(error), 'error');
+            } catch (err) {
+                showProfileMessage(getErrorMessage(err), 'error');
             } finally {
                 setLoading(btn, false, 'Сменить email');
             }
         });
 
-        /* ===== ОСТАЛЬНОЕ ===== */
-        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        /* ═══════════════════════════════════════════════════
+           ТЕМА
+           ═══════════════════════════════════════════════════ */
         const html = document.documentElement;
-        const themeToggle = document.getElementById('themeToggle');
+        const themeToggle = $('#themeToggle');
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
 
         themeToggle.addEventListener('click', () => {
-            const current = html.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
+            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', next);
             themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
             localStorage.setItem('theme', next);
         });
 
-        const nav = document.getElementById('nav');
-        const progressBar = document.getElementById('progressBar');
-        const toTop = document.getElementById('toTop');
+        /* ═══════════════════════════════════════════════════
+           СКРОЛЛ
+           ═══════════════════════════════════════════════════ */
+        const siteHeader = $('#siteHeader');
+        const progressBar = $('#progressBar');
+        const toTop = $('#toTop');
         let ticking = false;
 
         function onScroll() {
@@ -2525,97 +2581,94 @@
             const docHeight = document.documentElement.scrollHeight - window.innerHeight;
             const progress = docHeight > 0 ? (scrollY / docHeight) * 100 : 0;
             progressBar.style.width = progress + '%';
-            nav.classList.toggle('scrolled', scrollY > 20);
+            siteHeader.classList.toggle('scrolled', scrollY > 20);
             toTop.classList.toggle('visible', scrollY > 400);
             ticking = false;
         }
 
         window.addEventListener('scroll', () => {
             if (!ticking) {
-                window.requestAnimationFrame(onScroll);
+                requestAnimationFrame(onScroll);
                 ticking = true;
             }
         }, { passive: true });
 
-        const burger = document.getElementById('burger');
-        const navLinks = document.getElementById('navLinks');
+        toTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        /* ═══════════════════════════════════════════════════
+           МОБИЛЬНОЕ МЕНЮ
+           ═══════════════════════════════════════════════════ */
+        const burger = $('#burger');
+        const navList = $('#navList');
+
         burger.addEventListener('click', (e) => {
             e.stopPropagation();
-            const isOpen = navLinks.classList.toggle('open');
+            const isOpen = navList.classList.toggle('open');
             burger.setAttribute('aria-expanded', String(isOpen));
             burger.textContent = isOpen ? '✕' : '☰';
         });
-        navLinks.querySelectorAll('a').forEach(a => {
+
+        navList.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
-                navLinks.classList.remove('open');
+                navList.classList.remove('open');
                 burger.setAttribute('aria-expanded', 'false');
                 burger.textContent = '☰';
             });
         });
 
-        document.addEventListener('click', (e) => {
-            const burgerEl = $('#burger');
-            const navLinksEl = $('#navLinks');
-            if (navLinksEl && navLinksEl.classList.contains('open')) {
-                if (!navLinksEl.contains(e.target) && e.target !== burgerEl) {
-                    navLinksEl.classList.remove('open');
-                    burgerEl.setAttribute('aria-expanded', 'false');
-                    burgerEl.textContent = '☰';
-                }
-            }
-        });
+        /* ═══════════════════════════════════════════════════
+           КОПИРОВАНИЕ КОМАНД
+           ═══════════════════════════════════════════════════ */
+        document.querySelectorAll('.cmd-item').forEach(item => {
+            const copyText = item.dataset.copy || item.querySelector('.cmd-name')?.textContent || '';
+            if (!copyText) return;
 
-        toTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
-        });
-
-        document.querySelectorAll('.cmd-name').forEach(el => {
-            const copy = () => {
-                const text = el.dataset.copy || el.textContent;
-                const done = () => {
-                    el.classList.add('copied');
-                    setTimeout(() => el.classList.remove('copied'), 1300);
-                };
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
-                } else {
-                    fallbackCopy(text, done);
+            item.addEventListener('click', async () => {
+                const nameEl = item.querySelector('.cmd-name');
+                try {
+                    await navigator.clipboard.writeText(copyText);
+                } catch {
+                    // Fallback
+                    const ta = document.createElement('textarea');
+                    ta.value = copyText;
+                    ta.style.position = 'fixed';
+                    ta.style.opacity = '0';
+                    document.body.appendChild(ta);
+                    ta.select();
+                    try { document.execCommand('copy'); } catch (e) {}
+                    document.body.removeChild(ta);
                 }
-            };
-            el.addEventListener('click', copy);
-            el.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    copy();
+                if (nameEl) {
+                    nameEl.classList.add('copied');
+                    setTimeout(() => nameEl.classList.remove('copied'), 1200);
                 }
             });
         });
 
-        function fallbackCopy(text, callback) {
-            const ta = document.createElement('textarea');
-            ta.value = text;
-            ta.style.position = 'fixed';
-            ta.style.opacity = '0';
-            document.body.appendChild(ta);
-            ta.select();
-            try { document.execCommand('copy'); callback(); } catch (e) {}
-            document.body.removeChild(ta);
-        }
+        /* ═══════════════════════════════════════════════════
+           АНИМАЦИИ ПОЯВЛЕНИЯ
+           ═══════════════════════════════════════════════════ */
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
-            const observer = new IntersectionObserver(entries => {
+            const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('visible');
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
         } else {
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
+        /* ═══════════════════════════════════════════════════
+           СЧЁТЧИКИ
+           ═══════════════════════════════════════════════════ */
         const counters = document.querySelectorAll('.stat-value[data-target]');
         const runCounter = (el) => {
             const target = parseInt(el.dataset.target, 10);
@@ -2660,8 +2713,12 @@
             });
         }
 
+        /* ═══════════════════════════════════════════════════
+           SCROLL-SPY
+           ═══════════════════════════════════════════════════ */
         const sections = document.querySelectorAll('section[id]');
-        const navAnchors = document.querySelectorAll('.nav-links a[href^="#"]');
+        const navAnchors = document.querySelectorAll('.nav-link[href^="#"]');
+
         if ('IntersectionObserver' in window) {
             const spyObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
