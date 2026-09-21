@@ -682,7 +682,6 @@
         color: var(--text-dim);
     }
 
-    /* ═══════════ КОМАНДЫ ═══════════ */
     .commands-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -733,7 +732,6 @@
         border: 1px solid var(--border-soft);
     }
 
-    /* Цвета иконок по категориям */
     .cmd-card.moder .cmd-card-icon { background: var(--success-subtle); }
     .cmd-card.config .cmd-card-icon { background: rgba(155, 89, 182, 0.12); }
     .cmd-card.help .cmd-card-icon { background: var(--warning-subtle); }
@@ -911,7 +909,6 @@
         transform: translateY(-3px);
     }
 
-    /* ═══════════ МОДАЛЬНЫЕ ОКНА ═══════════ */
     .modal-overlay {
         position: fixed;
         inset: 0;
@@ -1085,6 +1082,7 @@
         box-shadow: 0 4px 20px var(--accent-glow);
         transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
         margin-top: 8px;
+        position: relative;
     }
     .form-submit:hover:not(:disabled) {
         transform: translateY(-1px);
@@ -1297,7 +1295,6 @@
 <body>
     <div class="progress-bar" id="progressBar" aria-hidden="true"></div>
 
-    <!-- ═══════════ НАВИГАЦИЯ ═══════════ -->
     <header class="site-header" id="siteHeader">
         <div class="container">
             <nav class="nav" aria-label="Основная навигация">
@@ -1355,7 +1352,6 @@
     </header>
 
     <main>
-        <!-- ═══════════ HERO ═══════════ -->
         <section class="hero">
             <div class="container">
                 <span class="badge">
@@ -1391,7 +1387,6 @@
             </div>
         </section>
 
-        <!-- ═══════════ СТАТИСТИКА ═══════════ -->
         <section id="stats">
             <div class="container">
                 <div class="stats-grid reveal">
@@ -1415,7 +1410,6 @@
             </div>
         </section>
 
-        <!-- ═══════════ О LOLKA ═══════════ -->
         <section class="section reveal">
             <div class="container">
                 <div class="about-card">
@@ -1523,7 +1517,6 @@
             </div>
         </section>
 
-        <!-- ═══════════ ВОЗМОЖНОСТИ ═══════════ -->
         <section class="section reveal" id="features">
             <div class="container">
                 <div class="section-header">
@@ -1598,7 +1591,6 @@
             </div>
         </section>
 
-        <!-- ═══════════ КОМАНДЫ ═══════════ -->
         <section class="section reveal" id="commands">
             <div class="container">
                 <div class="section-header">
@@ -1607,7 +1599,6 @@
                 </div>
 
                 <div class="commands-grid">
-                    <!-- ═══ ОСНОВНОЕ ═══ -->
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🟢</div>
@@ -1634,7 +1625,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ ПОЛЬЗОВАТЕЛИ ═══ -->
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">👤</div>
@@ -1657,7 +1647,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ МОДЕРАЦИЯ ═══ -->
                     <div class="cmd-card moder">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🛡️</div>
@@ -1680,7 +1669,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ КОНФИГУРАЦИЯ ═══ -->
                     <div class="cmd-card config">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">⚙️</div>
@@ -1711,7 +1699,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ ЭКОНОМИКА ═══ -->
                     <div class="cmd-card economy">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">💰</div>
@@ -1766,7 +1753,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ БИЗНЕСЫ ═══ -->
                     <div class="cmd-card business">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">💼</div>
@@ -1809,7 +1795,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ БРАКИ ═══ -->
                     <div class="cmd-card marriage">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">💍</div>
@@ -1860,7 +1845,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ СПРАВКА ═══ -->
                     <div class="cmd-card help">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">📖</div>
@@ -1875,7 +1859,6 @@
                         </ul>
                     </div>
 
-                    <!-- ═══ СОБЫТИЯ ═══ -->
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🔔</div>
@@ -1913,7 +1896,6 @@
             </div>
         </section>
 
-        <!-- ═══════════ CTA ═══════════ -->
         <section class="reveal" id="invite">
             <div class="container">
                 <div class="cta-card">
@@ -1942,7 +1924,6 @@
         </section>
     </main>
 
-    <!-- ═══════════ ФУТЕР ═══════════ -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-brand">
@@ -1965,7 +1946,6 @@
         </svg>
     </button>
 
-    <!-- ═══════════ МОДАЛЬНОЕ ОКНО АВТОРИЗАЦИИ ═══════════ -->
     <div class="modal-overlay" id="authModal" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal">
             <button class="modal-close" id="authClose" aria-label="Закрыть">×</button>
@@ -2034,7 +2014,6 @@
         </div>
     </div>
 
-    <!-- ═══════════ МОДАЛЬНОЕ ОКНО ПРОФИЛЯ ═══════════ -->
     <div class="modal-overlay" id="profileModal" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal wide">
             <button class="modal-close" id="profileClose" aria-label="Закрыть">×</button>
@@ -2169,7 +2148,8 @@
             doc,
             getDoc,
             setDoc,
-            serverTimestamp
+            serverTimestamp,
+            enableIndexedDbPersistence
         } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
         const firebaseConfig = {
@@ -2186,6 +2166,19 @@
         const auth = getAuth(firebaseApp);
         const db = getFirestore(firebaseApp);
 
+        /* ===== OFFLINE PERSISTENCE ===== */
+        // Локальный кэш Firestore (IndexedDB) — работает без сети
+        enableIndexedDbPersistence(db).catch((err) => {
+            if (err.code === 'failed-precondition') {
+                console.warn('Firestore: несколько вкладок открыто, offline-режим недоступен');
+            } else if (err.code === 'unimplemented') {
+                console.warn('Firestore: браузер не поддерживает offline-режим');
+            }
+        });
+
+        /* ═══════════════════════════════════════════════════
+           УТИЛИТЫ
+           ═══════════════════════════════════════════════════ */
         const $ = (sel) => document.querySelector(sel);
 
         const ERROR_MESSAGES = {
@@ -2208,14 +2201,15 @@
 
         const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+        // Кнопка не блокируется и не меняет текст — только спиннер
         const setLoading = (btn, loading, label) => {
             btn.disabled = loading;
             btn.classList.toggle('loading', loading);
-            const l = btn.querySelector('.btn-label');
-            if (l) l.textContent = loading ? 'Подождите…' : label;
         };
 
-        /* ===== АВТОРИЗАЦИЯ ===== */
+        /* ═══════════════════════════════════════════════════
+           АВТОРИЗАЦИЯ
+           ═══════════════════════════════════════════════════ */
         const authModal = $('#authModal');
         const authOpenBtn = $('#authOpenBtn');
         const loginForm = $('#loginForm');
@@ -2359,28 +2353,80 @@
             }
         });
 
-        /* ===== FIRESTORE ===== */
+        /* ═══════════════════════════════════════════════════
+           FIRESTORE — КЭШ + ОЧЕРЕДЬ
+           ═══════════════════════════════════════════════════ */
         const profileCache = new Map();
+        const cacheTimestamps = new Map();
+        const CACHE_TTL = 5 * 60 * 1000; // 5 минут
 
-        async function loadUserDoc(uid) {
-            if (profileCache.has(uid)) return profileCache.get(uid);
+        // Очередь синхронизации
+        const syncQueue = new Map();
+        let syncInProgress = false;
+
+        async function loadUserDoc(uid, forceRefresh = false) {
+            const now = Date.now();
+            const cached = profileCache.get(uid);
+            const timestamp = cacheTimestamps.get(uid) || 0;
+
+            // Кэш свежий — не идём в Firestore
+            if (cached && !forceRefresh && (now - timestamp) < CACHE_TTL) {
+                return cached;
+            }
+
             try {
                 const ref = doc(db, 'users', uid);
                 const snap = await getDoc(ref);
                 const data = snap.exists() ? snap.data() : null;
-                if (data) profileCache.set(uid, data);
+                if (data) {
+                    profileCache.set(uid, data);
+                    cacheTimestamps.set(uid, now);
+                }
                 return data;
             } catch (e) {
                 console.warn('Ошибка загрузки профиля:', e);
-                return null;
+                return cached || null;
             }
         }
 
+        // Мгновенное сохранение: кэш сразу, Firestore — в фоне
+        function saveUserDocFast(uid, data) {
+            const existing = profileCache.get(uid) || {};
+            const merged = { ...existing, ...data };
+            profileCache.set(uid, merged);
+            cacheTimestamps.set(uid, Date.now());
+
+            syncQueue.set(uid, merged);
+
+            if (!syncInProgress) {
+                syncInProgress = true;
+                processSyncQueue();
+            }
+            return merged;
+        }
+
+        async function processSyncQueue() {
+            while (syncQueue.size > 0) {
+                const [uid, data] = syncQueue.entries().next().value;
+                syncQueue.delete(uid);
+                try {
+                    const ref = doc(db, 'users', uid);
+                    await setDoc(ref, data, { merge: true });
+                } catch (e) {
+                    console.error('Ошибка синхронизации:', e);
+                }
+            }
+            syncInProgress = false;
+        }
+
+        // Обычное сохранение (для случая, когда нужен await)
         async function saveUserDoc(uid, data) {
             const ref = doc(db, 'users', uid);
             await setDoc(ref, data, { merge: true });
             const existing = profileCache.get(uid) || {};
-            profileCache.set(uid, { ...existing, ...data });
+            const merged = { ...existing, ...data };
+            profileCache.set(uid, merged);
+            cacheTimestamps.set(uid, Date.now());
         }
 
         async function ensureUserDoc(user) {
@@ -2397,7 +2443,9 @@
             return initial;
         }
 
-        /* ===== СОСТОЯНИЕ ===== */
+        /* ═══════════════════════════════════════════════════
+           СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ
+           ═══════════════════════════════════════════════════ */
         const userMenu = $('#userMenu');
         const userAvatar = $('#userAvatar');
         const userEmail = $('#userEmail');
@@ -2446,6 +2494,12 @@
                 userEmail.textContent = email;
                 userAvatar.title = 'Вы вошли как ' + email;
 
+                // Мгновенно показываем инициал из Auth
+                const initialName = user.displayName?.trim();
+                const initial = initialName ? initialName[0] : email[0];
+                userAvatar.textContent = initial.toUpperCase();
+
+                // В фоне — загружаем профиль
                 const profile = await ensureUserDoc(user);
                 applyAvatarToHeader(profile, email);
 
@@ -2456,10 +2510,13 @@
                 userDropdown.classList.remove('open');
                 userAvatar.style.backgroundImage = '';
                 profileCache.clear();
+                cacheTimestamps.clear();
             }
         });
 
-        /* ===== ПРОФИЛЬ ===== */
+        /* ═══════════════════════════════════════════════════
+           ПРОФИЛЬ
+           ═══════════════════════════════════════════════════ */
         const profileModal = $('#profileModal');
         const profileMessage = $('#profileMessage');
         const profileAvatarPreview = $('#profileAvatarPreview');
@@ -2502,8 +2559,20 @@
             $('#profileEmailDisplay').textContent = user.email || '—';
             $('#profileUidDisplay').textContent = user.uid;
 
-            const profile = await loadUserDoc(user.uid);
+            // Сначала из кэша — мгновенно
+            const cached = profileCache.get(user.uid);
+            if (cached) {
+                applyProfileToForm(cached, user);
+            }
 
+            // Потом — свежие данные
+            const fresh = await loadUserDoc(user.uid);
+            if (fresh) {
+                applyProfileToForm(fresh, user);
+            }
+        }
+
+        function applyProfileToForm(profile, user) {
             let createdText = '—';
             const created = profile?.createdAt;
             if (created) {
@@ -2552,41 +2621,38 @@
             tab.addEventListener('click', () => switchProfileTab(tab.dataset.tab));
         });
 
-        $('#profileForm').addEventListener('submit', async (e) => {
+        // ОПТИМИСТИЧНОЕ СОХРАНЕНИЕ
+        $('#profileForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const user = auth.currentUser;
             if (!user) return;
 
             clearProfileMessage();
-            const btn = $('#profileSaveBtn');
-            setLoading(btn, true, 'Сохранить');
 
-            try {
-                const displayName = $('#profileDisplayName').value.trim().slice(0, 32);
-                const bio = $('#profileBio').value.trim().slice(0, 200);
-                const avatarUrl = $('#profileAvatarUrl').value.trim();
+            const displayName = $('#profileDisplayName').value.trim().slice(0, 32);
+            const bio = $('#profileBio').value.trim().slice(0, 200);
+            const avatarUrl = $('#profileAvatarUrl').value.trim();
 
-                if (avatarUrl && !/^https?:\/\//.test(avatarUrl)) {
-                    throw new Error('Ссылка на аватар должна начинаться с http:// или https://');
-                }
+            if (avatarUrl && !/^https?:\/\//.test(avatarUrl)) {
+                showProfileMessage('Ссылка на аватар должна начинаться с http:// или https://', 'error');
+                return;
+            }
 
-                await saveUserDoc(user.uid, {
-                    displayName,
-                    bio,
-                    avatarUrl,
-                    updatedAt: serverTimestamp()
-                });
+            // 1. Мгновенно применяем UI
+            applyAvatarToHeader({ displayName, avatarUrl }, user.email);
+            showProfileMessage('Профиль сохранён', 'success');
 
-                if (displayName && displayName !== user.displayName) {
-                    try { await updateProfile(user, { displayName }); } catch (e) { console.warn(e); }
-                }
+            // 2. В фоне — в Firestore
+            saveUserDocFast(user.uid, {
+                displayName,
+                bio,
+                avatarUrl,
+                updatedAt: serverTimestamp()
+            });
 
-                applyAvatarToHeader({ displayName, avatarUrl }, user.email);
-                showProfileMessage('Профиль сохранён', 'success');
-            } catch (err) {
-                showProfileMessage(err.message || getErrorMessage(err), 'error');
-            } finally {
-                setLoading(btn, false, 'Сохранить');
+            // 3. В фоне — в Firebase Auth
+            if (displayName && displayName !== user.displayName) {
+                updateProfile(user, { displayName }).catch((err) => console.warn(err));
             }
         });
 
@@ -2595,6 +2661,7 @@
             closeProfileModal();
         });
 
+        // Смена пароля — нужен await, но без «Подождите…»
         $('#changePasswordForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
@@ -2609,7 +2676,7 @@
             if (next !== confirm) { showProfileMessage('Пароли не совпадают', 'error'); return; }
 
             const btn = $('#changePasswordBtn');
-            setLoading(btn, true, 'Сменить пароль');
+            btn.disabled = true;
 
             try {
                 const cred = EmailAuthProvider.credential(user.email, current);
@@ -2620,10 +2687,11 @@
             } catch (err) {
                 showProfileMessage(getErrorMessage(err), 'error');
             } finally {
-                setLoading(btn, false, 'Сменить пароль');
+                btn.disabled = false;
             }
         });
 
+        // Смена email — аналогично
         $('#changeEmailForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
@@ -2636,7 +2704,7 @@
             if (!isValidEmail(newEmail)) { showProfileMessage('Некорректный email', 'error'); return; }
 
             const btn = $('#changeEmailBtn');
-            setLoading(btn, true, 'Сменить email');
+            btn.disabled = true;
 
             try {
                 const cred = EmailAuthProvider.credential(user.email, current);
@@ -2649,11 +2717,13 @@
             } catch (err) {
                 showProfileMessage(getErrorMessage(err), 'error');
             } finally {
-                setLoading(btn, false, 'Сменить email');
+                btn.disabled = false;
             }
         });
 
-        /* ===== ТЕМА ===== */
+        /* ═══════════════════════════════════════════════════
+           ТЕМА
+           ═══════════════════════════════════════════════════ */
         const html = document.documentElement;
         const themeToggle = $('#themeToggle');
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -2667,7 +2737,9 @@
             localStorage.setItem('theme', next);
         });
 
-        /* ===== СКРОЛЛ ===== */
+        /* ═══════════════════════════════════════════════════
+           СКРОЛЛ
+           ═══════════════════════════════════════════════════ */
         const siteHeader = $('#siteHeader');
         const progressBar = $('#progressBar');
         const toTop = $('#toTop');
@@ -2694,7 +2766,9 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* ===== МОБИЛЬНОЕ МЕНЮ ===== */
+        /* ═══════════════════════════════════════════════════
+           МОБИЛЬНОЕ МЕНЮ
+           ═══════════════════════════════════════════════════ */
         const burger = $('#burger');
         const navList = $('#navList');
 
@@ -2713,7 +2787,9 @@
             });
         });
 
-        /* ===== КОПИРОВАНИЕ ===== */
+        /* ═══════════════════════════════════════════════════
+           КОПИРОВАНИЕ
+           ═══════════════════════════════════════════════════ */
         document.querySelectorAll('.cmd-item').forEach(item => {
             const copyText = item.dataset.copy || item.querySelector('.cmd-name')?.textContent || '';
             if (!copyText) return;
@@ -2739,7 +2815,9 @@
             });
         });
 
-        /* ===== АНИМАЦИИ ===== */
+        /* ═══════════════════════════════════════════════════
+           АНИМАЦИИ
+           ═══════════════════════════════════════════════════ */
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
@@ -2756,7 +2834,9 @@
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
-        /* ===== СЧЁТЧИКИ ===== */
+        /* ═══════════════════════════════════════════════════
+           СЧЁТЧИКИ
+           ═══════════════════════════════════════════════════ */
         const counters = document.querySelectorAll('.stat-value[data-target]');
         const runCounter = (el) => {
             const target = parseInt(el.dataset.target, 10);
@@ -2801,7 +2881,9 @@
             });
         }
 
-        /* ===== SCROLL-SPY ===== */
+        /* ═══════════════════════════════════════════════════
+           SCROLL-SPY
+           ═══════════════════════════════════════════════════ */
         const sections = document.querySelectorAll('section[id]');
         const navAnchors = document.querySelectorAll('.nav-link[href^="#"]');
 
