@@ -4,16 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Юрика-Бот — Твой помощник на сервере Lolka</title>
-<meta name="description" content="Модерация, утилиты и конфигурация — всё в одном боте для Lolka. Установка за 10 секунд, полностью бесплатно.">
+<meta name="description" content="Модерация, экономика, бизнесы, браки — всё в одном боте для Lolka. Установка за 10 секунд, полностью бесплатно.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://www.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-    /* ═══════════════════════════════════════════════════
-       1. ПЕРЕМЕННЫЕ ТЕМЫ
-       ═══════════════════════════════════════════════════ */
     :root, [data-theme="dark"] {
         --bg: #08090f;
         --bg-2: #0f1119;
@@ -42,6 +39,12 @@
         --error-subtle: rgba(248, 113, 113, 0.1);
         --warning: #fbbf24;
         --warning-subtle: rgba(251, 191, 36, 0.1);
+        --pink: #eb459e;
+        --pink-subtle: rgba(235, 69, 158, 0.12);
+        --gold: #f59e0b;
+        --gold-subtle: rgba(245, 158, 11, 0.12);
+        --green: #10b981;
+        --green-subtle: rgba(16, 185, 129, 0.12);
 
         --gradient: linear-gradient(135deg, #7c5cfc 0%, #a78bfa 50%, #c4b5fd 100%);
         --gradient-soft: linear-gradient(135deg, rgba(124,92,252,0.14), rgba(167,139,250,0.08));
@@ -85,6 +88,12 @@
         --error-subtle: rgba(220, 38, 38, 0.06);
         --warning: #d97706;
         --warning-subtle: rgba(217, 119, 6, 0.08);
+        --pink: #db2777;
+        --pink-subtle: rgba(219, 39, 119, 0.08);
+        --gold: #d97706;
+        --gold-subtle: rgba(217, 119, 6, 0.08);
+        --green: #059669;
+        --green-subtle: rgba(5, 150, 105, 0.08);
 
         --gradient: linear-gradient(135deg, #6d4aff 0%, #8b5cf6 50%, #a78bfa 100%);
         --gradient-soft: linear-gradient(135deg, rgba(109,74,255,0.08), rgba(139,92,246,0.04));
@@ -95,9 +104,6 @@
         --shadow-xl: 0 24px 60px rgba(20,30,60,0.14);
     }
 
-    /* ═══════════════════════════════════════════════════
-       2. СБРОС И БАЗОВЫЕ СТИЛИ
-       ═══════════════════════════════════════════════════ */
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
     html {
@@ -146,9 +152,6 @@
 
     ::selection { background: var(--accent); color: #fff; }
 
-    /* ═══════════════════════════════════════════════════
-       3. ТИПОГРАФИКА
-       ═══════════════════════════════════════════════════ */
     h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.02em; }
 
     .container {
@@ -163,11 +166,6 @@
         font-size: 0.9em;
     }
 
-    /* ═══════════════════════════════════════════════════
-       4. КОМПОНЕНТЫ
-       ═══════════════════════════════════════════════════ */
-
-    /* ---------- Прогресс-бар ---------- */
     .progress-bar {
         position: fixed;
         top: 0; left: 0;
@@ -179,7 +177,6 @@
         box-shadow: 0 0 12px var(--accent-glow);
     }
 
-    /* ---------- Кнопки ---------- */
     .btn {
         display: inline-flex;
         align-items: center;
@@ -219,20 +216,6 @@
         transform: translateY(-2px);
     }
 
-    /* ---------- Карточки ---------- */
-    .card {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-    }
-    .card:hover {
-        transform: translateY(-3px);
-        border-color: var(--border-strong);
-        box-shadow: var(--shadow-lg);
-    }
-
-    /* ---------- Бейджи ---------- */
     .badge {
         display: inline-flex;
         align-items: center;
@@ -260,9 +243,6 @@
         100% { box-shadow: 0 0 0 0 transparent; }
     }
 
-    /* ═══════════════════════════════════════════════════
-       5. НАВИГАЦИЯ
-       ═══════════════════════════════════════════════════ */
     .site-header {
         position: sticky;
         top: 0;
@@ -373,7 +353,6 @@
 
     .burger { display: none; }
 
-    /* ---------- Аватар пользователя ---------- */
     .user-menu {
         display: none;
         align-items: center;
@@ -469,9 +448,6 @@
     }
     .user-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; }
 
-    /* ═══════════════════════════════════════════════════
-       6. HERO
-       ═══════════════════════════════════════════════════ */
     .hero {
         text-align: center;
         padding: 90px 0 40px;
@@ -511,9 +487,6 @@
         flex-wrap: wrap;
     }
 
-    /* ═══════════════════════════════════════════════════
-       7. СТАТИСТИКА
-       ═══════════════════════════════════════════════════ */
     .stats-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -564,9 +537,6 @@
         color: var(--text-dim);
     }
 
-    /* ═══════════════════════════════════════════════════
-       8. СЕКЦИИ
-       ═══════════════════════════════════════════════════ */
     .section { padding: 80px 0; }
     .section-header {
         text-align: center;
@@ -584,7 +554,6 @@
         line-height: 1.6;
     }
 
-    /* ---------- Возможности ---------- */
     .features-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -629,7 +598,6 @@
         line-height: 1.6;
     }
 
-    /* ---------- О Lolka ---------- */
     .about-card {
         background: var(--bg-2);
         border: 1px solid var(--border);
@@ -714,7 +682,7 @@
         color: var(--text-dim);
     }
 
-    /* ---------- Команды ---------- */
+    /* ═══════════ КОМАНДЫ ═══════════ */
     .commands-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -765,9 +733,13 @@
         border: 1px solid var(--border-soft);
     }
 
+    /* Цвета иконок по категориям */
     .cmd-card.moder .cmd-card-icon { background: var(--success-subtle); }
     .cmd-card.config .cmd-card-icon { background: rgba(155, 89, 182, 0.12); }
     .cmd-card.help .cmd-card-icon { background: var(--warning-subtle); }
+    .cmd-card.economy .cmd-card-icon { background: var(--gold-subtle); }
+    .cmd-card.business .cmd-card-icon { background: var(--green-subtle); }
+    .cmd-card.marriage .cmd-card-icon { background: var(--pink-subtle); }
 
     .cmd-list {
         list-style: none;
@@ -839,7 +811,6 @@
         line-height: 1.45;
     }
 
-    /* ---------- CTA ---------- */
     .cta-card {
         text-align: center;
         padding: 60px 32px;
@@ -864,9 +835,6 @@
         margin-right: auto;
     }
 
-    /* ═══════════════════════════════════════════════════
-       9. ФУТЕР
-       ═══════════════════════════════════════════════════ */
     .site-footer {
         padding: 44px 0 30px;
         border-top: 1px solid var(--border);
@@ -914,7 +882,6 @@
         color: var(--text-faint);
     }
 
-    /* ---------- Наверх ---------- */
     .to-top {
         position: fixed;
         right: 24px; bottom: 24px;
@@ -944,9 +911,7 @@
         transform: translateY(-3px);
     }
 
-    /* ═══════════════════════════════════════════════════
-       10. МОДАЛЬНЫЕ ОКНА
-       ═══════════════════════════════════════════════════ */
+    /* ═══════════ МОДАЛЬНЫЕ ОКНА ═══════════ */
     .modal-overlay {
         position: fixed;
         inset: 0;
@@ -1018,7 +983,6 @@
         border-radius: var(--radius-lg);
     }
 
-    /* ---------- Табы ---------- */
     .tabs {
         display: flex;
         gap: 4px;
@@ -1042,7 +1006,6 @@
         box-shadow: var(--shadow-sm);
     }
 
-    /* ---------- Формы ---------- */
     .form-group { margin-bottom: 16px; }
     .form-label {
         display: block;
@@ -1172,7 +1135,6 @@
     .form-panel { display: none; }
     .form-panel.active { display: block; }
 
-    /* ---------- Профиль ---------- */
     .avatar-row {
         display: flex;
         align-items: center;
@@ -1249,9 +1211,6 @@
     }
     .btn-danger svg { width: 16px; height: 16px; }
 
-    /* ═══════════════════════════════════════════════════
-       11. АНИМАЦИИ ПОЯВЛЕНИЯ
-       ═══════════════════════════════════════════════════ */
     .reveal {
         opacity: 0;
         transform: translateY(20px);
@@ -1262,9 +1221,6 @@
         transform: translateY(0);
     }
 
-    /* ═══════════════════════════════════════════════════
-       12. АДАПТИВНОСТЬ
-       ═══════════════════════════════════════════════════ */
     @media (max-width: 900px) {
         .burger { display: grid; }
 
@@ -1410,7 +1366,7 @@
                 <h1 class="hero-title">Твой помощник<br>на сервере Lolka</h1>
 
                 <p class="hero-subtitle">
-                    Модерация, утилиты, конфигурация и удобное меню команд —
+                    Модерация, экономика, бизнесы, браки и удобное меню команд —
                     всё в одном боте. Установка занимает 10 секунд.
                 </p>
 
@@ -1440,11 +1396,11 @@
             <div class="container">
                 <div class="stats-grid reveal">
                     <div class="stat">
-                        <div class="stat-value" data-target="16">0</div>
+                        <div class="stat-value" data-target="52">0</div>
                         <div class="stat-label">Команд</div>
                     </div>
                     <div class="stat">
-                        <div class="stat-value" data-target="5">0</div>
+                        <div class="stat-value" data-target="8">0</div>
                         <div class="stat-label">Категорий</div>
                     </div>
                     <div class="stat">
@@ -1583,7 +1539,7 @@
                             </svg>
                         </div>
                         <h3>Модерация</h3>
-                        <p>Кик, мут, очистка чата — базовые инструменты для поддержания порядка.</p>
+                        <p>Кик, мут, очистка чата — базовые инструменты для порядка.</p>
                     </article>
 
                     <article class="feature">
@@ -1593,7 +1549,7 @@
                             </svg>
                         </div>
                         <h3>Утилиты</h3>
-                        <p>Карточка пользователя, аватар, отладка — вся информация под рукой.</p>
+                        <p>Карточка пользователя, аватар, отладка — под рукой.</p>
                     </article>
 
                     <article class="feature">
@@ -1604,39 +1560,39 @@
                             </svg>
                         </div>
                         <h3>Конфигурация</h3>
-                        <p>Свой префикс, канал приветствий, логи и авто-роль — настройка в чате.</p>
+                        <p>Свой префикс, канал приветствий, логи и авто-роль.</p>
                     </article>
 
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                                <line x1="12" y1="1" x2="12" y2="23"></line>
+                                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
                             </svg>
                         </div>
-                        <h3>Умное меню</h3>
-                        <p>Постраничный <code>/команды</code> со всеми командами по категориям.</p>
+                        <h3>Экономика</h3>
+                        <p>Заработок, банк, магазин ролей, переводы и топ богачей.</p>
                     </article>
 
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
                             </svg>
                         </div>
-                        <h3>Быстрый</h3>
-                        <p>Современный Python с асинхронной библиотекой. Отвечает мгновенно.</p>
+                        <h3>Бизнесы</h3>
+                        <p>Создавай свои бизнесы, собирай пассивный доход, улучшай.</p>
                     </article>
 
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
                             </svg>
                         </div>
-                        <h3>Безопасный</h3>
-                        <p>Токен хранится в <code>.env</code>, права проверяются на каждой команде.</p>
+                        <h3>Браки</h3>
+                        <p>Предложения, свадьбы, разводы, совместимость и обнимашки.</p>
                     </article>
                 </div>
             </div>
@@ -1651,7 +1607,7 @@
                 </div>
 
                 <div class="commands-grid">
-                    <!-- Основное -->
+                    <!-- ═══ ОСНОВНОЕ ═══ -->
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🟢</div>
@@ -1678,7 +1634,7 @@
                         </ul>
                     </div>
 
-                    <!-- Пользователи -->
+                    <!-- ═══ ПОЛЬЗОВАТЕЛИ ═══ -->
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">👤</div>
@@ -1701,7 +1657,7 @@
                         </ul>
                     </div>
 
-                    <!-- Модерация -->
+                    <!-- ═══ МОДЕРАЦИЯ ═══ -->
                     <div class="cmd-card moder">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🛡️</div>
@@ -1724,7 +1680,7 @@
                         </ul>
                     </div>
 
-                    <!-- Конфигурация -->
+                    <!-- ═══ КОНФИГУРАЦИЯ ═══ -->
                     <div class="cmd-card config">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">⚙️</div>
@@ -1755,7 +1711,156 @@
                         </ul>
                     </div>
 
-                    <!-- Справка -->
+                    <!-- ═══ ЭКОНОМИКА ═══ -->
+                    <div class="cmd-card economy">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">💰</div>
+                            <div class="cmd-card-title">Экономика</div>
+                            <div class="cmd-card-count">11</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/balance">
+                                <span class="cmd-name">/balance [@user]</span>
+                                <span class="cmd-desc">Баланс пользователя</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/daily">
+                                <span class="cmd-name">/daily</span>
+                                <span class="cmd-desc">Ежедневный бонус</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/work">
+                                <span class="cmd-name">/work</span>
+                                <span class="cmd-desc">Заработать деньги</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/transfer @user 100">
+                                <span class="cmd-name">/transfer @user</span>
+                                <span class="cmd-desc">Перевести деньги</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/bank">
+                                <span class="cmd-name">/bank [action]</span>
+                                <span class="cmd-desc">Вклады и снятия</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/top">
+                                <span class="cmd-name">/top</span>
+                                <span class="cmd-desc">Топ богачей</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/shop">
+                                <span class="cmd-name">/shop</span>
+                                <span class="cmd-desc">Магазин сервера</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/buy 1">
+                                <span class="cmd-name">/buy ID</span>
+                                <span class="cmd-desc">Купить товар</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/inventory">
+                                <span class="cmd-name">/inventory</span>
+                                <span class="cmd-desc">Инвентарь</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/shop-add @Роль 1000">
+                                <span class="cmd-name">/shop-add @Роль</span>
+                                <span class="cmd-desc">Добавить товар (админ)</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/shop-remove 1">
+                                <span class="cmd-name">/shop-remove ID</span>
+                                <span class="cmd-desc">Удалить товар (админ)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ═══ БИЗНЕСЫ ═══ -->
+                    <div class="cmd-card business">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">💼</div>
+                            <div class="cmd-card-title">Бизнесы</div>
+                            <div class="cmd-card-count">8</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/business">
+                                <span class="cmd-name">/business</span>
+                                <span class="cmd-desc">Мои бизнесы</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-create Кофейня 250">
+                                <span class="cmd-name">/business-create</span>
+                                <span class="cmd-desc">Создать бизнес</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-collect">
+                                <span class="cmd-name">/business-collect</span>
+                                <span class="cmd-desc">Собрать доход</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-upgrade 1">
+                                <span class="cmd-name">/business-upgrade ID</span>
+                                <span class="cmd-desc">Улучшить бизнес</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-sell 1">
+                                <span class="cmd-name">/business-sell ID</span>
+                                <span class="cmd-desc">Продать (70% возврат)</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-info 1">
+                                <span class="cmd-name">/business-info ID</span>
+                                <span class="cmd-desc">Подробнее о бизнесе</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-top">
+                                <span class="cmd-name">/business-top</span>
+                                <span class="cmd-desc">Топ предпринимателей</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/business-price 500">
+                                <span class="cmd-name">/business-price</span>
+                                <span class="cmd-desc">Узнать цену</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ═══ БРАКИ ═══ -->
+                    <div class="cmd-card marriage">
+                        <div class="cmd-card-header">
+                            <div class="cmd-card-icon">💍</div>
+                            <div class="cmd-card-title">Браки</div>
+                            <div class="cmd-card-count">10</div>
+                        </div>
+                        <ul class="cmd-list">
+                            <li class="cmd-item" data-copy="/предложить @user">
+                                <span class="cmd-name">/предложить @user</span>
+                                <span class="cmd-desc">Сделать предложение</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/развод">
+                                <span class="cmd-name">/развод</span>
+                                <span class="cmd-desc">Развестись</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/пара">
+                                <span class="cmd-name">/пара [@user]</span>
+                                <span class="cmd-desc">Показать партнёра</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/браки">
+                                <span class="cmd-name">/браки</span>
+                                <span class="cmd-desc">Список всех браков</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/совместимость @u1 @u2">
+                                <span class="cmd-name">/совместимость</span>
+                                <span class="cmd-desc">Проверить совместимость</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/шип @u1 @u2">
+                                <span class="cmd-name">/шип @u1 @u2</span>
+                                <span class="cmd-desc">Шип с процентами</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/поцеловать @user">
+                                <span class="cmd-name">/поцеловать @user</span>
+                                <span class="cmd-desc">Поцеловать</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/обнять @user">
+                                <span class="cmd-name">/обнять @user</span>
+                                <span class="cmd-desc">Обнять</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/погладить @user">
+                                <span class="cmd-name">/погладить @user</span>
+                                <span class="cmd-desc">Погладить по голове</span>
+                            </li>
+                            <li class="cmd-item" data-copy="/шлёпнуть @user">
+                                <span class="cmd-name">/шлёпнуть @user</span>
+                                <span class="cmd-desc">Шлёпнуть</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- ═══ СПРАВКА ═══ -->
                     <div class="cmd-card help">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">📖</div>
@@ -1770,7 +1875,7 @@
                         </ul>
                     </div>
 
-                    <!-- События -->
+                    <!-- ═══ СОБЫТИЯ ═══ -->
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🔔</div>
@@ -1778,12 +1883,30 @@
                             <div class="cmd-card-count">6</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item"><span class="cmd-name">Вход</span><span class="cmd-desc">Приветствие + роль</span></li>
-                            <li class="cmd-item"><span class="cmd-name">Выход</span><span class="cmd-desc">Лог с ролями</span></li>
-                            <li class="cmd-item"><span class="cmd-name">Удаление</span><span class="cmd-desc">Лог сообщения</span></li>
-                            <li class="cmd-item"><span class="cmd-name">Изменение</span><span class="cmd-desc">Было → Стало</span></li>
-                            <li class="cmd-item"><span class="cmd-name">Бан</span><span class="cmd-desc">Лог в канал</span></li>
-                            <li class="cmd-item"><span class="cmd-name">Разбан</span><span class="cmd-desc">Лог в канал</span></li>
+                            <li class="cmd-item">
+                                <span class="cmd-name">Вход</span>
+                                <span class="cmd-desc">Приветствие + роль</span>
+                            </li>
+                            <li class="cmd-item">
+                                <span class="cmd-name">Выход</span>
+                                <span class="cmd-desc">Лог с ролями</span>
+                            </li>
+                            <li class="cmd-item">
+                                <span class="cmd-name">Удаление</span>
+                                <span class="cmd-desc">Лог сообщения</span>
+                            </li>
+                            <li class="cmd-item">
+                                <span class="cmd-name">Изменение</span>
+                                <span class="cmd-desc">Было → Стало</span>
+                            </li>
+                            <li class="cmd-item">
+                                <span class="cmd-name">Бан</span>
+                                <span class="cmd-desc">Лог в канал</span>
+                            </li>
+                            <li class="cmd-item">
+                                <span class="cmd-name">Разбан</span>
+                                <span class="cmd-desc">Лог в канал</span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1926,7 +2049,6 @@
                 <button class="tab" data-tab="account" type="button">Аккаунт</button>
             </div>
 
-            <!-- Профиль -->
             <div class="form-panel active" data-panel="general">
                 <form id="profileForm">
                     <div class="avatar-row">
@@ -1957,7 +2079,6 @@
                 </form>
             </div>
 
-            <!-- Безопасность -->
             <div class="form-panel" data-panel="security">
                 <form id="changePasswordForm">
                     <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px;">Смена пароля</h4>
@@ -1996,7 +2117,6 @@
                 </form>
             </div>
 
-            <!-- Аккаунт -->
             <div class="form-panel" data-panel="account">
                 <div class="info-row">
                     <span class="info-row-label">Email</span>
@@ -2066,9 +2186,6 @@
         const auth = getAuth(firebaseApp);
         const db = getFirestore(firebaseApp);
 
-        /* ═══════════════════════════════════════════════════
-           УТИЛИТЫ
-           ═══════════════════════════════════════════════════ */
         const $ = (sel) => document.querySelector(sel);
 
         const ERROR_MESSAGES = {
@@ -2098,9 +2215,7 @@
             if (l) l.textContent = loading ? 'Подождите…' : label;
         };
 
-        /* ═══════════════════════════════════════════════════
-           АВТОРИЗАЦИЯ
-           ═══════════════════════════════════════════════════ */
+        /* ===== АВТОРИЗАЦИЯ ===== */
         const authModal = $('#authModal');
         const authOpenBtn = $('#authOpenBtn');
         const loginForm = $('#loginForm');
@@ -2190,7 +2305,6 @@
             return ok;
         }
 
-        // Обработчики
         authOpenBtn.addEventListener('click', () => openAuthModal('login'));
         $('#authClose').addEventListener('click', closeAuthModal);
         authModal.addEventListener('click', (e) => { if (e.target === authModal) closeAuthModal(); });
@@ -2245,16 +2359,11 @@
             }
         });
 
-        /* ═══════════════════════════════════════════════════
-           FIRESTORE — С КЭШЕМ
-           ═══════════════════════════════════════════════════ */
-        // Кэш профилей в памяти — избегаем повторных запросов
+        /* ===== FIRESTORE ===== */
         const profileCache = new Map();
 
         async function loadUserDoc(uid) {
-            // Проверяем кэш
             if (profileCache.has(uid)) return profileCache.get(uid);
-
             try {
                 const ref = doc(db, 'users', uid);
                 const snap = await getDoc(ref);
@@ -2270,7 +2379,6 @@
         async function saveUserDoc(uid, data) {
             const ref = doc(db, 'users', uid);
             await setDoc(ref, data, { merge: true });
-            // Обновляем кэш
             const existing = profileCache.get(uid) || {};
             profileCache.set(uid, { ...existing, ...data });
         }
@@ -2289,9 +2397,7 @@
             return initial;
         }
 
-        /* ═══════════════════════════════════════════════════
-           СОСТОЯНИЕ ПОЛЬЗОВАТЕЛЯ
-           ═══════════════════════════════════════════════════ */
+        /* ===== СОСТОЯНИЕ ===== */
         const userMenu = $('#userMenu');
         const userAvatar = $('#userAvatar');
         const userEmail = $('#userEmail');
@@ -2353,9 +2459,7 @@
             }
         });
 
-        /* ═══════════════════════════════════════════════════
-           ПРОФИЛЬ
-           ═══════════════════════════════════════════════════ */
+        /* ===== ПРОФИЛЬ ===== */
         const profileModal = $('#profileModal');
         const profileMessage = $('#profileMessage');
         const profileAvatarPreview = $('#profileAvatarPreview');
@@ -2400,7 +2504,6 @@
 
             const profile = await loadUserDoc(user.uid);
 
-            // Дата регистрации
             let createdText = '—';
             const created = profile?.createdAt;
             if (created) {
@@ -2492,7 +2595,6 @@
             closeProfileModal();
         });
 
-        // Смена пароля
         $('#changePasswordForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
@@ -2522,7 +2624,6 @@
             }
         });
 
-        // Смена email
         $('#changeEmailForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
@@ -2552,9 +2653,7 @@
             }
         });
 
-        /* ═══════════════════════════════════════════════════
-           ТЕМА
-           ═══════════════════════════════════════════════════ */
+        /* ===== ТЕМА ===== */
         const html = document.documentElement;
         const themeToggle = $('#themeToggle');
         const savedTheme = localStorage.getItem('theme') || 'dark';
@@ -2568,9 +2667,7 @@
             localStorage.setItem('theme', next);
         });
 
-        /* ═══════════════════════════════════════════════════
-           СКРОЛЛ
-           ═══════════════════════════════════════════════════ */
+        /* ===== СКРОЛЛ ===== */
         const siteHeader = $('#siteHeader');
         const progressBar = $('#progressBar');
         const toTop = $('#toTop');
@@ -2597,9 +2694,7 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
 
-        /* ═══════════════════════════════════════════════════
-           МОБИЛЬНОЕ МЕНЮ
-           ═══════════════════════════════════════════════════ */
+        /* ===== МОБИЛЬНОЕ МЕНЮ ===== */
         const burger = $('#burger');
         const navList = $('#navList');
 
@@ -2618,9 +2713,7 @@
             });
         });
 
-        /* ═══════════════════════════════════════════════════
-           КОПИРОВАНИЕ КОМАНД
-           ═══════════════════════════════════════════════════ */
+        /* ===== КОПИРОВАНИЕ ===== */
         document.querySelectorAll('.cmd-item').forEach(item => {
             const copyText = item.dataset.copy || item.querySelector('.cmd-name')?.textContent || '';
             if (!copyText) return;
@@ -2630,7 +2723,6 @@
                 try {
                     await navigator.clipboard.writeText(copyText);
                 } catch {
-                    // Fallback
                     const ta = document.createElement('textarea');
                     ta.value = copyText;
                     ta.style.position = 'fixed';
@@ -2647,9 +2739,7 @@
             });
         });
 
-        /* ═══════════════════════════════════════════════════
-           АНИМАЦИИ ПОЯВЛЕНИЯ
-           ═══════════════════════════════════════════════════ */
+        /* ===== АНИМАЦИИ ===== */
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
@@ -2666,9 +2756,7 @@
             document.querySelectorAll('.reveal').forEach(el => el.classList.add('visible'));
         }
 
-        /* ═══════════════════════════════════════════════════
-           СЧЁТЧИКИ
-           ═══════════════════════════════════════════════════ */
+        /* ===== СЧЁТЧИКИ ===== */
         const counters = document.querySelectorAll('.stat-value[data-target]');
         const runCounter = (el) => {
             const target = parseInt(el.dataset.target, 10);
@@ -2713,9 +2801,7 @@
             });
         }
 
-        /* ═══════════════════════════════════════════════════
-           SCROLL-SPY
-           ═══════════════════════════════════════════════════ */
+        /* ===== SCROLL-SPY ===== */
         const sections = document.querySelectorAll('section[id]');
         const navAnchors = document.querySelectorAll('.nav-link[href^="#"]');
 
