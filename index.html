@@ -12,242 +12,107 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
     :root, [data-theme="dark"] {
-        --bg: #08090f;
-        --bg-2: #0f1119;
-        --bg-3: #151824;
-        --bg-elevated: #1a1e2c;
-        --bg-hover: #202433;
-
-        --border: #22273a;
-        --border-soft: #1a1e2b;
-        --border-strong: #2e3450;
-
-        --text: #f4f5fa;
-        --text-muted: #a8afc9;
-        --text-dim: #7a8199;
-        --text-faint: #4d5470;
-
-        --accent: #7c5cfc;
-        --accent-hover: #8b6efd;
-        --accent-soft: #a78bfa;
-        --accent-glow: rgba(124, 92, 252, 0.35);
-        --accent-subtle: rgba(124, 92, 252, 0.12);
-
-        --success: #34d399;
-        --success-subtle: rgba(52, 211, 153, 0.12);
-        --error: #f87171;
-        --error-subtle: rgba(248, 113, 113, 0.1);
-        --warning: #fbbf24;
-        --warning-subtle: rgba(251, 191, 36, 0.1);
-        --pink: #eb459e;
-        --pink-subtle: rgba(235, 69, 158, 0.12);
-        --gold: #f59e0b;
-        --gold-subtle: rgba(245, 158, 11, 0.12);
-        --green: #10b981;
-        --green-subtle: rgba(16, 185, 129, 0.12);
-
+        --bg: #08090f; --bg-2: #0f1119; --bg-3: #151824; --bg-elevated: #1a1e2c; --bg-hover: #202433;
+        --border: #22273a; --border-soft: #1a1e2b; --border-strong: #2e3450;
+        --text: #f4f5fa; --text-muted: #a8afc9; --text-dim: #7a8199; --text-faint: #4d5470;
+        --accent: #7c5cfc; --accent-hover: #8b6efd; --accent-soft: #a78bfa;
+        --accent-glow: rgba(124, 92, 252, 0.35); --accent-subtle: rgba(124, 92, 252, 0.12);
+        --success: #34d399; --success-subtle: rgba(52, 211, 153, 0.12);
+        --error: #f87171; --error-subtle: rgba(248, 113, 113, 0.1);
+        --warning: #fbbf24; --warning-subtle: rgba(251, 191, 36, 0.1);
+        --pink: #eb459e; --pink-subtle: rgba(235, 69, 158, 0.12);
+        --gold: #f59e0b; --gold-subtle: rgba(245, 158, 11, 0.12);
+        --green: #10b981; --green-subtle: rgba(16, 185, 129, 0.12);
         --gradient: linear-gradient(135deg, #7c5cfc 0%, #a78bfa 50%, #c4b5fd 100%);
         --gradient-soft: linear-gradient(135deg, rgba(124,92,252,0.14), rgba(167,139,250,0.08));
-
         --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
         --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
         --shadow-lg: 0 12px 32px rgba(0,0,0,0.45);
         --shadow-xl: 0 24px 60px rgba(0,0,0,0.6);
-
-        --radius-sm: 8px;
-        --radius-md: 12px;
-        --radius-lg: 16px;
-        --radius-xl: 20px;
+        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
     }
-
     [data-theme="light"] {
-        --bg: #fafbff;
-        --bg-2: #ffffff;
-        --bg-3: #f3f5fb;
-        --bg-elevated: #ffffff;
-        --bg-hover: #eef1f9;
-
-        --border: #e4e8f2;
-        --border-soft: #eef1f8;
-        --border-strong: #d5daea;
-
-        --text: #0d1023;
-        --text-muted: #4d5470;
-        --text-dim: #6b7290;
-        --text-faint: #9aa1b8;
-
-        --accent: #6d4aff;
-        --accent-hover: #7d5cff;
-        --accent-soft: #8b5cf6;
-        --accent-glow: rgba(109, 74, 255, 0.22);
-        --accent-subtle: rgba(109, 74, 255, 0.08);
-
-        --success: #059669;
-        --success-subtle: rgba(5, 150, 105, 0.08);
-        --error: #dc2626;
-        --error-subtle: rgba(220, 38, 38, 0.06);
-        --warning: #d97706;
-        --warning-subtle: rgba(217, 119, 6, 0.08);
-        --pink: #db2777;
-        --pink-subtle: rgba(219, 39, 119, 0.08);
-        --gold: #d97706;
-        --gold-subtle: rgba(217, 119, 6, 0.08);
-        --green: #059669;
-        --green-subtle: rgba(5, 150, 105, 0.08);
-
+        --bg: #fafbff; --bg-2: #ffffff; --bg-3: #f3f5fb; --bg-elevated: #ffffff; --bg-hover: #eef1f9;
+        --border: #e4e8f2; --border-soft: #eef1f8; --border-strong: #d5daea;
+        --text: #0d1023; --text-muted: #4d5470; --text-dim: #6b7290; --text-faint: #9aa1b8;
+        --accent: #6d4aff; --accent-hover: #7d5cff; --accent-soft: #8b5cf6;
+        --accent-glow: rgba(109, 74, 255, 0.22); --accent-subtle: rgba(109, 74, 255, 0.08);
+        --success: #059669; --success-subtle: rgba(5, 150, 105, 0.08);
+        --error: #dc2626; --error-subtle: rgba(220, 38, 38, 0.06);
+        --warning: #d97706; --warning-subtle: rgba(217, 119, 6, 0.08);
+        --pink: #db2777; --pink-subtle: rgba(219, 39, 119, 0.08);
+        --gold: #d97706; --gold-subtle: rgba(217, 119, 6, 0.08);
+        --green: #059669; --green-subtle: rgba(5, 150, 105, 0.08);
         --gradient: linear-gradient(135deg, #6d4aff 0%, #8b5cf6 50%, #a78bfa 100%);
         --gradient-soft: linear-gradient(135deg, rgba(109,74,255,0.08), rgba(139,92,246,0.04));
-
         --shadow-sm: 0 1px 2px rgba(20,30,60,0.04);
         --shadow-md: 0 4px 16px rgba(20,30,60,0.06);
         --shadow-lg: 0 12px 32px rgba(20,30,60,0.1);
         --shadow-xl: 0 24px 60px rgba(20,30,60,0.14);
     }
-
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html {
-        scroll-behavior: smooth;
-        scroll-padding-top: 90px;
-        -webkit-text-size-adjust: 100%;
-    }
-
+    html { scroll-behavior: smooth; scroll-padding-top: 90px; -webkit-text-size-adjust: 100%; }
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        min-height: 100vh;
-        overflow-x: hidden;
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
+        line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
         transition: background 0.3s ease, color 0.3s ease;
     }
-
     body::before {
-        content: "";
-        position: fixed;
-        inset: 0;
+        content: ""; position: fixed; inset: 0;
         background:
             radial-gradient(circle at 15% 10%, var(--accent-subtle), transparent 42%),
             radial-gradient(circle at 85% 90%, rgba(167, 139, 250, 0.1), transparent 42%);
-        z-index: -1;
-        pointer-events: none;
-        animation: floatSlow 30s ease-in-out infinite;
+        z-index: -1; pointer-events: none; animation: floatSlow 30s ease-in-out infinite;
     }
     [data-theme="light"] body::before {
         background:
             radial-gradient(circle at 15% 10%, rgba(109, 74, 255, 0.06), transparent 42%),
             radial-gradient(circle at 85% 90%, rgba(139, 92, 246, 0.05), transparent 42%);
     }
-    @keyframes floatSlow {
-        0%, 100% { transform: translate(0, 0) scale(1); }
-        50% { transform: translate(-20px, -20px) scale(1.04); }
-    }
-
+    @keyframes floatSlow { 0%, 100% { transform: translate(0, 0) scale(1); } 50% { transform: translate(-20px, -20px) scale(1.04); } }
     img, svg { display: block; max-width: 100%; }
     button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
     a { color: inherit; text-decoration: none; }
     input, textarea { font-family: inherit; }
-
     ::selection { background: var(--accent); color: #fff; }
-
     h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.02em; }
-
-    .container {
-        width: 100%;
-        max-width: 1160px;
-        margin: 0 auto;
-        padding: 0 24px;
-    }
-
-    code, .mono {
-        font-family: 'JetBrains Mono', 'Consolas', monospace;
-        font-size: 0.9em;
-    }
-
+    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    code, .mono { font-family: 'JetBrains Mono', 'Consolas', monospace; font-size: 0.9em; }
     .progress-bar {
-        position: fixed;
-        top: 0; left: 0;
-        height: 2px;
-        width: 0%;
-        background: var(--gradient);
-        z-index: 200;
-        transition: width 0.1s linear;
-        box-shadow: 0 0 12px var(--accent-glow);
+        position: fixed; top: 0; left: 0; height: 2px; width: 0%;
+        background: var(--gradient); z-index: 200;
+        transition: width 0.1s linear; box-shadow: 0 0 12px var(--accent-glow);
     }
-
     .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 12px 22px;
-        border-radius: var(--radius-md);
-        font-size: 14.5px;
-        font-weight: 600;
+        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 12px 22px; border-radius: var(--radius-md); font-size: 14.5px; font-weight: 600;
         white-space: nowrap;
         transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
-        cursor: pointer;
-        border: 1px solid transparent;
+        cursor: pointer; border: 1px solid transparent;
     }
     .btn svg { width: 17px; height: 17px; flex-shrink: 0; }
-
-    .btn-primary {
-        background: var(--gradient);
-        color: #fff;
-        box-shadow: 0 4px 20px var(--accent-glow);
-    }
-    .btn-primary:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 10px 32px var(--accent-glow);
-    }
+    .btn-primary { background: var(--gradient); color: #fff; box-shadow: 0 4px 20px var(--accent-glow); }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px var(--accent-glow); }
     .btn-primary:active { transform: translateY(0); }
-
-    .btn-outline {
-        background: transparent;
-        color: var(--text);
-        border-color: var(--border);
-    }
-    .btn-outline:hover {
-        background: var(--bg-2);
-        border-color: var(--accent);
-        color: var(--accent);
-        transform: translateY(-2px);
-    }
-
+    .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
+    .btn-outline:hover { background: var(--bg-2); border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
     .badge {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 5px 12px;
-        border-radius: 100px;
-        font-size: 12.5px;
-        font-weight: 600;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text-muted);
+        display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 100px;
+        font-size: 12.5px; font-weight: 600;
+        background: var(--bg-2); border: 1px solid var(--border); color: var(--text-muted);
     }
-
     .badge-dot {
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        background: var(--success);
-        box-shadow: 0 0 0 0 var(--success);
-        animation: pulse 2s infinite;
+        width: 6px; height: 6px; border-radius: 50%;
+        background: var(--success); box-shadow: 0 0 0 0 var(--success); animation: pulse 2s infinite;
     }
     @keyframes pulse {
         0% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.5); }
         70% { box-shadow: 0 0 0 8px transparent; }
         100% { box-shadow: 0 0 0 0 transparent; }
     }
-
     .site-header {
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        padding: 12px 0;
+        position: sticky; top: 0; z-index: 100; padding: 12px 0;
         border-bottom: 1px solid transparent;
         transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s, padding 0.3s;
     }
@@ -255,1038 +120,407 @@
         background: color-mix(in srgb, var(--bg) 82%, transparent);
         backdrop-filter: blur(20px) saturate(180%);
         -webkit-backdrop-filter: blur(20px) saturate(180%);
-        border-bottom-color: var(--border);
-        padding: 8px 0;
+        border-bottom-color: var(--border); padding: 8px 0;
     }
-
-    .nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-    }
-
-    .logo {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 19px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        cursor: pointer;
-    }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; letter-spacing: -0.02em; cursor: pointer; }
     .logo-icon {
-        width: 36px;
-        height: 36px;
-        border-radius: var(--radius-md);
-        background: var(--gradient);
-        display: grid;
-        place-items: center;
-        font-size: 18px;
-        box-shadow: 0 4px 16px var(--accent-glow);
-        transition: transform 0.3s;
+        width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--gradient);
+        display: grid; place-items: center; font-size: 18px;
+        box-shadow: 0 4px 16px var(--accent-glow); transition: transform 0.3s;
     }
     .logo:hover .logo-icon { transform: scale(1.08) rotate(-6deg); }
     .logo-text {
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-size: 200% 100%;
-        transition: background-position 0.5s;
+        background: var(--gradient); -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent; background-size: 200% 100%; transition: background-position 0.5s;
     }
     .logo:hover .logo-text { background-position: 100% 0; }
-
-    .nav-list {
-        display: flex;
-        align-items: center;
-        gap: 4px;
-        list-style: none;
-    }
+    .nav-list { display: flex; align-items: center; gap: 4px; list-style: none; }
     .nav-link {
-        padding: 8px 14px;
-        border-radius: var(--radius-sm);
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-muted);
-        transition: color 0.2s, background 0.2s;
-        position: relative;
+        padding: 8px 14px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500;
+        color: var(--text-muted); transition: color 0.2s, background 0.2s; position: relative;
     }
     .nav-link:hover { color: var(--text); background: var(--bg-2); }
-    .nav-link.active {
-        color: var(--text);
-        background: var(--bg-2);
-    }
+    .nav-link.active { color: var(--text); background: var(--bg-2); }
     .nav-link.active::after {
-        content: "";
-        position: absolute;
-        bottom: 3px; left: 50%;
-        transform: translateX(-50%);
-        width: 14px; height: 2px;
-        background: var(--gradient);
-        border-radius: 2px;
+        content: ""; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+        width: 14px; height: 2px; background: var(--gradient); border-radius: 2px;
     }
-
-    .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-    }
-
+    .nav-actions { display: flex; align-items: center; gap: 6px; }
     .icon-btn {
-        width: 38px;
-        height: 38px;
-        border-radius: var(--radius-md);
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text);
-        font-size: 15px;
-        display: grid;
-        place-items: center;
+        width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--bg-2);
+        border: 1px solid var(--border); color: var(--text); font-size: 15px;
+        display: grid; place-items: center;
         transition: border-color 0.2s, transform 0.15s, background 0.2s;
     }
-    .icon-btn:hover {
-        border-color: var(--accent);
-        background: var(--bg-elevated);
-        transform: scale(1.05);
-    }
-
+    .icon-btn:hover { border-color: var(--accent); background: var(--bg-elevated); transform: scale(1.05); }
     .burger { display: none; }
-
-    .user-menu {
-        display: none;
-        align-items: center;
-        margin-left: 4px;
-    }
+    .user-menu { display: none; align-items: center; margin-left: 4px; }
     .user-menu.visible { display: flex; }
     .user-menu-wrapper { position: relative; }
-
     .user-avatar {
-        width: 38px;
-        height: 38px;
-        border-radius: 50%;
-        background: var(--gradient);
-        color: #fff;
-        font-weight: 700;
-        font-size: 14px;
-        cursor: pointer;
-        border: 2px solid var(--border);
-        display: grid;
-        place-items: center;
-        text-transform: uppercase;
-        background-size: cover;
-        background-position: center;
-        transition: border-color 0.2s, transform 0.15s;
-        overflow: hidden;
+        width: 38px; height: 38px; border-radius: 50%; background: var(--gradient); color: #fff;
+        font-weight: 700; font-size: 14px; cursor: pointer; border: 2px solid var(--border);
+        display: grid; place-items: center; text-transform: uppercase;
+        background-size: cover; background-position: center;
+        transition: border-color 0.2s, transform 0.15s; overflow: hidden;
     }
-    .user-avatar:hover {
-        border-color: var(--accent);
-        transform: scale(1.06);
-    }
-
+    .user-avatar:hover { border-color: var(--accent); transform: scale(1.06); }
     .user-dropdown {
-        position: absolute;
-        top: calc(100% + 10px);
-        right: 0;
-        min-width: 250px;
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 6px;
-        box-shadow: var(--shadow-xl);
-        opacity: 0;
-        transform: translateY(-6px) scale(0.98);
-        pointer-events: none;
-        transition: opacity 0.18s, transform 0.18s;
-        z-index: 101;
+        position: absolute; top: calc(100% + 10px); right: 0; min-width: 250px;
+        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+        padding: 6px; box-shadow: var(--shadow-xl);
+        opacity: 0; transform: translateY(-6px) scale(0.98); pointer-events: none;
+        transition: opacity 0.18s, transform 0.18s; z-index: 101;
     }
-    .user-dropdown.open {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-        pointer-events: auto;
-    }
-
-    .user-dropdown-header {
-        padding: 12px 14px;
-        border-bottom: 1px solid var(--border-soft);
-        margin-bottom: 4px;
-    }
-    .user-dropdown-label {
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 0.6px;
-        font-weight: 600;
-        color: var(--text-faint);
-        margin-bottom: 3px;
-    }
-    .user-dropdown-email {
-        font-size: 13.5px;
-        color: var(--text);
-        font-weight: 500;
-        word-break: break-all;
-    }
-
+    .user-dropdown.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .user-dropdown-header { padding: 12px 14px; border-bottom: 1px solid var(--border-soft); margin-bottom: 4px; }
+    .user-dropdown-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.6px; font-weight: 600; color: var(--text-faint); margin-bottom: 3px; }
+    .user-dropdown-email { font-size: 13.5px; color: var(--text); font-weight: 500; word-break: break-all; }
     .user-dropdown-item {
-        width: 100%;
-        text-align: left;
-        padding: 10px 14px;
-        border-radius: var(--radius-sm);
-        font-size: 14px;
-        color: var(--text-muted);
-        display: flex;
-        align-items: center;
-        gap: 10px;
+        width: 100%; text-align: left; padding: 10px 14px; border-radius: var(--radius-sm);
+        font-size: 14px; color: var(--text-muted); display: flex; align-items: center; gap: 10px;
         transition: background 0.15s, color 0.15s;
     }
-    .user-dropdown-item:hover {
-        background: var(--bg-3);
-        color: var(--text);
-    }
-    .user-dropdown-item.danger:hover {
-        background: var(--error-subtle);
-        color: var(--error);
-    }
+    .user-dropdown-item:hover { background: var(--bg-3); color: var(--text); }
+    .user-dropdown-item.danger:hover { background: var(--error-subtle); color: var(--error); }
     .user-dropdown-item svg { width: 16px; height: 16px; flex-shrink: 0; }
-
-    .hero {
-        text-align: center;
-        padding: 90px 0 40px;
-    }
+    .hero { text-align: center; padding: 90px 0 40px; }
     .hero .badge { margin-bottom: 24px; }
-
     .hero-title {
-        font-size: clamp(36px, 6vw, 68px);
-        font-weight: 800;
-        line-height: 1.05;
-        letter-spacing: -0.035em;
-        margin-bottom: 20px;
+        font-size: clamp(36px, 6vw, 68px); font-weight: 800; line-height: 1.05;
+        letter-spacing: -0.035em; margin-bottom: 20px;
         background: linear-gradient(110deg, var(--text) 20%, var(--accent-soft) 50%, var(--accent) 70%, var(--text) 90%);
-        background-size: 250% 100%;
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: gradientShift 8s ease-in-out infinite;
+        background-size: 250% 100%; -webkit-background-clip: text; background-clip: text;
+        -webkit-text-fill-color: transparent; animation: gradientShift 8s ease-in-out infinite;
     }
-    @keyframes gradientShift {
-        0%, 100% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-    }
-
+    @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
     .hero-subtitle {
-        font-size: clamp(15px, 2vw, 18px);
-        color: var(--text-muted);
-        max-width: 620px;
-        margin: 0 auto 36px;
-        line-height: 1.65;
+        font-size: clamp(15px, 2vw, 18px); color: var(--text-muted);
+        max-width: 620px; margin: 0 auto 36px; line-height: 1.65;
     }
-
-    .hero-actions {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-        flex-wrap: wrap;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-        gap: 14px;
-        margin: 64px 0;
-    }
-
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin: 64px 0; }
     .stat {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 28px 20px;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
+        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+        padding: 28px 20px; text-align: center; position: relative; overflow: hidden;
         transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
     }
     .stat::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0;
-        height: 2px;
-        background: var(--gradient);
-        opacity: 0;
-        transition: opacity 0.3s;
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+        background: var(--gradient); opacity: 0; transition: opacity 0.3s;
     }
-    .stat:hover {
-        transform: translateY(-4px);
-        border-color: var(--border-strong);
-        box-shadow: var(--shadow-md);
-    }
+    .stat:hover { transform: translateY(-4px); border-color: var(--border-strong); box-shadow: var(--shadow-md); }
     .stat:hover::before { opacity: 1; }
-
-    .stat-value {
-        font-size: 36px;
-        font-weight: 800;
-        letter-spacing: -0.02em;
-        line-height: 1;
-        margin-bottom: 8px;
-        color: var(--text);
-    }
+    .stat-value { font-size: 36px; font-weight: 800; letter-spacing: -0.02em; line-height: 1; margin-bottom: 8px; color: var(--text); }
     .stat-value.small { font-size: 18px; padding: 9px 0; }
-    .stat-label {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.8px;
-        font-weight: 600;
-        color: var(--text-dim);
-    }
-
+    .stat-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px; font-weight: 600; color: var(--text-dim); }
     .section { padding: 80px 0; }
-    .section-header {
-        text-align: center;
-        max-width: 620px;
-        margin: 0 auto 48px;
-    }
-    .section-title {
-        font-size: clamp(28px, 4vw, 40px);
-        font-weight: 800;
-        margin-bottom: 12px;
-    }
-    .section-subtitle {
-        font-size: 16px;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
-    .features-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 18px;
-    }
+    .section-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
+    .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-bottom: 12px; }
+    .section-subtitle { font-size: 16px; color: var(--text-muted); line-height: 1.6; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 18px; }
     .feature {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 28px;
-        transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+        padding: 28px; transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
     }
-    .feature:hover {
-        transform: translateY(-4px);
-        border-color: var(--accent);
-        box-shadow: var(--shadow-md);
-    }
+    .feature:hover { transform: translateY(-4px); border-color: var(--accent); box-shadow: var(--shadow-md); }
     .feature-icon {
-        width: 48px;
-        height: 48px;
-        border-radius: var(--radius-md);
-        background: var(--gradient-soft);
-        display: grid;
-        place-items: center;
-        margin-bottom: 18px;
+        width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--gradient-soft);
+        display: grid; place-items: center; margin-bottom: 18px;
     }
-    .feature-icon svg {
-        width: 24px;
-        height: 24px;
-        stroke: var(--accent);
-        stroke-width: 1.8;
-        fill: none;
-    }
-    .feature h3 {
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 8px;
-    }
-    .feature p {
-        font-size: 14px;
-        color: var(--text-muted);
-        line-height: 1.6;
-    }
-
+    .feature-icon svg { width: 24px; height: 24px; stroke: var(--accent); stroke-width: 1.8; fill: none; }
+    .feature h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .feature p { font-size: 14px; color: var(--text-muted); line-height: 1.6; }
     .about-card {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-xl);
-        padding: 44px;
-        position: relative;
-        overflow: hidden;
+        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-xl);
+        padding: 44px; position: relative; overflow: hidden;
     }
     .about-card::before {
-        content: "";
-        position: absolute;
-        top: -40%; right: -20%;
-        width: 380px; height: 380px;
-        background: radial-gradient(circle, var(--accent-subtle), transparent 70%);
-        pointer-events: none;
+        content: ""; position: absolute; top: -40%; right: -20%; width: 380px; height: 380px;
+        background: radial-gradient(circle, var(--accent-subtle), transparent 70%); pointer-events: none;
     }
-    .about-card h2 {
-        font-size: 26px;
-        font-weight: 800;
-        margin-bottom: 12px;
-    }
-    .about-card > p {
-        font-size: 15px;
-        color: var(--text-muted);
-        line-height: 1.7;
-        max-width: 700px;
-        margin-bottom: 28px;
-    }
-    .about-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-        gap: 14px;
-        margin-bottom: 28px;
-    }
+    .about-card h2 { font-size: 26px; font-weight: 800; margin-bottom: 12px; }
+    .about-card > p { font-size: 15px; color: var(--text-muted); line-height: 1.7; max-width: 700px; margin-bottom: 28px; }
+    .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 28px; }
     .about-item {
-        display: flex;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 16px;
-        background: var(--bg-3);
-        border: 1px solid var(--border-soft);
-        border-radius: var(--radius-md);
-        transition: border-color 0.2s;
+        display: flex; align-items: flex-start; gap: 12px; padding: 16px;
+        background: var(--bg-3); border: 1px solid var(--border-soft);
+        border-radius: var(--radius-md); transition: border-color 0.2s;
     }
     .about-item:hover { border-color: var(--accent); }
     .about-item-icon {
-        width: 34px; height: 34px;
-        border-radius: var(--radius-sm);
-        background: var(--gradient-soft);
-        display: grid;
-        place-items: center;
-        flex-shrink: 0;
+        width: 34px; height: 34px; border-radius: var(--radius-sm); background: var(--gradient-soft);
+        display: grid; place-items: center; flex-shrink: 0;
     }
-    .about-item-icon svg {
-        width: 17px; height: 17px;
-        stroke: var(--accent);
-        stroke-width: 2;
-        fill: none;
-    }
-    .about-item h4 {
-        font-size: 13.5px;
-        font-weight: 600;
-        margin-bottom: 3px;
-    }
-    .about-item p {
-        font-size: 12.5px;
-        color: var(--text-muted);
-        line-height: 1.5;
-    }
+    .about-item-icon svg { width: 17px; height: 17px; stroke: var(--accent); stroke-width: 2; fill: none; }
+    .about-item h4 { font-size: 13.5px; font-weight: 600; margin-bottom: 3px; }
+    .about-item p { font-size: 12.5px; color: var(--text-muted); line-height: 1.5; }
     .about-footer {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        padding-top: 22px;
-        border-top: 1px solid var(--border-soft);
-        align-items: center;
+        display: flex; flex-wrap: wrap; gap: 12px; padding-top: 22px;
+        border-top: 1px solid var(--border-soft); align-items: center;
     }
-    .about-footer .note {
-        flex: 1;
-        min-width: 220px;
-        font-size: 13px;
-        color: var(--text-dim);
-    }
-
-    .commands-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-        gap: 16px;
-    }
-
+    .about-footer .note { flex: 1; min-width: 220px; font-size: 13px; color: var(--text-dim); }
+    .commands-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 16px; }
     .cmd-card {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        padding: 24px;
-        transition: border-color 0.2s, box-shadow 0.2s;
+        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+        padding: 24px; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    .cmd-card:hover {
-        border-color: var(--border-strong);
-        box-shadow: var(--shadow-md);
-    }
-
+    .cmd-card:hover { border-color: var(--border-strong); box-shadow: var(--shadow-md); }
     .cmd-card-header {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 16px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid var(--border-soft);
+        display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
+        padding-bottom: 16px; border-bottom: 1px solid var(--border-soft);
     }
     .cmd-card-icon {
-        width: 38px; height: 38px;
-        border-radius: var(--radius-md);
-        display: grid;
-        place-items: center;
-        font-size: 17px;
-        background: var(--accent-subtle);
-        flex-shrink: 0;
+        width: 38px; height: 38px; border-radius: var(--radius-md); display: grid; place-items: center;
+        font-size: 17px; background: var(--accent-subtle); flex-shrink: 0;
     }
-    .cmd-card-title {
-        font-size: 15.5px;
-        font-weight: 700;
-        flex: 1;
-    }
+    .cmd-card-title { font-size: 15.5px; font-weight: 700; flex: 1; }
     .cmd-card-count {
-        font-size: 12px;
-        font-weight: 700;
-        color: var(--text-dim);
-        background: var(--bg-3);
-        padding: 4px 10px;
-        border-radius: 100px;
-        border: 1px solid var(--border-soft);
+        font-size: 12px; font-weight: 700; color: var(--text-dim); background: var(--bg-3);
+        padding: 4px 10px; border-radius: 100px; border: 1px solid var(--border-soft);
     }
-
     .cmd-card.moder .cmd-card-icon { background: var(--success-subtle); }
     .cmd-card.config .cmd-card-icon { background: rgba(155, 89, 182, 0.12); }
     .cmd-card.help .cmd-card-icon { background: var(--warning-subtle); }
     .cmd-card.economy .cmd-card-icon { background: var(--gold-subtle); }
     .cmd-card.business .cmd-card-icon { background: var(--green-subtle); }
     .cmd-card.marriage .cmd-card-icon { background: var(--pink-subtle); }
-
-    .cmd-list {
-        list-style: none;
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-    }
-
+    .cmd-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
     .cmd-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-        gap: 12px;
-        padding: 10px 12px;
-        border-radius: var(--radius-sm);
-        transition: background 0.15s;
-        cursor: pointer;
-        font-size: 13.5px;
+        display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+        padding: 10px 12px; border-radius: var(--radius-sm);
+        transition: background 0.15s; cursor: pointer; font-size: 13.5px;
     }
     .cmd-item:hover { background: var(--bg-3); }
-
     .cmd-name {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12.5px;
-        font-weight: 500;
-        color: var(--accent-soft);
-        background: var(--bg-3);
-        padding: 4px 10px;
-        border-radius: 6px;
-        border: 1px solid var(--border-soft);
-        white-space: nowrap;
-        transition: background 0.2s, color 0.2s, transform 0.15s;
-        position: relative;
-        flex-shrink: 0;
+        font-family: 'JetBrains Mono', monospace; font-size: 12.5px; font-weight: 500;
+        color: var(--accent-soft); background: var(--bg-3); padding: 4px 10px;
+        border-radius: 6px; border: 1px solid var(--border-soft); white-space: nowrap;
+        transition: background 0.2s, color 0.2s, transform 0.15s; position: relative; flex-shrink: 0;
     }
-    .cmd-item:hover .cmd-name {
-        background: var(--accent);
-        color: #fff;
-        border-color: var(--accent);
-    }
-    .cmd-name.copied {
-        background: var(--success) !important;
-        color: #fff !important;
-        border-color: var(--success) !important;
-    }
+    .cmd-item:hover .cmd-name { background: var(--accent); color: #fff; border-color: var(--accent); }
+    .cmd-name.copied { background: var(--success) !important; color: #fff !important; border-color: var(--success) !important; }
     .cmd-name.copied::after {
-        content: "✓";
-        position: absolute;
-        top: -8px; right: -8px;
-        width: 16px; height: 16px;
-        background: var(--success);
-        color: #fff;
-        border-radius: 50%;
-        font-size: 10px;
-        display: grid;
-        place-items: center;
-        font-weight: 700;
-        animation: popIn 0.25s ease;
+        content: "✓"; position: absolute; top: -8px; right: -8px; width: 16px; height: 16px;
+        background: var(--success); color: #fff; border-radius: 50%; font-size: 10px;
+        display: grid; place-items: center; font-weight: 700; animation: popIn 0.25s ease;
     }
-    @keyframes popIn {
-        from { transform: scale(0); }
-        to { transform: scale(1); }
-    }
-
-    .cmd-desc {
-        font-size: 12.5px;
-        color: var(--text-muted);
-        text-align: right;
-        line-height: 1.45;
-    }
-
+    @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+    .cmd-desc { font-size: 12.5px; color: var(--text-muted); text-align: right; line-height: 1.45; }
     .cta-card {
-        text-align: center;
-        padding: 60px 32px;
+        text-align: center; padding: 60px 32px;
         background:
             radial-gradient(circle at 20% 30%, var(--accent-subtle), transparent 55%),
             radial-gradient(circle at 80% 70%, rgba(167, 139, 250, 0.08), transparent 55%),
             var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-xl);
-        margin: 60px 0 40px;
+        border: 1px solid var(--border); border-radius: var(--radius-xl); margin: 60px 0 40px;
     }
-    .cta-card h2 {
-        font-size: clamp(24px, 3.5vw, 34px);
-        font-weight: 800;
-        margin-bottom: 12px;
-    }
-    .cta-card p {
-        color: var(--text-muted);
-        margin-bottom: 28px;
-        max-width: 480px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .site-footer {
-        padding: 44px 0 30px;
-        border-top: 1px solid var(--border);
-        text-align: center;
-    }
-    .footer-brand {
-        display: inline-flex;
-        align-items: center;
-        gap: 10px;
-        font-size: 16px;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-    .footer-brand .logo-icon {
-        width: 30px; height: 30px;
-        font-size: 15px;
-    }
+    .cta-card h2 { font-size: clamp(24px, 3.5vw, 34px); font-weight: 800; margin-bottom: 12px; }
+    .cta-card p { color: var(--text-muted); margin-bottom: 28px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .site-footer { padding: 44px 0 30px; border-top: 1px solid var(--border); text-align: center; }
+    .footer-brand { display: inline-flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 700; margin-bottom: 20px; }
+    .footer-brand .logo-icon { width: 30px; height: 30px; font-size: 15px; }
     .footer-brand span:last-child {
-        background: var(--gradient);
-        -webkit-background-clip: text;
-        background-clip: text;
+        background: var(--gradient); -webkit-background-clip: text; background-clip: text;
         -webkit-text-fill-color: transparent;
     }
-    .footer-links {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 6px;
-        margin-bottom: 20px;
-    }
+    .footer-links { display: flex; justify-content: center; flex-wrap: wrap; gap: 6px; margin-bottom: 20px; }
     .footer-links a {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 8px 14px;
-        border-radius: var(--radius-sm);
-        font-size: 13.5px;
-        font-weight: 500;
-        color: var(--text-muted);
-        transition: background 0.2s, color 0.2s;
+        display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px;
+        border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 500;
+        color: var(--text-muted); transition: background 0.2s, color 0.2s;
     }
     .footer-links a:hover { background: var(--bg-2); color: var(--text); }
-    .footer-copy {
-        font-size: 12.5px;
-        color: var(--text-faint);
-    }
-
+    .footer-copy { font-size: 12.5px; color: var(--text-faint); }
     .to-top {
-        position: fixed;
-        right: 24px; bottom: 24px;
-        width: 44px; height: 44px;
-        border-radius: var(--radius-md);
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        color: var(--text);
-        display: grid;
-        place-items: center;
-        box-shadow: var(--shadow-md);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(16px);
-        transition: opacity 0.3s, transform 0.3s, background 0.2s, border-color 0.2s;
-        z-index: 99;
+        position: fixed; right: 24px; bottom: 24px; width: 44px; height: 44px;
+        border-radius: var(--radius-md); background: var(--bg-2); border: 1px solid var(--border);
+        color: var(--text); display: grid; place-items: center; box-shadow: var(--shadow-md);
+        opacity: 0; pointer-events: none; transform: translateY(16px);
+        transition: opacity 0.3s, transform 0.3s, background 0.2s, border-color 0.2s; z-index: 99;
     }
-    .to-top.visible {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-    }
-    .to-top:hover {
-        background: var(--gradient);
-        border-color: transparent;
-        color: #fff;
-        transform: translateY(-3px);
-    }
-
+    .to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .to-top:hover { background: var(--gradient); border-color: transparent; color: #fff; transform: translateY(-3px); }
     .modal-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        z-index: 1000;
-        display: grid;
-        place-items: center;
-        padding: 20px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s;
+        position: fixed; inset: 0; background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        z-index: 1000; display: grid; place-items: center; padding: 20px;
+        opacity: 0; pointer-events: none; transition: opacity 0.2s;
     }
     .modal-overlay.open { opacity: 1; pointer-events: auto; }
-
     .modal {
-        background: var(--bg-2);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-xl);
-        width: 100%;
-        max-width: 440px;
-        padding: 34px;
-        position: relative;
+        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-xl);
+        width: 100%; max-width: 440px; padding: 34px; position: relative;
         transform: translateY(16px) scale(0.97);
         transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-        max-height: 90vh;
-        overflow-y: auto;
-        box-shadow: var(--shadow-xl);
+        max-height: 90vh; overflow-y: auto; box-shadow: var(--shadow-xl);
     }
     .modal-overlay.open .modal { transform: translateY(0) scale(1); }
     .modal.wide { max-width: 560px; }
-
     .modal-close {
-        position: absolute;
-        top: 14px; right: 14px;
-        width: 34px; height: 34px;
-        border-radius: var(--radius-sm);
-        display: grid;
-        place-items: center;
-        color: var(--text-dim);
-        font-size: 22px;
-        transition: background 0.2s, color 0.2s;
-        z-index: 1;
+        position: absolute; top: 14px; right: 14px; width: 34px; height: 34px;
+        border-radius: var(--radius-sm); display: grid; place-items: center;
+        color: var(--text-dim); font-size: 22px; transition: background 0.2s, color 0.2s; z-index: 1;
     }
     .modal-close:hover { background: var(--bg-3); color: var(--text); }
-
-    .modal-title {
-        font-size: 22px;
-        font-weight: 800;
-        text-align: center;
-        margin-bottom: 6px;
-    }
-    .modal-subtitle {
-        font-size: 14px;
-        color: var(--text-muted);
-        text-align: center;
-        margin-bottom: 24px;
-    }
-
-    .modal-logo {
-        display: grid;
-        place-items: center;
-        margin-bottom: 20px;
-    }
-    .modal-logo .logo-icon {
-        width: 56px; height: 56px;
-        font-size: 26px;
-        border-radius: var(--radius-lg);
-    }
-
+    .modal-title { font-size: 22px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+    .modal-subtitle { font-size: 14px; color: var(--text-muted); text-align: center; margin-bottom: 24px; }
+    .modal-logo { display: grid; place-items: center; margin-bottom: 20px; }
+    .modal-logo .logo-icon { width: 56px; height: 56px; font-size: 26px; border-radius: var(--radius-lg); }
     .tabs {
-        display: flex;
-        gap: 4px;
-        background: var(--bg-3);
-        padding: 4px;
-        border-radius: var(--radius-md);
-        margin-bottom: 22px;
+        display: flex; gap: 4px; background: var(--bg-3); padding: 4px;
+        border-radius: var(--radius-md); margin-bottom: 22px;
     }
     .tab {
-        flex: 1;
-        padding: 10px 12px;
-        border-radius: var(--radius-sm);
-        font-size: 13.5px;
-        font-weight: 600;
-        color: var(--text-muted);
-        transition: background 0.2s, color 0.2s;
+        flex: 1; padding: 10px 12px; border-radius: var(--radius-sm); font-size: 13.5px; font-weight: 600;
+        color: var(--text-muted); transition: background 0.2s, color 0.2s;
     }
-    .tab.active {
-        background: var(--bg-2);
-        color: var(--text);
-        box-shadow: var(--shadow-sm);
-    }
-
+    .tab.active { background: var(--bg-2); color: var(--text); box-shadow: var(--shadow-sm); }
     .form-group { margin-bottom: 16px; }
     .form-label {
-        display: block;
-        font-size: 13px;
-        font-weight: 600;
-        color: var(--text-muted);
-        margin-bottom: 8px;
+        display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px;
     }
     .form-input {
-        width: 100%;
-        padding: 12px 14px;
-        background: var(--bg-3);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-md);
-        color: var(--text);
-        font-size: 14px;
-        transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
-        outline: none;
-        resize: vertical;
+        width: 100%; padding: 12px 14px; background: var(--bg-3); border: 1px solid var(--border);
+        border-radius: var(--radius-md); color: var(--text); font-size: 14px;
+        transition: border-color 0.2s, background 0.2s, box-shadow 0.2s; outline: none; resize: vertical;
     }
-    .form-input:focus {
-        border-color: var(--accent);
-        background: var(--bg-2);
-        box-shadow: 0 0 0 3px var(--accent-glow);
-    }
+    .form-input:focus { border-color: var(--accent); background: var(--bg-2); box-shadow: 0 0 0 3px var(--accent-glow); }
     .form-input::placeholder { color: var(--text-faint); }
-    .form-input.error {
-        border-color: var(--error);
-        box-shadow: 0 0 0 3px var(--error-subtle);
-    }
-
-    .form-hint {
-        font-size: 11.5px;
-        color: var(--text-faint);
-        margin-top: 6px;
-    }
-    .form-error {
-        display: none;
-        color: var(--error);
-        font-size: 12.5px;
-        margin-top: 6px;
-    }
+    .form-input.error { border-color: var(--error); box-shadow: 0 0 0 3px var(--error-subtle); }
+    .form-hint { font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
+    .form-error { display: none; color: var(--error); font-size: 12.5px; margin-top: 6px; }
     .form-error.visible { display: block; }
-
     .form-message {
-        display: none;
-        padding: 12px 14px;
-        border-radius: var(--radius-md);
-        font-size: 13.5px;
-        margin-bottom: 16px;
-        line-height: 1.5;
+        display: none; padding: 12px 14px; border-radius: var(--radius-md); font-size: 13.5px;
+        margin-bottom: 16px; line-height: 1.5;
     }
     .form-message.visible { display: block; }
-    .form-message.error {
-        background: var(--error-subtle);
-        border: 1px solid rgba(248, 113, 113, 0.3);
-        color: var(--error);
-    }
-    .form-message.success {
-        background: var(--success-subtle);
-        border: 1px solid rgba(52, 211, 153, 0.3);
-        color: var(--success);
-    }
-
+    .form-message.error { background: var(--error-subtle); border: 1px solid rgba(248, 113, 113, 0.3); color: var(--error); }
+    .form-message.success { background: var(--success-subtle); border: 1px solid rgba(52, 211, 153, 0.3); color: var(--success); }
     .form-submit {
-        width: 100%;
-        padding: 13px;
-        border-radius: var(--radius-md);
-        background: var(--gradient);
-        color: #fff;
-        font-size: 15px;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 10px;
+        width: 100%; padding: 13px; border-radius: var(--radius-md); background: var(--gradient);
+        color: #fff; font-size: 15px; font-weight: 600;
+        display: flex; align-items: center; justify-content: center; gap: 10px;
         box-shadow: 0 4px 20px var(--accent-glow);
         transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
-        margin-top: 8px;
-        position: relative;
+        margin-top: 8px; position: relative;
     }
-    .form-submit:hover:not(:disabled) {
-        transform: translateY(-1px);
-        box-shadow: 0 8px 28px var(--accent-glow);
-    }
+    .form-submit:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 28px var(--accent-glow); }
     .form-submit:disabled { opacity: 0.7; cursor: not-allowed; }
-
     .spinner {
-        width: 16px; height: 16px;
-        border: 2px solid rgba(255,255,255,0.3);
-        border-top-color: #fff;
-        border-radius: 50%;
-        animation: spin 0.7s linear infinite;
-        display: none;
+        width: 16px; height: 16px; border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; display: none;
     }
     .form-submit.loading .spinner { display: block; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    .form-links {
-        display: flex;
-        justify-content: center;
-        gap: 4px;
-        margin-top: 16px;
-        font-size: 13px;
-    }
+    .form-links { display: flex; justify-content: center; gap: 4px; margin-top: 16px; font-size: 13px; }
     .form-links button {
-        color: var(--accent-soft);
-        font-size: 13px;
-        font-weight: 500;
-        padding: 4px 6px;
-        border-radius: 6px;
-        transition: background 0.2s, color 0.2s;
+        color: var(--accent-soft); font-size: 13px; font-weight: 500; padding: 4px 6px;
+        border-radius: 6px; transition: background 0.2s, color 0.2s;
     }
-    .form-links button:hover {
-        background: var(--bg-3);
-        color: var(--accent);
-        text-decoration: underline;
-    }
+    .form-links button:hover { background: var(--bg-3); color: var(--accent); text-decoration: underline; }
     .form-links span { color: var(--text-faint); }
-
-    .form-footer {
-        text-align: center;
-        font-size: 12px;
-        color: var(--text-faint);
-        margin-top: 18px;
-    }
-
+    .form-footer { text-align: center; font-size: 12px; color: var(--text-faint); margin-top: 18px; }
     .form-panel { display: none; }
     .form-panel.active { display: block; }
-
-    .avatar-row {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        margin-bottom: 20px;
-    }
+    .avatar-row { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
     .avatar-preview {
-        width: 72px; height: 72px;
-        border-radius: 50%;
-        background: var(--gradient);
-        color: #fff;
-        font-weight: 700;
-        font-size: 26px;
-        display: grid;
-        place-items: center;
-        text-transform: uppercase;
-        border: 3px solid var(--border);
-        background-size: cover;
-        background-position: center;
-        flex-shrink: 0;
+        width: 72px; height: 72px; border-radius: 50%; background: var(--gradient); color: #fff;
+        font-weight: 700; font-size: 26px; display: grid; place-items: center; text-transform: uppercase;
+        border: 3px solid var(--border); background-size: cover; background-position: center; flex-shrink: 0;
     }
     .avatar-fields { flex: 1; min-width: 0; }
-
     .info-row {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 0;
-        border-bottom: 1px solid var(--border-soft);
-        font-size: 13.5px;
+        display: flex; justify-content: space-between; align-items: center; gap: 12px;
+        padding: 12px 0; border-bottom: 1px solid var(--border-soft); font-size: 13.5px;
     }
     .info-row:last-child { border-bottom: none; }
     .info-row-label { color: var(--text-dim); flex-shrink: 0; }
     .info-row-value {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 12.5px;
-        color: var(--text);
-        text-align: right;
-        word-break: break-all;
+        font-family: 'JetBrains Mono', monospace; font-size: 12.5px; color: var(--text);
+        text-align: right; word-break: break-all;
     }
-
     .danger-zone {
-        margin-top: 20px;
-        padding: 16px;
-        background: var(--error-subtle);
-        border: 1px solid rgba(248, 113, 113, 0.25);
-        border-radius: var(--radius-md);
+        margin-top: 20px; padding: 16px; background: var(--error-subtle);
+        border: 1px solid rgba(248, 113, 113, 0.25); border-radius: var(--radius-md);
     }
-    .danger-zone h4 {
-        font-size: 14px;
-        font-weight: 700;
-        color: var(--error);
-        margin-bottom: 12px;
-    }
+    .danger-zone h4 { font-size: 14px; font-weight: 700; color: var(--error); margin-bottom: 12px; }
     .btn-danger {
-        width: 100%;
-        padding: 12px;
-        border-radius: var(--radius-md);
-        background: transparent;
-        color: var(--error);
-        border: 1px solid rgba(248, 113, 113, 0.4);
-        font-size: 14px;
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
+        width: 100%; padding: 12px; border-radius: var(--radius-md); background: transparent;
+        color: var(--error); border: 1px solid rgba(248, 113, 113, 0.4);
+        font-size: 14px; font-weight: 600;
+        display: flex; align-items: center; justify-content: center; gap: 8px;
         transition: background 0.2s, border-color 0.2s;
     }
-    .btn-danger:hover {
-        background: rgba(248, 113, 113, 0.15);
-        border-color: var(--error);
-    }
+    .btn-danger:hover { background: rgba(248, 113, 113, 0.15); border-color: var(--error); }
     .btn-danger svg { width: 16px; height: 16px; }
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    .reveal {
-        opacity: 0;
-        transform: translateY(20px);
-        transition: opacity 0.6s ease, transform 0.6s ease;
+    /* Специфично для вебхука */
+    .wh-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    @media (min-width: 1024px) { .wh-grid { grid-template-columns: 7fr 5fr; } .wh-full { grid-column: 1 / -1; } }
+    .wh-embed-card {
+        background: var(--bg-3); border: 1px solid var(--border);
+        border-radius: var(--radius-md); padding: 16px;
     }
-    .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
+    .wh-preview-msg {
+        background: var(--bg-2); border: 1px solid var(--border);
+        border-radius: var(--radius-md); padding: 16px; min-height: 100px;
     }
+    .wh-preview-embed {
+        background: var(--bg-3); border-radius: 6px; padding: 12px;
+        border-left: 3px solid var(--accent); margin-top: 8px;
+    }
+    .wh-color-input {
+        width: 100%; height: 42px; padding: 4px; background: var(--bg-3);
+        border: 1px solid var(--border); border-radius: var(--radius-md); cursor: pointer;
+    }
+    .wh-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .wh-actions .btn { flex: 1; min-width: 130px; }
 
     @media (max-width: 900px) {
         .burger { display: grid; }
-
         .nav-list {
-            position: absolute;
-            top: calc(100% + 8px);
-            left: 0; right: 0;
-            flex-direction: column;
-            align-items: stretch;
-            gap: 4px;
-            padding: 10px;
-            background: var(--bg-2);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-xl);
-            transform: translateY(-10px) scale(0.98);
-            transform-origin: top;
-            opacity: 0;
-            pointer-events: none;
-            transition: transform 0.2s, opacity 0.2s;
+            position: absolute; top: calc(100% + 8px); left: 0; right: 0;
+            flex-direction: column; align-items: stretch; gap: 4px; padding: 10px;
+            background: var(--bg-2); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); box-shadow: var(--shadow-xl);
+            transform: translateY(-10px) scale(0.98); transform-origin: top;
+            opacity: 0; pointer-events: none; transition: transform 0.2s, opacity 0.2s;
         }
-        .nav-list.open {
-            transform: translateY(0) scale(1);
-            opacity: 1;
-            pointer-events: auto;
-        }
+        .nav-list.open { transform: translateY(0) scale(1); opacity: 1; pointer-events: auto; }
         .nav-list li { width: 100%; }
-        .nav-link {
-            display: block;
-            padding: 12px 16px;
-            width: 100%;
-            border-radius: var(--radius-md);
-        }
+        .nav-link { display: block; padding: 12px 16px; width: 100%; border-radius: var(--radius-md); }
         .nav-link.active::after { display: none; }
-
         .nav-actions { width: 100%; flex-direction: column; align-items: stretch; margin-top: 4px; }
         .icon-btn { width: 100%; }
         .user-menu { width: 100%; }
         .user-menu-wrapper { width: 100%; }
         .user-dropdown { left: 0; right: 0; }
-
         .hero { padding: 56px 0 30px; }
         .hero-actions { flex-direction: column; align-items: stretch; }
         .btn { width: 100%; }
-
         .stats-grid { margin: 48px 0; }
         .section { padding: 56px 0; }
         .about-card { padding: 28px 20px; }
         .about-grid { grid-template-columns: 1fr; }
         .about-footer { flex-direction: column; align-items: stretch; }
-
         .commands-grid { grid-template-columns: 1fr; }
         .cmd-item { flex-direction: column; align-items: flex-start; gap: 6px; }
         .cmd-desc { text-align: left; }
-
         .cta-card { padding: 40px 24px; }
         .modal { padding: 26px 20px; }
         .avatar-row { flex-direction: column; text-align: center; }
         .avatar-fields { width: 100%; }
         .to-top { right: 16px; bottom: 16px; }
     }
-
     @media (prefers-reduced-motion: reduce) {
         *, *::before, *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
+            animation-duration: 0.01ms !important; animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important; scroll-behavior: auto !important;
         }
         .reveal { opacity: 1; transform: none; }
     }
@@ -1302,12 +536,11 @@
                     <span class="logo-icon">🤖</span>
                     <span class="logo-text">Юрика-Бот</span>
                 </a>
-
                 <button class="icon-btn burger" id="burger" aria-label="Открыть меню" aria-expanded="false">☰</button>
-
                 <ul class="nav-list" id="navList">
                     <li><a href="#features" class="nav-link">Возможности</a></li>
                     <li><a href="#commands" class="nav-link">Команды</a></li>
+                    <li><a href="#webhook" class="nav-link">Вебхук</a></li>
                     <li><a href="#stats" class="nav-link">Статистика</a></li>
                     <li><a href="#invite" class="nav-link">Добавить</a></li>
                     <li class="nav-actions">
@@ -1358,14 +591,11 @@
                     <span class="badge-dot"></span>
                     Работает на сервере Lolka
                 </span>
-
                 <h1 class="hero-title">Твой помощник<br>на сервере Lolka</h1>
-
                 <p class="hero-subtitle">
                     Модерация, экономика, бизнесы, браки и удобное меню команд —
                     всё в одном боте. Установка занимает 10 секунд.
                 </p>
-
                 <div class="hero-actions">
                     <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
                        target="_blank" rel="noopener" class="btn btn-primary">
@@ -1419,7 +649,6 @@
                         Серверы с текстовыми и голосовыми каналами, роли, трансляции экрана (до 5 одновременно),
                         ЛС и групповые чаты. Работает без VPN на всех популярных платформах.
                     </p>
-
                     <div class="about-grid">
                         <div class="about-item">
                             <div class="about-item-icon">
@@ -1428,12 +657,8 @@
                                     <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>HD-трансляции</h4>
-                                <p>До 1440p 60fps, до 5 стримов одновременно</p>
-                            </div>
+                            <div><h4>HD-трансляции</h4><p>До 1440p 60fps, до 5 стримов одновременно</p></div>
                         </div>
-
                         <div class="about-item">
                             <div class="about-item-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1443,12 +668,8 @@
                                     <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>Серверы и роли</h4>
-                                <p>До 250 000 участников, 500 каналов, 250 ролей</p>
-                            </div>
+                            <div><h4>Серверы и роли</h4><p>До 250 000 участников, 500 каналов, 250 ролей</p></div>
                         </div>
-
                         <div class="about-item">
                             <div class="about-item-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1456,24 +677,16 @@
                                     <polyline points="8 6 2 12 8 18"></polyline>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>API для ботов</h4>
-                                <p>Библиотеки lolka.py и lolka.js для разработчиков</p>
-                            </div>
+                            <div><h4>API для ботов</h4><p>Библиотеки lolka.py и lolka.js для разработчиков</p></div>
                         </div>
-
                         <div class="about-item">
                             <div class="about-item-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>Импорт из Discord</h4>
-                                <p>Перенос ролей и структуры каналов</p>
-                            </div>
+                            <div><h4>Импорт из Discord</h4><p>Перенос ролей и структуры каналов</p></div>
                         </div>
-
                         <div class="about-item">
                             <div class="about-item-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1482,12 +695,8 @@
                                     <line x1="12" y1="17" x2="12" y2="21"></line>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>Все платформы</h4>
-                                <p>Windows, macOS, Linux, Android, iOS и браузер</p>
-                            </div>
+                            <div><h4>Все платформы</h4><p>Windows, macOS, Linux, Android, iOS и браузер</p></div>
                         </div>
-
                         <div class="about-item">
                             <div class="about-item-icon">
                                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -1495,13 +704,9 @@
                                     <polyline points="12 6 12 12 16 14"></polyline>
                                 </svg>
                             </div>
-                            <div>
-                                <h4>Без VPN</h4>
-                                <p>Стабильная работа на территории России</p>
-                            </div>
+                            <div><h4>Без VPN</h4><p>Стабильная работа на территории России</p></div>
                         </div>
                     </div>
-
                     <div class="about-footer">
                         <span class="note">💡 Нет аккаунта в Lolka? Скачай приложение для своей платформы.</span>
                         <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-outline">
@@ -1523,7 +728,6 @@
                     <h2 class="section-title">Что умеет бот</h2>
                     <p class="section-subtitle">Полный набор инструментов для комфортного общения</p>
                 </div>
-
                 <div class="features-grid">
                     <article class="feature">
                         <div class="feature-icon">
@@ -1534,7 +738,6 @@
                         <h3>Модерация</h3>
                         <p>Кик, мут, очистка чата — базовые инструменты для порядка.</p>
                     </article>
-
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1544,7 +747,6 @@
                         <h3>Утилиты</h3>
                         <p>Карточка пользователя, аватар, отладка — под рукой.</p>
                     </article>
-
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1555,7 +757,6 @@
                         <h3>Конфигурация</h3>
                         <p>Свой префикс, канал приветствий, логи и авто-роль.</p>
                     </article>
-
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1566,7 +767,6 @@
                         <h3>Экономика</h3>
                         <p>Заработок, банк, магазин ролей, переводы и топ богачей.</p>
                     </article>
-
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1577,7 +777,6 @@
                         <h3>Бизнесы</h3>
                         <p>Создавай свои бизнесы, собирай пассивный доход, улучшай.</p>
                     </article>
-
                     <article class="feature">
                         <div class="feature-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
@@ -1597,7 +796,6 @@
                     <h2 class="section-title">Команды бота</h2>
                     <p class="section-subtitle">Нажми на команду, чтобы скопировать</p>
                 </div>
-
                 <div class="commands-grid">
                     <div class="cmd-card">
                         <div class="cmd-card-header">
@@ -1606,25 +804,12 @@
                             <div class="cmd-card-count">4</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/ping">
-                                <span class="cmd-name">/ping</span>
-                                <span class="cmd-desc">Проверка связи</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/hello">
-                                <span class="cmd-name">/hello</span>
-                                <span class="cmd-desc">Приветствие</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/info">
-                                <span class="cmd-name">/info</span>
-                                <span class="cmd-desc">Информация о боте</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/latency">
-                                <span class="cmd-name">/latency</span>
-                                <span class="cmd-desc">Задержка в мс</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/ping"><span class="cmd-name">/ping</span><span class="cmd-desc">Проверка связи</span></li>
+                            <li class="cmd-item" data-copy="/hello"><span class="cmd-name">/hello</span><span class="cmd-desc">Приветствие</span></li>
+                            <li class="cmd-item" data-copy="/info"><span class="cmd-name">/info</span><span class="cmd-desc">Информация о боте</span></li>
+                            <li class="cmd-item" data-copy="/latency"><span class="cmd-name">/latency</span><span class="cmd-desc">Задержка в мс</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">👤</div>
@@ -1632,21 +817,11 @@
                             <div class="cmd-card-count">3</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/user">
-                                <span class="cmd-name">/user [@user]</span>
-                                <span class="cmd-desc">Карточка пользователя</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/avatar">
-                                <span class="cmd-name">/avatar [@user]</span>
-                                <span class="cmd-desc">Аватар</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/debug_user">
-                                <span class="cmd-name">/debug_user</span>
-                                <span class="cmd-desc">Отладка (скрыта)</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/user"><span class="cmd-name">/user [@user]</span><span class="cmd-desc">Карточка пользователя</span></li>
+                            <li class="cmd-item" data-copy="/avatar"><span class="cmd-name">/avatar [@user]</span><span class="cmd-desc">Аватар</span></li>
+                            <li class="cmd-item" data-copy="/debug_user"><span class="cmd-name">/debug_user</span><span class="cmd-desc">Отладка (скрыта)</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card moder">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🛡️</div>
@@ -1654,21 +829,11 @@
                             <div class="cmd-card-count">3</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/purge 10">
-                                <span class="cmd-name">/purge N</span>
-                                <span class="cmd-desc">Удалить N сообщений</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/kick @user">
-                                <span class="cmd-name">/kick @user</span>
-                                <span class="cmd-desc">Кикнуть участника</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/mute @user 10m">
-                                <span class="cmd-name">/mute @user</span>
-                                <span class="cmd-desc">Заглушить</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/purge 10"><span class="cmd-name">/purge N</span><span class="cmd-desc">Удалить N сообщений</span></li>
+                            <li class="cmd-item" data-copy="/kick @user"><span class="cmd-name">/kick @user</span><span class="cmd-desc">Кикнуть участника</span></li>
+                            <li class="cmd-item" data-copy="/mute @user 10m"><span class="cmd-name">/mute @user</span><span class="cmd-desc">Заглушить</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card config">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">⚙️</div>
@@ -1676,29 +841,13 @@
                             <div class="cmd-card-count">5</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/конфиг">
-                                <span class="cmd-name">/конфиг</span>
-                                <span class="cmd-desc">Текущие настройки</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/конфиг префикс ?">
-                                <span class="cmd-name">/конфиг префикс</span>
-                                <span class="cmd-desc">Сменить префикс</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/конфиг приветствие #канал">
-                                <span class="cmd-name">/конфиг приветствие</span>
-                                <span class="cmd-desc">Канал приветствий</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/конфиг лог #канал">
-                                <span class="cmd-name">/конфиг лог</span>
-                                <span class="cmd-desc">Канал логов</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/конфиг роль @Роль">
-                                <span class="cmd-name">/конфиг роль</span>
-                                <span class="cmd-desc">Авто-роль</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/конфиг"><span class="cmd-name">/конфиг</span><span class="cmd-desc">Текущие настройки</span></li>
+                            <li class="cmd-item" data-copy="/конфиг префикс ?"><span class="cmd-name">/конфиг префикс</span><span class="cmd-desc">Сменить префикс</span></li>
+                            <li class="cmd-item" data-copy="/конфиг приветствие #канал"><span class="cmd-name">/конфиг приветствие</span><span class="cmd-desc">Канал приветствий</span></li>
+                            <li class="cmd-item" data-copy="/конфиг лог #канал"><span class="cmd-name">/конфиг лог</span><span class="cmd-desc">Канал логов</span></li>
+                            <li class="cmd-item" data-copy="/конфиг роль @Роль"><span class="cmd-name">/конфиг роль</span><span class="cmd-desc">Авто-роль</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card economy">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">💰</div>
@@ -1706,53 +855,19 @@
                             <div class="cmd-card-count">11</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/balance">
-                                <span class="cmd-name">/balance [@user]</span>
-                                <span class="cmd-desc">Баланс пользователя</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/daily">
-                                <span class="cmd-name">/daily</span>
-                                <span class="cmd-desc">Ежедневный бонус</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/work">
-                                <span class="cmd-name">/work</span>
-                                <span class="cmd-desc">Заработать деньги</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/transfer @user 100">
-                                <span class="cmd-name">/transfer @user</span>
-                                <span class="cmd-desc">Перевести деньги</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/bank">
-                                <span class="cmd-name">/bank [action]</span>
-                                <span class="cmd-desc">Вклады и снятия</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/top">
-                                <span class="cmd-name">/top</span>
-                                <span class="cmd-desc">Топ богачей</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/shop">
-                                <span class="cmd-name">/shop</span>
-                                <span class="cmd-desc">Магазин сервера</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/buy 1">
-                                <span class="cmd-name">/buy ID</span>
-                                <span class="cmd-desc">Купить товар</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/inventory">
-                                <span class="cmd-name">/inventory</span>
-                                <span class="cmd-desc">Инвентарь</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/shop-add @Роль 1000">
-                                <span class="cmd-name">/shop-add @Роль</span>
-                                <span class="cmd-desc">Добавить товар (админ)</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/shop-remove 1">
-                                <span class="cmd-name">/shop-remove ID</span>
-                                <span class="cmd-desc">Удалить товар (админ)</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/balance"><span class="cmd-name">/balance [@user]</span><span class="cmd-desc">Баланс пользователя</span></li>
+                            <li class="cmd-item" data-copy="/daily"><span class="cmd-name">/daily</span><span class="cmd-desc">Ежедневный бонус</span></li>
+                            <li class="cmd-item" data-copy="/work"><span class="cmd-name">/work</span><span class="cmd-desc">Заработать деньги</span></li>
+                            <li class="cmd-item" data-copy="/transfer @user 100"><span class="cmd-name">/transfer @user</span><span class="cmd-desc">Перевести деньги</span></li>
+                            <li class="cmd-item" data-copy="/bank"><span class="cmd-name">/bank [action]</span><span class="cmd-desc">Вклады и снятия</span></li>
+                            <li class="cmd-item" data-copy="/top"><span class="cmd-name">/top</span><span class="cmd-desc">Топ богачей</span></li>
+                            <li class="cmd-item" data-copy="/shop"><span class="cmd-name">/shop</span><span class="cmd-desc">Магазин сервера</span></li>
+                            <li class="cmd-item" data-copy="/buy 1"><span class="cmd-name">/buy ID</span><span class="cmd-desc">Купить товар</span></li>
+                            <li class="cmd-item" data-copy="/inventory"><span class="cmd-name">/inventory</span><span class="cmd-desc">Инвентарь</span></li>
+                            <li class="cmd-item" data-copy="/shop-add @Роль 1000"><span class="cmd-name">/shop-add @Роль</span><span class="cmd-desc">Добавить товар (админ)</span></li>
+                            <li class="cmd-item" data-copy="/shop-remove 1"><span class="cmd-name">/shop-remove ID</span><span class="cmd-desc">Удалить товар (админ)</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card business">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">💼</div>
@@ -1760,41 +875,16 @@
                             <div class="cmd-card-count">8</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/business">
-                                <span class="cmd-name">/business</span>
-                                <span class="cmd-desc">Мои бизнесы</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-create Кофейня 250">
-                                <span class="cmd-name">/business-create</span>
-                                <span class="cmd-desc">Создать бизнес</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-collect">
-                                <span class="cmd-name">/business-collect</span>
-                                <span class="cmd-desc">Собрать доход</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-upgrade 1">
-                                <span class="cmd-name">/business-upgrade ID</span>
-                                <span class="cmd-desc">Улучшить бизнес</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-sell 1">
-                                <span class="cmd-name">/business-sell ID</span>
-                                <span class="cmd-desc">Продать (70% возврат)</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-info 1">
-                                <span class="cmd-name">/business-info ID</span>
-                                <span class="cmd-desc">Подробнее о бизнесе</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-top">
-                                <span class="cmd-name">/business-top</span>
-                                <span class="cmd-desc">Топ предпринимателей</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/business-price 500">
-                                <span class="cmd-name">/business-price</span>
-                                <span class="cmd-desc">Узнать цену</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/business"><span class="cmd-name">/business</span><span class="cmd-desc">Мои бизнесы</span></li>
+                            <li class="cmd-item" data-copy="/business-create Кофейня 250"><span class="cmd-name">/business-create</span><span class="cmd-desc">Создать бизнес</span></li>
+                            <li class="cmd-item" data-copy="/business-collect"><span class="cmd-name">/business-collect</span><span class="cmd-desc">Собрать доход</span></li>
+                            <li class="cmd-item" data-copy="/business-upgrade 1"><span class="cmd-name">/business-upgrade ID</span><span class="cmd-desc">Улучшить бизнес</span></li>
+                            <li class="cmd-item" data-copy="/business-sell 1"><span class="cmd-name">/business-sell ID</span><span class="cmd-desc">Продать (70% возврат)</span></li>
+                            <li class="cmd-item" data-copy="/business-info 1"><span class="cmd-name">/business-info ID</span><span class="cmd-desc">Подробнее о бизнесе</span></li>
+                            <li class="cmd-item" data-copy="/business-top"><span class="cmd-name">/business-top</span><span class="cmd-desc">Топ предпринимателей</span></li>
+                            <li class="cmd-item" data-copy="/business-price 500"><span class="cmd-name">/business-price</span><span class="cmd-desc">Узнать цену</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card marriage">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">💍</div>
@@ -1802,49 +892,18 @@
                             <div class="cmd-card-count">10</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/предложить @user">
-                                <span class="cmd-name">/предложить @user</span>
-                                <span class="cmd-desc">Сделать предложение</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/развод">
-                                <span class="cmd-name">/развод</span>
-                                <span class="cmd-desc">Развестись</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/пара">
-                                <span class="cmd-name">/пара [@user]</span>
-                                <span class="cmd-desc">Показать партнёра</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/браки">
-                                <span class="cmd-name">/браки</span>
-                                <span class="cmd-desc">Список всех браков</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/совместимость @u1 @u2">
-                                <span class="cmd-name">/совместимость</span>
-                                <span class="cmd-desc">Проверить совместимость</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/шип @u1 @u2">
-                                <span class="cmd-name">/шип @u1 @u2</span>
-                                <span class="cmd-desc">Шип с процентами</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/поцеловать @user">
-                                <span class="cmd-name">/поцеловать @user</span>
-                                <span class="cmd-desc">Поцеловать</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/обнять @user">
-                                <span class="cmd-name">/обнять @user</span>
-                                <span class="cmd-desc">Обнять</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/погладить @user">
-                                <span class="cmd-name">/погладить @user</span>
-                                <span class="cmd-desc">Погладить по голове</span>
-                            </li>
-                            <li class="cmd-item" data-copy="/шлёпнуть @user">
-                                <span class="cmd-name">/шлёпнуть @user</span>
-                                <span class="cmd-desc">Шлёпнуть</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/предложить @user"><span class="cmd-name">/предложить @user</span><span class="cmd-desc">Сделать предложение</span></li>
+                            <li class="cmd-item" data-copy="/развод"><span class="cmd-name">/развод</span><span class="cmd-desc">Развестись</span></li>
+                            <li class="cmd-item" data-copy="/пара"><span class="cmd-name">/пара [@user]</span><span class="cmd-desc">Показать партнёра</span></li>
+                            <li class="cmd-item" data-copy="/браки"><span class="cmd-name">/браки</span><span class="cmd-desc">Список всех браков</span></li>
+                            <li class="cmd-item" data-copy="/совместимость @u1 @u2"><span class="cmd-name">/совместимость</span><span class="cmd-desc">Проверить совместимость</span></li>
+                            <li class="cmd-item" data-copy="/шип @u1 @u2"><span class="cmd-name">/шип @u1 @u2</span><span class="cmd-desc">Шип с процентами</span></li>
+                            <li class="cmd-item" data-copy="/поцеловать @user"><span class="cmd-name">/поцеловать @user</span><span class="cmd-desc">Поцеловать</span></li>
+                            <li class="cmd-item" data-copy="/обнять @user"><span class="cmd-name">/обнять @user</span><span class="cmd-desc">Обнять</span></li>
+                            <li class="cmd-item" data-copy="/погладить @user"><span class="cmd-name">/погладить @user</span><span class="cmd-desc">Погладить по голове</span></li>
+                            <li class="cmd-item" data-copy="/шлёпнуть @user"><span class="cmd-name">/шлёпнуть @user</span><span class="cmd-desc">Шлёпнуть</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card help">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">📖</div>
@@ -1852,13 +911,9 @@
                             <div class="cmd-card-count">1</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item" data-copy="/команды">
-                                <span class="cmd-name">/команды</span>
-                                <span class="cmd-desc">Список команд</span>
-                            </li>
+                            <li class="cmd-item" data-copy="/команды"><span class="cmd-name">/команды</span><span class="cmd-desc">Список команд</span></li>
                         </ul>
                     </div>
-
                     <div class="cmd-card">
                         <div class="cmd-card-header">
                             <div class="cmd-card-icon">🔔</div>
@@ -1866,35 +921,135 @@
                             <div class="cmd-card-count">6</div>
                         </div>
                         <ul class="cmd-list">
-                            <li class="cmd-item">
-                                <span class="cmd-name">Вход</span>
-                                <span class="cmd-desc">Приветствие + роль</span>
-                            </li>
-                            <li class="cmd-item">
-                                <span class="cmd-name">Выход</span>
-                                <span class="cmd-desc">Лог с ролями</span>
-                            </li>
-                            <li class="cmd-item">
-                                <span class="cmd-name">Удаление</span>
-                                <span class="cmd-desc">Лог сообщения</span>
-                            </li>
-                            <li class="cmd-item">
-                                <span class="cmd-name">Изменение</span>
-                                <span class="cmd-desc">Было → Стало</span>
-                            </li>
-                            <li class="cmd-item">
-                                <span class="cmd-name">Бан</span>
-                                <span class="cmd-desc">Лог в канал</span>
-                            </li>
-                            <li class="cmd-item">
-                                <span class="cmd-name">Разбан</span>
-                                <span class="cmd-desc">Лог в канал</span>
-                            </li>
+                            <li class="cmd-item"><span class="cmd-name">Вход</span><span class="cmd-desc">Приветствие + роль</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Выход</span><span class="cmd-desc">Лог с ролями</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Удаление</span><span class="cmd-desc">Лог сообщения</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Изменение</span><span class="cmd-desc">Было → Стало</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Бан</span><span class="cmd-desc">Лог в канал</span></li>
+                            <li class="cmd-item"><span class="cmd-name">Разбан</span><span class="cmd-desc">Лог в канал</span></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </section>
+
+        <!-- ============ ВЕБХУК ============ -->
+        <section class="section reveal" id="webhook">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">🔗 Вебхук</h2>
+                    <p class="section-subtitle">Отправка сообщений и Embed-карточек через вебхук Lolka прямо из браузера</p>
+                </div>
+
+                <div class="wh-grid">
+                    <!-- Левая колонка -->
+                    <div>
+                        <div class="cmd-card" style="margin-bottom: 16px;">
+                            <div class="cmd-card-header">
+                                <div class="cmd-card-icon">🔗</div>
+                                <div class="cmd-card-title">Параметры вебхука</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="whUrl">URL вебхука</label>
+                                <input class="form-input" type="text" id="whUrl" placeholder="https://lolka.app/api/webhooks/..." autocomplete="off">
+                                <div class="form-hint">Вставьте URL вебхука, созданного в настройках канала Lolka</div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                                <div class="form-group">
+                                    <label class="form-label" for="whName">Имя отправителя</label>
+                                    <input class="form-input" type="text" id="whName" placeholder="Лола" maxlength="80">
+                                    <div class="form-hint"><span id="whNameCount">0</span> / 80</div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="whAvatar">Аватар (URL)</label>
+                                    <input class="form-input" type="text" id="whAvatar" placeholder="https://example.com/avatar.png">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="cmd-card" style="margin-bottom: 16px;">
+                            <div class="cmd-card-header">
+                                <div class="cmd-card-icon">💬</div>
+                                <div class="cmd-card-title">Сообщение</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="whContent">Текст сообщения</label>
+                                <textarea class="form-input" id="whContent" rows="3" placeholder="Привет! Я — Лола 🎀 Твой помощник на сервере." maxlength="2000"></textarea>
+                                <div class="form-hint"><span id="whContentCount">0</span> / 2000</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Вложения (файлы)</label>
+                                <label class="btn btn-outline" style="cursor: pointer; width: 100%;">
+                                    📎 Прикрепить файл
+                                    <input hidden multiple type="file" id="whFiles" accept="image/*,.pdf,.txt,.zip">
+                                </label>
+                                <div id="whFilesList" class="form-hint" style="margin-top: 8px;"></div>
+                            </div>
+                        </div>
+
+                        <div class="cmd-card">
+                            <div class="cmd-card-header">
+                                <div class="cmd-card-icon">🎴</div>
+                                <div class="cmd-card-title">Embed-карточки</div>
+                                <div class="cmd-card-count"><span id="whEmbedCount">0</span> / 10</div>
+                            </div>
+
+                            <div id="whEmbedsList" style="display: flex; flex-direction: column; gap: 12px;"></div>
+
+                            <button class="btn btn-outline" id="whAddEmbed" type="button" style="width: 100%; margin-top: 12px;">➕ Добавить карточку</button>
+                        </div>
+                    </div>
+
+                    <!-- Правая колонка -->
+                    <div>
+                        <div class="cmd-card" style="margin-bottom: 16px;">
+                            <div class="cmd-card-header">
+                                <div class="cmd-card-icon">👁️</div>
+                                <div class="cmd-card-title">Предпросмотр</div>
+                            </div>
+
+                            <div class="wh-preview-msg">
+                                <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
+                                    <div id="whPreviewAvatar" style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0; background-size: cover; background-position: center;">?</div>
+                                    <div>
+                                        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 2px;">
+                                            <span id="whPreviewName" style="font-weight: 700; font-size: 14.5px; color: var(--text);">Лола</span>
+                                            <span style="background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">БОТ</span>
+                                            <span style="font-size: 11.5px; color: var(--text-faint);">Сегодня</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="whPreviewContent" style="font-size: 13.5px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.5;">Сообщение появится здесь...</div>
+                                <div id="whPreviewEmbeds"></div>
+                            </div>
+                        </div>
+
+                        <div class="cmd-card">
+                            <div class="cmd-card-header">
+                                <div class="cmd-card-icon">🚀</div>
+                                <div class="cmd-card-title">Действия</div>
+                            </div>
+
+                            <div class="wh-actions" style="margin-bottom: 12px;">
+                                <button class="btn btn-primary" id="whSendBtn" type="button">🚀 Отправить</button>
+                                <button class="btn btn-outline" id="whEditBtn" type="button" disabled>✏️ Редактировать</button>
+                            </div>
+                            <div class="wh-actions">
+                                <button class="btn btn-outline" id="whDeleteBtn" type="button" disabled style="color: var(--error); border-color: rgba(248,113,113,0.4);">🗑 Удалить</button>
+                                <button class="btn btn-outline" id="whClearBtn" type="button">🧹 Очистить</button>
+                            </div>
+
+                            <div class="form-message" id="whMessage" style="margin-top: 16px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- ============ /ВЕБХУК ============ -->
 
         <section class="reveal" id="invite">
             <div class="container">
@@ -1954,14 +1109,11 @@
             </div>
             <h2 class="modal-title" id="authTitle">Добро пожаловать</h2>
             <p class="modal-subtitle" id="authSubtitle">Войдите или создайте аккаунт</p>
-
             <div class="tabs" role="tablist">
                 <button class="tab active" id="tabLogin" role="tab" aria-selected="true" type="button">Вход</button>
                 <button class="tab" id="tabRegister" role="tab" aria-selected="false" type="button">Регистрация</button>
             </div>
-
             <div class="form-message" id="authMessage" role="alert"></div>
-
             <form class="form-panel active" id="loginForm" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="loginEmail">Email</label>
@@ -1981,7 +1133,6 @@
                     <button type="button" id="forgotPasswordBtn">Забыли пароль?</button>
                 </div>
             </form>
-
             <form class="form-panel" id="registerForm" novalidate>
                 <div class="form-group">
                     <label class="form-label" for="registerEmail">Email</label>
@@ -2007,7 +1158,6 @@
                     <button type="button" id="switchToLogin">Войти</button>
                 </div>
             </form>
-
             <div class="form-footer">
                 Регистрируясь, вы соглашаетесь с правилами сервиса
             </div>
@@ -2019,15 +1169,12 @@
             <button class="modal-close" id="profileClose" aria-label="Закрыть">×</button>
             <h2 class="modal-title">Личный кабинет</h2>
             <p class="modal-subtitle">Управляйте своим профилем</p>
-
             <div class="form-message" id="profileMessage" role="alert"></div>
-
             <div class="tabs" role="tablist">
                 <button class="tab active" data-tab="general" type="button">Профиль</button>
                 <button class="tab" data-tab="security" type="button">Безопасность</button>
                 <button class="tab" data-tab="account" type="button">Аккаунт</button>
             </div>
-
             <div class="form-panel active" data-panel="general">
                 <form id="profileForm">
                     <div class="avatar-row">
@@ -2038,26 +1185,22 @@
                             <div class="form-hint">Прямая ссылка на изображение (http/https)</div>
                         </div>
                     </div>
-
                     <div class="form-group">
                         <label class="form-label" for="profileDisplayName">Отображаемое имя</label>
                         <input class="form-input" type="text" id="profileDisplayName" placeholder="Ваше имя" maxlength="32">
                         <div class="form-hint">До 32 символов</div>
                     </div>
-
                     <div class="form-group">
                         <label class="form-label" for="profileBio">О себе</label>
                         <textarea class="form-input" id="profileBio" rows="3" placeholder="Расскажите немного о себе" maxlength="200"></textarea>
                         <div class="form-hint">До 200 символов</div>
                     </div>
-
                     <button class="form-submit" id="profileSaveBtn" type="submit">
                         <span class="spinner"></span>
                         <span class="btn-label">Сохранить</span>
                     </button>
                 </form>
             </div>
-
             <div class="form-panel" data-panel="security">
                 <form id="changePasswordForm">
                     <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px;">Смена пароля</h4>
@@ -2078,7 +1221,6 @@
                         <span class="btn-label">Сменить пароль</span>
                     </button>
                 </form>
-
                 <form id="changeEmailForm" style="margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-soft);">
                     <h4 style="font-size: 15px; font-weight: 700; margin-bottom: 14px;">Смена email</h4>
                     <div class="form-group">
@@ -2095,7 +1237,6 @@
                     </button>
                 </form>
             </div>
-
             <div class="form-panel" data-panel="account">
                 <div class="info-row">
                     <span class="info-row-label">Email</span>
@@ -2109,7 +1250,6 @@
                     <span class="info-row-label">Дата регистрации</span>
                     <span class="info-row-value" id="profileCreatedDisplay">—</span>
                 </div>
-
                 <div class="danger-zone">
                     <h4>Выход из аккаунта</h4>
                     <button class="btn-danger" id="profileLogoutBtn" type="button">
@@ -2166,14 +1306,9 @@
         const auth = getAuth(firebaseApp);
         const db = getFirestore(firebaseApp);
 
-        /* ===== OFFLINE PERSISTENCE ===== */
-        // Локальный кэш Firestore (IndexedDB) — работает без сети
         enableIndexedDbPersistence(db).catch((err) => {
-            if (err.code === 'failed-precondition') {
-                console.warn('Firestore: несколько вкладок открыто, offline-режим недоступен');
-            } else if (err.code === 'unimplemented') {
-                console.warn('Firestore: браузер не поддерживает offline-режим');
-            }
+            if (err.code === 'failed-precondition') console.warn('Firestore: несколько вкладок открыто');
+            else if (err.code === 'unimplemented') console.warn('Firestore: offline недоступен');
         });
 
         /* ═══════════════════════════════════════════════════
@@ -2201,7 +1336,6 @@
 
         const isValidEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
-        // Кнопка не блокируется и не меняет текст — только спиннер
         const setLoading = (btn, loading, label) => {
             btn.disabled = loading;
             btn.classList.toggle('loading', loading);
@@ -2238,17 +1372,14 @@
             loginForm.classList.toggle('active', isLogin);
             registerForm.classList.toggle('active', !isLogin);
             $('#authTitle').textContent = isLogin ? 'Добро пожаловать' : 'Создать аккаунт';
-            $('#authSubtitle').textContent = isLogin
-                ? 'Войдите в свой аккаунт'
-                : 'Заполните форму — это займёт минуту';
+            $('#authSubtitle').textContent = isLogin ? 'Войдите в свой аккаунт' : 'Заполните форму — это займёт минуту';
             clearAuthErrors();
             clearAuthMessage();
         }
 
         function clearAuthErrors() {
             document.querySelectorAll('#authModal .form-error').forEach(el => {
-                el.classList.remove('visible');
-                el.textContent = '';
+                el.classList.remove('visible'); el.textContent = '';
             });
             document.querySelectorAll('#authModal .form-input').forEach(el => el.classList.remove('error'));
         }
@@ -2262,10 +1393,7 @@
             const input = document.getElementById(fieldId);
             const errorEl = document.getElementById(fieldId + 'Error');
             if (input) input.classList.add('error');
-            if (errorEl) {
-                errorEl.textContent = message;
-                errorEl.classList.add('visible');
-            }
+            if (errorEl) { errorEl.textContent = message; errorEl.classList.add('visible'); }
         }
 
         function showAuthMessage(text, type = 'error') {
@@ -2358,9 +1486,7 @@
            ═══════════════════════════════════════════════════ */
         const profileCache = new Map();
         const cacheTimestamps = new Map();
-        const CACHE_TTL = 5 * 60 * 1000; // 5 минут
-
-        // Очередь синхронизации
+        const CACHE_TTL = 5 * 60 * 1000;
         const syncQueue = new Map();
         let syncInProgress = false;
 
@@ -2368,20 +1494,12 @@
             const now = Date.now();
             const cached = profileCache.get(uid);
             const timestamp = cacheTimestamps.get(uid) || 0;
-
-            // Кэш свежий — не идём в Firestore
-            if (cached && !forceRefresh && (now - timestamp) < CACHE_TTL) {
-                return cached;
-            }
-
+            if (cached && !forceRefresh && (now - timestamp) < CACHE_TTL) return cached;
             try {
                 const ref = doc(db, 'users', uid);
                 const snap = await getDoc(ref);
                 const data = snap.exists() ? snap.data() : null;
-                if (data) {
-                    profileCache.set(uid, data);
-                    cacheTimestamps.set(uid, now);
-                }
+                if (data) { profileCache.set(uid, data); cacheTimestamps.set(uid, now); }
                 return data;
             } catch (e) {
                 console.warn('Ошибка загрузки профиля:', e);
@@ -2389,19 +1507,13 @@
             }
         }
 
-        // Мгновенное сохранение: кэш сразу, Firestore — в фоне
         function saveUserDocFast(uid, data) {
             const existing = profileCache.get(uid) || {};
             const merged = { ...existing, ...data };
             profileCache.set(uid, merged);
             cacheTimestamps.set(uid, Date.now());
-
             syncQueue.set(uid, merged);
-
-            if (!syncInProgress) {
-                syncInProgress = true;
-                processSyncQueue();
-            }
+            if (!syncInProgress) { syncInProgress = true; processSyncQueue(); }
             return merged;
         }
 
@@ -2412,14 +1524,11 @@
                 try {
                     const ref = doc(db, 'users', uid);
                     await setDoc(ref, data, { merge: true });
-                } catch (e) {
-                    console.error('Ошибка синхронизации:', e);
-                }
+                } catch (e) { console.error('Ошибка синхронизации:', e); }
             }
             syncInProgress = false;
         }
 
-        // Обычное сохранение (для случая, когда нужен await)
         async function saveUserDoc(uid, data) {
             const ref = doc(db, 'users', uid);
             await setDoc(ref, data, { merge: true });
@@ -2433,12 +1542,7 @@
             if (!user) return null;
             const existing = await loadUserDoc(user.uid);
             if (existing) return existing;
-            const initial = {
-                displayName: user.displayName || '',
-                bio: '',
-                avatarUrl: '',
-                createdAt: serverTimestamp()
-            };
+            const initial = { displayName: user.displayName || '', bio: '', avatarUrl: '', createdAt: serverTimestamp() };
             await saveUserDoc(user.uid, initial);
             return initial;
         }
@@ -2493,16 +1597,11 @@
                 userMenu.classList.add('visible');
                 userEmail.textContent = email;
                 userAvatar.title = 'Вы вошли как ' + email;
-
-                // Мгновенно показываем инициал из Auth
                 const initialName = user.displayName?.trim();
                 const initial = initialName ? initialName[0] : email[0];
                 userAvatar.textContent = initial.toUpperCase();
-
-                // В фоне — загружаем профиль
                 const profile = await ensureUserDoc(user);
                 applyAvatarToHeader(profile, email);
-
                 if (authModal.classList.contains('open')) closeAuthModal();
             } else {
                 authOpenBtn.style.display = '';
@@ -2555,21 +1654,12 @@
         async function fillProfileForm() {
             const user = auth.currentUser;
             if (!user) return;
-
             $('#profileEmailDisplay').textContent = user.email || '—';
             $('#profileUidDisplay').textContent = user.uid;
-
-            // Сначала из кэша — мгновенно
             const cached = profileCache.get(user.uid);
-            if (cached) {
-                applyProfileToForm(cached, user);
-            }
-
-            // Потом — свежие данные
+            if (cached) applyProfileToForm(cached, user);
             const fresh = await loadUserDoc(user.uid);
-            if (fresh) {
-                applyProfileToForm(fresh, user);
-            }
+            if (fresh) applyProfileToForm(fresh, user);
         }
 
         function applyProfileToForm(profile, user) {
@@ -2581,11 +1671,9 @@
                 else if (typeof created === 'string') createdText = new Date(created).toLocaleDateString('ru-RU');
             }
             $('#profileCreatedDisplay').textContent = createdText;
-
             $('#profileDisplayName').value = profile?.displayName || user.displayName || '';
             $('#profileBio').value = profile?.bio || '';
             $('#profileAvatarUrl').value = profile?.avatarUrl || '';
-
             updateAvatarPreview(profile?.avatarUrl || '', profile?.displayName || user.email || 'U');
         }
 
@@ -2604,7 +1692,6 @@
             const fallback = $('#profileDisplayName').value.trim() || auth.currentUser?.email || 'U';
             updateAvatarPreview(url, fallback);
         });
-
         $('#profileDisplayName').addEventListener('input', (e) => {
             const url = $('#profileAvatarUrl').value.trim();
             if (!url) updateAvatarPreview('', e.target.value || 'U');
@@ -2616,41 +1703,25 @@
             document.querySelectorAll('#profileModal .form-panel').forEach(p =>
                 p.classList.toggle('active', p.dataset.panel === name));
         }
-
         document.querySelectorAll('#profileModal .tab').forEach(tab => {
             tab.addEventListener('click', () => switchProfileTab(tab.dataset.tab));
         });
 
-        // ОПТИМИСТИЧНОЕ СОХРАНЕНИЕ
         $('#profileForm').addEventListener('submit', (e) => {
             e.preventDefault();
             const user = auth.currentUser;
             if (!user) return;
-
             clearProfileMessage();
-
             const displayName = $('#profileDisplayName').value.trim().slice(0, 32);
             const bio = $('#profileBio').value.trim().slice(0, 200);
             const avatarUrl = $('#profileAvatarUrl').value.trim();
-
             if (avatarUrl && !/^https?:\/\//.test(avatarUrl)) {
                 showProfileMessage('Ссылка на аватар должна начинаться с http:// или https://', 'error');
                 return;
             }
-
-            // 1. Мгновенно применяем UI
             applyAvatarToHeader({ displayName, avatarUrl }, user.email);
             showProfileMessage('Профиль сохранён', 'success');
-
-            // 2. В фоне — в Firestore
-            saveUserDocFast(user.uid, {
-                displayName,
-                bio,
-                avatarUrl,
-                updatedAt: serverTimestamp()
-            });
-
-            // 3. В фоне — в Firebase Auth
+            saveUserDocFast(user.uid, { displayName, bio, avatarUrl, updatedAt: serverTimestamp() });
             if (displayName && displayName !== user.displayName) {
                 updateProfile(user, { displayName }).catch((err) => console.warn(err));
             }
@@ -2661,23 +1732,18 @@
             closeProfileModal();
         });
 
-        // Смена пароля — нужен await, но без «Подождите…»
         $('#changePasswordForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
             const user = auth.currentUser;
             if (!user) return;
-
             const current = $('#currentPassword').value;
             const next = $('#newPassword').value;
             const confirm = $('#confirmNewPassword').value;
-
             if (next.length < 6) { showProfileMessage('Пароль должен быть минимум 6 символов', 'error'); return; }
             if (next !== confirm) { showProfileMessage('Пароли не совпадают', 'error'); return; }
-
             const btn = $('#changePasswordBtn');
             btn.disabled = true;
-
             try {
                 const cred = EmailAuthProvider.credential(user.email, current);
                 await reauthenticateWithCredential(user, cred);
@@ -2691,21 +1757,16 @@
             }
         });
 
-        // Смена email — аналогично
         $('#changeEmailForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             clearProfileMessage();
             const user = auth.currentUser;
             if (!user) return;
-
             const current = $('#currentEmailPassword').value;
             const newEmail = $('#newEmail').value.trim();
-
             if (!isValidEmail(newEmail)) { showProfileMessage('Некорректный email', 'error'); return; }
-
             const btn = $('#changeEmailBtn');
             btn.disabled = true;
-
             try {
                 const cred = EmailAuthProvider.credential(user.email, current);
                 await reauthenticateWithCredential(user, cred);
@@ -2729,7 +1790,6 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-
         themeToggle.addEventListener('click', () => {
             const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
             html.setAttribute('data-theme', next);
@@ -2754,31 +1814,22 @@
             toTop.classList.toggle('visible', scrollY > 400);
             ticking = false;
         }
-
         window.addEventListener('scroll', () => {
-            if (!ticking) {
-                requestAnimationFrame(onScroll);
-                ticking = true;
-            }
+            if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
         }, { passive: true });
-
-        toTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+        toTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
         /* ═══════════════════════════════════════════════════
            МОБИЛЬНОЕ МЕНЮ
            ═══════════════════════════════════════════════════ */
         const burger = $('#burger');
         const navList = $('#navList');
-
         burger.addEventListener('click', (e) => {
             e.stopPropagation();
             const isOpen = navList.classList.toggle('open');
             burger.setAttribute('aria-expanded', String(isOpen));
             burger.textContent = isOpen ? '✕' : '☰';
         });
-
         navList.querySelectorAll('a').forEach(a => {
             a.addEventListener('click', () => {
                 navList.classList.remove('open');
@@ -2793,18 +1844,13 @@
         document.querySelectorAll('.cmd-item').forEach(item => {
             const copyText = item.dataset.copy || item.querySelector('.cmd-name')?.textContent || '';
             if (!copyText) return;
-
             item.addEventListener('click', async () => {
                 const nameEl = item.querySelector('.cmd-name');
-                try {
-                    await navigator.clipboard.writeText(copyText);
-                } catch {
+                try { await navigator.clipboard.writeText(copyText); }
+                catch {
                     const ta = document.createElement('textarea');
-                    ta.value = copyText;
-                    ta.style.position = 'fixed';
-                    ta.style.opacity = '0';
-                    document.body.appendChild(ta);
-                    ta.select();
+                    ta.value = copyText; ta.style.position = 'fixed'; ta.style.opacity = '0';
+                    document.body.appendChild(ta); ta.select();
                     try { document.execCommand('copy'); } catch (e) {}
                     document.body.removeChild(ta);
                 }
@@ -2819,7 +1865,6 @@
            АНИМАЦИИ
            ═══════════════════════════════════════════════════ */
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -2851,7 +1896,6 @@
             }
             requestAnimationFrame(step);
         };
-
         if ('IntersectionObserver' in window) {
             const counterObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -2862,7 +1906,6 @@
                 });
             }, { threshold: 0.5 });
             counters.forEach(el => counterObserver.observe(el));
-
             document.querySelectorAll('.stat-value[data-text]').forEach(el => {
                 const txtObserver = new IntersectionObserver(entries => {
                     entries.forEach(entry => {
@@ -2876,9 +1919,7 @@
             });
         } else {
             counters.forEach(runCounter);
-            document.querySelectorAll('.stat-value[data-text]').forEach(el => {
-                el.textContent = el.dataset.text;
-            });
+            document.querySelectorAll('.stat-value[data-text]').forEach(el => { el.textContent = el.dataset.text; });
         }
 
         /* ═══════════════════════════════════════════════════
@@ -2886,7 +1927,6 @@
            ═══════════════════════════════════════════════════ */
         const sections = document.querySelectorAll('section[id]');
         const navAnchors = document.querySelectorAll('.nav-link[href^="#"]');
-
         if ('IntersectionObserver' in window) {
             const spyObserver = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
@@ -2900,6 +1940,324 @@
             }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
             sections.forEach(s => spyObserver.observe(s));
         }
+
+        /* ═══════════════════════════════════════════════════
+           ВЕБХУКИ
+           ═══════════════════════════════════════════════════ */
+        const whUrl = $('#whUrl');
+        const whName = $('#whName');
+        const whAvatar = $('#whAvatar');
+        const whContent = $('#whContent');
+        const whFiles = $('#whFiles');
+        const whMessage = $('#whMessage');
+        const whEmbedsList = $('#whEmbedsList');
+        const whPreviewAvatar = $('#whPreviewAvatar');
+        const whPreviewName = $('#whPreviewName');
+        const whPreviewContent = $('#whPreviewContent');
+        const whPreviewEmbeds = $('#whPreviewEmbeds');
+
+        let whSentMessageId = null;
+        let whEmbedCounter = 0;
+        let whEmbeds = [];
+        let whFilesData = [];
+
+        function clearWhMessage() {
+            whMessage.classList.remove('visible', 'error', 'success');
+            whMessage.textContent = '';
+        }
+        function showWhMessage(text, type = 'error') {
+            whMessage.className = 'form-message visible ' + type;
+            whMessage.textContent = (type === 'error' ? '⚠️ ' : '✓ ') + text;
+        }
+
+        whName?.addEventListener('input', () => {
+            const c = $('#whNameCount');
+            if (c) c.textContent = whName.value.length;
+            updateWhPreview();
+        });
+        whContent?.addEventListener('input', () => {
+            const c = $('#whContentCount');
+            if (c) c.textContent = whContent.value.length;
+            updateWhPreview();
+        });
+        whAvatar?.addEventListener('input', updateWhPreview);
+
+        whFiles?.addEventListener('change', () => {
+            whFilesData = Array.from(whFiles.files).map(f => ({ file: f, name: f.name }));
+            renderWhFiles();
+        });
+
+        function renderWhFiles() {
+            const list = $('#whFilesList');
+            if (!list) return;
+            if (whFilesData.length === 0) { list.textContent = ''; return; }
+            list.textContent = '📎 ' + whFilesData.map(f => f.name).join(', ');
+        }
+
+        $('#whAddEmbed')?.addEventListener('click', () => {
+            if (whEmbeds.length >= 10) {
+                showWhMessage('Максимум 10 Embed-карточек', 'error');
+                return;
+            }
+            whEmbedCounter++;
+            whEmbeds.push({
+                id: whEmbedCounter, title: '', description: '', color: '#7c5cfc',
+                url: '', thumbnail: '', image: '', footer: '', author: '', fields: []
+            });
+            renderWhEmbeds();
+            updateWhPreview();
+        });
+
+        function renderWhEmbeds() {
+            if (!whEmbedsList) return;
+            $('#whEmbedCount').textContent = whEmbeds.length;
+            if (whEmbeds.length === 0) {
+                whEmbedsList.innerHTML = '<p class="form-hint" style="text-align: center;">Нет Embed-карточек. Нажмите «Добавить карточку».</p>';
+                return;
+            }
+            whEmbedsList.innerHTML = '';
+            whEmbeds.forEach((embed, idx) => {
+                const div = document.createElement('div');
+                div.className = 'wh-embed-card';
+                div.innerHTML = `
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                        <strong style="font-size: 13.5px;">Карточка #${idx + 1}</strong>
+                        <button type="button" data-remove="${embed.id}" style="color: var(--error); font-size: 18px; padding: 4px 8px;">✕</button>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Заголовок</label>
+                        <input class="form-input" data-field="title" data-id="${embed.id}" type="text" value="${escapeHtml(embed.title)}" maxlength="256">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Описание</label>
+                        <textarea class="form-input" data-field="description" data-id="${embed.id}" rows="2" maxlength="4096">${escapeHtml(embed.description)}</textarea>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                        <div class="form-group">
+                            <label class="form-label">Цвет</label>
+                            <input class="wh-color-input" data-field="color" data-id="${embed.id}" type="color" value="${embed.color}">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Footer</label>
+                            <input class="form-input" data-field="footer" data-id="${embed.id}" type="text" value="${escapeHtml(embed.footer)}" maxlength="2048">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Author</label>
+                        <input class="form-input" data-field="author" data-id="${embed.id}" type="text" value="${escapeHtml(embed.author)}" maxlength="256">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Thumbnail (URL)</label>
+                        <input class="form-input" data-field="thumbnail" data-id="${embed.id}" type="text" value="${escapeHtml(embed.thumbnail)}">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Image (URL)</label>
+                        <input class="form-input" data-field="image" data-id="${embed.id}" type="text" value="${escapeHtml(embed.image)}">
+                    </div>
+                `;
+                whEmbedsList.appendChild(div);
+            });
+            whEmbedsList.querySelectorAll('input, textarea').forEach(input => {
+                input.addEventListener('input', (e) => {
+                    const id = parseInt(e.target.dataset.id, 10);
+                    const field = e.target.dataset.field;
+                    const embed = whEmbeds.find(x => x.id === id);
+                    if (!embed) return;
+                    embed[field] = e.target.value;
+                    updateWhPreview();
+                });
+            });
+            whEmbedsList.querySelectorAll('[data-remove]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const id = parseInt(e.target.dataset.remove, 10);
+                    whEmbeds = whEmbeds.filter(x => x.id !== id);
+                    renderWhEmbeds();
+                    updateWhPreview();
+                });
+            });
+        }
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        function updateWhPreview() {
+            if (!whPreviewName) return;
+            const name = whName.value.trim() || 'Лола';
+            const avatar = whAvatar.value.trim();
+            const content = whContent.value;
+            whPreviewName.textContent = name;
+            if (avatar && /^https?:\/\//.test(avatar)) {
+                whPreviewAvatar.style.backgroundImage = `url("${avatar}")`;
+                whPreviewAvatar.textContent = '';
+            } else {
+                whPreviewAvatar.style.backgroundImage = '';
+                whPreviewAvatar.textContent = (name[0] || '?').toUpperCase();
+            }
+            if (content) {
+                whPreviewContent.textContent = content;
+                whPreviewContent.style.color = 'var(--text)';
+            } else {
+                whPreviewContent.textContent = 'Сообщение появится здесь...';
+                whPreviewContent.style.color = 'var(--text-muted)';
+            }
+            whPreviewEmbeds.innerHTML = '';
+            whEmbeds.forEach(embed => {
+                if (!embed.title && !embed.description) return;
+                const div = document.createElement('div');
+                const color = embed.color || '#7c5cfc';
+                div.className = 'wh-preview-embed';
+                div.style.borderLeftColor = color;
+                let html = '';
+                if (embed.author) html += `<div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">${escapeHtml(embed.author)}</div>`;
+                if (embed.title) html += `<div style="font-weight: 700; font-size: 14px; color: var(--text); margin-bottom: 4px;">${escapeHtml(embed.title)}</div>`;
+                if (embed.description) html += `<div style="font-size: 13px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.4;">${escapeHtml(embed.description)}</div>`;
+                if (embed.footer) html += `<div style="font-size: 11.5px; color: var(--text-faint); margin-top: 8px;">${escapeHtml(embed.footer)}</div>`;
+                div.innerHTML = html;
+                whPreviewEmbeds.appendChild(div);
+            });
+        }
+
+        $('#whSendBtn')?.addEventListener('click', async () => {
+            clearWhMessage();
+            const url = whUrl.value.trim();
+            if (!url) { showWhMessage('Укажите URL вебхука', 'error'); return; }
+            if (!url.includes('lolka.app/api/webhooks/')) { showWhMessage('URL должен быть вебхуком Lolka', 'error'); return; }
+            const content = whContent.value.trim();
+            if (!content && whEmbeds.length === 0 && whFilesData.length === 0) {
+                showWhMessage('Введите текст, добавьте Embed или прикрепите файл', 'error');
+                return;
+            }
+            const btn = $('#whSendBtn');
+            btn.disabled = true;
+            const payload = {
+                content: content || undefined,
+                username: whName.value.trim() || undefined,
+                avatar_url: whAvatar.value.trim() || undefined,
+            };
+            if (whEmbeds.length > 0) {
+                payload.embeds = whEmbeds.map(e => {
+                    const obj = {};
+                    if (e.title) obj.title = e.title;
+                    if (e.description) obj.description = e.description;
+                    if (e.color) obj.color = hexToInt(e.color);
+                    if (e.url) obj.url = e.url;
+                    if (e.footer) obj.footer = { text: e.footer };
+                    if (e.author) obj.author = { name: e.author };
+                    if (e.thumbnail) obj.thumbnail = { url: e.thumbnail };
+                    if (e.image) obj.image = { url: e.image };
+                    return obj;
+                }).filter(e => Object.keys(e).length > 0);
+            }
+            let body;
+            const headers = {};
+            if (whFilesData.length > 0) {
+                const form = new FormData();
+                form.append('payload_json', JSON.stringify(payload));
+                whFilesData.forEach((f, i) => form.append(`file${i}`, f.file, f.name));
+                body = form;
+            } else {
+                body = JSON.stringify(payload);
+                headers['Content-Type'] = 'application/json';
+            }
+            try {
+                const resp = await fetch(url + '?wait=true', { method: 'POST', headers, body });
+                if (!resp.ok && resp.status !== 204) {
+                    showWhMessage(`Ошибка ${resp.status}: ${(await resp.text()).slice(0, 200)}`, 'error');
+                    return;
+                }
+                try {
+                    if (resp.status !== 204) {
+                        const data = await resp.json();
+                        whSentMessageId = data.id || null;
+                    }
+                } catch {}
+                $('#whEditBtn').disabled = !whSentMessageId;
+                $('#whDeleteBtn').disabled = !whSentMessageId;
+                showWhMessage('✅ Сообщение отправлено', 'success');
+            } catch (err) {
+                showWhMessage('Ошибка сети: ' + err.message, 'error');
+            } finally {
+                btn.disabled = false;
+            }
+        });
+
+        $('#whEditBtn')?.addEventListener('click', async () => {
+            if (!whSentMessageId) { showWhMessage('Сначала отправьте сообщение', 'error'); return; }
+            clearWhMessage();
+            const url = whUrl.value.trim();
+            if (!url) return;
+            const payload = {
+                content: whContent.value.trim() || undefined,
+                embeds: whEmbeds.map(e => {
+                    const obj = {};
+                    if (e.title) obj.title = e.title;
+                    if (e.description) obj.description = e.description;
+                    if (e.color) obj.color = hexToInt(e.color);
+                    if (e.footer) obj.footer = { text: e.footer };
+                    if (e.author) obj.author = { name: e.author };
+                    if (e.thumbnail) obj.thumbnail = { url: e.thumbnail };
+                    if (e.image) obj.image = { url: e.image };
+                    return obj;
+                }).filter(e => Object.keys(e).length > 0),
+            };
+            try {
+                const resp = await fetch(`${url}/messages/${whSentMessageId}`, {
+                    method: 'PATCH',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!resp.ok && resp.status !== 204) {
+                    showWhMessage(`Ошибка ${resp.status}: ${await resp.text()}`, 'error');
+                    return;
+                }
+                showWhMessage('✅ Сообщение обновлено', 'success');
+            } catch (err) {
+                showWhMessage('Ошибка: ' + err.message, 'error');
+            }
+        });
+
+        $('#whDeleteBtn')?.addEventListener('click', async () => {
+            if (!whSentMessageId) return;
+            if (!confirm('Удалить отправленное сообщение?')) return;
+            clearWhMessage();
+            const url = whUrl.value.trim();
+            if (!url) return;
+            try {
+                const resp = await fetch(`${url}/messages/${whSentMessageId}`, { method: 'DELETE' });
+                if (!resp.ok && resp.status !== 204) { showWhMessage(`Ошибка ${resp.status}`, 'error'); return; }
+                whSentMessageId = null;
+                $('#whEditBtn').disabled = true;
+                $('#whDeleteBtn').disabled = true;
+                showWhMessage('✅ Сообщение удалено', 'success');
+            } catch (err) {
+                showWhMessage('Ошибка: ' + err.message, 'error');
+            }
+        });
+
+        $('#whClearBtn')?.addEventListener('click', () => {
+            whContent.value = '';
+            whEmbeds = [];
+            whEmbedCounter = 0;
+            whFilesData = [];
+            if (whFiles) whFiles.value = '';
+            renderWhEmbeds();
+            renderWhFiles();
+            updateWhPreview();
+            clearWhMessage();
+            $('#whContentCount').textContent = '0';
+        });
+
+        function hexToInt(hex) {
+            try { return parseInt(hex.replace('#', ''), 16); }
+            catch { return 0x7c5cfc; }
+        }
+
+        updateWhPreview();
+        renderWhEmbeds();
+        renderWhFiles();
     </script>
 </body>
 </html>
