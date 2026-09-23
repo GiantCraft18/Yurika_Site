@@ -469,6 +469,7 @@ select option{background:#12162a; color:var(--text)}
 }
 .chip-status.ok{color:var(--ok); border-color:rgba(55,214,122,.4); background:rgba(55,214,122,.10)}
 .chip-status.warn{color:var(--warn); border-color:rgba(255,176,32,.4); background:rgba(255,176,32,.10)}
+.chip-status.cloud{color:var(--brand-2); border-color:rgba(34,211,238,.4); background:rgba(34,211,238,.10)}
 
 .stat-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
 .stat{
@@ -1584,6 +1585,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         <div class="input-wrap"><i class="fa-solid fa-hashtag lead"></i>
           <input id="srvId" placeholder="123456789" />
         </div>
+        <div class="hint">Тот же ID, что и в Lolka. По нему бот поймёт, к какому серверу относится приветствие.</div>
       </div>
       <div class="field">
         <label>Ссылка на аватар (необязательно)</label>
@@ -1624,6 +1626,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           <div class="input-wrap"><i class="fa-solid fa-hashtag lead"></i>
             <input id="spId" placeholder="123456789" />
           </div>
+          <div class="hint">Используется ботом, чтобы понять, куда отправлять сообщения.</div>
         </div>
         <div class="field" style="margin:0 0 12px">
           <label>Аватар (URL)</label>
@@ -1662,6 +1665,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           <div class="input-wrap"><i class="fa-solid fa-hand-sparkles lead"></i>
             <input id="spWelcomeChannel" placeholder="#welcome" />
           </div>
+          <div class="hint">Сюда бот будет отправлять приветствия и прощания.</div>
         </div>
         <div class="field" style="margin:0">
           <label>Канал объявлений</label>
@@ -1792,7 +1796,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
     <div class="card-head" style="border-top:1px solid var(--stroke); border-bottom:none; border-radius:0 0 var(--radius) var(--radius); position:sticky; bottom:0; background:linear-gradient(0deg, rgba(18,22,42,.98), rgba(18,22,42,.92)); backdrop-filter:blur(8px)">
       <button class="btn ghost" id="spCancel">Отмена</button>
-      <button class="btn" id="spSave" style="margin-left:auto"><i class="fa-solid fa-floppy-disk"></i> Сохранить настройки</button>
+      <button class="btn" id="spSave" style="margin-left:auto"><i class="fa-solid fa-cloud-arrow-up"></i> Сохранить и отправить боту</button>
     </div>
   </div>
 </div>
@@ -2038,7 +2042,6 @@ const state = {
   theme:'dark'
 };
 
-/* ----- Вкладки конструктора ----- */
 $$('#hookTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
     $$('#hookTabs .chip').forEach(x=>x.classList.remove('active'));
@@ -2052,7 +2055,6 @@ $$('#hookTabs .chip').forEach(chip=>{
   });
 });
 
-/* ----- Markdown ----- */
 function applyMd(wrap){
   const ta = $('#hookMsg');
   const start = ta.selectionStart, end = ta.selectionEnd;
@@ -2074,7 +2076,6 @@ $$('.md-btn[data-md]').forEach(b=>{
   b.addEventListener('click', ()=> applyMd(b.dataset.md));
 });
 
-/* ----- Счётчики ----- */
 function counter(el, val, max){
   if(!el) return;
   el.textContent = `${val} / ${max}`;
@@ -2095,7 +2096,6 @@ function updCounters(){
   }
 }
 
-/* ----- Поля ----- */
 $('#hookUrl').addEventListener('input', e=>{ state.url = e.target.value; updCounters(); saveDraft(); });
 $('#hookName').addEventListener('input', e=>{ state.name = e.target.value; renderPreview(); saveDraft(); });
 $('#hookAvatar').addEventListener('input', e=>{ state.avatar = e.target.value; renderPreview(); saveDraft(); });
@@ -2108,7 +2108,6 @@ $('#hookFile').addEventListener('change', e=>{
   renderPreview();
 });
 
-/* ----- Загрузка по ссылке ----- */
 $('#hookLoad').addEventListener('click', async ()=>{
   const ref = $('#hookLoadBy').value.trim();
   if(!ref){ toast('Укажите ссылку или ID', 'warn'); return; }
@@ -2138,7 +2137,6 @@ $('#hookLoad').addEventListener('click', async ()=>{
   }
 });
 
-/* ----- Отправка / удаление / очистка ----- */
 $('#hookSend').addEventListener('click', async ()=>{
   if(!state.url){ toast('Укажите URL вебхука', 'err'); return; }
   try{
@@ -2177,7 +2175,6 @@ $('#hookCopy').addEventListener('click', async ()=>{
   catch{ toast('Не удалось скопировать', 'err'); }
 });
 
-/* ----- Ссылка-шаблон ----- */
 $('#hookShare').addEventListener('click', async ()=>{
   try{
     const data = btoa(unescape(encodeURIComponent(JSON.stringify(buildPayload()))));
@@ -2189,7 +2186,6 @@ $('#hookShare').addEventListener('click', async ()=>{
   }
 });
 
-/* ----- EMBEDS ----- */
 $('#hookAddEmbed').addEventListener('click', ()=>{
   if(state.embeds.length >= MAX_EMBEDS) return;
   state.embeds.push({
@@ -2366,7 +2362,6 @@ function renderEmbeds(){
   });
 }
 
-/* ----- КОМПОНЕНТЫ ----- */
 $('#hookAddRow').addEventListener('click', ()=>{
   if(state.rows.length >= MAX_BTN_ROWS) return;
   state.rows.push({ type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] });
@@ -2482,7 +2477,6 @@ function editButton(rowI, btnI){
   renderComp(); renderPreview(); saveDraft();
 }
 
-/* ----- ПРЕДПРОСМОТР ----- */
 function renderPreview(){
   const p = $('#hookPreview');
   p.className = 'discord-preview theme-' + state.theme;
@@ -2567,13 +2561,11 @@ function renderPreview(){
   p.innerHTML = html;
 }
 
-/* ----- Тема превью ----- */
 $('#themeToggle').addEventListener('click', ()=>{
   state.theme = state.theme === 'dark' ? 'light' : 'dark';
   renderPreview(); saveDraft();
 });
 
-/* ----- Валидация ----- */
 function runChecklist(){
   const items = [];
   const payload = buildPayload();
@@ -2617,7 +2609,6 @@ function runChecklist(){
 }
 $('#runCheck').addEventListener('click', runChecklist);
 
-/* ----- Экспорт ----- */
 let exportKind = 'json';
 $$('#exportTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
@@ -2649,7 +2640,6 @@ $('#copyExport').addEventListener('click', async ()=>{
   catch{ toast('Не удалось скопировать', 'err'); }
 });
 
-/* ----- Сборка payload ----- */
 function buildPayload(){
   const embeds = state.embeds
     .filter(e => (e.title||'').trim() || (e.desc||'').trim() || e.author.name || e.footer.text || e.image || e.thumbnail || (e.fields && e.fields.some(f=>(f.name||f.value))))
@@ -2694,7 +2684,6 @@ function buildPayload(){
   return payload;
 }
 
-/* ----- Черновик ----- */
 const DRAFT_KEY = 'yurika_hook_draft_v1';
 let saveTimer = null;
 function saveDraft(){
@@ -2733,7 +2722,6 @@ function loadDraft(){
   }catch(e){ /* тихо */ }
 }
 
-/* ----- Горячие клавиши ----- */
 document.addEventListener('keydown', (e)=>{
   if(e.ctrlKey || e.metaKey){
     if(e.key === 'Enter'){ e.preventDefault(); $('#hookSend').click(); }
@@ -2743,7 +2731,6 @@ document.addEventListener('keydown', (e)=>{
   }
 });
 
-/* ----- Шаблоны ----- */
 const TEMPLATES = {
   news: { name:'Новость', icon:'fa-newspaper', build(){
     state.name = 'Yurika News';
@@ -2803,7 +2790,6 @@ function buildTemplateButtons(){
 }
 buildTemplateButtons();
 
-/* Мои шаблоны */
 const MY_TPL_KEY = 'yurika_hook_mytpl_v1';
 function loadMyTemplates(){ try{ return JSON.parse(localStorage.getItem(MY_TPL_KEY) || '{}'); }catch{ return {}; } }
 function saveMyTemplates(obj){ localStorage.setItem(MY_TPL_KEY, JSON.stringify(obj)); }
@@ -2846,7 +2832,6 @@ function buildMyTemplateButtons(){
 }
 buildMyTemplateButtons();
 
-/* URL с шаблоном */
 function checkShareLink(){
   const h = location.hash;
   if(!h.startsWith('#hook=')) return;
@@ -2871,7 +2856,6 @@ function checkShareLink(){
   }catch(err){ /* тихо */ }
 }
 
-/* Инициализация вебхука */
 loadDraft();
 checkShareLink();
 updCounters(); renderEmbeds(); renderComp(); renderPreview();
@@ -3242,6 +3226,7 @@ function renderServers(){
           <span class="chip-status ok"><i class="fa-solid fa-circle-check"></i> Юрика работает</span>
           <span class="chip-status"><i class="fa-solid fa-clock"></i> ${escapeHTML(s.addedAt || '')}</span>
           ${s.settings && s.settings.language ? `<span class="chip-status"><i class="fa-solid fa-language"></i> ${escapeHTML(String(s.settings.language).toUpperCase())}</span>` : ''}
+          <span class="chip-status cloud"><i class="fa-solid fa-cloud"></i> облако</span>
         </div>
       </div>
       <div class="server-actions">
@@ -3313,7 +3298,7 @@ $('#srvSave').addEventListener('click', ()=>{
 });
 
 /* ============================================================
-   8. ПАНЕЛЬ НАСТРОЙКИ СЕРВЕРА
+   8. ПАНЕЛЬ НАСТРОЙКИ СЕРВЕРА (+ отправка в Firestore для бота)
 ============================================================ */
 let spIndex = -1;
 
@@ -3387,7 +3372,9 @@ $('#spDescription').addEventListener('input', e=>{
 $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
   sw.addEventListener('click', ()=> sw.classList.toggle('on'));
 });
-$('#spSave').addEventListener('click', ()=>{
+
+// СОХРАНЕНИЕ + ОТПРАВКА В FIRESTORE ДЛЯ БОТА
+$('#spSave').addEventListener('click', async ()=>{
   if(spIndex < 0){ toast('Сервер не выбран', 'err'); return; }
   const list = loadServers();
   const s = list[spIndex]; if(!s) return;
@@ -3412,21 +3399,58 @@ $('#spSave').addEventListener('click', ()=>{
     autoRoleDelay: clamp(parseInt($('#spAutoRoleDelay').value || '0', 10) || 0, 0, 1440),
     modules: mods
   };
+
   saveServers(list);
   renderServers(); renderMeta(loadProfileLocal());
+
+  // Отправляем в Firestore
+  if(!s.id){
+    toast('Укажи ID сервера — иначе бот не узнает, куда писать', 'warn', 3600);
+    closeServerPanel();
+    return;
+  }
+
+  try{
+    if(fbReady && fbDb){
+      await fbDb.collection('servers').doc(s.id).set({
+        id: s.id,
+        name: s.name,
+        avatar: s.avatar,
+        description: s.description,
+        settings: s.settings,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+      toast('Сохранено и отправлено боту', 'ok');
+    }else{
+      toast('Сохранено локально (Firestore недоступен)', 'warn', 3600);
+    }
+  }catch(err){
+    console.error(err);
+    toast('Локально сохранено, но Firestore не принял: ' + (err.code || err.message), 'warn', 4000);
+  }
+
   closeServerPanel();
-  toast('Настройки сохранены', 'ok');
 });
-$('#spKick').addEventListener('click', ()=>{
+
+$('#spKick').addEventListener('click', async ()=>{
   if(spIndex < 0) return;
   const list = loadServers();
   const s = list[spIndex]; if(!s) return;
   if(!confirm(`Убрать Юрику с «${s.name || 'Сервер'}»?`)) return;
+
+  const sid = s.id;
   list.splice(spIndex, 1);
   saveServers(list);
   renderServers(); renderMeta(loadProfileLocal());
   closeServerPanel();
   toast('Бот убран с сервера', 'warn');
+
+  // Удаляем настройки из Firestore, чтобы бот перестал отправлять сообщения
+  try{
+    if(sid && fbReady && fbDb){
+      await fbDb.collection('servers').doc(sid).delete();
+    }
+  }catch(err){ /* тихо */ }
 });
 
 /* ============================================================
