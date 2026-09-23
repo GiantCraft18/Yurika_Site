@@ -6,18 +6,15 @@
 <title>Yurika Bot</title>
 <meta name="theme-color" content="#0b0d1a" />
 
-<!-- Иконка сайта -->
 <link rel="icon" type="image/jpeg" href="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" />
 <link rel="apple-touch-icon" href="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" />
 <link rel="shortcut icon" href="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" />
 
-<!-- Иконки + шрифт -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-<!-- Firebase SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
@@ -79,7 +76,6 @@ body::after{
 a{color:inherit;text-decoration:none}
 button{font-family:inherit}
 
-/* ============ ХЕДЕР ============ */
 header.topbar{
   position:sticky; top:0; z-index:50;
   backdrop-filter:blur(14px);
@@ -121,7 +117,6 @@ nav.tabs{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap}
 }
 .tab.active i{color:#fff}
 
-/* ============ ОБЩИЙ КОНТЕЙНЕР ============ */
 main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
 .section{display:none; animation:fade .35s ease both}
 .section.active{display:block}
@@ -134,7 +129,6 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   border:1px dashed var(--stroke-strong); padding:6px 12px; border-radius:999px;
 }
 
-/* ============ КАРТОЧКИ ============ */
 .grid{display:grid; gap:16px}
 .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -165,7 +159,6 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   border:1px solid var(--stroke-strong); color:#fff; font-size:16px;
 }
 
-/* ============ ГЛАВНАЯ ============ */
 .hero{
   position:relative;
   border:1px solid var(--stroke);
@@ -222,7 +215,6 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
 .callout b{display:block; margin-bottom:4px}
 .callout p{margin:0; color:var(--text); opacity:.92; font-size:14.5px; line-height:1.6}
 
-/* Категории команд на главной */
 .cats-strip{
   margin-top:22px;
   padding:20px 20px 18px;
@@ -259,7 +251,6 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   border:1px solid var(--stroke-strong);
 }
 
-/* ============ УСТАНОВКА ============ */
 .guide{
   border:1px solid var(--stroke);
   border-radius:22px;
@@ -318,7 +309,6 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
 .btn-install:hover{transform:translateY(-2px); box-shadow:0 24px 60px rgba(255,255,255,.28), 0 0 0 1px rgba(255,255,255,.55)}
 .install-note{font-size:12.5px; color:var(--muted); font-weight:700; letter-spacing:.3px}
 
-/* ============ ПОЛЯ ФОРМ ============ */
 .field{display:flex; flex-direction:column; gap:7px; margin-bottom:14px}
 .field label{font-size:12.5px; font-weight:800; color:var(--muted); letter-spacing:.4px; text-transform:uppercase}
 .input-wrap{position:relative; display:flex; align-items:center}
@@ -338,7 +328,6 @@ input:focus,textarea:focus,select:focus{border-color:var(--brand); box-shadow:va
 input::placeholder,textarea::placeholder{color:#6b74a3}
 .hint{font-size:12px; color:var(--muted)}
 
-/* Select */
 .select-wrap{position:relative; display:flex; align-items:center}
 .select-wrap i.lead{position:absolute; left:14px; color:var(--brand-2); font-size:14px; pointer-events:none; z-index:2}
 .select-wrap::after{
@@ -346,13 +335,9 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
   font-family:"Font Awesome 6 Free"; font-weight:900;
   position:absolute; right:14px; color:var(--muted); pointer-events:none;
 }
-select{
-  appearance:none; -webkit-appearance:none;
-  padding-right:40px; cursor:pointer;
-}
+select{appearance:none; -webkit-appearance:none; padding-right:40px; cursor:pointer}
 select option{background:#12162a; color:var(--text)}
 
-/* Кнопки */
 .btn{
   --b1:var(--brand); --b2:var(--brand-2);
   display:inline-flex; align-items:center; justify-content:center; gap:9px;
@@ -377,7 +362,6 @@ select option{background:#12162a; color:var(--text)}
 .row{display:flex; gap:10px; flex-wrap:wrap}
 .row.end{justify-content:flex-end}
 
-/* ============ ПРОФИЛЬ / АВАТАР ============ */
 .profile-top{display:flex; gap:20px; align-items:center; flex-wrap:wrap}
 .avatar-wrap{position:relative; flex:0 0 auto}
 .avatar{
@@ -410,7 +394,6 @@ select option{background:#12162a; color:var(--text)}
 .badge.ok i{color:var(--ok)}
 .badge.warn i{color:var(--warn)}
 
-/* Соцсети */
 .socials{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
 .social{
   display:inline-flex; align-items:center; gap:8px;
@@ -432,7 +415,6 @@ select option{background:#12162a; color:var(--text)}
 .social.twitter i{color:#e8e8e8}
 .social.empty{opacity:.55; cursor:default; pointer-events:none}
 
-/* Био */
 .bio{
   margin-top:14px; padding:14px 16px; border-radius:14px;
   border:1px dashed var(--stroke-strong); background:rgba(255,255,255,.02);
@@ -441,7 +423,6 @@ select option{background:#12162a; color:var(--text)}
 }
 .bio.empty{color:var(--muted); font-style:italic; font-weight:500}
 
-/* Приватность */
 .privacy-row{
   display:flex; align-items:center; gap:12px;
   padding:12px 14px; border-radius:14px;
@@ -479,7 +460,6 @@ select option{background:#12162a; color:var(--text)}
 .danger-zone b{display:block; margin-bottom:4px}
 .danger-zone p{margin:0; color:var(--muted); font-size:13.5px; font-weight:600; line-height:1.55}
 
-/* Сообщество и активность */
 .server-item{
   display:flex; align-items:center; gap:14px;
   padding:14px;
@@ -537,13 +517,8 @@ select option{background:#12162a; color:var(--text)}
   margin-top:10px;
 }
 .share-row i.lead{color:var(--brand-2); font-size:16px}
-.share-row input{
-  padding:10px 12px;
-  font-family:'JetBrains Mono',monospace; font-size:13px;
-  background:rgba(0,0,0,.35);
-}
+.share-row input{padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:13px; background:rgba(0,0,0,.35)}
 
-/* Модалки */
 .modal-overlay{
   display:none; position:fixed; inset:0; z-index:1000;
   align-items:center; justify-content:center; padding:20px;
@@ -563,7 +538,6 @@ select option{background:#12162a; color:var(--text)}
 }
 .modal-body{max-height:calc(100vh - 200px); overflow-y:auto}
 
-/* Панель настроек — секции */
 .panel-section{
   border:1px solid var(--stroke);
   border-radius:16px;
@@ -588,7 +562,6 @@ select option{background:#12162a; color:var(--text)}
 .toggle-row b{display:block; font-size:14px; margin-bottom:2px}
 .toggle-row span{font-size:12px; color:var(--muted); font-weight:600; display:block}
 
-/* Плейсхолдеры-чипы */
 .ph-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
 .ph-chip{
   font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
@@ -598,7 +571,7 @@ select option{background:#12162a; color:var(--text)}
 }
 .ph-chip:hover{background:rgba(124,92,255,.28); transform:translateY(-1px)}
 
-/* ============ ВЕБХУК: РАСШИРЕНИЯ ============ */
+/* ============ ВЕБХУК ============ */
 .hook-toolbar{
   display:flex; align-items:center; gap:6px; flex-wrap:wrap;
   padding:10px 12px;
@@ -632,15 +605,50 @@ select option{background:#12162a; color:var(--text)}
 .preset:hover{background:rgba(255,255,255,.09); transform:translateY(-1px)}
 .preset i{font-size:11px}
 
-/* Color palette */
-.color-palette{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
-.color-swatch{
-  width:26px;height:26px;border-radius:8px;
-  border:2px solid var(--stroke-strong);
-  cursor:pointer;
-  transition:.2s transform, .2s border-color;
+/* Плитки шаблонов */
+.tpl-grid{
+  display:grid;
+  gap:12px;
+  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
+  margin-top:4px;
 }
-.color-swatch:hover{transform:translateY(-2px); border-color:#fff}
+.tpl-card{
+  position:relative;
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  padding:16px 16px 14px;
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  cursor:pointer;
+  transition:.2s transform, .2s border-color, .2s box-shadow;
+  overflow:hidden;
+}
+.tpl-card::before{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(124,92,255,.14), transparent 45%, rgba(34,211,238,.12));
+  pointer-events:none;
+}
+.tpl-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--stroke-strong);
+  box-shadow:0 20px 50px rgba(124,92,255,.28);
+}
+.tpl-card .tpl-head{
+  display:flex; align-items:center; gap:10px; margin-bottom:8px;
+}
+.tpl-card .tpl-ico{
+  width:40px;height:40px;border-radius:12px; flex:0 0 40px;
+  display:grid;place-items:center; color:#fff; font-size:15px;
+  background:linear-gradient(135deg, rgba(124,92,255,.55), rgba(34,211,238,.45));
+  border:1px solid var(--stroke-strong);
+}
+.tpl-card b{display:block; font-size:14.5px; margin-bottom:2px}
+.tpl-card .tpl-desc{
+  font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.45;
+}
+.tpl-card .tpl-color{
+  position:absolute; left:0; top:0; bottom:0; width:4px;
+}
 
 /* Поля embed (author/footer/fields) */
 .mini-grid{display:grid; gap:8px; grid-template-columns:1fr 1fr}
@@ -655,7 +663,6 @@ select option{background:#12162a; color:var(--text)}
 .field-item .field-item-head b{font-size:12px; color:var(--muted); letter-spacing:.4px}
 .field-item .field-item-head .btn{margin-left:auto}
 
-/* Кнопки-компоненты */
 .buttons-list{display:flex; flex-direction:column; gap:8px; margin-top:8px}
 .btn-row{
   display:flex; gap:6px; flex-wrap:wrap;
@@ -690,7 +697,6 @@ select option{background:#12162a; color:var(--text)}
   margin-left:auto; font-size:10px;
 }
 
-/* Точное превью Discord */
 .discord-preview{
   border-radius:14px;
   padding:16px;
@@ -746,7 +752,6 @@ select option{background:#12162a; color:var(--text)}
 .dp-embed .dp-footer span{font-size:12px; opacity:.75}
 .dp-embed .dp-footer .dp-timestamp{font-size:11.5px; opacity:.65}
 
-/* Валидация */
 .checklist{display:flex; flex-direction:column; gap:8px}
 .chk{
   display:flex; align-items:center; gap:10px;
@@ -765,7 +770,6 @@ select option{background:#12162a; color:var(--text)}
 
 .export-code{margin-top:10px}
 
-/* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
 .toast{
   display:flex; align-items:center; gap:10px;
@@ -779,7 +783,6 @@ select option{background:#12162a; color:var(--text)}
 .toast.warn{border-left-color:var(--warn)}
 @keyframes pop{from{opacity:0; transform:translateY(10px) scale(.98)} to{opacity:1; transform:none}}
 
-/* ============ КОМАНДЫ ============ */
 .cat-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
 .chip{
   display:inline-flex; align-items:center; gap:8px;
@@ -815,7 +818,6 @@ select option{background:#12162a; color:var(--text)}
   padding:3px 8px; border-radius:999px;
 }
 
-/* ============ КОД ============ */
 pre.code{
   margin:0; padding:18px;
   background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
@@ -824,37 +826,94 @@ pre.code{
   font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.65; color:#c9d2ff;
 }
 
-/* ============ ВЕБХУК-КОНСТРУКТОР ============ */
 .hook-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:16px}
 .hook-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px}
 .hook-row label{font-size:12.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:var(--muted)}
 .counter{font-size:12px; font-weight:800; color:var(--muted)}
 .counter.over{color:var(--err)}
-.embed-box{border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.025)}
+.embed-box{border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.025); transition:border-color .2s, box-shadow .2s, opacity .2s}
 .embed-box .embed-top{display:flex; align-items:center; gap:10px; margin-bottom:10px}
 .embed-box .embed-top strong{font-size:13.5px}
-.embed-box .embed-top .btn{margin-left:auto}
 .color-line{height:5px; border-radius:99px; margin-bottom:12px}
+
+.embed-box.collapsed .emb-pane,
+.embed-box.collapsed .tabs-mini,
+.embed-box.collapsed .color-line{
+  display:none !important;
+}
+.embed-box.collapsed{padding:10px 14px}
+.embed-box.collapsed .embed-top{margin-bottom:0}
+.embed-box .collapse-btn{
+  width:32px;height:32px;border-radius:10px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(255,255,255,.04);
+  color:var(--text); cursor:pointer;
+  display:grid;place-items:center;
+  transition:.2s background, .2s transform, .2s border-color;
+}
+.embed-box .collapse-btn:hover{background:rgba(255,255,255,.09); border-color:var(--brand)}
+.embed-box .collapse-btn i{transition:transform .2s}
+
+.embed-box.dragging{
+  opacity:.55;
+  border-color:var(--brand);
+  box-shadow:0 20px 50px rgba(124,92,255,.35);
+}
+.embed-box.drag-over{
+  border-color:var(--brand-2);
+  box-shadow:0 0 0 2px rgba(34,211,238,.35);
+}
+.drag-handle{
+  cursor:grab; color:var(--muted); font-size:14px; padding:4px 6px;
+  border-radius:8px; transition:.15s background;
+}
+.drag-handle:hover{background:rgba(255,255,255,.06); color:var(--text)}
+.drag-handle:active{cursor:grabbing}
+
+input.limit-over, textarea.limit-over{
+  border-color:var(--err) !important;
+  box-shadow:0 0 0 3px rgba(255,90,106,.20) !important;
+  background:rgba(255,90,106,.06) !important;
+}
+
+.ph-embed{
+  font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
+  padding:3px 8px; border-radius:999px;
+  background:rgba(34,211,238,.14); border:1px solid rgba(34,211,238,.32);
+  color:#b9f3ff; cursor:pointer;
+  transition:.2s background, .2s transform;
+  display:inline-flex; align-items:center; justify-content:center;
+}
+.ph-embed:hover{background:rgba(34,211,238,.26); transform:translateY(-1px)}
+.ph-embed.md{
+  background:rgba(124,92,255,.16); border-color:rgba(124,92,255,.32); color:#d7dcff;
+  min-width:26px;
+}
+.ph-embed.md:hover{background:rgba(124,92,255,.28)}
+
+.color-palette{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
+.color-swatch{
+  width:26px;height:26px;border-radius:8px;
+  border:2px solid var(--stroke-strong);
+  cursor:pointer;
+  transition:.2s transform, .2s border-color;
+}
+.color-swatch:hover{transform:translateY(-2px); border-color:#fff}
+
 .preview{
   border:1px solid var(--stroke); border-radius:14px; padding:16px;
   background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
   min-height:220px;
 }
-.preview .msg{font-weight:600; font-size:14.5px; line-height:1.55; white-space:pre-wrap; word-break:break-word}
-.preview .e{margin-top:12px; border-left:4px solid var(--brand); border-radius:10px; background:rgba(255,255,255,.035); padding:12px 14px}
-.preview .e h4{margin:0 0 6px; font-size:14px}
-.preview .e p{margin:0; color:var(--muted); font-size:13px; font-weight:600; white-space:pre-wrap; word-break:break-word}
 .empty{display:grid; place-items:center; text-align:center; color:var(--muted); min-height:180px; font-weight:700; gap:10px}
 .empty i{font-size:32px; color:var(--brand)}
 
-/* ============ АВТОРИЗАЦИЯ ============ */
 .auth-wrap{max-width:460px; margin:40px auto}
 .auth-tabs{display:flex; gap:8px; margin-bottom:16px}
 .auth-tabs .chip{flex:1; justify-content:center}
 .divider{display:flex; align-items:center; gap:12px; color:var(--muted); font-size:12px; font-weight:800; margin:14px 0}
 .divider::before,.divider::after{content:""; flex:1; height:1px; background:var(--stroke)}
 
-/* ============ FOOTER ============ */
 footer{
   max-width:1240px; margin:0 auto; padding:24px 18px 50px;
   color:var(--muted); font-size:13px; font-weight:600;
@@ -862,7 +921,6 @@ footer{
 }
 footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
-/* ============ АДАПТИВ ============ */
 @media (max-width:1024px){
   .hook-grid{grid-template-columns:1fr}
   .grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -875,6 +933,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .stat-grid{grid-template-columns:1fr}
   .mini-grid{grid-template-columns:1fr}
   .cats-grid{grid-template-columns:1fr}
+  .tpl-grid{grid-template-columns:1fr}
   nav.tabs{width:100%; margin-left:0; order:3; padding-top:6px}
   .topbar-inner{flex-wrap:wrap}
   .tab{flex:1 1 auto; justify-content:center; padding:9px 10px; font-size:12.5px}
@@ -904,7 +963,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 </head>
 <body>
 
-<!-- ===================== ХЕДЕР ===================== -->
 <header class="topbar">
   <div class="topbar-inner">
     <div class="logo">
@@ -930,59 +988,56 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
 <main>
 
-<!-- ===================== ГЛАВНАЯ ===================== -->
-<section class="section active" id="tab-home">
-  <div class="hero">
-    <h1>YurikaBot — твой идеальный помощник на сервере!</h1>
-    <p><span class="wave">👋</span> Привет, я Юрика! Я — многофункциональный бот, который всегда придёт на помощь. Вот что я умею:</p>
+  <section class="section active" id="tab-home">
+    <div class="hero">
+      <h1>YurikaBot — твой идеальный помощник на сервере!</h1>
+      <p><span class="wave">👋</span> Привет, я Юрика! Я — многофункциональный бот, который всегда придёт на помощь. Вот что я умею:</p>
 
-    <div class="feature-list">
-      <div class="feature"><i class="fa-solid fa-coins"></i><div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div></div>
-      <div class="feature"><i class="fa-solid fa-paw"></i><div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div></div>
-      <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div></div>
-      <div class="feature"><i class="fa-solid fa-circle-question"></i><div><b>Справка</b><span>Покажу все команды и функции.</span></div></div>
-    </div>
+      <div class="feature-list">
+        <div class="feature"><i class="fa-solid fa-coins"></i><div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div></div>
+        <div class="feature"><i class="fa-solid fa-paw"></i><div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div></div>
+        <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div></div>
+        <div class="feature"><i class="fa-solid fa-circle-question"></i><div><b>Справка</b><span>Покажу все команды и функции.</span></div></div>
+      </div>
 
-    <!-- Остальные категории команд (без дублей с фичами выше) -->
-    <div class="cats-strip">
-      <h3><i class="fa-solid fa-layer-group"></i> Другие категории команд</h3>
-      <div class="cats-grid">
-        <div class="cat-pill"><i class="fa-solid fa-brain"></i> Нейросеть GigaChat-2</div>
-        <div class="cat-pill"><i class="fa-solid fa-briefcase"></i> Бизнесы</div>
-        <div class="cat-pill"><i class="fa-solid fa-heart"></i> Браки</div>
-        <div class="cat-pill"><i class="fa-solid fa-gear"></i> Конфигурация</div>
-        <div class="cat-pill"><i class="fa-solid fa-circle-play"></i> Основное</div>
-        <div class="cat-pill"><i class="fa-solid fa-users"></i> Пользователи</div>
+      <div class="cats-strip">
+        <h3><i class="fa-solid fa-layer-group"></i> Другие категории команд</h3>
+        <div class="cats-grid">
+          <div class="cat-pill"><i class="fa-solid fa-brain"></i> Нейросеть GigaChat-2</div>
+          <div class="cat-pill"><i class="fa-solid fa-briefcase"></i> Бизнесы</div>
+          <div class="cat-pill"><i class="fa-solid fa-heart"></i> Браки</div>
+          <div class="cat-pill"><i class="fa-solid fa-gear"></i> Конфигурация</div>
+          <div class="cat-pill"><i class="fa-solid fa-circle-play"></i> Основное</div>
+          <div class="cat-pill"><i class="fa-solid fa-users"></i> Пользователи</div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <i class="fa-solid fa-comments"></i>
+        <div>
+          <b>💬 Живое общение</b>
+          <p>Во мне встроен API-ключ GigaChat от Сбербанка! Просто выдели мой ник <b style="color:#fff">@Yurika_Bot</b> и напиши мне вопрос или приветствие — я всегда отвечу!</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:14px; border-color:rgba(34,211,238,.4); background:linear-gradient(135deg, rgba(34,211,238,.16), rgba(124,92,255,.14))">
+        <i class="fa-solid fa-download" style="background:linear-gradient(135deg,#22d3ee,#37d67a)"></i>
+        <div>
+          <b>📥 Как установить?</b>
+          <p>Загляни во вкладку <b style="color:#fff">«Установить бота»</b> — там подробная инструкция, как правильно меня добавить и настроить на твоём сервере.</p>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:22px">
+        <a class="btn" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
+          <i class="fa-solid fa-rocket"></i> Установить на сервер
+        </a>
+        <button class="btn ghost" data-goto="commands"><i class="fa-solid fa-terminal"></i> Посмотреть команды</button>
+        <button class="btn ghost" data-goto="webhook"><i class="fa-solid fa-bolt"></i> Вебхук-конструктор</button>
       </div>
     </div>
+  </section>
 
-    <div class="callout">
-      <i class="fa-solid fa-comments"></i>
-      <div>
-        <b>💬 Живое общение</b>
-        <p>Во мне встроен API-ключ GigaChat от Сбербанка! Просто выдели мой ник <b style="color:#fff">@Yurika_Bot</b> и напиши мне вопрос или приветствие — я всегда отвечу!</p>
-      </div>
-    </div>
-
-    <div class="callout" style="margin-top:14px; border-color:rgba(34,211,238,.4); background:linear-gradient(135deg, rgba(34,211,238,.16), rgba(124,92,255,.14))">
-      <i class="fa-solid fa-download" style="background:linear-gradient(135deg,#22d3ee,#37d67a)"></i>
-      <div>
-        <b>📥 Как установить?</b>
-        <p>Загляни во вкладку <b style="color:#fff">«Установить бота»</b> — там подробная инструкция, как правильно меня добавить и настроить на твоём сервере.</p>
-      </div>
-    </div>
-
-    <div class="row" style="margin-top:22px">
-      <a class="btn" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
-        <i class="fa-solid fa-rocket"></i> Установить на сервер
-      </a>
-      <button class="btn ghost" data-goto="commands"><i class="fa-solid fa-terminal"></i> Посмотреть команды</button>
-      <button class="btn ghost" data-goto="webhook"><i class="fa-solid fa-bolt"></i> Вебхук-конструктор</button>
-    </div>
-  </div>
-</section>
-
-  <!-- ===================== УСТАНОВИТЬ БОТА ===================== -->
   <section class="section" id="tab-install">
     <div class="section-title">
       <h2><i class="fa-solid fa-download" style="color:var(--brand-2)"></i> Установить бота</h2>
@@ -1041,7 +1096,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
   </section>
 
-  <!-- ===================== КОМАНДЫ ===================== -->
   <section class="section" id="tab-commands">
     <div class="section-title">
       <h2><i class="fa-solid fa-terminal" style="color:var(--brand-3)"></i> Команды Yurika Bot</h2>
@@ -1058,7 +1112,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     <div class="cmd-grid" id="cmdGrid"></div>
   </section>
 
-  <!-- ===================== ВЕБХУК ===================== -->
   <section class="section" id="tab-webhook">
     <div class="section-title">
       <h2><i class="fa-solid fa-bolt" style="color:var(--warn)"></i> Yurika Hook</h2>
@@ -1200,10 +1253,11 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <div class="card-head">
               <div class="ico"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
               <h3>Готовые шаблоны</h3>
+              <span class="badge" style="margin-left:auto"><i class="fa-solid fa-layer-group"></i> 14 шт.</span>
             </div>
             <div class="card-pad">
-              <p class="hint" style="margin:0 0 12px">Нажми на шаблон — он заменит текущее содержимое редактора. Отменить можно кнопкой «Очистить».</p>
-              <div id="templatesList" class="preset-row"></div>
+              <p class="hint" style="margin:0 0 12px">Нажми на карточку — она заменит текущее содержимое редактора. Отменить можно кнопкой «Очистить».</p>
+              <div id="templatesList" class="tpl-grid"></div>
             </div>
           </div>
 
@@ -1272,14 +1326,12 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
   </section>
 
-  <!-- ===================== ПРОФИЛЬ ===================== -->
   <section class="section" id="tab-profile">
     <div class="section-title">
       <h2><i class="fa-solid fa-id-badge" style="color:var(--brand-2)"></i> Личный кабинет</h2>
       <span class="pill" id="profileStatus">Yurika</span>
     </div>
 
-    <!-- Авторизация -->
     <div id="authView" class="auth-wrap">
       <div class="card card-pad">
         <div class="auth-tabs">
@@ -1332,10 +1384,8 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       </div>
     </div>
 
-    <!-- Кабинет -->
     <div id="cabinetView" class="grid cols-3" style="display:none">
 
-      <!-- Мой профиль -->
       <div class="card" style="grid-column:span 2">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-user-astronaut"></i></div>
@@ -1379,7 +1429,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Форма редактирования -->
       <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-address-card"></i></div>
@@ -1471,7 +1520,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Аватар -->
       <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-image"></i></div>
@@ -1494,7 +1542,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Мои серверы -->
       <div class="card" style="grid-column:span 2">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-server"></i></div>
@@ -1510,7 +1557,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Активность -->
       <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-chart-simple"></i></div>
@@ -1534,7 +1580,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Смена пароля -->
       <div class="card" style="grid-column:span 3">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-key"></i></div>
@@ -1558,7 +1603,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Приватность -->
       <div class="card" style="grid-column:span 2">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-user-shield"></i></div>
@@ -1588,7 +1632,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Удаление аккаунта -->
       <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-triangle-exclamation"></i></div>
@@ -1616,7 +1659,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   <span style="opacity:.6">· дизайн, профиль и вебхук-конструктор</span>
 </footer>
 
-<!-- ===== Модалка: удаление аккаунта ===== -->
 <div id="deleteModal" class="modal-overlay">
   <div class="card modal-card small">
     <div class="card-head">
@@ -1642,7 +1684,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   </div>
 </div>
 
-<!-- ===== Модалка: добавление сервера ===== -->
 <div id="serverModal" class="modal-overlay">
   <div class="card modal-card small">
     <div class="card-head">
@@ -1678,7 +1719,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   </div>
 </div>
 
-<!-- ===== Модалка: панель настройки сервера ===== -->
 <div id="serverPanelModal" class="modal-overlay">
   <div class="card modal-card">
     <div class="card-head">
@@ -1688,8 +1728,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
 
     <div class="card-pad modal-body">
-
-      <!-- Основное -->
       <div class="panel-section">
         <h4><i class="fa-solid fa-circle-info"></i> Основное</h4>
         <div class="field" style="margin:0 0 12px">
@@ -1728,7 +1766,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Каналы -->
       <div class="panel-section">
         <h4><i class="fa-solid fa-hashtag"></i> Каналы</h4>
         <div class="field" style="margin:0 0 12px">
@@ -1752,7 +1789,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Роли и права -->
       <div class="panel-section">
         <h4><i class="fa-solid fa-user-shield"></i> Роли и права</h4>
         <div class="field" style="margin:0 0 12px">
@@ -1775,7 +1811,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Приветствие / прощание -->
       <div class="panel-section">
         <h4><i class="fa-solid fa-hand-sparkles"></i> Приветствие / прощание</h4>
 
@@ -1820,7 +1855,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Модули -->
       <div class="panel-section">
         <h4><i class="fa-solid fa-puzzle-piece"></i> Модули</h4>
 
@@ -1858,7 +1892,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Опасная зона -->
       <div class="panel-section" style="border-color:rgba(255,90,106,.35); background:linear-gradient(135deg, rgba(255,90,106,.10), rgba(255,176,32,.06))">
         <h4 style="color:#ff8a96"><i class="fa-solid fa-triangle-exclamation" style="color:#ff5a6a"></i> Опасная зона</h4>
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
@@ -1881,9 +1914,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 <div class="toast-zone" id="toasts"></div>
 
 <script>
-/* ============================================================
-   0. УТИЛИТЫ
-============================================================ */
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const yearEl = $('#year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
@@ -1911,9 +1941,6 @@ function initials(name){
 }
 function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
 
-/* ============================================================
-   1. FIREBASE
-============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
   authDomain: "yurika-bot.firebaseapp.com",
@@ -1931,11 +1958,8 @@ try{
     fbDb   = firebase.firestore();
     fbReady = true;
   }
-}catch(e){ /* тихо */ }
+}catch(e){}
 
-/* ============================================================
-   2. ВКЛАДКИ
-============================================================ */
 function switchTab(name){
   $$('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab === name));
   $$('.section').forEach(s=>s.classList.toggle('active', s.id === 'tab-' + name));
@@ -1944,9 +1968,6 @@ function switchTab(name){
 $$('.tab').forEach(btn=> btn.addEventListener('click', ()=> switchTab(btn.dataset.tab)));
 $$('[data-goto]').forEach(b=> b.addEventListener('click', ()=> switchTab(b.dataset.goto)));
 
-/* ============================================================
-   3. КОМАНДЫ
-============================================================ */
 const CATEGORIES = [
   { id:'ai', icon:'fa-brain', title:'Нейросеть GigaChat-2', items:[
     {c:'/ai', d:'Включить / выключить ИИ. !ai on · !ai off', a:['ии']},
@@ -2101,7 +2122,7 @@ $('#cmdSearch').addEventListener('input', e=>{ search = e.target.value; renderCo
 renderCatTabs(); renderCommands();
 
 /* ============================================================
-   4. ВЕБХУК — РАСШИРЕННЫЙ КОНСТРУКТОР
+   4. ВЕБХУК
 ============================================================ */
 const MAX_EMBEDS = 10;
 const MAX_BTN_ROWS = 5;
@@ -2281,17 +2302,40 @@ function buildColorPalette(current, idx, prop){
   }</div>`;
 }
 
+function updateEmbedCounters(i, wrap){
+  const em = state.embeds[i]; if(!em) return;
+  const set = (key, val, max)=>{
+    const el = wrap.querySelector(`[data-cnt="${key}-${i}"]`);
+    if(!el) return;
+    el.textContent = `${val} / ${max}`;
+    el.classList.toggle('over', val > max);
+  };
+  set('title', (em.title||'').length, 256);
+  set('desc', (em.desc||'').length, 4096);
+  set('authorName', (em.author.name||'').length, 256);
+  set('footerText', (em.footer.text||'').length, 2048);
+}
+
 function renderEmbeds(){
   const box = $('#embeds'); box.innerHTML = '';
   state.embeds.forEach((em, i)=>{
     const wrap = document.createElement('div');
     wrap.className = 'embed-box';
+    wrap.dataset.idx = i;
+    wrap.setAttribute('draggable','false');
     wrap.innerHTML = `
       <div class="embed-top">
+        <span class="drag-handle" title="Перетащи, чтобы изменить порядок" data-drag="${i}">
+          <i class="fa-solid fa-grip-vertical"></i>
+        </span>
         <i class="fa-solid fa-layer-group" style="color:var(--brand-2)"></i>
         <strong>Embed #${i+1}</strong>
+        <button class="btn ghost sm" data-copy-emb="${i}" title="Копировать JSON"><i class="fa-solid fa-copy"></i></button>
         <button class="btn ghost sm" data-dupl="${i}" title="Дублировать"><i class="fa-solid fa-clone"></i></button>
-        <button class="btn ghost sm" data-del="${i}" title="Удалить"><i class="fa-solid fa-trash"></i></button>
+        <button class="collapse-btn" data-collapse="${i}" title="Свернуть / развернуть">
+          <i class="fa-solid fa-chevron-up"></i>
+        </button>
+        <button class="btn ghost sm" data-del="${i}" title="Удалить" style="margin-left:auto"><i class="fa-solid fa-trash"></i></button>
       </div>
       <div class="color-line" style="background:${em.color || '#5865F2'}"></div>
 
@@ -2304,21 +2348,51 @@ function renderEmbeds(){
       </div>
 
       <div class="emb-pane" data-pane="main">
-        <div class="field"><label>Заголовок</label>
+        <div class="field">
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <label style="margin:0">Заголовок</label>
+            <span class="counter" data-cnt="title-${i}">${(em.title||'').length} / 256</span>
+          </div>
           <input data-i="${i}" data-f="title" maxlength="256" placeholder="Заголовок" value="${escapeHTML(em.title||'')}">
         </div>
-        <div class="field"><label>Описание</label>
-          <textarea data-i="${i}" data-f="desc" maxlength="4096" placeholder="Описание…" style="min-height:80px">${escapeHTML(em.desc||'')}</textarea>
+        <div class="field">
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <label style="margin:0">Описание</label>
+            <span class="counter" data-cnt="desc-${i}">${(em.desc||'').length} / 4096</span>
+          </div>
+          <textarea data-i="${i}" data-f="desc" maxlength="4096" placeholder="Описание…" style="min-height:90px">${escapeHTML(em.desc||'')}</textarea>
+          <div class="hint">Вставка плейсхолдеров и markdown:</div>
+          <div class="ph-row">
+            <span class="ph-embed" data-emb="${i}" data-token="{user}">{user}</span>
+            <span class="ph-embed" data-emb="${i}" data-token="{server}">{server}</span>
+            <span class="ph-embed" data-emb="${i}" data-token="{memberCount}">{memberCount}</span>
+            <span class="ph-embed md" data-emb="${i}" data-token="**жирный**"><b>B</b></span>
+            <span class="ph-embed md" data-emb="${i}" data-token="*курсив*"><i>I</i></span>
+            <span class="ph-embed md" data-emb="${i}" data-token="||спойлер||">||</span>
+          </div>
         </div>
-        <div class="field" style="margin-bottom:0"><label>Цвет</label>
+        <div class="field" style="margin-bottom:0">
+          <div style="display:flex; align-items:center; justify-content:space-between">
+            <label style="margin:0">Цвет</label>
+            <span class="hint" data-color-hex="${i}">${(em.color||'#5865F2').toUpperCase()}</span>
+          </div>
           <input type="color" data-i="${i}" data-f="color" value="${em.color||'#5865F2'}" style="padding:6px; height:44px">
+          <div style="display:flex; gap:6px; margin-top:8px; align-items:center">
+            <input type="text" data-i="${i}" data-f="colorText" maxlength="7"
+                   value="${(em.color||'#5865F2').toUpperCase()}" placeholder="#5865F2"
+                   style="padding:10px 12px; font-family:'JetBrains Mono',monospace">
+          </div>
           ${buildColorPalette(em.color, i, 'color')}
         </div>
       </div>
 
       <div class="emb-pane" data-pane="author" style="display:none">
         <div class="mini-grid">
-          <div class="field"><label>Имя автора</label>
+          <div class="field">
+            <div style="display:flex; align-items:center; justify-content:space-between">
+              <label style="margin:0">Имя автора</label>
+              <span class="counter" data-cnt="authorName-${i}">${(em.author.name||'').length} / 256</span>
+            </div>
             <input data-i="${i}" data-f="author.name" maxlength="256" placeholder="Юрика" value="${escapeHTML(em.author.name||'')}">
           </div>
           <div class="field"><label>Иконка (URL)</label>
@@ -2343,7 +2417,11 @@ function renderEmbeds(){
 
       <div class="emb-pane" data-pane="footer" style="display:none">
         <div class="mini-grid">
-          <div class="field"><label>Текст футера</label>
+          <div class="field">
+            <div style="display:flex; align-items:center; justify-content:space-between">
+              <label style="margin:0">Текст футера</label>
+              <span class="counter" data-cnt="footerText-${i}">${(em.footer.text||'').length} / 2048</span>
+            </div>
             <input data-i="${i}" data-f="footer.text" maxlength="2048" placeholder="Сделано на Yurika Bot" value="${escapeHTML(em.footer.text||'')}">
           </div>
           <div class="field"><label>Иконка футера (URL)</label>
@@ -2382,6 +2460,37 @@ function renderEmbeds(){
   box.querySelectorAll('[data-del]').forEach(b=>{
     b.onclick = ()=>{ state.embeds.splice(+b.dataset.del,1); renderEmbeds(); updCounters(); renderPreview(); saveDraft(); };
   });
+
+  box.querySelectorAll('[data-collapse]').forEach(b=>{
+    b.onclick = ()=>{
+      const i = +b.dataset.collapse;
+      const card = b.closest('.embed-box');
+      card.classList.toggle('collapsed');
+      b.querySelector('i').style.transform = card.classList.contains('collapsed') ? 'rotate(180deg)' : '';
+    };
+  });
+
+  box.querySelectorAll('[data-copy-emb]').forEach(b=>{
+    b.onclick = async ()=>{
+      const i = +b.dataset.copyEmb;
+      const em = state.embeds[i];
+      const clean = {
+        title: em.title || undefined,
+        description: em.desc || undefined,
+        color: em.color ? parseInt(em.color.replace('#',''),16) : undefined,
+        author: em.author.name ? {name:em.author.name, icon_url:em.author.icon||undefined, url:em.author.url||undefined} : undefined,
+        footer: (em.footer.text||em.footer.icon) ? {text:em.footer.text||'', icon_url:em.footer.icon||undefined} : undefined,
+        thumbnail: em.thumbnail ? {url:em.thumbnail} : undefined,
+        image: em.image ? {url:em.image} : undefined,
+        fields: (em.fields||[]).filter(f=>(f.name||f.value)).map(f=>({name:f.name||'',value:f.value||'',inline:!!f.inline}))
+      };
+      try{
+        await navigator.clipboard.writeText(JSON.stringify(clean, null, 2));
+        toast('Embed #'+(i+1)+' скопирован', 'ok');
+      }catch{ toast('Не удалось скопировать', 'err'); }
+    };
+  });
+
   box.querySelectorAll('[data-dupl]').forEach(b=>{
     b.onclick = ()=>{
       const i = +b.dataset.dupl;
@@ -2390,6 +2499,7 @@ function renderEmbeds(){
       renderEmbeds(); updCounters(); renderPreview(); saveDraft();
     };
   });
+
   box.querySelectorAll('[data-embtab]').forEach(chip=>{
     chip.onclick = ()=>{
       const i = +chip.dataset.i;
@@ -2402,18 +2512,51 @@ function renderEmbeds(){
       });
     };
   });
+
   box.querySelectorAll('input[data-f], textarea[data-f]').forEach(inp=>{
     const path = inp.dataset.f;
+    if(path === 'colorText') return;
     inp.oninput = ()=>{
       const i = +inp.dataset.i;
       const val = inp.value;
       const parts = path.split('.');
       if(parts.length === 1){ state.embeds[i][parts[0]] = val; }
       else { state.embeds[i][parts[0]][parts[1]] = val; }
-      if(path === 'color'){ wrap.querySelector('.color-line').style.background = val; }
+
+      if(path === 'color'){
+        wrap.querySelector('.color-line').style.background = val;
+        const hex = wrap.querySelector(`[data-color-hex="${i}"]`);
+        if(hex) hex.textContent = (val||'').toUpperCase();
+        const hexInput = wrap.querySelector(`input[data-f="colorText"][data-i="${i}"]`);
+        if(hexInput) hexInput.value = (val||'').toUpperCase();
+      }
+
+      const maxLen = parseInt(inp.getAttribute('maxlength') || '0', 10);
+      if(maxLen && val.length >= maxLen) inp.classList.add('limit-over');
+      else inp.classList.remove('limit-over');
+
+      updateEmbedCounters(i, wrap);
       renderPreview(); saveDraft();
     };
   });
+
+  box.querySelectorAll('input[data-f="colorText"]').forEach(inp=>{
+    inp.oninput = ()=>{
+      const i = +inp.dataset.i;
+      let v = inp.value.trim();
+      if(v && v[0] !== '#') v = '#' + v;
+      if(/^#[0-9a-fA-F]{6}$/.test(v)){
+        state.embeds[i].color = v;
+        wrap.querySelector('.color-line').style.background = v;
+        const colorInput = wrap.querySelector(`input[data-f="color"][data-i="${i}"]`);
+        if(colorInput) colorInput.value = v;
+        const hex = wrap.querySelector(`[data-color-hex="${i}"]`);
+        if(hex) hex.textContent = v.toUpperCase();
+        renderPreview(); saveDraft();
+      }
+    };
+  });
+
   box.querySelectorAll('.color-swatch').forEach(sw=>{
     sw.onclick = ()=>{
       const i = +sw.dataset.emb;
@@ -2422,6 +2565,26 @@ function renderEmbeds(){
       renderEmbeds(); renderPreview(); saveDraft();
     };
   });
+
+  box.querySelectorAll('.ph-embed').forEach(chip=>{
+    chip.onclick = ()=>{
+      const i = +chip.dataset.emb;
+      const token = chip.dataset.token;
+      const ta = wrap.querySelector(`textarea[data-f="desc"][data-i="${i}"]`);
+      if(!ta) return;
+      const pos = ta.selectionStart ?? ta.value.length;
+      ta.value = ta.value.slice(0,pos) + token + ta.value.slice(pos);
+      ta.focus();
+      ta.selectionStart = ta.selectionEnd = pos + token.length;
+      state.embeds[i].desc = ta.value;
+      const maxLen = parseInt(ta.getAttribute('maxlength') || '0', 10);
+      if(maxLen && ta.value.length >= maxLen) ta.classList.add('limit-over');
+      else ta.classList.remove('limit-over');
+      updateEmbedCounters(i, wrap);
+      renderPreview(); saveDraft();
+    };
+  });
+
   box.querySelectorAll('[data-ffield-del]').forEach(b=>{
     b.onclick = ()=>{ state.embeds[+b.dataset.ffieldDel].fields.splice(+b.dataset.fi,1); renderEmbeds(); renderPreview(); saveDraft(); };
   });
@@ -2436,6 +2599,54 @@ function renderEmbeds(){
   });
   box.querySelectorAll('[data-fields-add]').forEach(b=>{
     b.onclick = ()=>{ state.embeds[+b.dataset.fieldsAdd].fields.push({name:'',value:'',inline:false}); renderEmbeds(); renderPreview(); saveDraft(); };
+  });
+
+  let dragFrom = null;
+
+  box.querySelectorAll('[data-drag]').forEach(handle=>{
+    handle.addEventListener('mousedown', ()=>{
+      const card = handle.closest('.embed-box');
+      if(card) card.setAttribute('draggable','true');
+    });
+    handle.addEventListener('mouseup', ()=>{
+      const card = handle.closest('.embed-box');
+      if(card) card.setAttribute('draggable','false');
+    });
+  });
+
+  box.querySelectorAll('.embed-box').forEach(card=>{
+    card.addEventListener('dragstart', (e)=>{
+      if(card.getAttribute('draggable') !== 'true'){ e.preventDefault(); return; }
+      dragFrom = +card.dataset.idx;
+      card.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      try{ e.dataTransfer.setData('text/plain', String(dragFrom)); }catch{}
+    });
+    card.addEventListener('dragend', ()=>{
+      card.setAttribute('draggable','false');
+      card.classList.remove('dragging');
+      box.querySelectorAll('.embed-box').forEach(c=>c.classList.remove('drag-over'));
+      dragFrom = null;
+    });
+    card.addEventListener('dragover', (e)=>{
+      if(dragFrom === null) return;
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+      card.classList.add('drag-over');
+    });
+    card.addEventListener('dragleave', ()=> card.classList.remove('drag-over'));
+    card.addEventListener('drop', (e)=>{
+      e.preventDefault();
+      card.classList.remove('drag-over');
+      if(dragFrom === null) return;
+      const to = +card.dataset.idx;
+      if(dragFrom === to) return;
+      const moved = state.embeds.splice(dragFrom, 1)[0];
+      state.embeds.splice(to, 0, moved);
+      dragFrom = null;
+      renderEmbeds(); updCounters(); renderPreview(); saveDraft();
+      toast('Порядок карточек обновлён', 'ok', 1400);
+    });
   });
 }
 
@@ -2796,7 +3007,7 @@ function loadDraft(){
     $('#hookMsg').value = state.msg;
 
     renderEmbeds(); renderComp(); updCounters(); renderPreview();
-  }catch(e){ /* тихо */ }
+  }catch(e){}
 }
 
 document.addEventListener('keydown', (e)=>{
@@ -2808,48 +3019,339 @@ document.addEventListener('keydown', (e)=>{
   }
 });
 
+/* ============================================================
+   ШАБЛОНЫ — 14 штук
+============================================================ */
 const TEMPLATES = {
-  news: { name:'Новость', icon:'fa-newspaper', build(){
-    state.name = 'Yurika News';
-    state.avatar = 'https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg';
-    state.msg = '@everyone';
-    state.embeds = [{ title:'🎉 Обновление Yurika Bot 2.0', desc:'Мы выпустили крупное обновление:\n• Новые команды экономики\n• Улучшения ИИ GigaChat\n• Множество исправлений', color:'#5865F2', author:{name:'Yurika Bot', icon:'', url:''}, footer:{text:'Yurika Bot · Обновления', icon:''}, image:'', thumbnail:'', fields:[{name:'Версия', value:'2.0.0', inline:true},{name:'Дата', value:new Date().toLocaleDateString('ru-RU'), inline:true}] }];
-    state.rows = [{ type:'buttons', buttons:[{label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com/changelog'},{label:'Обсудить', emoji:'💬', style:'primary', url:''}] }];
-  }},
-  announce: { name:'Анонс', icon:'fa-bullhorn', build(){
-    state.name = 'Yurika'; state.avatar = ''; state.msg = '@here';
-    state.embeds = [{ title:'📢 Важное объявление', desc:'Сегодня в 20:00 по МСК состоится ивент.\nНе пропусти!', color:'#FEE75C', author:{name:'',icon:'',url:''}, footer:{text:'Yurika Bot', icon:''}, image:'', thumbnail:'', fields:[{name:'Время', value:'20:00 МСК', inline:true},{name:'Место', value:'Голосовой канал', inline:true}] }];
-    state.rows = [{ type:'buttons', buttons:[{label:'Участвовать', emoji:'🎉', style:'success', url:''},{label:'Напомнить', emoji:'🔔', style:'secondary', url:''}] }];
-  }},
-  rules: { name:'Правила', icon:'fa-book', build(){
-    state.name = 'Yurika Rules'; state.avatar = ''; state.msg = '';
-    state.embeds = [{ title:'📕 Правила сервера', desc:'1. Будь вежлив.\n2. Без спама и рекламы.\n3. Соблюдай тематику каналов.\n4. Не оскорбляй других.\n5. Следуй указаниям модераторов.', color:'#ED4245', author:{name:'',icon:'',url:''}, footer:{text:'Незнание правил не освобождает от ответственности', icon:''}, image:'', thumbnail:'', fields:[] }];
-    state.rows = [];
-  }},
-  error: { name:'Ошибка', icon:'fa-triangle-exclamation', build(){
-    state.name = 'Yurika'; state.avatar = ''; state.msg = '';
-    state.embeds = [{ title:'⚠️ Ошибка выполнения', desc:'Команда не может быть выполнена. Причина: недостаточно прав.', color:'#ED4245', author:{name:'',icon:'',url:''}, footer:{text:'Попробуйте позже или обратитесь к модерации', icon:''}, image:'', thumbnail:'', fields:[] }];
-    state.rows = [];
-  }},
-  success: { name:'Успех', icon:'fa-circle-check', build(){
-    state.name = 'Yurika'; state.avatar = ''; state.msg = '';
-    state.embeds = [{ title:'✅ Готово', desc:'Действие успешно выполнено.', color:'#3BA55C', author:{name:'',icon:'',url:''}, footer:{text:'Yurika Bot', icon:''}, image:'', thumbnail:'', fields:[] }];
-    state.rows = [];
-  }},
-  update: { name:'Обновление', icon:'fa-arrows-rotate', build(){
-    state.name = 'Yurika Bot'; state.avatar = ''; state.msg = '';
-    state.embeds = [{ title:'🚀 Обновление 1.5', desc:'Что нового:\n• Улучшена скорость работы\n• Добавлены новые команды\n• Исправлены баги', color:'#57F287', author:{name:'Yurika Bot',icon:'',url:''}, footer:{text:'Спасибо, что пользуетесь нашим ботом!', icon:''}, image:'', thumbnail:'', fields:[{name:'Версия',value:'1.5.0',inline:true},{name:'Дата',value:new Date().toLocaleDateString('ru-RU'),inline:true}] }];
-    state.rows = [];
-  }}
+  /* ---- 1. Новость ---- */
+  news: { name:'Новость', icon:'fa-newspaper', color:'#5865F2',
+    desc:'Обновления бота, релизы, анонсы',
+    build(){
+      state.name = 'Yurika News';
+      state.avatar = 'https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg';
+      state.msg = '@everyone';
+      state.embeds = [{
+        title:'🎉 Обновление Yurika Bot 2.0',
+        desc:'Мы выпустили крупное обновление:\n• Новые команды экономики\n• Улучшения ИИ GigaChat\n• Множество исправлений',
+        color:'#5865F2',
+        author:{name:'Yurika Bot', icon:'', url:''},
+        footer:{text:'Yurika Bot · Обновления', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Версия', value:'2.0.0', inline:true},
+          {name:'Дата', value:new Date().toLocaleDateString('ru-RU'), inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com/changelog'},
+        {label:'Обсудить', emoji:'💬', style:'primary', url:''}
+      ]}];
+    }
+  },
+
+  /* ---- 2. Анонс ---- */
+  announce: { name:'Анонс', icon:'fa-bullhorn', color:'#FEE75C',
+    desc:'Важные объявления на сервере',
+    build(){
+      state.name = 'Yurika'; state.avatar = ''; state.msg = '@here';
+      state.embeds = [{
+        title:'📢 Важное объявление',
+        desc:'Сегодня в 20:00 по МСК состоится ивент.\nНе пропусти!',
+        color:'#FEE75C',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Yurika Bot', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Время', value:'20:00 МСК', inline:true},
+          {name:'Место', value:'Голосовой канал', inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Участвовать', emoji:'🎉', style:'success', url:''},
+        {label:'Напомнить', emoji:'🔔', style:'secondary', url:''}
+      ]}];
+    }
+  },
+
+  /* ---- 3. Правила ---- */
+  rules: { name:'Правила', icon:'fa-book', color:'#ED4245',
+    desc:'Список правил сервера',
+    build(){
+      state.name = 'Yurika Rules'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'📕 Правила сервера',
+        desc:'1. Будь вежлив.\n2. Без спама и рекламы.\n3. Соблюдай тематику каналов.\n4. Не оскорбляй других.\n5. Следуй указаниям модераторов.',
+        color:'#ED4245',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Незнание правил не освобождает от ответственности', icon:''},
+        image:'', thumbnail:'', fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+
+  /* ---- 4. Ошибка ---- */
+  error: { name:'Ошибка', icon:'fa-triangle-exclamation', color:'#ED4245',
+    desc:'Сообщение об ошибке выполнения',
+    build(){
+      state.name = 'Yurika'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'⚠️ Ошибка выполнения',
+        desc:'Команда не может быть выполнена. Причина: недостаточно прав.',
+        color:'#ED4245',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Попробуйте позже или обратитесь к модерации', icon:''},
+        image:'', thumbnail:'', fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+
+  /* ---- 5. Успех ---- */
+  success: { name:'Успех', icon:'fa-circle-check', color:'#3BA55C',
+    desc:'Подтверждение успешного действия',
+    build(){
+      state.name = 'Yurika'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'✅ Готово',
+        desc:'Действие успешно выполнено.',
+        color:'#3BA55C',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Yurika Bot', icon:''},
+        image:'', thumbnail:'', fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+
+  /* ---- 6. Обновление ---- */
+  update: { name:'Обновление', icon:'fa-arrows-rotate', color:'#57F287',
+    desc:'Технический релиз, чейнджлог',
+    build(){
+      state.name = 'Yurika Bot'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'🚀 Обновление 1.5',
+        desc:'Что нового:\n• Улучшена скорость работы\n• Добавлены новые команды\n• Исправлены баги',
+        color:'#57F287',
+        author:{name:'Yurika Bot',icon:'',url:''},
+        footer:{text:'Спасибо, что пользуетесь нашим ботом!', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Версия',value:'1.5.0',inline:true},
+          {name:'Дата',value:new Date().toLocaleDateString('ru-RU'),inline:true}
+        ]
+      }];
+      state.rows = [];
+    }
+  },
+
+  /* ---- 7. Логи модерации ---- */
+  modlog: { name:'Логи модерации', icon:'fa-clipboard-list', color:'#EB459E',
+    desc:'Бан, мут, кик, предупреждение',
+    build(){
+      state.name = 'Yurika Modlog'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'🔨 Наказание выдано',
+        desc:'Пользователь нарушил правила сервера. Наказание применено модератором.',
+        color:'#EB459E',
+        author:{name:'Модерация', icon:'', url:''},
+        footer:{text:'Yurika Bot · Журнал', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Участник', value:'@user#0001', inline:true},
+          {name:'Модератор', value:'@mod#1234', inline:true},
+          {name:'Тип наказания', value:'Мут', inline:true},
+          {name:'Срок', value:'10 минут', inline:true},
+          {name:'Причина', value:'Спам и флуд', inline:false}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Снять наказание', emoji:'♻️', style:'secondary', url:''},
+        {label:'История', emoji:'📜', style:'primary', url:''}
+      ]}];
+    }
+  },
+
+  /* ---- 8. Приветствие ---- */
+  welcome: { name:'Приветствие', icon:'fa-hand-sparkles', color:'#37D67A',
+    desc:'Сообщение для новых участников',
+    build(){
+      state.name = 'Yurika Welcome'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'Добро пожаловать на сервер!',
+        desc:'Привет, {user}! Рады видеть тебя на {server}.\nНас уже **{memberCount}** участников.\nОзнакомься с правилами и получай удовольствие!',
+        color:'#37D67A',
+        author:{name:'Yurika Bot',icon:'',url:''},
+        footer:{text:'Приятного общения!', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Правила', value:'#правила', inline:true},
+          {name:'FAQ', value:'#faq', inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Прочитать правила', emoji:'📖', style:'link', url:'https://example.com/rules'}
+      ]}];
+    }
+  },
+
+  /* ---- 9. Прощание ---- */
+  goodbye: { name:'Прощание', icon:'fa-hand-peace', color:'#9AA3C7',
+    desc:'Сообщение при выходе участника',
+    build(){
+      state.name = 'Yurika'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'Участник покинул сервер',
+        desc:'{user} покинул(а) **{server}**.\nВсего участников: **{memberCount}**.\nВозвращайся, будем рады!',
+        color:'#9AA3C7',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Yurika Bot', icon:''},
+        image:'', thumbnail:'', fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+
+  /* ---- 10. Розыгрыш ---- */
+  giveaway: { name:'Розыгрыш', icon:'fa-gift', color:'#EB459E',
+    desc:'Гивэвей с призом и условиями',
+    build(){
+      state.name = 'Yurika Giveaway'; state.avatar = ''; state.msg = '@everyone';
+      state.embeds = [{
+        title:'🎁 Розыгрыш: Discord Nitro',
+        desc:'Разыгрываем **Discord Nitro** на 1 месяц!\n\nЧтобы участвовать — нажми кнопку ниже и оставайся на сервере до конца розыгрыша.',
+        color:'#EB459E',
+        author:{name:'Yurika Bot', icon:'', url:''},
+        footer:{text:'Итоги — через 24 часа', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Приз', value:'Discord Nitro (1 месяц)', inline:true},
+          {name:'Победителей', value:'1', inline:true},
+          {name:'Окончание', value:'через 24 часа', inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Участвовать', emoji:'🎉', style:'success', url:''}
+      ]}];
+    }
+  },
+
+  /* ---- 11. Опрос ---- */
+  poll: { name:'Опрос', icon:'fa-square-poll-vertical', color:'#FEE75C',
+    desc:'Голосование с вариантами',
+    build(){
+      state.name = 'Yurika Poll'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'📊 Опрос: какой ивент провести?',
+        desc:'Выберите вариант, который вам больше нравится.\nГолосование закроется через 24 часа.',
+        color:'#FEE75C',
+        author:{name:'Yurika Bot',icon:'',url:''},
+        footer:{text:'Голосуйте с помощью кнопок ниже', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Вариант 1', value:'🎮 Игровой вечер', inline:true},
+          {name:'Вариант 2', value:'🎬 Кино-вечер', inline:true},
+          {name:'Вариант 3', value:'🎤 Голосовой квиз', inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Игры', emoji:'🎮', style:'primary', url:''},
+        {label:'Кино', emoji:'🎬', style:'secondary', url:''},
+        {label:'Квиз', emoji:'🎤', style:'success', url:''}
+      ]}];
+    }
+  },
+
+  /* ---- 12. Событие / Ивент ---- */
+  event: { name:'Событие', icon:'fa-calendar-days', color:'#57F287',
+    desc:'Ивент с датой, местом и записью',
+    build(){
+      state.name = 'Yurika Events'; state.avatar = ''; state.msg = '@here';
+      state.embeds = [{
+        title:'🎉 Ивент: Ночь кино',
+        desc:'Собираемся вместе, чтобы посмотреть фильм и обсудить его в голосовом канале. Присоединяйся!',
+        color:'#57F287',
+        author:{name:'Yurika Bot',icon:'',url:''},
+        footer:{text:'Не забудь записаться заранее', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Дата', value:'суббота, 20:00', inline:true},
+          {name:'Место', value:'#кино-зал', inline:true},
+          {name:'Длительность', value:'~2 часа', inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Записаться', emoji:'✅', style:'success', url:''},
+        {label:'Напомнить', emoji:'🔔', style:'secondary', url:''}
+      ]}];
+    }
+  },
+
+  /* ---- 13. Предупреждение ---- */
+  warning: { name:'Предупреждение', icon:'fa-circle-exclamation', color:'#FFB020',
+    desc:'Выдача предупреждения участнику',
+    build(){
+      state.name = 'Yurika Moderation'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'⚠️ Предупреждение',
+        desc:'Участник получил предупреждение от модератора. При накоплении нескольких — последует бан.',
+        color:'#FFB020',
+        author:{name:'Модерация',icon:'',url:''},
+        footer:{text:'Пожалуйста, соблюдайте правила сервера', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Участник', value:'@user#0001', inline:true},
+          {name:'Модератор', value:'@mod#1234', inline:true},
+          {name:'Активных предупреждений', value:'1 / 3', inline:true},
+          {name:'Причина', value:'Оскорбления в чате', inline:false}
+        ]
+      }];
+      state.rows = [];
+    }
+  },
+
+  /* ---- 14. Реклама / Промо ---- */
+  promo: { name:'Реклама / Промо', icon:'fa-bullhorn', color:'#5865F2',
+    desc:'Промо-пост для сервера или проекта',
+    build(){
+      state.name = 'Yurika Promo'; state.avatar = ''; state.msg = '';
+      state.embeds = [{
+        title:'✨ Присоединяйся к нашему серверу!',
+        desc:'У нас:\n• Дружное сообщество\n• Активные ивенты и розыгрыши\n• Экономика и питомцы\n• Умный ИИ-помощник\n\nПрисоединяйся и найди новых друзей!',
+        color:'#5865F2',
+        author:{name:'Yurika Bot',icon:'',url:''},
+        footer:{text:'Мы ждём именно тебя', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Участников', value:'1 250+', inline:true},
+          {name:'Онлайн', value:'180+', inline:true},
+          {name:'Создан', value:'2024', inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Присоединиться', emoji:'🚀', style:'link', url:'https://example.com/invite'},
+        {label:'Правила', emoji:'📖', style:'secondary', url:''}
+      ]}];
+    }
+  }
 };
 
 function buildTemplateButtons(){
   const box = $('#templatesList'); box.innerHTML = '';
   Object.entries(TEMPLATES).forEach(([key, tpl])=>{
-    const b = document.createElement('button');
-    b.className = 'preset';
-    b.innerHTML = `<i class="fa-solid ${tpl.icon}"></i> ${tpl.name}`;
-    b.onclick = ()=>{
+    const card = document.createElement('div');
+    card.className = 'tpl-card';
+    card.innerHTML = `
+      <div class="tpl-color" style="background:${tpl.color}"></div>
+      <div class="tpl-head">
+        <div class="tpl-ico"><i class="fa-solid ${tpl.icon}"></i></div>
+        <div>
+          <b>${tpl.name}</b>
+          <div class="tpl-desc">${tpl.desc}</div>
+        </div>
+      </div>
+    `;
+    card.onclick = ()=>{
       tpl.build();
       $('#hookName').value = state.name || '';
       $('#hookAvatar').value = state.avatar || '';
@@ -2862,7 +3364,7 @@ function buildTemplateButtons(){
         $('#hookPane-' + name).style.display = (name === 'editor') ? 'block' : 'none';
       });
     };
-    box.appendChild(b);
+    box.appendChild(card);
   });
 }
 buildTemplateButtons();
@@ -2930,7 +3432,7 @@ function checkShareLink(){
     }
     renderEmbeds(); updCounters(); renderPreview();
     toast('Шаблон загружен из ссылки', 'ok');
-  }catch(err){ /* тихо */ }
+  }catch(err){}
 }
 
 loadDraft();
@@ -2950,7 +3452,6 @@ const LS = {
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
 
-// Список соцсетей
 const SOCIALS = [
   { key:'discord',  icon:'fa-discord',   cls:'discord',  label:'Discord',   url: v=>`https://discord.com/users/${v}` },
   { key:'telegram', icon:'fa-telegram',  cls:'telegram', label:'Telegram',  url: v=>`https://t.me/${v.replace(/^@/,'')}` },
@@ -3032,7 +3533,6 @@ function showCabinet(profile){
   $('#pName').textContent  = shownName;
   $('#pEmail').textContent = profile.email || '—';
 
-  // Рендер соцсетей
   const soc = $('#pSocials'); soc.innerHTML = '';
   SOCIALS.forEach(s=>{
     const val = (profile[s.key]||'').trim();
@@ -3050,7 +3550,6 @@ function showCabinet(profile){
   bioEl.textContent = bio || 'Расскажи о себе — добавь био в форме справа.';
   bioEl.classList.toggle('empty', !bio);
 
-  // Заполнение формы
   $('#inName').value = profile.name || '';
   $('#inSurname').value = profile.surname || '';
   $('#inUsername').value = profile.username || '';
@@ -3121,7 +3620,7 @@ $('#profileForm').addEventListener('submit', async e=>{
         await fbAuth.currentUser.updateEmail(profile.email);
       }
     }
-  }catch(err){ /* тихо */ }
+  }catch(err){}
 
   showCabinet(profile);
   toast('Профиль сохранён', 'ok');
@@ -3258,9 +3757,6 @@ $('#authForm').addEventListener('submit', async e=>{
   }
 });
 
-/* ============================================================
-   6. ПРИВАТНОСТЬ
-============================================================ */
 const PRIVACY_LABELS = {
   publicProfile: 'Публичный профиль',
   showEmail:     'Показывать e-mail',
@@ -3294,9 +3790,6 @@ function initPrivacySwitches(){
   });
 }
 
-/* ============================================================
-   7. МОИ СЕРВЕРЫ
-============================================================ */
 function renderServers(){
   const prefs = loadPrefs();
   const show = prefs.showServers !== undefined ? !!prefs.showServers : true;
@@ -3395,9 +3888,6 @@ $('#srvSave').addEventListener('click', ()=>{
   toast('Сервер добавлен', 'ok');
 });
 
-/* ============================================================
-   8. ПАНЕЛЬ НАСТРОЙКИ СЕРВЕРА
-============================================================ */
 let spIndex = -1;
 
 $$('.ph-chip').forEach(chip=>{
@@ -3545,12 +4035,9 @@ $('#spKick').addEventListener('click', async ()=>{
     if(sid && fbReady && fbDb){
       await fbDb.collection('servers').doc(sid).delete();
     }
-  }catch(err){ /* тихо */ }
+  }catch(err){}
 });
 
-/* ============================================================
-   9. ПОДЕЛИТЬСЯ ПРОФИЛЕМ
-============================================================ */
 $('#shareCopy').addEventListener('click', async ()=>{
   const val = $('#shareLink').value;
   if(!val){ toast('Сначала сохрани никнейм', 'warn'); return; }
@@ -3558,9 +4045,6 @@ $('#shareCopy').addEventListener('click', async ()=>{
   catch{ toast('Не удалось скопировать', 'err'); }
 });
 
-/* ============================================================
-   10. УДАЛЕНИЕ АККАУНТА
-============================================================ */
 $('#deleteOpen').addEventListener('click', ()=>{
   $('#deleteModal').classList.add('open');
   $('#deleteConfirm').value = '';
@@ -3578,7 +4062,7 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
       try{ await fbDb.collection('profiles').doc(uid).delete(); }catch{}
       await fbAuth.currentUser.delete();
     }
-  }catch(err){ /* тихо */ }
+  }catch(err){}
 
   [LS.profile, LS.creds, LS.session, LS.prefs, LS.servers, LS.meta].forEach(k=> localStorage.removeItem(k));
   $('#deleteModal').classList.remove('open');
@@ -3586,9 +4070,6 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
   toast('Аккаунт удалён', 'err', 3200);
 });
 
-/* ============================================================
-   11. АВТОЗАГРУЗКА
-============================================================ */
 (function init(){
   initPrivacySwitches();
   touchMeta();
@@ -3612,7 +4093,7 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
           const profile = snap.exists ? snap.data() : { email:user.email, avatar:DEFAULT_AVATAR };
           saveProfileLocal(profile);
           showCabinet(profile);
-        }catch(e){ /* тихо */ }
+        }catch(e){}
       }
     });
   }
