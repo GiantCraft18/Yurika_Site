@@ -399,7 +399,7 @@ select option{background:#12162a; color:var(--text)}
 }
 .bio.empty{color:var(--muted); font-style:italic; font-weight:500}
 
-/* Приватность / toggles */
+/* Приватность */
 .privacy-row{
   display:flex; align-items:center; gap:12px;
   padding:12px 14px; border-radius:14px;
@@ -1467,187 +1467,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             </div>
           </form>
           <div class="hint" style="margin-top:10px">Пароль хранится в защищённом виде.</div>
-        </div>
-      </div>
-
-      <!-- ===== НАСТРОЙКИ БОТА ===== -->
-      <div class="card" style="grid-column:span 3">
-        <div class="card-head">
-          <div class="ico"><i class="fa-solid fa-robot"></i></div>
-          <h3>Настройки бота</h3>
-          <span class="badge" id="botStatusBadge" style="margin-left:auto"><i class="fa-solid fa-cloud"></i> сохраняется в облако</span>
-        </div>
-        <div class="card-pad">
-          <div class="grid cols-2" style="gap:16px">
-
-            <!-- Внешний вид -->
-            <div class="panel-section" style="margin:0">
-              <h4><i class="fa-solid fa-palette"></i> Внешний вид</h4>
-
-              <div class="field">
-                <label>Ник бота</label>
-                <div class="input-wrap"><i class="fa-solid fa-signature lead"></i>
-                  <input id="botName" maxlength="32" placeholder="Yurika" />
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Аватар бота (URL)</label>
-                <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
-                  <input id="botAvatar" maxlength="400" placeholder="https://…" />
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Тип активности</label>
-                <div class="select-wrap"><i class="fa-solid fa-circle-play lead"></i>
-                  <select id="botActivityType">
-                    <option value="playing">Играет в</option>
-                    <option value="listening">Слушает</option>
-                    <option value="watching">Смотрит</option>
-                    <option value="competing">Соревнуется в</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field" style="margin-bottom:0">
-                <label>Текст активности</label>
-                <div class="input-wrap"><i class="fa-solid fa-comment-dots lead"></i>
-                  <input id="botActivityText" maxlength="128" placeholder="Yurika Bot · /help" />
-                </div>
-              </div>
-            </div>
-
-            <!-- Общие -->
-            <div class="panel-section" style="margin:0">
-              <h4><i class="fa-solid fa-gear"></i> Общие</h4>
-
-              <div class="field">
-                <label>Язык по умолчанию</label>
-                <div class="select-wrap"><i class="fa-solid fa-language lead"></i>
-                  <select id="botLanguage">
-                    <option value="ru">Русский (RU)</option>
-                    <option value="en">English (EN)</option>
-                    <option value="ua">Українська (UA)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Префикс по умолчанию</label>
-                <div class="input-wrap"><i class="fa-solid fa-terminal lead"></i>
-                  <input id="botPrefix" maxlength="4" placeholder="/" />
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Часовой пояс</label>
-                <div class="select-wrap"><i class="fa-solid fa-clock lead"></i>
-                  <select id="botTimezone">
-                    <option value="Europe/Moscow">Europe/Moscow (UTC+3)</option>
-                    <option value="Europe/Kyiv">Europe/Kyiv (UTC+2/3)</option>
-                    <option value="Europe/Berlin">Europe/Berlin (UTC+1/2)</option>
-                    <option value="UTC">UTC</option>
-                    <option value="Asia/Almaty">Asia/Almaty (UTC+5)</option>
-                    <option value="Asia/Tokyo">Asia/Tokyo (UTC+9)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field" style="margin-bottom:0">
-                <label>Цвет эмбеда по умолчанию</label>
-                <input type="color" id="botEmbedColor" value="#7c5cff" style="padding:6px; height:44px; width:100%" />
-              </div>
-            </div>
-
-            <!-- ИИ GigaChat -->
-            <div class="panel-section" style="margin:0">
-              <h4><i class="fa-solid fa-brain"></i> ИИ GigaChat</h4>
-
-              <div class="field">
-                <label>Модель по умолчанию</label>
-                <div class="select-wrap"><i class="fa-solid fa-microchip lead"></i>
-                  <select id="botAIModel">
-                    <option value="GigaChat-2">GigaChat-2</option>
-                    <option value="GigaChat-2-Pro">GigaChat-2-Pro</option>
-                    <option value="GigaChat-2-Max">GigaChat-2-Max</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="field">
-                <label>Системный промпт</label>
-                <textarea id="botAIPrompt" maxlength="2000" placeholder="Ты — Юрика, дружелюбный помощник на сервере…" style="min-height:90px"></textarea>
-                <div class="hint"><span id="botAIPromptCount">0</span> / 2000</div>
-              </div>
-
-              <div class="field" style="margin-bottom:0">
-                <label>История сообщений</label>
-                <div class="select-wrap"><i class="fa-solid fa-clock-rotate-left lead"></i>
-                  <select id="botAIHistory">
-                    <option value="5">5 сообщений</option>
-                    <option value="10">10 сообщений</option>
-                    <option value="20">20 сообщений</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <!-- Поведение -->
-            <div class="panel-section" style="margin:0">
-              <h4><i class="fa-solid fa-sliders"></i> Поведение</h4>
-
-              <div class="toggle-row">
-                <div class="info"><b>Отвечать только на упоминания</b><span>ИИ отвечает, только если упомянуть бота</span></div>
-                <div class="switch on" data-bot="aiOnlyMentions"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>Показывать ошибки команд</b><span>Сообщать, если команда выполнена с ошибкой</span></div>
-                <div class="switch on" data-bot="showErrors"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>Уведомления об обновлениях</b><span>Сообщать о новых версиях бота</span></div>
-                <div class="switch on" data-bot="updateNotifications"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>События в ЛС</b><span>Отправлять важные события в личку владельцу</span></div>
-                <div class="switch" data-bot="dmEvents"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>Авто-перезагрузка ИИ</b><span>Перезапускать клиент GigaChat при ошибке</span></div>
-                <div class="switch on" data-bot="aiAutoReload"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>Скрывать мод-команды</b><span>Не показывать команды модерации обычным участникам</span></div>
-                <div class="switch on" data-bot="hideModCommands"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>Публичный профиль бота</b><span>Разрешить смотреть профиль бота через команду</span></div>
-                <div class="switch on" data-bot="publicBotProfile"></div>
-              </div>
-
-              <div class="toggle-row">
-                <div class="info"><b>Отвечать в ЛС</b><span>Отвечать на личные сообщения от пользователей</span></div>
-                <div class="switch on" data-bot="dmReplies"></div>
-              </div>
-
-              <div class="toggle-row" style="border-bottom:none">
-                <div class="info"><b>Индексировать профиль бота</b><span>Разрешить поисковикам находить профиль</span></div>
-                <div class="switch" data-bot="botIndexable"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="row end" style="margin-top:16px">
-            <button class="btn ghost" id="botReset"><i class="fa-solid fa-rotate-left"></i> Сбросить к дефолту</button>
-            <button class="btn" id="botSave"><i class="fa-solid fa-cloud-arrow-up"></i> Сохранить настройки бота</button>
-          </div>
         </div>
       </div>
 
@@ -3151,7 +2970,6 @@ function showCabinet(profile){
   renderPrivacySwitches();
   renderServers();
   renderMeta(profile);
-  renderBotSettings(); // ← настройки бота
 }
 function showAuth(){
   $('#cabinetView').style.display = 'none';
@@ -3469,7 +3287,7 @@ $('#srvSave').addEventListener('click', ()=>{
 });
 
 /* ============================================================
-   8. ПАНЕЛЬ НАСТРОЙКИ СЕРВЕРА (+ отправка в Firestore для бота)
+   8. ПАНЕЛЬ НАСТРОЙКИ СЕРВЕРА
 ============================================================ */
 let spIndex = -1;
 
@@ -3622,128 +3440,6 @@ $('#spKick').addEventListener('click', async ()=>{
 });
 
 /* ============================================================
-   8.5. НАСТРОЙКИ БОТА (глобальные)
-============================================================ */
-const BOT_LS_KEY = 'yurika_bot_settings_v1';
-
-const BOT_DEFAULTS = {
-  name: 'Yurika',
-  avatar: '',
-  activityType: 'playing',
-  activityText: 'Yurika Bot · /help',
-  language: 'ru',
-  prefix: '/',
-  timezone: 'Europe/Moscow',
-  embedColor: '#7c5cff',
-  aiModel: 'GigaChat-2',
-  aiPrompt: 'Ты — Юрика, дружелюбный и умный помощник на сервере. Отвечай кратко и по делу, помогай участникам и следи за порядком.',
-  aiHistory: 10,
-  behavior: {
-    aiOnlyMentions: true,
-    showErrors: true,
-    updateNotifications: true,
-    dmEvents: false,
-    aiAutoReload: true,
-    hideModCommands: true,
-    publicBotProfile: true,
-    dmReplies: true,
-    botIndexable: false
-  }
-};
-
-function loadBotLocal(){
-  try{
-    const raw = localStorage.getItem(BOT_LS_KEY);
-    if(!raw) return null;
-    return JSON.parse(raw);
-  }catch{ return null; }
-}
-function saveBotLocal(obj){
-  localStorage.setItem(BOT_LS_KEY, JSON.stringify(obj));
-}
-
-function renderBotSettings(){
-  const s = Object.assign({}, BOT_DEFAULTS, loadBotLocal() || {});
-  s.behavior = Object.assign({}, BOT_DEFAULTS.behavior, (s.behavior || {}));
-
-  $('#botName').value = s.name || '';
-  $('#botAvatar').value = s.avatar || '';
-  $('#botActivityType').value = s.activityType || 'playing';
-  $('#botActivityText').value = s.activityText || '';
-  $('#botLanguage').value = s.language || 'ru';
-  $('#botPrefix').value = s.prefix || '/';
-  $('#botTimezone').value = s.timezone || 'Europe/Moscow';
-  $('#botEmbedColor').value = s.embedColor || '#7c5cff';
-  $('#botAIModel').value = s.aiModel || 'GigaChat-2';
-  $('#botAIPrompt').value = s.aiPrompt || '';
-  $('#botAIHistory').value = s.aiHistory || 10;
-  $('#botAIPromptCount').textContent = (s.aiPrompt || '').length;
-
-  $$('#cabinetView .switch[data-bot]').forEach(sw=>{
-    const key = sw.dataset.bot;
-    sw.classList.toggle('on', !!s.behavior[key]);
-  });
-}
-
-function collectBotSettings(){
-  const behavior = {};
-  $$('#cabinetView .switch[data-bot]').forEach(sw=>{
-    behavior[sw.dataset.bot] = sw.classList.contains('on');
-  });
-  return {
-    name: $('#botName').value.trim() || BOT_DEFAULTS.name,
-    avatar: $('#botAvatar').value.trim(),
-    activityType: $('#botActivityType').value,
-    activityText: $('#botActivityText').value.trim(),
-    language: $('#botLanguage').value,
-    prefix: $('#botPrefix').value.trim() || '/',
-    timezone: $('#botTimezone').value,
-    embedColor: $('#botEmbedColor').value || '#7c5cff',
-    aiModel: $('#botAIModel').value,
-    aiPrompt: $('#botAIPrompt').value,
-    aiHistory: parseInt($('#botAIHistory').value || '10', 10) || 10,
-    behavior,
-    updatedAt: new Date().toISOString()
-  };
-}
-
-$$('#cabinetView .switch[data-bot]').forEach(sw=>{
-  sw.addEventListener('click', ()=> sw.classList.toggle('on'));
-});
-
-$('#botAIPrompt').addEventListener('input', e=>{
-  $('#botAIPromptCount').textContent = e.target.value.length;
-});
-
-$('#botSave').addEventListener('click', async ()=>{
-  const s = collectBotSettings();
-  saveBotLocal(s);
-
-  try{
-    if(fbReady && fbDb){
-      await fbDb.collection('bot_settings').doc('global').set(s, { merge:true });
-      toast('Настройки бота сохранены и отправлены', 'ok');
-      const b = $('#botStatusBadge');
-      if(b){ b.innerHTML = '<i class="fa-solid fa-cloud-arrow-up"></i> сохранено'; }
-    }else{
-      toast('Сохранено локально (Firestore недоступен)', 'warn', 3200);
-    }
-  }catch(err){
-    console.error(err);
-    toast('Локально сохранено, но Firestore не принял: ' + (err.code || err.message), 'warn', 4000);
-  }
-});
-
-$('#botReset').addEventListener('click', ()=>{
-  if(!confirm('Сбросить настройки бота к значениям по умолчанию?')) return;
-  localStorage.removeItem(BOT_LS_KEY);
-  renderBotSettings();
-  toast('Настройки сброшены (нажми «Сохранить», чтобы применить)', 'warn', 3600);
-});
-
-renderBotSettings();
-
-/* ============================================================
    9. ПОДЕЛИТЬСЯ ПРОФИЛЕМ
 ============================================================ */
 $('#shareCopy').addEventListener('click', async ()=>{
@@ -3775,7 +3471,7 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
     }
   }catch(err){ /* тихо */ }
 
-  [LS.profile, LS.creds, LS.session, LS.prefs, LS.servers, LS.meta, BOT_LS_KEY].forEach(k=> localStorage.removeItem(k));
+  [LS.profile, LS.creds, LS.session, LS.prefs, LS.servers, LS.meta].forEach(k=> localStorage.removeItem(k));
   $('#deleteModal').classList.remove('open');
   showAuth();
   toast('Аккаунт удалён', 'err', 3200);
@@ -3810,18 +3506,6 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
         }catch(e){ /* тихо */ }
       }
     });
-  }
-
-  // Загрузить настройки бота из Firestore
-  if(fbReady && fbDb){
-    fbDb.collection('bot_settings').doc('global').get()
-      .then(snap=>{
-        if(snap.exists){
-          saveBotLocal(snap.data());
-          renderBotSettings();
-        }
-      })
-      .catch(()=>{ /* тихо */ });
   }
 })();
 </script>
