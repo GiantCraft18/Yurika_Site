@@ -1,734 +1,1392 @@
 <!DOCTYPE html>
-<html lang="ru" data-theme="dark">
+<html lang="ru">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Юрика-Бот — Твой помощник на сервере Lolka</title>
-<meta name="description" content="Модерация, экономика, бизнесы, браки — всё в одном боте для Lolka. Установка за 10 секунд.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Yurika Bot — Личный кабинет</title>
+<meta name="theme-color" content="#0b0d1a" />
+
+<!-- Иконки + шрифт -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
 <style>
-    :root, [data-theme="dark"] {
-        --bg: #08090f; --bg-2: #0f1119; --bg-3: #151824; --bg-elevated: #1a1e2c; --bg-hover: #202433;
-        --border: #22273a; --border-soft: #1a1e2b; --border-strong: #2e3450;
-        --text: #f4f5fa; --text-muted: #a8afc9; --text-dim: #7a8199; --text-faint: #4d5470;
-        --accent: #7c5cfc; --accent-hover: #8b6efd; --accent-soft: #a78bfa;
-        --accent-glow: rgba(124, 92, 252, 0.35); --accent-subtle: rgba(124, 92, 252, 0.12);
-        --success: #34d399; --success-subtle: rgba(52, 211, 153, 0.12);
-        --error: #f87171; --error-subtle: rgba(248, 113, 113, 0.1);
-        --warning: #fbbf24; --warning-subtle: rgba(251, 191, 36, 0.1);
-        --pink: #eb459e; --pink-subtle: rgba(235, 69, 158, 0.12);
-        --gold: #f59e0b; --gold-subtle: rgba(245, 158, 11, 0.12);
-        --green: #10b981; --green-subtle: rgba(16, 185, 129, 0.12);
-        --gradient: linear-gradient(135deg, #7c5cfc 0%, #a78bfa 50%, #c4b5fd 100%);
-        --gradient-soft: linear-gradient(135deg, rgba(124,92,252,0.14), rgba(167,139,250,0.08));
-        --shadow-sm: 0 1px 2px rgba(0,0,0,0.2);
-        --shadow-md: 0 4px 16px rgba(0,0,0,0.3);
-        --shadow-lg: 0 12px 32px rgba(0,0,0,0.45);
-        --shadow-xl: 0 24px 60px rgba(0,0,0,0.6);
-        --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px; --radius-xl: 20px;
-    }
-    [data-theme="light"] {
-        --bg: #fafbff; --bg-2: #ffffff; --bg-3: #f3f5fb; --bg-elevated: #ffffff; --bg-hover: #eef1f9;
-        --border: #e4e8f2; --border-soft: #eef1f8; --border-strong: #d5daea;
-        --text: #0d1023; --text-muted: #4d5470; --text-dim: #6b7290; --text-faint: #9aa1b8;
-        --accent: #6d4aff; --accent-hover: #7d5cff; --accent-soft: #8b5cf6;
-        --accent-glow: rgba(109, 74, 255, 0.22); --accent-subtle: rgba(109, 74, 255, 0.08);
-        --success: #059669; --success-subtle: rgba(5, 150, 105, 0.08);
-        --error: #dc2626; --error-subtle: rgba(220, 38, 38, 0.06);
-        --warning: #d97706; --warning-subtle: rgba(217, 119, 6, 0.08);
-        --pink: #db2777; --pink-subtle: rgba(219, 39, 119, 0.08);
-        --gold: #d97706; --gold-subtle: rgba(217, 119, 6, 0.08);
-        --green: #059669; --green-subtle: rgba(5, 150, 105, 0.08);
-        --gradient: linear-gradient(135deg, #6d4aff 0%, #8b5cf6 50%, #a78bfa 100%);
-        --gradient-soft: linear-gradient(135deg, rgba(109,74,255,0.08), rgba(139,92,246,0.04));
-        --shadow-sm: 0 1px 2px rgba(20,30,60,0.04);
-        --shadow-md: 0 4px 16px rgba(20,30,60,0.06);
-        --shadow-lg: 0 12px 32px rgba(20,30,60,0.1);
-        --shadow-xl: 0 24px 60px rgba(20,30,60,0.14);
-    }
-    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 90px; }
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background: var(--bg); color: var(--text); min-height: 100vh; overflow-x: hidden;
-        line-height: 1.6; -webkit-font-smoothing: antialiased;
-        transition: background 0.3s ease, color 0.3s ease;
-    }
-    body::before {
-        content: ""; position: fixed; inset: 0;
-        background:
-            radial-gradient(circle at 15% 10%, var(--accent-subtle), transparent 42%),
-            radial-gradient(circle at 85% 90%, rgba(167, 139, 250, 0.1), transparent 42%);
-        z-index: -1; pointer-events: none;
-    }
-    img, svg { display: block; max-width: 100%; }
-    button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
-    a { color: inherit; text-decoration: none; }
-    input, textarea, select { font-family: inherit; }
-    ::selection { background: var(--accent); color: #fff; }
-    h1, h2, h3, h4 { line-height: 1.2; letter-spacing: -0.02em; }
-    .container { width: 100%; max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+/* ============ БАЗА ============ */
+:root{
+  --bg:#080a14;
+  --bg-2:#0e1224;
+  --card:rgba(18,22,42,.72);
+  --card-solid:#12162a;
+  --stroke:rgba(255,255,255,.10);
+  --stroke-strong:rgba(255,255,255,.18);
+  --text:#eef1ff;
+  --muted:#9aa3c7;
+  --brand:#7c5cff;
+  --brand-2:#22d3ee;
+  --brand-3:#ff5cae;
+  --ok:#37d67a;
+  --warn:#ffb020;
+  --err:#ff5a6a;
+  --radius:18px;
+  --radius-sm:12px;
+  --shadow:0 20px 60px rgba(0,0,0,.55);
+  --ring:0 0 0 3px rgba(124,92,255,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family:'Manrope',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--text);
+  background:var(--bg);
+  min-height:100vh;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:"";
+  position:fixed; inset:0;
+  background:
+    radial-gradient(1200px 700px at 80% -10%, rgba(124,92,255,.35), transparent 60%),
+    radial-gradient(900px 600px at -10% 20%, rgba(34,211,238,.25), transparent 60%),
+    radial-gradient(800px 600px at 50% 120%, rgba(255,92,174,.22), transparent 60%),
+    linear-gradient(180deg, rgba(8,10,20,.78), rgba(8,10,20,.92)),
+    url("https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg") center/cover no-repeat fixed;
+  z-index:-2;
+}
+body::after{
+  content:"";
+  position:fixed; inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+  background-size:44px 44px;
+  mask-image:radial-gradient(circle at 50% 30%, #000 0%, transparent 75%);
+  z-index:-1;
+  pointer-events:none;
+}
+a{color:inherit;text-decoration:none}
+button{font-family:inherit}
 
-    .site-header {
-        position: sticky; top: 0; z-index: 100; padding: 12px 0;
-        border-bottom: 1px solid transparent;
-        transition: background 0.3s, backdrop-filter 0.3s, border-color 0.3s;
-    }
-    .site-header.scrolled {
-        background: color-mix(in srgb, var(--bg) 82%, transparent);
-        backdrop-filter: blur(20px);
-        border-bottom-color: var(--border);
-    }
-    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-    .logo { display: inline-flex; align-items: center; gap: 10px; font-size: 19px; font-weight: 800; }
-    .logo-icon {
-        width: 36px; height: 36px; border-radius: var(--radius-md); background: var(--gradient);
-        display: grid; place-items: center; font-size: 18px;
-        box-shadow: 0 4px 16px var(--accent-glow);
-    }
-    .logo-text {
-        background: var(--gradient); -webkit-background-clip: text; background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .nav-list { display: flex; align-items: center; gap: 4px; list-style: none; }
-    .nav-link {
-        padding: 8px 14px; border-radius: var(--radius-sm); font-size: 14px; font-weight: 500;
-        color: var(--text-muted); transition: color 0.2s, background 0.2s; position: relative;
-    }
-    .nav-link:hover { color: var(--text); background: var(--bg-2); }
-    .nav-link.active { color: var(--text); background: var(--bg-2); }
-    .nav-actions { display: flex; align-items: center; gap: 6px; }
-    .icon-btn {
-        width: 38px; height: 38px; border-radius: var(--radius-md); background: var(--bg-2);
-        border: 1px solid var(--border); color: var(--text); font-size: 15px;
-        display: grid; place-items: center;
-    }
-    .burger { display: none; }
+/* ============ ХЕДЕР ============ */
+header.topbar{
+  position:sticky; top:0; z-index:50;
+  backdrop-filter:blur(14px);
+  background:linear-gradient(180deg, rgba(10,12,24,.85), rgba(10,12,24,.55));
+  border-bottom:1px solid var(--stroke);
+}
+.topbar-inner{
+  max-width:1240px; margin:0 auto;
+  display:flex; align-items:center; gap:14px;
+  padding:12px 18px;
+}
+.logo{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
+.logo-badge{
+  width:42px;height:42px;border-radius:14px;
+  background:conic-gradient(from 210deg, var(--brand), var(--brand-2), var(--brand-3), var(--brand));
+  display:grid;place-items:center; color:#fff; font-size:20px;
+  box-shadow:0 10px 30px rgba(124,92,255,.45), inset 0 0 0 1px rgba(255,255,255,.25);
+}
+.logo-text small{display:block; font-weight:600; font-size:11px; color:var(--muted); letter-spacing:2px}
+nav.tabs{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap}
+.tab{
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.03);
+  color:var(--text);
+  padding:9px 14px; border-radius:999px;
+  font-size:13.5px; font-weight:700; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+  transition:.2s transform,.2s background,.2s border-color;
+}
+.tab i{color:var(--brand-2)}
+.tab:hover{background:rgba(255,255,255,.07); border-color:var(--stroke-strong); transform:translateY(-1px)}
+.tab.active{
+  background:linear-gradient(135deg, rgba(124,92,255,.9), rgba(34,211,238,.75));
+  border-color:transparent; color:#fff;
+  box-shadow:0 10px 30px rgba(124,92,255,.35);
+}
+.tab.active i{color:#fff}
 
-    .hero { text-align: center; padding: 90px 0 40px; }
-    .hero-title {
-        font-size: clamp(36px, 6vw, 68px); font-weight: 800; line-height: 1.05;
-        letter-spacing: -0.035em; margin-bottom: 20px;
-        background: linear-gradient(110deg, var(--text) 20%, var(--accent-soft) 50%, var(--accent) 70%, var(--text) 90%);
-        background-size: 250% 100%; -webkit-background-clip: text; background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-    .hero-subtitle { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto 36px; }
-    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+/* ============ ОБЩИЙ КОНТЕЙНЕР ============ */
+main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
+.section{display:none; animation:fade .35s ease both}
+.section.active{display:block}
+@keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
 
-    .btn {
-        display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-        padding: 12px 22px; border-radius: var(--radius-md); font-size: 14.5px; font-weight: 600;
-        transition: transform 0.15s, box-shadow 0.2s, background 0.2s, border-color 0.2s;
-        cursor: pointer; border: 1px solid transparent;
-    }
-    .btn svg { width: 17px; height: 17px; }
-    .btn-primary { background: var(--gradient); color: #fff; box-shadow: 0 4px 20px var(--accent-glow); }
-    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px var(--accent-glow); }
-    .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
-    .btn-outline:hover { background: var(--bg-2); border-color: var(--accent); color: var(--accent); }
+.section-title{display:flex; align-items:center; gap:12px; margin:8px 0 18px}
+.section-title h2{margin:0; font-size:clamp(20px,2.6vw,28px); letter-spacing:.2px}
+.section-title .pill{
+  margin-left:auto; font-size:12px; font-weight:800; color:var(--muted);
+  border:1px dashed var(--stroke-strong); padding:6px 12px; border-radius:999px;
+}
 
-    .badge {
-        display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 100px;
-        font-size: 12.5px; font-weight: 600;
-        background: var(--bg-2); border: 1px solid var(--border); color: var(--text-muted);
-    }
-    .badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); }
+/* ============ КАРТОЧКИ ============ */
+.grid{display:grid; gap:16px}
+.grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid.cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.card{
+  position:relative;
+  background:var(--card);
+  border:1px solid var(--stroke);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(12px);
+  overflow:hidden;
+}
+.card::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(124,92,255,.12), transparent 40%, rgba(34,211,238,.10));
+  pointer-events:none;
+}
+.card-pad{padding:20px}
+.card-head{
+  display:flex; align-items:center; gap:12px;
+  padding:16px 20px; border-bottom:1px solid var(--stroke);
+}
+.card-head h3{margin:0; font-size:16px}
+.card-head .ico{
+  width:38px;height:38px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(135deg, rgba(124,92,255,.35), rgba(34,211,238,.25));
+  border:1px solid var(--stroke-strong); color:#fff; font-size:16px;
+}
 
-    .section { padding: 80px 0; }
-    .section-header { text-align: center; max-width: 620px; margin: 0 auto 48px; }
-    .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-bottom: 12px; }
-    .section-subtitle { font-size: 16px; color: var(--text-muted); }
+/* ============ ПОЛЯ ФОРМ ============ */
+.field{display:flex; flex-direction:column; gap:7px; margin-bottom:14px}
+.field label{font-size:12.5px; font-weight:800; color:var(--muted); letter-spacing:.4px; text-transform:uppercase}
+.input-wrap{position:relative; display:flex; align-items:center}
+.input-wrap i.lead{position:absolute; left:14px; color:var(--brand-2); font-size:14px; pointer-events:none}
+input,textarea,select{
+  width:100%;
+  background:rgba(255,255,255,.04);
+  color:var(--text);
+  border:1px solid var(--stroke-strong);
+  border-radius:14px;
+  padding:13px 14px 13px 42px;
+  font-size:14.5px; font-weight:600;
+  outline:none; transition:.2s border-color, .2s box-shadow, .2s background;
+}
+textarea{padding-left:14px; min-height:110px; resize:vertical; font-family:'JetBrains Mono',monospace; font-weight:400}
+input:focus,textarea:focus,select:focus{border-color:var(--brand); box-shadow:var(--ring); background:rgba(255,255,255,.06)}
+input::placeholder,textarea::placeholder{color:#6b74a3}
+.hint{font-size:12px; color:var(--muted)}
 
-    /* ===== СТИЛИ ВЕБХУКА ===== */
-    .wh-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 1024px) { .wh-grid { grid-template-columns: 7fr 5fr; } }
+/* Кнопки */
+.btn{
+  --b1:var(--brand); --b2:var(--brand-2);
+  display:inline-flex; align-items:center; justify-content:center; gap:9px;
+  border:none; cursor:pointer; font-weight:800; font-size:14px;
+  padding:13px 18px; border-radius:14px; color:#fff;
+  background:linear-gradient(135deg, var(--b1), var(--b2));
+  box-shadow:0 12px 30px rgba(124,92,255,.35), inset 0 0 0 1px rgba(255,255,255,.18);
+  transition:.2s transform, .2s box-shadow, .2s filter;
+  white-space:nowrap;
+}
+.btn:hover{transform:translateY(-2px); filter:saturate(1.1)}
+.btn:active{transform:translateY(0)}
+.btn.ghost{
+  background:rgba(255,255,255,.04); color:var(--text);
+  box-shadow:none; border:1px solid var(--stroke-strong);
+}
+.btn.ghost:hover{background:rgba(255,255,255,.08)}
+.btn.pink{--b1:#ff5cae; --b2:#7c5cff}
+.btn.cyan{--b1:#22d3ee; --b2:#37d67a}
+.btn.danger{--b1:#ff5a6a; --b2:#ffb020}
+.btn.block{width:100%}
+.btn.sm{padding:10px 14px; font-size:13px; border-radius:12px}
 
-    .cmd-card {
-        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-lg);
-        padding: 24px;
-    }
-    .cmd-card-header {
-        display: flex; align-items: center; gap: 12px; margin-bottom: 16px;
-        padding-bottom: 16px; border-bottom: 1px solid var(--border-soft);
-    }
-    .cmd-card-icon {
-        width: 38px; height: 38px; border-radius: var(--radius-md); display: grid; place-items: center;
-        font-size: 17px; background: var(--accent-subtle); flex-shrink: 0;
-    }
-    .cmd-card-title { font-size: 15.5px; font-weight: 700; flex: 1; }
-    .cmd-card-count {
-        font-size: 12px; font-weight: 700; color: var(--text-dim); background: var(--bg-3);
-        padding: 4px 10px; border-radius: 100px; border: 1px solid var(--border-soft);
-    }
+.row{display:flex; gap:10px; flex-wrap:wrap}
+.row.end{justify-content:flex-end}
 
-    .form-group { margin-bottom: 16px; }
-    .form-label { display: block; font-size: 13px; font-weight: 600; color: var(--text-muted); margin-bottom: 8px; }
-    .form-input {
-        width: 100%; padding: 12px 14px; background: var(--bg-3); border: 1px solid var(--border);
-        border-radius: var(--radius-md); color: var(--text); font-size: 14px;
-        transition: border-color 0.2s, box-shadow 0.2s; outline: none; resize: vertical;
-    }
-    .form-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
-    .form-input::placeholder { color: var(--text-faint); }
-    .form-hint { font-size: 11.5px; color: var(--text-faint); margin-top: 6px; }
-    .form-message {
-        display: none; padding: 12px 14px; border-radius: var(--radius-md); font-size: 13.5px;
-        margin-top: 16px;
-    }
-    .form-message.visible { display: block; }
-    .form-message.error { background: var(--error-subtle); border: 1px solid rgba(248, 113, 113, 0.3); color: var(--error); }
-    .form-message.success { background: var(--success-subtle); border: 1px solid rgba(52, 211, 153, 0.3); color: var(--success); }
+/* ============ ПРОФИЛЬ / АВАТАР ============ */
+.profile-top{display:flex; gap:20px; align-items:center; flex-wrap:wrap}
+.avatar-wrap{position:relative; flex:0 0 auto}
+.avatar{
+  width:112px;height:112px;border-radius:26px; object-fit:cover;
+  border:2px solid rgba(255,255,255,.22);
+  background:linear-gradient(135deg, #1b2140, #0d1020);
+  box-shadow:0 20px 50px rgba(0,0,0,.55), 0 0 0 6px rgba(124,92,255,.12);
+  display:block;
+}
+.avatar-ring{
+  position:absolute; inset:-8px; border-radius:32px;
+  background:conic-gradient(from 180deg, var(--brand), var(--brand-2), var(--brand-3), var(--brand));
+  filter:blur(14px); opacity:.55; z-index:-1;
+}
+.avatar-edit{
+  position:absolute; right:-6px; bottom:-6px;
+  width:38px;height:38px;border-radius:12px; border:1px solid var(--stroke-strong);
+  background:#171c33; color:#fff; display:grid;place-items:center; cursor:pointer;
+  box-shadow:0 10px 24px rgba(0,0,0,.5);
+}
+.profile-info h3{margin:0 0 4px; font-size:22px}
+.profile-info p{margin:0; color:var(--muted); font-weight:600}
+.badges{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+.badge{
+  font-size:12px; font-weight:800; padding:6px 11px; border-radius:999px;
+  border:1px solid var(--stroke-strong); color:var(--muted); background:rgba(255,255,255,.03);
+  display:inline-flex; align-items:center; gap:6px;
+}
+.badge i{color:var(--brand-2)}
+.badge.ok i{color:var(--ok)}
+.badge.warn i{color:var(--warn)}
 
-    .wh-embed-card {
-        background: var(--bg-3); border: 1px solid var(--border);
-        border-radius: var(--radius-md); padding: 16px;
-    }
-    .wh-preview-msg {
-        background: var(--bg-2); border: 1px solid var(--border);
-        border-radius: var(--radius-md); padding: 16px; min-height: 100px;
-    }
-    .wh-preview-embed {
-        background: var(--bg-3); border-radius: 6px; padding: 12px;
-        border-left: 3px solid var(--accent); margin-top: 8px;
-    }
-    .wh-color-input {
-        width: 100%; height: 42px; padding: 4px; background: var(--bg-3);
-        border: 1px solid var(--border); border-radius: var(--radius-md); cursor: pointer;
-    }
-    .wh-actions { display: flex; gap: 12px; flex-wrap: wrap; }
-    .wh-actions .btn { flex: 1; min-width: 130px; }
+/* Тост */
+.toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
+.toast{
+  display:flex; align-items:center; gap:10px;
+  background:rgba(18,22,42,.95); border:1px solid var(--stroke-strong);
+  padding:12px 16px; border-radius:14px; box-shadow:var(--shadow);
+  font-weight:700; font-size:14px; animation:pop .25s ease both;
+  border-left:4px solid var(--brand-2);
+}
+.toast.ok{border-left-color:var(--ok)}
+.toast.err{border-left-color:var(--err)}
+.toast.warn{border-left-color:var(--warn)}
+@keyframes pop{from{opacity:0; transform:translateY(10px) scale(.98)} to{opacity:1; transform:none}}
 
-    .site-footer { padding: 44px 0 30px; border-top: 1px solid var(--border); text-align: center; margin-top: 60px; }
+/* ============ КОМАНДЫ ============ */
+.cat-tabs{display:flex; gap:8px; flex-wrap:wrap; margin-bottom:16px}
+.chip{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:9px 14px; border-radius:999px; cursor:pointer; font-weight:800; font-size:13px;
+  background:rgba(255,255,255,.04); border:1px solid var(--stroke);
+  color:var(--muted); transition:.2s all;
+}
+.chip:hover{color:var(--text); border-color:var(--stroke-strong); transform:translateY(-1px)}
+.chip.active{
+  color:#fff; border-color:transparent;
+  background:linear-gradient(135deg, rgba(124,92,255,.95), rgba(34,211,238,.8));
+  box-shadow:0 10px 26px rgba(124,92,255,.35);
+}
+.cmd-grid{display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr))}
+.cmd{
+  position:relative;
+  border:1px solid var(--stroke);
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  border-radius:16px; padding:14px 16px;
+  transition:.22s transform, .22s border-color, .22s background;
+}
+.cmd:hover{transform:translateY(-3px); border-color:var(--stroke-strong); background:rgba(255,255,255,.06)}
+.cmd code{
+  font-family:'JetBrains Mono',monospace; font-weight:600; font-size:13.5px;
+  color:#d7dcff; background:rgba(124,92,255,.16);
+  padding:3px 8px; border-radius:8px; border:1px solid rgba(124,92,255,.28);
+  display:inline-block; margin-bottom:8px;
+}
+.cmd .desc{color:var(--muted); font-size:13.5px; font-weight:600; line-height:1.5}
+.cmd .aliases{margin-top:8px; display:flex; gap:6px; flex-wrap:wrap}
+.cmd .alias{
+  font-size:11.5px; font-weight:800; color:#aeb6e0;
+  background:rgba(255,255,255,.05); border:1px solid var(--stroke);
+  padding:3px 8px; border-radius:999px;
+}
 
-    @media (max-width: 900px) {
-        .burger { display: grid; }
-        .nav-list {
-            position: absolute; top: calc(100% + 8px); left: 0; right: 0;
-            flex-direction: column; padding: 10px;
-            background: var(--bg-2); border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            display: none;
-        }
-        .nav-list.open { display: flex; }
-        .nav-list li { width: 100%; }
-        .nav-link { display: block; padding: 12px 16px; }
-    }
+/* ============ КОД ============ */
+pre.code{
+  margin:0; padding:18px;
+  background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25));
+  border:1px solid var(--stroke); border-radius:14px;
+  overflow:auto; max-height:460px;
+  font-family:'JetBrains Mono',monospace; font-size:13px; line-height:1.65; color:#c9d2ff;
+}
+
+/* ============ ВЕБХУК-КОНСТРУКТОР ============ */
+.hook-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:16px}
+.hook-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px}
+.hook-row label{font-size:12.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:var(--muted)}
+.counter{font-size:12px; font-weight:800; color:var(--muted)}
+.counter.over{color:var(--err)}
+.embed-box{
+  border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px;
+  background:rgba(255,255,255,.025);
+}
+.embed-box .embed-top{display:flex; align-items:center; gap:10px; margin-bottom:10px}
+.embed-box .embed-top strong{font-size:13.5px}
+.embed-box .embed-top .btn{margin-left:auto}
+.color-line{height:5px; border-radius:99px; margin-bottom:12px}
+.preview{
+  border:1px solid var(--stroke); border-radius:14px; padding:16px;
+  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
+  min-height:220px;
+}
+.preview .msg{font-weight:600; font-size:14.5px; line-height:1.55; white-space:pre-wrap; word-break:break-word}
+.preview .e{
+  margin-top:12px; border-left:4px solid var(--brand); border-radius:10px;
+  background:rgba(255,255,255,.035); padding:12px 14px;
+}
+.preview .e h4{margin:0 0 6px; font-size:14px}
+.preview .e p{margin:0; color:var(--muted); font-size:13px; font-weight:600; white-space:pre-wrap; word-break:break-word}
+.empty{
+  display:grid; place-items:center; text-align:center; color:var(--muted);
+  min-height:180px; font-weight:700; gap:10px;
+}
+.empty i{font-size:32px; color:var(--brand)}
+
+/* ============ АВТОРИЗАЦИЯ ============ */
+.auth-wrap{max-width:460px; margin:40px auto}
+.auth-tabs{display:flex; gap:8px; margin-bottom:16px}
+.auth-tabs .chip{flex:1; justify-content:center}
+.divider{display:flex; align-items:center; gap:12px; color:var(--muted); font-size:12px; font-weight:800; margin:14px 0}
+.divider::before,.divider::after{content:""; flex:1; height:1px; background:var(--stroke)}
+
+/* ============ FOOTER ============ */
+footer{
+  max-width:1240px; margin:0 auto; padding:24px 18px 50px;
+  color:var(--muted); font-size:13px; font-weight:600;
+  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+}
+footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
+
+/* ============ АДАПТИВ ============ */
+@media (max-width:1024px){
+  .hook-grid{grid-template-columns:1fr}
+  .grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:760px){
+  .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
+  .cmd-grid{grid-template-columns:1fr}
+  nav.tabs{width:100%; margin-left:0; order:3; padding-top:6px}
+  .topbar-inner{flex-wrap:wrap}
+  .tab{flex:1 1 auto; justify-content:center; padding:9px 10px; font-size:12.5px}
+  main{padding:16px 12px 70px}
+  .card-pad{padding:16px}
+  .avatar{width:92px;height:92px}
+  .profile-info h3{font-size:19px}
+  .toast-zone{left:12px; right:12px}
+  .section-title .pill{display:none}
+  .card[style*="position:sticky"]{position:static !important}
+}
+@media (max-width:420px){
+  .tab span{display:none}
+  .tab{padding:10px 12px}
+  .tab i{font-size:15px}
+}
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important; transition:none!important}
+}
 </style>
 </head>
 <body>
-    <header class="site-header" id="siteHeader">
-        <div class="container">
-            <nav class="nav">
-                <a href="#" class="logo">
-                    <span class="logo-icon">🤖</span>
-                    <span class="logo-text">Юрика-Бот</span>
-                </a>
-                <button class="icon-btn burger" id="burger" aria-label="Меню">☰</button>
-                <ul class="nav-list" id="navList">
-                    <li><a href="#features" class="nav-link">Возможности</a></li>
-                    <li><a href="#commands" class="nav-link">Команды</a></li>
-                    <li><a href="#webhook" class="nav-link">Вебхук</a></li>
-                    <li><a href="#invite" class="nav-link">Добавить</a></li>
-                    <li class="nav-actions">
-                        <button class="icon-btn" id="themeToggle" aria-label="Тема">🌙</button>
-                    </li>
-                </ul>
-            </nav>
+
+<!-- ===================== ХЕДЕР ===================== -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="logo">
+      <div class="logo-badge"><i class="fa-solid fa-robot"></i></div>
+      <div class="logo-text">
+        <div>Yurika Bot</div>
+        <small>WEB PANEL</small>
+      </div>
+    </div>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="profile"><i class="fa-solid fa-user-astronaut"></i><span>Профиль</span></button>
+      <button class="tab" data-tab="commands"><i class="fa-solid fa-terminal"></i><span>Команды</span></button>
+      <button class="tab" data-tab="webhook"><i class="fa-solid fa-bolt"></i><span>Вебхук</span></button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===================== ПРОФИЛЬ ===================== -->
+  <section class="section active" id="tab-profile">
+    <div class="section-title">
+      <h2><i class="fa-solid fa-id-badge" style="color:var(--brand-2)"></i> Личный кабинет</h2>
+      <span class="pill" id="profileStatus">не авторизован</span>
+    </div>
+
+    <!-- Авторизация -->
+    <div id="authView" class="auth-wrap">
+      <div class="card card-pad">
+        <div class="auth-tabs">
+          <button class="chip active" data-auth="login"><i class="fa-solid fa-right-to-bracket"></i> Вход</button>
+          <button class="chip" data-auth="register"><i class="fa-solid fa-user-plus"></i> Регистрация</button>
         </div>
-    </header>
 
-    <main>
-        <section class="hero">
-            <div class="container">
-                <span class="badge"><span class="badge-dot"></span> Работает на сервере Lolka</span>
-                <h1 class="hero-title">Твой помощник<br>на сервере Lolka</h1>
-                <p class="hero-subtitle">Модерация, экономика, бизнесы, браки и удобное меню команд — всё в одном боте.</p>
-                <div class="hero-actions">
-                    <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-                       target="_blank" rel="noopener" class="btn btn-primary">
-                        ➕ Пригласить бота
-                    </a>
-                    <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-outline">
-                        ⬇ Скачать Lolka
-                    </a>
+        <form id="authForm" autocomplete="on">
+          <div class="field" id="nameFields" style="display:none">
+            <div class="row">
+              <div style="flex:1; min-width:140px">
+                <label>Имя</label>
+                <div class="input-wrap"><i class="fa-solid fa-user lead"></i>
+                  <input id="regName" placeholder="Юрика" />
                 </div>
+              </div>
+              <div style="flex:1; min-width:140px">
+                <label>Фамилия</label>
+                <div class="input-wrap"><i class="fa-solid fa-signature lead"></i>
+                  <input id="regSurname" placeholder="Ботова" />
+                </div>
+              </div>
             </div>
-        </section>
+          </div>
 
-        <section class="section" id="features">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Что умеет бот</h2>
-                    <p class="section-subtitle">Полный набор инструментов</p>
-                </div>
+          <div class="field">
+            <label>E-mail</label>
+            <div class="input-wrap"><i class="fa-solid fa-envelope lead"></i>
+              <input id="authEmail" type="email" placeholder="you@example.com" required />
             </div>
-        </section>
+          </div>
 
-        <section class="section" id="commands">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Команды бота</h2>
-                    <p class="section-subtitle">Нажми на команду, чтобы скопировать</p>
-                </div>
+          <div class="field">
+            <label>Пароль</label>
+            <div class="input-wrap"><i class="fa-solid fa-lock lead"></i>
+              <input id="authPass" type="password" placeholder="••••••••" minlength="6" required />
             </div>
-        </section>
+            <div class="hint" id="authHint">Минимум 6 символов.</div>
+          </div>
 
-        <!-- ================== ВЕБХУК ================== -->
-        <section class="section" id="webhook">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">🔗 Вебхук</h2>
-                    <p class="section-subtitle">Отправка сообщений и Embed-карточек через вебхук Lolka прямо из браузера</p>
-                </div>
+          <button class="btn block" type="submit" id="authSubmit">
+            <i class="fa-solid fa-right-to-bracket"></i> Войти
+          </button>
+        </form>
 
-                <div class="wh-grid">
-                    <!-- Левая колонка -->
-                    <div>
-                        <div class="cmd-card" style="margin-bottom: 16px;">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">🔗</div>
-                                <div class="cmd-card-title">Параметры вебхука</div>
-                            </div>
+        <div class="divider">или</div>
+        <button class="btn ghost block" id="btnLocal">
+          <i class="fa-solid fa-hard-drive"></i> Быстрый локальный профиль (без сервера)
+        </button>
+      </div>
+    </div>
 
-                            <div class="form-group">
-                                <label class="form-label" for="whUrl">URL вебхука</label>
-                                <input class="form-input" type="text" id="whUrl" placeholder="https://lolka.app/api/webhooks/..." autocomplete="off">
-                                <div class="form-hint">Вставьте URL вебхука из настроек канала Lolka</div>
-                            </div>
-
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                <div class="form-group">
-                                    <label class="form-label" for="whName">Имя отправителя</label>
-                                    <input class="form-input" type="text" id="whName" placeholder="Лола" maxlength="80">
-                                    <div class="form-hint"><span id="whNameCount">0</span> / 80</div>
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="whAvatar">Аватар (URL)</label>
-                                    <input class="form-input" type="text" id="whAvatar" placeholder="https://example.com/avatar.png">
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="cmd-card" style="margin-bottom: 16px;">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">💬</div>
-                                <div class="cmd-card-title">Сообщение</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="whContent">Текст сообщения</label>
-                                <textarea class="form-input" id="whContent" rows="3" placeholder="Привет! Я — Лола 🎀" maxlength="2000"></textarea>
-                                <div class="form-hint"><span id="whContentCount">0</span> / 2000</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Вложения (файлы)</label>
-                                <label class="btn btn-outline" style="cursor: pointer; width: 100%;">
-                                    📎 Прикрепить файл
-                                    <input hidden multiple type="file" id="whFiles" accept="image/*,.pdf,.txt,.zip">
-                                </label>
-                                <div id="whFilesList" class="form-hint" style="margin-top: 8px;"></div>
-                            </div>
-                        </div>
-
-                        <div class="cmd-card">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">🎴</div>
-                                <div class="cmd-card-title">Embed-карточки</div>
-                                <div class="cmd-card-count"><span id="whEmbedCount">0</span> / 10</div>
-                            </div>
-
-                            <div id="whEmbedsList" style="display: flex; flex-direction: column; gap: 12px;"></div>
-
-                            <button class="btn btn-outline" id="whAddEmbed" type="button" style="width: 100%; margin-top: 12px;">➕ Добавить карточку</button>
-                        </div>
-                    </div>
-
-                    <!-- Правая колонка -->
-                    <div>
-                        <div class="cmd-card" style="margin-bottom: 16px;">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">👁️</div>
-                                <div class="cmd-card-title">Предпросмотр</div>
-                            </div>
-
-                            <div class="wh-preview-msg">
-                                <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
-                                    <div id="whPreviewAvatar" style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0; background-size: cover; background-position: center;">?</div>
-                                    <div>
-                                        <div style="display: flex; align-items: center; gap: 8px;">
-                                            <span id="whPreviewName" style="font-weight: 700; font-size: 14.5px; color: var(--text);">Лола</span>
-                                            <span style="background: var(--accent); color: #fff; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px;">БОТ</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="whPreviewContent" style="font-size: 13.5px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.5;">Сообщение появится здесь...</div>
-                                <div id="whPreviewEmbeds"></div>
-                            </div>
-                        </div>
-
-                        <div class="cmd-card">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">🚀</div>
-                                <div class="cmd-card-title">Действия</div>
-                            </div>
-
-                            <div class="wh-actions" style="margin-bottom: 12px;">
-                                <button class="btn btn-primary" id="whSendBtn" type="button">🚀 Отправить</button>
-                                <button class="btn btn-outline" id="whEditBtn" type="button" disabled>✏️ Редактировать</button>
-                            </div>
-                            <div class="wh-actions">
-                                <button class="btn btn-outline" id="whDeleteBtn" type="button" disabled style="color: var(--error); border-color: rgba(248,113,113,0.4);">🗑 Удалить</button>
-                                <button class="btn btn-outline" id="whClearBtn" type="button">🧹 Очистить</button>
-                            </div>
-
-                            <div class="form-message" id="whMessage"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ================== /ВЕБХУК ================== -->
-
-        <section class="section" id="invite">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">Готов добавить бота?</h2>
-                </div>
-                <div class="hero-actions">
-                    <a href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5"
-                       target="_blank" rel="noopener" class="btn btn-primary">
-                        ➕ Добавить на сервер
-                    </a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="container">
-            <p>© 2026 Юрика-Бот · Сделано с ❤️ на Python</p>
+    <!-- Кабинет -->
+    <div id="cabinetView" class="grid cols-3" style="display:none">
+      <div class="card" style="grid-column:span 2">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-user-astronaut"></i></div>
+          <h3>Мой профиль</h3>
+          <button class="btn ghost sm" id="btnLogout" style="margin-left:auto"><i class="fa-solid fa-arrow-right-from-bracket"></i> Выйти</button>
         </div>
-    </footer>
 
-    <script>
-        /* ===== ТЕМА ===== */
-        const html = document.documentElement;
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('theme') || 'dark';
-        html.setAttribute('data-theme', savedTheme);
-        themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-        themeToggle.addEventListener('click', () => {
-            const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            html.setAttribute('data-theme', next);
-            themeToggle.textContent = next === 'dark' ? '🌙' : '☀️';
-            localStorage.setItem('theme', next);
-        });
+        <div class="card-pad">
+          <div class="profile-top">
+            <div class="avatar-wrap">
+              <div class="avatar-ring"></div>
+              <img id="avatarImg" class="avatar"
+                   src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika"
+                   alt="Аватар" />
+              <button class="avatar-edit" id="btnPickAvatar" title="Сменить аватар"><i class="fa-solid fa-camera"></i></button>
+            </div>
 
-        /* ===== БУРГЕР ===== */
-        const burger = document.getElementById('burger');
-        const navList = document.getElementById('navList');
-        burger.addEventListener('click', () => navList.classList.toggle('open'));
+            <div class="profile-info" style="flex:1; min-width:220px">
+              <h3 id="pName">— —</h3>
+              <p id="pEmail">—</p>
+              <div class="badges">
+                <span class="badge ok"><i class="fa-solid fa-circle-check"></i> <span id="pSource">local</span></span>
+                <span class="badge"><i class="fa-solid fa-shield-halved"></i> 2FA позже</span>
+                <span class="badge"><i class="fa-solid fa-bolt"></i> автосохранение</span>
+              </div>
+            </div>
+          </div>
 
-        /* ===== ВЕБХУК ===== */
-        const whUrl = document.getElementById('whUrl');
-        const whName = document.getElementById('whName');
-        const whAvatar = document.getElementById('whAvatar');
-        const whContent = document.getElementById('whContent');
-        const whFiles = document.getElementById('whFiles');
-        const whMessage = document.getElementById('whMessage');
-        const whEmbedsList = document.getElementById('whEmbedsList');
-        const whPreviewAvatar = document.getElementById('whPreviewAvatar');
-        const whPreviewName = document.getElementById('whPreviewName');
-        const whPreviewContent = document.getElementById('whPreviewContent');
-        const whPreviewEmbeds = document.getElementById('whPreviewEmbeds');
+          <div class="field" style="margin-top:20px">
+            <label>Аватар по ссылке (URL)</label>
+            <div class="input-wrap"><i class="fa-solid fa-link lead"></i>
+              <input id="avatarUrl" placeholder="https://example.com/avatar.png" />
+            </div>
+            <div class="row">
+              <button class="btn sm" id="btnApplyAvatar"><i class="fa-solid fa-check"></i> Применить</button>
+              <button class="btn ghost sm" id="btnRandomAvatar"><i class="fa-solid fa-shuffle"></i> Случайный</button>
+              <button class="btn ghost sm" id="btnFileAvatar"><i class="fa-solid fa-upload"></i> С устройства</button>
+              <input type="file" id="avatarFile" accept="image/*" hidden />
+            </div>
+          </div>
+        </div>
+      </div>
 
-        let whSentMessageId = null;
-        let whEmbedCounter = 0;
-        let whEmbeds = [];
-        let whFilesData = [];
+      <div class="card">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-address-card"></i></div>
+          <h3>Данные</h3>
+        </div>
+        <div class="card-pad">
+          <form id="profileForm">
+            <div class="field">
+              <label>Имя</label>
+              <div class="input-wrap"><i class="fa-solid fa-user lead"></i><input id="inName" placeholder="Юрика" /></div>
+            </div>
+            <div class="field">
+              <label>Фамилия</label>
+              <div class="input-wrap"><i class="fa-solid fa-signature lead"></i><input id="inSurname" placeholder="Ботова" /></div>
+            </div>
+            <div class="field">
+              <label>E-mail</label>
+              <div class="input-wrap"><i class="fa-solid fa-envelope lead"></i><input id="inEmail" type="email" placeholder="you@example.com" /></div>
+            </div>
+            <button class="btn block" type="submit"><i class="fa-solid fa-floppy-disk"></i> Сохранить профиль</button>
+          </form>
+        </div>
+      </div>
 
-        function clearWhMessage() {
-            whMessage.classList.remove('visible', 'error', 'success');
-            whMessage.textContent = '';
-        }
-        function showWhMessage(text, type) {
-            type = type || 'error';
-            whMessage.className = 'form-message visible ' + type;
-            whMessage.textContent = (type === 'error' ? '⚠️ ' : '✓ ') + text;
-        }
+      <div class="card" style="grid-column:span 3">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-key"></i></div>
+          <h3>Смена пароля</h3>
+        </div>
+        <div class="card-pad">
+          <form id="passForm" class="grid cols-3" style="gap:14px">
+            <div class="field" style="margin:0">
+              <label>Новый пароль</label>
+              <div class="input-wrap"><i class="fa-solid fa-lock lead"></i><input id="newPass" type="password" minlength="6" placeholder="••••••••" /></div>
+            </div>
+            <div class="field" style="margin:0">
+              <label>Повтор пароля</label>
+              <div class="input-wrap"><i class="fa-solid fa-lock lead"></i><input id="newPass2" type="password" minlength="6" placeholder="••••••••" /></div>
+            </div>
+            <div style="display:flex; align-items:flex-end">
+              <button class="btn block pink" type="submit"><i class="fa-solid fa-shield-halved"></i> Обновить пароль</button>
+            </div>
+          </form>
+          <div class="hint" style="margin-top:10px">В локальном режиме пароль хранится как хэш (SHA-256) в вашем браузере.</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-        whName.addEventListener('input', function() {
-            document.getElementById('whNameCount').textContent = whName.value.length;
-            updateWhPreview();
-        });
-        whContent.addEventListener('input', function() {
-            document.getElementById('whContentCount').textContent = whContent.value.length;
-            updateWhPreview();
-        });
-        whAvatar.addEventListener('input', updateWhPreview);
+  <!-- ===================== КОМАНДЫ ===================== -->
+  <section class="section" id="tab-commands">
+    <div class="section-title">
+      <h2><i class="fa-solid fa-terminal" style="color:var(--brand-3)"></i> Команды Yurika Bot</h2>
+      <span class="pill" id="cmdCount">0 команд</span>
+    </div>
 
-        whFiles.addEventListener('change', function() {
-            whFilesData = Array.from(whFiles.files).map(function(f) {
-                return { file: f, name: f.name };
-            });
-            renderWhFiles();
-        });
+    <div class="field" style="max-width:420px">
+      <div class="input-wrap"><i class="fa-solid fa-magnifying-glass lead"></i>
+        <input id="cmdSearch" placeholder="Поиск команды или алиаса…" />
+      </div>
+    </div>
 
-        function renderWhFiles() {
-            const list = document.getElementById('whFilesList');
-            if (whFilesData.length === 0) { list.textContent = ''; return; }
-            list.textContent = '📎 ' + whFilesData.map(function(f) { return f.name; }).join(', ');
-        }
+    <div class="cat-tabs" id="catTabs"></div>
+    <div class="cmd-grid" id="cmdGrid"></div>
+  </section>
 
-        document.getElementById('whAddEmbed').addEventListener('click', function() {
-            if (whEmbeds.length >= 10) { showWhMessage('Максимум 10 Embed-карточек'); return; }
-            whEmbedCounter++;
-            whEmbeds.push({
-                id: whEmbedCounter, title: '', description: '', color: '#7c5cfc',
-                url: '', thumbnail: '', image: '', footer: '', author: ''
-            });
-            renderWhEmbeds();
-            updateWhPreview();
-        });
+  <!-- ===================== ВЕБХУК ===================== -->
+  <section class="section" id="tab-webhook">
+    <div class="section-title">
+      <h2><i class="fa-solid fa-bolt" style="color:var(--warn)"></i> Yurika Hook</h2>
+      <span class="pill">визуальный конструктор вебхуков</span>
+    </div>
+    <p class="hint" style="max-width:640px; margin:-6px 0 18px">
+      Визуальный конструктор сообщений и embed-карточек для вебхуков Yurika Bot.
+      Всё работает в браузере, шаблоны не сохраняются.
+    </p>
 
-        function renderWhEmbeds() {
-            document.getElementById('whEmbedCount').textContent = whEmbeds.length;
-            if (whEmbeds.length === 0) {
-                whEmbedsList.innerHTML = '<p class="form-hint" style="text-align: center;">Нет Embed-карточек. Нажмите «Добавить карточку».</p>';
-                return;
-            }
-            whEmbedsList.innerHTML = '';
-            whEmbeds.forEach(function(embed, idx) {
-                const div = document.createElement('div');
-                div.className = 'wh-embed-card';
-                div.innerHTML =
-                    '<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">' +
-                        '<strong style="font-size: 13.5px;">Карточка #' + (idx + 1) + '</strong>' +
-                        '<button type="button" data-remove="' + embed.id + '" style="color: var(--error); font-size: 18px; padding: 4px 8px;">✕</button>' +
-                    '</div>' +
-                    '<div class="form-group"><label class="form-label">Заголовок</label>' +
-                        '<input class="form-input" data-field="title" data-id="' + embed.id + '" type="text" value="' + escapeHtml(embed.title) + '" maxlength="256"></div>' +
-                    '<div class="form-group"><label class="form-label">Описание</label>' +
-                        '<textarea class="form-input" data-field="description" data-id="' + embed.id + '" rows="2" maxlength="4096">' + escapeHtml(embed.description) + '</textarea></div>' +
-                    '<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">' +
-                        '<div class="form-group"><label class="form-label">Цвет</label>' +
-                            '<input class="wh-color-input" data-field="color" data-id="' + embed.id + '" type="color" value="' + embed.color + '"></div>' +
-                        '<div class="form-group"><label class="form-label">Footer</label>' +
-                            '<input class="form-input" data-field="footer" data-id="' + embed.id + '" type="text" value="' + escapeHtml(embed.footer) + '" maxlength="2048"></div>' +
-                    '</div>' +
-                    '<div class="form-group"><label class="form-label">Author</label>' +
-                        '<input class="form-input" data-field="author" data-id="' + embed.id + '" type="text" value="' + escapeHtml(embed.author) + '" maxlength="256"></div>' +
-                    '<div class="form-group"><label class="form-label">Thumbnail (URL)</label>' +
-                        '<input class="form-input" data-field="thumbnail" data-id="' + embed.id + '" type="text" value="' + escapeHtml(embed.thumbnail) + '"></div>' +
-                    '<div class="form-group"><label class="form-label">Image (URL)</label>' +
-                        '<input class="form-input" data-field="image" data-id="' + embed.id + '" type="text" value="' + escapeHtml(embed.image) + '"></div>';
-                whEmbedsList.appendChild(div);
-            });
+    <div class="hook-grid">
+      <!-- ЛЕВАЯ КОЛОНКА -->
+      <div style="display:flex; flex-direction:column; gap:16px">
 
-            whEmbedsList.querySelectorAll('input, textarea').forEach(function(input) {
-                input.addEventListener('input', function(e) {
-                    const id = parseInt(e.target.dataset.id, 10);
-                    const field = e.target.dataset.field;
-                    const embed = whEmbeds.find(function(x) { return x.id === id; });
-                    if (!embed) return;
-                    embed[field] = e.target.value;
-                    updateWhPreview();
-                });
-            });
-            whEmbedsList.querySelectorAll('[data-remove]').forEach(function(btn) {
-                btn.addEventListener('click', function(e) {
-                    const id = parseInt(e.target.dataset.remove, 10);
-                    whEmbeds = whEmbeds.filter(function(x) { return x.id !== id; });
-                    renderWhEmbeds();
-                    updateWhPreview();
-                });
-            });
-        }
+        <!-- ВЕБХУК -->
+        <div class="card">
+          <div class="card-head">
+            <div class="ico"><i class="fa-solid fa-link"></i></div>
+            <h3>Вебхук</h3>
+          </div>
+          <div class="card-pad">
+            <div class="field" style="margin-bottom:10px">
+              <div class="input-wrap"><i class="fa-solid fa-globe lead"></i>
+                <input id="hookUrl" maxlength="200" placeholder="URL вебхука" />
+              </div>
+            </div>
 
-        function escapeHtml(str) {
-            if (str === null || str === undefined) return '';
-            return String(str)
-                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
+            <div class="grid cols-2" style="gap:10px">
+              <div class="field" style="margin:0">
+                <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
+                  <input id="hookName" maxlength="80" placeholder="Имя отправителя" />
+                </div>
+              </div>
+              <div class="field" style="margin:0">
+                <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
+                  <input id="hookAvatar" maxlength="300" placeholder="Аватар (URL)" />
+                </div>
+              </div>
+            </div>
+            <div class="hint" style="margin:6px 0 12px"><span id="cntUrl">0 / 80</span></div>
 
-        function updateWhPreview() {
-            const name = whName.value.trim() || 'Лола';
-            const avatar = whAvatar.value.trim();
-            const content = whContent.value;
-            whPreviewName.textContent = name;
-            if (avatar && /^https?:\/\//.test(avatar)) {
-                whPreviewAvatar.style.backgroundImage = 'url("' + avatar + '")';
-                whPreviewAvatar.textContent = '';
-            } else {
-                whPreviewAvatar.style.backgroundImage = '';
-                whPreviewAvatar.textContent = (name[0] || '?').toUpperCase();
-            }
-            if (content) {
-                whPreviewContent.textContent = content;
-                whPreviewContent.style.color = 'var(--text)';
-            } else {
-                whPreviewContent.textContent = 'Сообщение появится здесь...';
-                whPreviewContent.style.color = 'var(--text-muted)';
-            }
-            whPreviewEmbeds.innerHTML = '';
-            whEmbeds.forEach(function(embed) {
-                if (!embed.title && !embed.description) return;
-                const div = document.createElement('div');
-                const color = embed.color || '#7c5cfc';
-                div.className = 'wh-preview-embed';
-                div.style.borderLeftColor = color;
-                let html = '';
-                if (embed.author) html += '<div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">' + escapeHtml(embed.author) + '</div>';
-                if (embed.title) html += '<div style="font-weight: 700; font-size: 14px; color: var(--text); margin-bottom: 4px;">' + escapeHtml(embed.title) + '</div>';
-                if (embed.description) html += '<div style="font-size: 13px; color: var(--text-muted); white-space: pre-wrap; line-height: 1.4;">' + escapeHtml(embed.description) + '</div>';
-                if (embed.footer) html += '<div style="font-size: 11.5px; color: var(--text-faint); margin-top: 8px;">' + escapeHtml(embed.footer) + '</div>';
-                div.innerHTML = html;
-                whPreviewEmbeds.appendChild(div);
-            });
-        }
+            <div class="grid cols-2" style="gap:10px">
+              <div class="field" style="margin:0">
+                <div class="input-wrap"><i class="fa-solid fa-message lead"></i>
+                  <input id="hookLoadBy" placeholder="Загрузить сообщение по ссылке или ID" />
+                </div>
+              </div>
+              <button class="btn cyan" id="hookLoad" type="button">
+                <i class="fa-solid fa-download"></i> Загрузить
+              </button>
+            </div>
+          </div>
+        </div>
 
-        document.getElementById('whSendBtn').addEventListener('click', async function() {
-            clearWhMessage();
-            const url = whUrl.value.trim();
-            if (!url) { showWhMessage('Укажите URL вебхука'); return; }
-            if (url.indexOf('lolka.app/api/webhooks/') === -1) { showWhMessage('URL должен быть вебхуком Lolka'); return; }
-            const content = whContent.value.trim();
-            if (!content && whEmbeds.length === 0 && whFilesData.length === 0) {
-                showWhMessage('Введите текст, добавьте Embed или прикрепите файл'); return;
-            }
-            const btn = this;
-            btn.disabled = true;
-            const payload = {
-                content: content || undefined,
-                username: whName.value.trim() || undefined,
-                avatar_url: whAvatar.value.trim() || undefined
-            };
-            if (whEmbeds.length > 0) {
-                payload.embeds = whEmbeds.map(function(e) {
-                    const obj = {};
-                    if (e.title) obj.title = e.title;
-                    if (e.description) obj.description = e.description;
-                    if (e.color) obj.color = hexToInt(e.color);
-                    if (e.footer) obj.footer = { text: e.footer };
-                    if (e.author) obj.author = { name: e.author };
-                    if (e.thumbnail) obj.thumbnail = { url: e.thumbnail };
-                    if (e.image) obj.image = { url: e.image };
-                    return obj;
-                }).filter(function(e) { return Object.keys(e).length > 0; });
-            }
-            let body;
-            const headers = {};
-            if (whFilesData.length > 0) {
-                const form = new FormData();
-                form.append('payload_json', JSON.stringify(payload));
-                whFilesData.forEach(function(f, i) { form.append('file' + i, f.file, f.name); });
-                body = form;
-            } else {
-                body = JSON.stringify(payload);
-                headers['Content-Type'] = 'application/json';
-            }
-            try {
-                const resp = await fetch(url + '?wait=true', { method: 'POST', headers: headers, body: body });
-                if (!resp.ok && resp.status !== 204) {
-                    const errText = await resp.text();
-                    showWhMessage('Ошибка ' + resp.status + ': ' + errText.slice(0, 200));
-                    return;
-                }
-                try {
-                    if (resp.status !== 204) {
-                        const data = await resp.json();
-                        whSentMessageId = data.id || null;
-                    }
-                } catch (e) {}
-                document.getElementById('whEditBtn').disabled = !whSentMessageId;
-                document.getElementById('whDeleteBtn').disabled = !whSentMessageId;
-                showWhMessage('Сообщение отправлено', 'success');
-            } catch (err) {
-                showWhMessage('Ошибка сети: ' + err.message);
-            } finally {
-                btn.disabled = false;
-            }
-        });
+        <!-- ПАНЕЛЬ КНОПОК -->
+        <div class="card">
+          <div class="card-pad" style="padding:12px 14px">
+            <div class="row">
+              <button class="btn sm" id="hookSend"><i class="fa-solid fa-paper-plane"></i> Отправить</button>
+              <button class="btn ghost sm" id="hookEdit"><i class="fa-solid fa-pen"></i> Редактировать</button>
+              <button class="btn ghost sm" id="hookDelete"><i class="fa-solid fa-trash"></i> Удалить</button>
+              <button class="btn ghost sm" id="hookClear" style="margin-left:auto"><i class="fa-solid fa-broom"></i> Очистить</button>
+            </div>
+          </div>
+        </div>
 
-        document.getElementById('whEditBtn').addEventListener('click', async function() {
-            if (!whSentMessageId) { showWhMessage('Сначала отправьте сообщение'); return; }
-            clearWhMessage();
-            const url = whUrl.value.trim();
-            if (!url) return;
-            const payload = {
-                content: whContent.value.trim() || undefined,
-                embeds: whEmbeds.map(function(e) {
-                    const obj = {};
-                    if (e.title) obj.title = e.title;
-                    if (e.description) obj.description = e.description;
-                    if (e.color) obj.color = hexToInt(e.color);
-                    if (e.footer) obj.footer = { text: e.footer };
-                    if (e.author) obj.author = { name: e.author };
-                    if (e.thumbnail) obj.thumbnail = { url: e.thumbnail };
-                    if (e.image) obj.image = { url: e.image };
-                    return obj;
-                }).filter(function(e) { return Object.keys(e).length > 0; })
-            };
-            try {
-                const resp = await fetch(url + '/messages/' + whSentMessageId, {
-                    method: 'PATCH',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
-                });
-                if (!resp.ok && resp.status !== 204) {
-                    showWhMessage('Ошибка ' + resp.status + ': ' + await resp.text());
-                    return;
-                }
-                showWhMessage('Сообщение обновлено', 'success');
-            } catch (err) {
-                showWhMessage('Ошибка: ' + err.message);
-            }
-        });
+        <!-- СООБЩЕНИЕ -->
+        <div class="card">
+          <div class="card-head">
+            <div class="ico"><i class="fa-solid fa-comment-dots"></i></div>
+            <h3>Сообщение</h3>
+            <span class="counter" id="cntMsg" style="margin-left:auto">0 / 2000</span>
+          </div>
+          <div class="card-pad">
+            <textarea id="hookMsg" maxlength="2000" placeholder="Текст сообщения" style="min-height:120px"></textarea>
 
-        document.getElementById('whDeleteBtn').addEventListener('click', async function() {
-            if (!whSentMessageId) return;
-            if (!confirm('Удалить отправленное сообщение?')) return;
-            clearWhMessage();
-            const url = whUrl.value.trim();
-            if (!url) return;
-            try {
-                const resp = await fetch(url + '/messages/' + whSentMessageId, { method: 'DELETE' });
-                if (!resp.ok && resp.status !== 204) { showWhMessage('Ошибка ' + resp.status); return; }
-                whSentMessageId = null;
-                document.getElementById('whEditBtn').disabled = true;
-                document.getElementById('whDeleteBtn').disabled = true;
-                showWhMessage('Сообщение удалено', 'success');
-            } catch (err) {
-                showWhMessage('Ошибка: ' + err.message);
-            }
-        });
+            <div class="row" style="margin-top:12px">
+              <button class="btn ghost sm" id="hookAttach"><i class="fa-solid fa-paperclip"></i> Прикрепить файл</button>
+              <input type="file" id="hookFile" hidden />
+              <span class="hint" id="hookFileName"></span>
+            </div>
+          </div>
+        </div>
 
-        document.getElementById('whClearBtn').addEventListener('click', function() {
-            whContent.value = '';
-            whEmbeds = [];
-            whEmbedCounter = 0;
-            whFilesData = [];
-            whFiles.value = '';
-            renderWhEmbeds();
-            renderWhFiles();
-            updateWhPreview();
-            clearWhMessage();
-            document.getElementById('whContentCount').textContent = '0';
-        });
+        <!-- EMBED-КАРТОЧКИ -->
+        <div class="card">
+          <div class="card-head">
+            <div class="ico"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Embed-карточки</h3>
+            <span class="badge" id="cntEmbBadge" style="margin-left:auto">0 / 10</span>
+            <button class="btn sm" id="hookAddEmbed"><i class="fa-solid fa-plus"></i> Добавить</button>
+          </div>
+          <div class="card-pad">
+            <div class="auth-tabs" style="margin-bottom:14px">
+              <button class="chip active" data-embed-tab="editor"><i class="fa-solid fa-pen-to-square"></i> Редактор</button>
+              <button class="chip" data-embed-tab="json"><i class="fa-solid fa-code"></i> JSON</button>
+            </div>
 
-        function hexToInt(hex) {
-            try { return parseInt(hex.replace('#', ''), 16); }
-            catch (e) { return 0x7c5cfc; }
-        }
+            <div id="embedEditor">
+              <div id="embeds"></div>
+              <div class="empty" id="embedsEmpty" style="min-height:120px">
+                <i class="fa-regular fa-square-plus"></i>
+                <div>Нет embed-карточек. Нажмите «Добавить».</div>
+              </div>
+            </div>
 
-        updateWhPreview();
-        renderWhEmbeds();
-        renderWhFiles();
-    </script>
+            <pre class="code" id="embedJSON" style="display:none; max-height:340px">{}</pre>
+          </div>
+        </div>
+      </div>
+
+      <!-- ПРАВАЯ КОЛОНКА: ПРЕДПРОСМОТР -->
+      <div class="card" style="align-self:start; position:sticky; top:80px">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-eye"></i></div>
+          <h3>Предпросмотр</h3>
+          <button class="btn sm cyan" id="hookCopy" style="margin-left:auto"><i class="fa-solid fa-copy"></i> JSON</button>
+        </div>
+        <div class="card-pad">
+          <div class="preview" id="hookPreview">
+            <div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span class="dot"></span> Yurika Bot © <span id="year"></span>
+  <span style="opacity:.6">· дизайн, профиль и вебхук-конструктор</span>
+</footer>
+
+<div class="toast-zone" id="toasts"></div>
+
+<script>
+/* ============================================================
+   0. УТИЛИТЫ
+============================================================ */
+const $  = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const yearEl = $('#year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+
+function toast(text, type='info', ms=2600){
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  const ic = type==='ok' ? 'fa-circle-check' : type==='err' ? 'fa-circle-xmark' : type==='warn' ? 'fa-triangle-exclamation' : 'fa-circle-info';
+  t.innerHTML = `<i class="fa-solid ${ic}"></i><span></span>`;
+  t.querySelector('span').textContent = text;
+  $('#toasts').appendChild(t);
+  setTimeout(()=>{ t.style.opacity='0'; t.style.transform='translateY(8px)'; setTimeout(()=>t.remove(),200); }, ms);
+}
+async function sha256(str){
+  const buf = new TextEncoder().encode(str);
+  const h = await crypto.subtle.digest('SHA-256', buf);
+  return [...new Uint8Array(h)].map(b=>b.toString(16).padStart(2,'0')).join('');
+}
+function escapeHTML(s=''){
+  return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* ============================================================
+   1. FIREBASE (работает в фоне, вкладка скрыта от пользователя)
+============================================================ */
+const firebaseConfig = {
+  apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
+  authDomain: "yurika-bot.firebaseapp.com",
+  projectId: "yurika-bot",
+  storageBucket: "yurika-bot.firebasestorage.app",
+  messagingSenderId: "686871342456",
+  appId: "1:686871342456:web:8fc8327c4d311993adac8d",
+  measurementId: "G-M1W6BLMP4H"
+};
+let fbAuth = null, fbDb = null, fbReady = false;
+try{
+  if(window.firebase){
+    const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+    fbAuth = firebase.auth();
+    fbDb   = firebase.firestore();
+    fbReady = true;
+  }
+}catch(e){ console.warn('Firebase init error:', e); }
+
+/* ============================================================
+   2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+============================================================ */
+$$('.tab').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    $$('.tab').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const id = 'tab-' + btn.dataset.tab;
+    $$('.section').forEach(s=>s.classList.toggle('active', s.id===id));
+    window.scrollTo({top:0, behavior:'smooth'});
+  });
+});
+
+/* ============================================================
+   3. КОМАНДЫ
+============================================================ */
+const CATEGORIES = [
+  { id:'ai', icon:'fa-brain', title:'Нейросеть GigaChat-2', items:[
+    {c:'/ai', d:'Включить / выключить ИИ. !ai on · !ai off', a:['ии']},
+    {c:'/aiclear', d:'Очистить историю диалога с ИИ в этом канале.', a:['ииочистить']},
+    {c:'/aimodel [name]', d:'Сменить модель GigaChat. !aimodel GigaChat-2-Pro', a:['иимодель']},
+    {c:'/aiprompt [text]', d:'Сменить системный промпт. reset — сброс.', a:['иипромпт']},
+    {c:'/aireload', d:'Перезагрузить клиент GigaChat, каналы и ID бота.', a:['ииперезагрузить']},
+    {c:'/aistats', d:'Статистика ИИ.', a:['иистат']},
+    {c:'/aitest', d:'Проверить, видит ли ИИ упоминания и ID бота.', a:['иитест']},
+  ]},
+  { id:'business', icon:'fa-briefcase', title:'Бизнесы', items:[
+    {c:'/бизнесы', d:'Показать мои бизнесы.', a:['business','бизнес']},
+    {c:'/инфо-бизнес [business_id=0]', d:'Инфо о бизнесе.', a:['business-info','binfo']},
+    {c:'/продать-бизнес [business_id=0]', d:'Продать бизнес.', a:['business-sell','bsell']},
+    {c:'/собрать', d:'Собрать доход.', a:['business-collect','bcollect']},
+    {c:'/создать-бизнес [name] [income=0]', d:'Создать бизнес.', a:['business-create','bcreate']},
+    {c:'/топ-бизнес', d:'Топ бизнесменов.', a:['business-top','btop']},
+    {c:'/улучшить [business_id=0]', d:'Улучшить бизнес.', a:['business-upgrade','bupgrade']},
+    {c:'/цена-бизнеса [income=0]', d:'Рассчитать цену бизнеса.', a:['business-price','bprice']},
+  ]},
+  { id:'love', icon:'fa-heart', title:'Браки', items:[
+    {c:'/браки', d:'Список браков.', a:['marriages','все-пары']},
+    {c:'/обнять [member]', d:'Обнять.', a:['hug','обнимашки']},
+    {c:'/пара [member]', d:'Показать партнёра.', a:['partner','мой-партнёр','половинка']},
+    {c:'/погладить [member]', d:'Погладить.', a:['pat']},
+    {c:'/поцеловать [member]', d:'Поцеловать.', a:['kiss','чмок']},
+    {c:'/предложить [member]', d:'Предложить брак.', a:['marry','жениться','выйти-замуж']},
+    {c:'/развод', d:'Развестись.', a:['divorce','развестись']},
+    {c:'/совместимость [member1] [member2]', d:'Проверить совместимость.', a:['love','любовь']},
+    {c:'/шип [member1] [member2]', d:'Шип с прогресс-баром.', a:['ship','шипперить']},
+    {c:'/шлёпнуть [member]', d:'Шлёпнуть.', a:['slap']},
+  ]},
+  { id:'config', icon:'fa-gear', title:'Конфигурация', items:[
+    {c:'/конфиг', d:'Текущие настройки сервера.', a:['config']},
+    {c:'/конфиг префикс <new_prefix>', d:'Установить новый префикс команд.', a:[]},
+    {c:'/конфиг лог <channel>', d:'Установить канал логов.', a:[]},
+    {c:'/конфиг приветствие <channel>', d:'Установить канал приветствий.', a:[]},
+    {c:'/конфиг роль <role>', d:'Установить авто-роль новым участникам.', a:[]},
+  ]},
+  { id:'mod', icon:'fa-shield-halved', title:'Модерация', items:[
+    {c:'/бан [member_str] [reason]', d:'Забанить участника. /бан @User причина', a:['ban']},
+    {c:'/кик [member_str] [reason]', d:'Кикнуть участника. /кик @User причина', a:['kick']},
+    {c:'/мут [member_str] [duration=10m]', d:'Замутить участника. /мут @User 10m', a:['mute']},
+    {c:'/очистить [count=5]', d:'Удалить N сообщений. /очистить 10', a:['purge','clear']},
+    {c:'/предупредить [member_str] [reason]', d:'Выдать предупреждение.', a:['warn']},
+    {c:'/предупреждения [member_str]', d:'Список предупреждений.', a:['warns']},
+    {c:'/разбан [user_id]', d:'Разбанить пользователя по ID. /разбан 123456789', a:['unban']},
+    {c:'/размут [member_str]', d:'Снять мут. /размут @User', a:['unmute']},
+    {c:'/снять-предупреждения [member_str]', d:'Очистить предупреждения.', a:['clearwarns']},
+  ]},
+  { id:'main', icon:'fa-circle-play', title:'Основное', items:[
+    {c:'/задержка', d:'Задержка бота.', a:['latency','пинг-бот']},
+    {c:'/информация', d:'Информация о боте.', a:['info','бот']},
+    {c:'/пинг', d:'Проверка связи.', a:['ping']},
+    {c:'/привет', d:'Приветствие.', a:['hello','hi']},
+  ]},
+  { id:'pets', icon:'fa-paw', title:'Питомцы', items:[
+    {c:'/виды', d:'Список видов питомцев с ценами.', a:['species']},
+    {c:'/завести [species] [name]', d:'Завести питомца. /завести кошка Мурка', a:['adopt']},
+    {c:'/лечить', d:'Вылечить питомца.', a:['heal']},
+    {c:'/отпустить', d:'Отпустить питомца.', a:['release']},
+    {c:'/переименовать [name]', d:'Переименовать питомца.', a:['rename']},
+    {c:'/питомец [member]', d:'Информация о питомце.', a:['pet']},
+    {c:'/питомцы', d:'Топ питомцев.', a:['pets','pet-top']},
+    {c:'/поиграть', d:'Поиграть с питомцем.', a:['play']},
+    {c:'/поиграть-премиум', d:'Премиум-игра за монеты — много XP.', a:['premium-play']},
+    {c:'/покормить', d:'Покормить питомца.', a:['feed']},
+    {c:'/покормить-премиум', d:'Премиум-кормление за монеты — много XP.', a:['premium-feed']},
+    {c:'/прокачать', d:'Прокачать питомца за монеты (повышает уровень на 1).', a:['upgrade','levelup']},
+    {c:'/прокачка-инфо', d:'Информация о прокачке.', a:['upgrade-info']},
+  ]},
+  { id:'users', icon:'fa-users', title:'Пользователи', items:[
+    {c:'/аватар [member_str]', d:'Аватар пользователя. /аватар [@user]', a:['avatar','av','ава']},
+    {c:'/баннер [member_str]', d:'Баннер пользователя. /баннер [@user]', a:['banner']},
+    {c:'/профиль [member_str]', d:'Карточка пользователя. /профиль [@user]', a:['user','u','юзер']},
+  ]},
+  { id:'help', icon:'fa-circle-question', title:'Справка', items:[
+    {c:'/команды', d:'Показать список всех команд.', a:['помощь','help','h']},
+  ]},
+  { id:'eco', icon:'fa-coins', title:'Экономика', items:[
+    {c:'/баланс [member]', d:'Показать баланс.', a:['balance','bal']},
+    {c:'/банк [action=info] [amount=0]', d:'Управление банком: вложить, снять, инфо.', a:['bank']},
+    {c:'/богачи', d:'Топ по балансу.', a:['top','top-balance']},
+    {c:'/бонус', d:'Ежедневный бонус.', a:['daily']},
+    {c:'/выдать-монеты [member] [amount=0]', d:'Выдать монеты участнику.', a:['grant','выдать']},
+    {c:'/добавить-товар [role] [price=0] [name] [description]', d:'Добавить товар в магазин.', a:['shop-add','shopadd']},
+    {c:'/инвентарь', d:'Инвентарь.', a:['inventory','inv']},
+    {c:'/купить [item_id=0]', d:'Купить товар.', a:['buy']},
+    {c:'/магазин', d:'Показать магазин.', a:['shop']},
+    {c:'/перевод [member] [amount=0]', d:'Перевести деньги.', a:['transfer','pay']},
+    {c:'/работа', d:'Поработать. Кулдаун — ровно 10 минут.', a:['work','работать']},
+    {c:'/удалить-товар [item_id=0]', d:'Удалить товар из магазина.', a:['shop-remove','shopremove']},
+  ]},
+];
+
+let activeCat = 'all', search = '';
+
+function renderCatTabs(){
+  const total = CATEGORIES.reduce((s,c)=>s+c.items.length,0);
+  $('#cmdCount').textContent = total + ' команд';
+  const el = $('#catTabs'); el.innerHTML = '';
+  const all = document.createElement('button');
+  all.className = 'chip' + (activeCat==='all' ? ' active' : '');
+  all.innerHTML = `<i class="fa-solid fa-layer-group"></i> Все <b style="opacity:.7">${total}</b>`;
+  all.onclick = ()=>{ activeCat='all'; renderCatTabs(); renderCommands(); };
+  el.appendChild(all);
+
+  CATEGORIES.forEach(cat=>{
+    const b = document.createElement('button');
+    b.className = 'chip' + (activeCat===cat.id ? ' active' : '');
+    b.innerHTML = `<i class="fa-solid ${cat.icon}"></i> ${cat.title}`;
+    b.onclick = ()=>{ activeCat=cat.id; renderCatTabs(); renderCommands(); };
+    el.appendChild(b);
+  });
+}
+
+function renderCommands(){
+  const grid = $('#cmdGrid'); grid.innerHTML = '';
+  const q = search.trim().toLowerCase();
+  let shown = 0;
+  CATEGORIES.forEach(cat=>{
+    if(activeCat !== 'all' && activeCat !== cat.id) return;
+    const list = cat.items.filter(it=>{
+      if(!q) return true;
+      return (it.c + ' ' + it.d + ' ' + (it.a||[]).join(' ')).toLowerCase().includes(q);
+    });
+    if(!list.length) return;
+    list.forEach(it=>{
+      shown++;
+      const card = document.createElement('div');
+      card.className = 'cmd';
+      card.innerHTML = `
+        <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px">
+          <span style="width:30px;height:30px;border-radius:10px;display:grid;place-items:center;
+            background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(34,211,238,.25));border:1px solid var(--stroke-strong)">
+            <i class="fa-solid ${cat.icon}" style="font-size:13px"></i>
+          </span>
+          <span style="font-size:12px;font-weight:800;color:var(--muted);letter-spacing:.4px;text-transform:uppercase">${escapeHTML(cat.title)}</span>
+        </div>
+        <code>${escapeHTML(it.c)}</code>
+        <div class="desc">${escapeHTML(it.d)}</div>
+        ${(it.a && it.a.length) ? `<div class="aliases">${it.a.map(a=>`<span class="alias">${escapeHTML(a)}</span>`).join('')}</div>` : ''}
+      `;
+      grid.appendChild(card);
+    });
+  });
+  if(!shown){
+    grid.innerHTML = `<div class="empty" style="grid-column:1/-1">
+      <i class="fa-solid fa-magnifying-glass"></i><div>Ничего не найдено</div></div>`;
+  }
+}
+$('#cmdSearch').addEventListener('input', e=>{ search = e.target.value; renderCommands(); });
+renderCatTabs(); renderCommands();
+
+/* ============================================================
+   4. ВЕБХУК-КОНСТРУКТОР (Yurika Hook)
+============================================================ */
+const MAX_EMBEDS = 10;
+const hook = { url:'', name:'', avatar:'', msg:'', file:null, embeds:[] };
+
+function counter(el, val, max){
+  if(!el) return;
+  el.textContent = `${val} / ${max}`;
+  el.classList.toggle('over', val > max);
+}
+function updCounters(){
+  counter($('#cntUrl'), hook.url.length, 80);
+  counter($('#cntMsg'), hook.msg.length, 2000);
+  const badge = $('#cntEmbBadge');
+  if(badge){
+    badge.textContent = `${hook.embeds.length} / ${MAX_EMBEDS}`;
+    badge.classList.toggle('warn', hook.embeds.length >= MAX_EMBEDS);
+  }
+}
+
+$('#hookUrl').addEventListener('input', e=>{ hook.url = e.target.value; updCounters(); });
+$('#hookName').addEventListener('input', e=>{ hook.name = e.target.value; renderPreview(); });
+$('#hookAvatar').addEventListener('input', e=>{ hook.avatar = e.target.value; renderPreview(); });
+$('#hookMsg').addEventListener('input', e=>{ hook.msg = e.target.value; updCounters(); renderPreview(); });
+
+$('#hookAttach').addEventListener('click', ()=> $('#hookFile').click());
+$('#hookFile').addEventListener('change', e=>{
+  const f = e.target.files[0]; hook.file = f || null;
+  $('#hookFileName').textContent = f ? f.name : '';
+  renderPreview();
+});
+
+/* Загрузка по ссылке/ID */
+$('#hookLoad').addEventListener('click', async ()=>{
+  const ref = $('#hookLoadBy').value.trim();
+  if(!ref){ toast('Укажите ссылку или ID', 'warn'); return; }
+  toast('Загрузка: ' + ref, 'info');
+  try{
+    const res = await fetch(ref);
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    const data = await res.json();
+    if(data.content){ hook.msg = data.content; $('#hookMsg').value = data.content; }
+    if(data.username){ hook.name = data.username; $('#hookName').value = data.username; }
+    if(data.avatar_url){ hook.avatar = data.avatar_url; $('#hookAvatar').value = data.avatar_url; }
+    if(Array.isArray(data.embeds)){
+      hook.embeds = data.embeds.slice(0, MAX_EMBEDS).map(e=>({
+        title:e.title||'', desc:e.description||'',
+        color: e.color ? '#'+e.color.toString(16).padStart(6,'0') : '#7c5cff'
+      }));
+      renderEmbeds();
+    }
+    updCounters(); renderPreview(); renderEmbedJSON();
+    toast('Загружено', 'ok');
+  }catch(err){
+    console.warn(err);
+    toast('Не удалось загрузить (CORS/URL). Вставьте данные вручную.', 'err', 3500);
+  }
+});
+
+/* Кнопки действий */
+$('#hookSend').addEventListener('click', async ()=>{
+  if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
+  try{
+    const res = await fetch(hook.url, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(buildPayload())
+    });
+    if(!res.ok) throw new Error('HTTP ' + res.status);
+    toast('Отправлено', 'ok');
+  }catch(err){
+    console.warn(err);
+    toast('Ошибка отправки (CORS/URL). JSON можно скопировать.', 'err', 3500);
+  }
+});
+$('#hookEdit').addEventListener('click', ()=>{
+  if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
+  toast('Режим редактирования: измените поля и нажмите «Отправить».', 'info', 3200);
+  $('#hookMsg').focus();
+});
+$('#hookDelete').addEventListener('click', ()=>{
+  if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
+  if(!confirm('Удалить сообщение по этому вебхуку?')) return;
+  fetch(hook.url, {method:'DELETE'})
+    .then(r=>{ toast(r.ok ? 'Удалено' : 'Не удалось удалить', r.ok ? 'ok':'err'); })
+    .catch(()=> toast('Ошибка запроса (CORS)', 'err'));
+});
+$('#hookClear').addEventListener('click', ()=>{
+  hook.url=''; hook.name=''; hook.avatar=''; hook.msg=''; hook.file=null; hook.embeds=[];
+  $('#hookUrl').value=''; $('#hookName').value=''; $('#hookAvatar').value='';
+  $('#hookMsg').value=''; $('#hookFileName').textContent=''; $('#hookLoadBy').value='';
+  renderEmbeds(); updCounters(); renderPreview(); renderEmbedJSON();
+  toast('Очищено', 'warn');
+});
+
+/* Embed-карточки */
+$('#hookAddEmbed').addEventListener('click', ()=>{
+  if(hook.embeds.length >= MAX_EMBEDS) return;
+  hook.embeds.push({ title:'', desc:'', color:'#7c5cff' });
+  renderEmbeds(); updCounters(); renderPreview(); renderEmbedJSON();
+});
+
+function renderEmbeds(){
+  const box = $('#embeds'); box.innerHTML = '';
+  hook.embeds.forEach((em, i)=>{
+    const d = document.createElement('div');
+    d.className = 'embed-box';
+    d.innerHTML = `
+      <div class="embed-top">
+        <i class="fa-solid fa-layer-group" style="color:var(--brand-2)"></i>
+        <strong>Embed #${i+1}</strong>
+        <button class="btn ghost sm" data-del="${i}"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="color-line" style="background:${em.color || '#7c5cff'}"></div>
+      <div class="field"><label>Заголовок</label>
+        <input data-i="${i}" data-f="title" maxlength="256" placeholder="Заголовок" value="${escapeHTML(em.title||'')}">
+      </div>
+      <div class="field"><label>Описание</label>
+        <textarea data-i="${i}" data-f="desc" maxlength="6000" placeholder="Описание…" style="min-height:80px">${escapeHTML(em.desc||'')}</textarea>
+      </div>
+      <div class="field" style="margin-bottom:0"><label>Цвет</label>
+        <input type="color" data-i="${i}" data-f="color" value="${em.color||'#7c5cff'}" style="padding:6px; height:44px">
+      </div>`;
+    box.appendChild(d);
+  });
+  $('#embedsEmpty').style.display = hook.embeds.length ? 'none' : 'grid';
+  $('#hookAddEmbed').disabled = hook.embeds.length >= MAX_EMBEDS;
+  $('#hookAddEmbed').style.opacity = hook.embeds.length >= MAX_EMBEDS ? .5 : 1;
+
+  box.querySelectorAll('[data-del]').forEach(b=>{
+    b.onclick = ()=>{ hook.embeds.splice(+b.dataset.del,1); renderEmbeds(); updCounters(); renderPreview(); renderEmbedJSON(); };
+  });
+  box.querySelectorAll('[data-i]').forEach(inp=>{
+    inp.oninput = ()=>{
+      const i = +inp.dataset.i, f = inp.dataset.f;
+      hook.embeds[i][f] = inp.value;
+      if(f === 'color') renderEmbeds();
+      renderPreview(); renderEmbedJSON();
+    };
+  });
+}
+
+/* Табы Редактор/JSON */
+$$('[data-embed-tab]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    $$('[data-embed-tab]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    const t = b.dataset.embedTab;
+    $('#embedEditor').style.display = t === 'editor' ? 'block' : 'none';
+    $('#embedJSON').style.display  = t === 'json'   ? 'block' : 'none';
+    if(t === 'json') renderEmbedJSON();
+  });
+});
+function renderEmbedJSON(){
+  const clean = hook.embeds
+    .filter(e => (e.title||'').trim() || (e.desc||'').trim())
+    .map(e => ({
+      title: e.title || undefined,
+      description: e.desc || undefined,
+      color: e.color ? parseInt(e.color.replace('#',''),16) : undefined
+    }));
+  $('#embedJSON').textContent = JSON.stringify(clean, null, 2);
+}
+
+/* Предпросмотр */
+function renderPreview(){
+  const p = $('#hookPreview');
+  const hasMsg = hook.msg.trim().length > 0;
+  const hasEmb = hook.embeds.some(e => (e.title||'').trim() || (e.desc||'').trim());
+  const hasFile = !!hook.file;
+  if(!hasMsg && !hasEmb && !hasFile && !hook.name && !hook.avatar){
+    p.innerHTML = `<div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>`;
+    return;
+  }
+  let html = '';
+  if(hook.name || hook.avatar){
+    html += `<div style="display:flex; align-items:center; gap:10px; margin-bottom:10px">
+      ${hook.avatar ? `<img src="${escapeHTML(hook.avatar)}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid var(--stroke-strong)" onerror="this.style.display='none'">` : ''}
+      ${hook.name ? `<strong style="font-size:14px">${escapeHTML(hook.name)}</strong>` : ''}
+    </div>`;
+  }
+  if(hasMsg) html += `<div class="msg">${escapeHTML(hook.msg)}</div>`;
+  if(hasFile) html += `<div class="hint" style="margin-top:10px"><i class="fa-solid fa-paperclip"></i> ${escapeHTML(hook.file.name)}</div>`;
+  hook.embeds.forEach(e=>{
+    if(!(e.title||'').trim() && !(e.desc||'').trim()) return;
+    html += `<div class="e" style="border-left-color:${e.color||'#7c5cff'}">
+      ${e.title ? `<h4>${escapeHTML(e.title)}</h4>` : ''}
+      ${e.desc ? `<p>${escapeHTML(e.desc)}</p>` : ''}
+    </div>`;
+  });
+  p.innerHTML = html || `<div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>`;
+}
+
+function buildPayload(){
+  return {
+    url: hook.url || undefined,
+    username: hook.name || undefined,
+    avatar_url: hook.avatar || undefined,
+    content: hook.msg || undefined,
+    embeds: hook.embeds
+      .filter(e => (e.title||'').trim() || (e.desc||'').trim())
+      .map(e => ({
+        title: e.title || undefined,
+        description: e.desc || undefined,
+        color: e.color ? parseInt(e.color.replace('#',''),16) : undefined
+      }))
+  };
+}
+$('#hookCopy').addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText(JSON.stringify(buildPayload(), null, 2)); toast('JSON скопирован', 'ok'); }
+  catch{ toast('Не удалось скопировать', 'err'); }
+});
+
+/* init */
+updCounters(); renderEmbeds(); renderPreview(); renderEmbedJSON();
+
+/* ============================================================
+   5. ПРОФИЛЬ: АВТОРИЗАЦИЯ / ЛОКАЛЬНЫЙ РЕЖИМ / FIREBASE
+============================================================ */
+const LS = {
+  profile: 'yurika_profile_v1',
+  creds:   'yurika_creds_v1',
+  session: 'yurika_session_v1'
+};
+const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
+
+let mode = 'auth';
+$$('[data-auth]').forEach(b=>{
+  b.addEventListener('click', ()=>{
+    $$('[data-auth]').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    mode = b.dataset.auth;
+    const isReg = mode === 'register';
+    $('#nameFields').style.display = isReg ? 'block' : 'none';
+    $('#authSubmit').innerHTML = isReg
+      ? '<i class="fa-solid fa-user-plus"></i> Создать аккаунт'
+      : '<i class="fa-solid fa-right-to-bracket"></i> Войти';
+    $('#authHint').textContent = isReg
+      ? 'Имя, фамилия и e-mail сохранятся в профиль.'
+      : 'Введите e-mail и пароль.';
+  });
+});
+
+function loadProfileLocal(){ try{ return JSON.parse(localStorage.getItem(LS.profile) || 'null'); }catch{ return null; } }
+function saveProfileLocal(p){ localStorage.setItem(LS.profile, JSON.stringify(p)); }
+function getCreds(){ try{ return JSON.parse(localStorage.getItem(LS.creds) || 'null'); }catch{ return null; } }
+function setCreds(c){ localStorage.setItem(LS.creds, JSON.stringify(c)); }
+function setSession(s){ localStorage.setItem(LS.session, JSON.stringify(s)); }
+function getSession(){ try{ return JSON.parse(localStorage.getItem(LS.session) || 'null'); }catch{ return null; } }
+function clearSession(){ localStorage.removeItem(LS.session); }
+
+function showCabinet(profile, source){
+  $('#authView').style.display = 'none';
+  $('#cabinetView').style.display = 'grid';
+  $('#profileStatus').textContent = 'авторизован · ' + source;
+
+  profile = Object.assign({
+    name:'Юрика', surname:'Ботова',
+    email:'user@example.com',
+    avatar: DEFAULT_AVATAR
+  }, profile || {});
+
+  $('#pName').textContent  = `${profile.name || ''} ${profile.surname || ''}`.trim() || 'Без имени';
+  $('#pEmail').textContent = profile.email || '—';
+  $('#pSource').textContent = source;
+  $('#inName').value = profile.name || '';
+  $('#inSurname').value = profile.surname || '';
+  $('#inEmail').value = profile.email || '';
+  $('#avatarUrl').value = (profile.avatar && profile.avatar.startsWith('http')) ? profile.avatar : '';
+  setAvatar(profile.avatar || DEFAULT_AVATAR);
+}
+function showAuth(){
+  $('#cabinetView').style.display = 'none';
+  $('#authView').style.display = 'block';
+  $('#profileStatus').textContent = 'не авторизован';
+}
+function setAvatar(url){
+  const img = $('#avatarImg');
+  img.onerror = ()=>{ img.src = DEFAULT_AVATAR; };
+  img.src = url || DEFAULT_AVATAR;
+}
+
+$('#authForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const email = $('#authEmail').value.trim();
+  const pass  = $('#authPass').value;
+  const name  = $('#regName').value.trim();
+  const surname = $('#regSurname').value.trim();
+
+  if(!email || pass.length < 6){ toast('Проверьте e-mail и пароль (мин. 6)', 'err'); return; }
+
+  if(fbReady && fbAuth){
+    try{
+      if(mode === 'register'){
+        const cred = await fbAuth.createUserWithEmailAndPassword(email, pass);
+        const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
+        await fbDb.collection('profiles').doc(cred.user.uid).set(profile, {merge:true});
+        saveProfileLocal(profile);
+        showCabinet(profile, 'Firebase');
+        toast('Аккаунт создан', 'ok');
+      }else{
+        const cred = await fbAuth.signInWithEmailAndPassword(email, pass);
+        const snap = await fbDb.collection('profiles').doc(cred.user.uid).get();
+        const profile = snap.exists ? snap.data() : { email, name:'', surname:'', avatar:DEFAULT_AVATAR };
+        saveProfileLocal(profile);
+        showCabinet(profile, 'Firebase');
+        toast('Вход выполнен', 'ok');
+      }
+      return;
+    }catch(err){
+      console.warn('Firebase Auth error:', err);
+      toast(err.message || 'Ошибка Firebase — переключаюсь в локальный режим', 'warn', 3500);
+    }
+  }
+
+  const creds = getCreds();
+  if(mode === 'register'){
+    const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
+    setCreds({ email, passHash: await sha256(pass) });
+    saveProfileLocal(profile);
+    setSession({ email, source:'local' });
+    showCabinet(profile, 'local');
+    toast('Аккаунт создан (локально)', 'ok');
+  }else{
+    if(creds && creds.email === email){
+      const h = await sha256(pass);
+      if(h !== creds.passHash){ toast('Неверный пароль', 'err'); return; }
+      const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
+      setSession({ email, source:'local' });
+      showCabinet(profile, 'local');
+      toast('Вход выполнен', 'ok');
+    }else{
+      const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
+      profile.email = email;
+      saveProfileLocal(profile);
+      setCreds({ email, passHash: await sha256(pass) });
+      setSession({ email, source:'local' });
+      showCabinet(profile, 'local');
+      toast('Локальный профиль создан', 'ok');
+    }
+  }
+});
+
+$('#btnLocal').addEventListener('click', ()=>{
+  const profile = loadProfileLocal() || {
+    name:'Юрика', surname:'Ботова',
+    email:'local@yurika.bot',
+    avatar: DEFAULT_AVATAR
+  };
+  saveProfileLocal(profile);
+  setSession({ email: profile.email, source:'local' });
+  showCabinet(profile, 'local');
+  toast('Локальный профиль загружен', 'ok');
+});
+
+$('#btnLogout').addEventListener('click', async ()=>{
+  try{ if(fbReady && fbAuth) await fbAuth.signOut(); }catch{}
+  clearSession();
+  showAuth();
+  toast('Вы вышли', 'warn');
+});
+
+$('#profileForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const profile = {
+    name: $('#inName').value.trim(),
+    surname: $('#inSurname').value.trim(),
+    email: $('#inEmail').value.trim(),
+    avatar: $('#avatarImg').src
+  };
+  saveProfileLocal(profile);
+  try{
+    if(fbReady && fbAuth && fbAuth.currentUser){
+      await fbDb.collection('profiles').doc(fbAuth.currentUser.uid).set(profile, {merge:true});
+      if(profile.email && profile.email !== fbAuth.currentUser.email){
+        await fbAuth.currentUser.updateEmail(profile.email);
+      }
+    }
+  }catch(err){ console.warn(err); toast('Профиль сохранён локально', 'warn'); }
+
+  $('#pName').textContent = `${profile.name} ${profile.surname}`.trim() || 'Без имени';
+  $('#pEmail').textContent = profile.email || '—';
+  toast('Профиль сохранён', 'ok');
+});
+
+$('#passForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const p1 = $('#newPass').value, p2 = $('#newPass2').value;
+  if(p1.length < 6){ toast('Пароль минимум 6 символов', 'err'); return; }
+  if(p1 !== p2){ toast('Пароли не совпадают', 'err'); return; }
+  try{
+    if(fbReady && fbAuth && fbAuth.currentUser){
+      await fbAuth.currentUser.updatePassword(p1);
+      toast('Пароль обновлён в Firebase', 'ok');
+    }else{
+      const creds = getCreds() || {};
+      creds.passHash = await sha256(p1);
+      setCreds(creds);
+      toast('Пароль обновлён (локально)', 'ok');
+    }
+    $('#newPass').value = ''; $('#newPass2').value = '';
+  }catch(err){
+    console.warn(err);
+    toast(err.message || 'Не удалось обновить пароль', 'err', 3500);
+  }
+});
+
+$('#btnApplyAvatar').addEventListener('click', ()=>{
+  const url = $('#avatarUrl').value.trim();
+  if(!url){ toast('Вставьте ссылку на картинку', 'warn'); return; }
+  setAvatar(url);
+  const p = loadProfileLocal() || {}; p.avatar = url; saveProfileLocal(p);
+  toast('Аватар обновлён', 'ok');
+});
+$('#btnRandomAvatar').addEventListener('click', ()=>{
+  const seed = Math.random().toString(36).slice(2, 10);
+  const url = `https://api.dicebear.com/9.x/bottts-neutral/svg?seed=${seed}`;
+  $('#avatarUrl').value = url;
+  setAvatar(url);
+  const p = loadProfileLocal() || {}; p.avatar = url; saveProfileLocal(p);
+  toast('Случайный аватар', 'ok');
+});
+$('#btnPickAvatar').addEventListener('click', ()=> $('#avatarFile').click());
+$('#btnFileAvatar').addEventListener('click', ()=> $('#avatarFile').click());
+$('#avatarFile').addEventListener('change', e=>{
+  const f = e.target.files && e.target.files[0];
+  if(!f) return;
+  if(f.size > 1.5 * 1024 * 1024){ toast('Файл больше 1.5 МБ', 'warn'); return; }
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    const dataUrl = reader.result;
+    setAvatar(dataUrl);
+    const p = loadProfileLocal() || {}; p.avatar = dataUrl; saveProfileLocal(p);
+    toast('Аватар загружен', 'ok');
+  };
+  reader.readAsDataURL(f);
+});
+
+/* ============================================================
+   6. АВТОЗАГРУЗКА СЕССИИ
+============================================================ */
+(function init(){
+  const s = getSession();
+  if(s){
+    const profile = loadProfileLocal();
+    if(profile) showCabinet(profile, s.source || 'local');
+  }
+  if(fbReady && fbAuth){
+    fbAuth.onAuthStateChanged(async user=>{
+      if(user){
+        try{
+          const snap = await fbDb.collection('profiles').doc(user.uid).get();
+          const profile = snap.exists ? snap.data() : { email:user.email, name:'', surname:'', avatar:DEFAULT_AVATAR };
+          saveProfileLocal(profile);
+          showCabinet(profile, 'Firebase');
+        }catch(e){ console.warn(e); }
+      }
+    });
+  }
+})();
+
+if(!localStorage.getItem('yurika_hint_shown')){
+  localStorage.setItem('yurika_hint_shown','1');
+  setTimeout(()=>toast('Совет: можно войти локально — кнопка внизу формы', 'info', 4200), 900);
+}
+</script>
 </body>
 </html>
