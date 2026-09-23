@@ -366,7 +366,6 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
   background:rgba(255,255,255,.04); border:1px solid var(--stroke);
   font-size:13px; font-weight:800; color:var(--text);
   transition:.2s transform, .2s border-color, .2s background;
-  text-decoration:none;
 }
 .social:hover{transform:translateY(-2px); border-color:var(--stroke-strong); background:rgba(255,255,255,.08)}
 .social i{font-size:15px}
@@ -374,47 +373,18 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
 .social.telegram i{color:#29B6F6}
 .social.github i{color:#e8e8e8}
 .social.youtube i{color:#FF3D3D}
-.social.twitch i{color:#A970FF}
 .social.empty{opacity:.55; cursor:default; pointer-events:none}
 
 /* Био */
 .bio{
-  margin-top:14px;
-  padding:14px 16px;
-  border-radius:14px;
-  border:1px dashed var(--stroke-strong);
-  background:rgba(255,255,255,.02);
+  margin-top:14px; padding:14px 16px; border-radius:14px;
+  border:1px dashed var(--stroke-strong); background:rgba(255,255,255,.02);
   color:var(--text); font-size:14px; line-height:1.65; font-weight:600;
   white-space:pre-wrap; word-break:break-word;
 }
 .bio.empty{color:var(--muted); font-style:italic; font-weight:500}
 
-/* Telegram-привязка */
-.tg-link{
-  display:flex; align-items:center; gap:14px;
-  padding:16px;
-  border-radius:16px;
-  border:1px solid rgba(41,182,246,.35);
-  background:linear-gradient(135deg, rgba(41,182,246,.12), rgba(124,92,255,.08));
-}
-.tg-link i{
-  width:46px;height:46px;border-radius:14px;flex:0 0 46px; display:grid;place-items:center;
-  background:linear-gradient(135deg,#29B6F6,#7c5cff); color:#fff; font-size:20px;
-  box-shadow:0 10px 24px rgba(41,182,246,.45);
-}
-.tg-link b{display:block; margin-bottom:3px; font-size:14.5px}
-.tg-link span{color:var(--muted); font-size:13px; font-weight:600; display:block}
-.tg-code{
-  margin-top:12px;
-  font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700;
-  background:rgba(0,0,0,.35); border:1px solid var(--stroke-strong);
-  padding:12px 14px; border-radius:12px;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-  color:#c9d2ff; letter-spacing:1px;
-}
-.tg-code button{background:none; border:none; color:var(--brand-2); cursor:pointer; font-size:14px}
-
-/* Приватность и удаление */
+/* Приватность */
 .privacy-row{
   display:flex; align-items:center; gap:12px;
   padding:12px 14px; border-radius:14px;
@@ -1017,7 +987,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       </div>
 
       <!-- Аватар -->
-      <div class="card" style="grid-column:span 1">
+      <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-image"></i></div>
           <h3>Аватар</h3>
@@ -1036,63 +1006,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <input type="file" id="avatarFile" accept="image/*" hidden />
           </div>
           <div class="hint" style="margin-top:10px">PNG, JPG или GIF до 1.5 МБ.</div>
-        </div>
-      </div>
-
-      <!-- Telegram-привязка -->
-      <div class="card" style="grid-column:span 2">
-        <div class="card-head">
-          <div class="ico"><i class="fa-brands fa-telegram"></i></div>
-          <h3>Привязка Telegram</h3>
-          <span class="badge" id="tgStatus" style="margin-left:auto"><i class="fa-solid fa-circle" style="color:var(--warn)"></i> не привязан</span>
-        </div>
-        <div class="card-pad">
-          <div class="tg-link">
-            <i class="fa-brands fa-telegram"></i>
-            <div style="flex:1; min-width:200px">
-              <b>Оповещения от Юрики в Telegram</b>
-              <span>Получай уведомления о событиях на сервере, ответах бота и системных сообщениях прямо в личку Telegram.</span>
-            </div>
-          </div>
-
-          <div id="tgNotLinked" style="margin-top:14px">
-            <p class="hint" style="margin:0 0 10px">Отправь боту в Telegram этот код — он автоматически привяжет аккаунт:</p>
-            <div class="tg-code">
-              <span id="tgCode">YURIKA-000000</span>
-              <button id="tgCopy" type="button" title="Скопировать"><i class="fa-regular fa-clipboard"></i></button>
-            </div>
-            <div class="row" style="margin-top:12px">
-              <button class="btn sm" id="tgGenerate"><i class="fa-solid fa-rotate"></i> Сгенерировать код</button>
-              <button class="btn ghost sm" id="tgDone"><i class="fa-solid fa-check"></i> Я отправил — проверить</button>
-              <a class="btn ghost sm" href="https://t.me/Yurika_Bot" target="_blank" rel="noopener">
-                <i class="fa-brands fa-telegram"></i> Открыть бота
-              </a>
-            </div>
-          </div>
-
-          <div id="tgLinked" style="display:none; margin-top:14px">
-            <div class="privacy-row" style="border-color:rgba(41,182,246,.35); background:linear-gradient(135deg, rgba(41,182,246,.10), rgba(124,92,255,.06))">
-              <i class="fa-brands fa-telegram" style="width:38px;height:38px;border-radius:12px;flex:0 0 38px;display:grid;place-items:center;background:linear-gradient(135deg,#29B6F6,#7c5cff);color:#fff"></i>
-              <div class="privacy-info">
-                <b id="tgLinkedName">@username</b>
-                <span>Telegram успешно привязан · уведомления включены</span>
-              </div>
-              <button class="btn ghost sm" id="tgUnlink"><i class="fa-solid fa-link-slash"></i> Отвязать</button>
-            </div>
-
-            <div class="privacy-row">
-              <div class="privacy-info"><b>События сервера</b><span>Кто зашёл, вышел, изменил настройки</span></div>
-              <div class="switch on" data-pref="tgEvents"></div>
-            </div>
-            <div class="privacy-row">
-              <div class="privacy-info"><b>Ответы бота</b><span>Когда Юрика отвечает на упоминания</span></div>
-              <div class="switch on" data-pref="tgBot"></div>
-            </div>
-            <div class="privacy-row">
-              <div class="privacy-info"><b>Системные сообщения</b><span>Обновления бота, тех. работы</span></div>
-              <div class="switch" data-pref="tgSystem"></div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -1147,7 +1060,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       </div>
 
       <!-- Удаление аккаунта -->
-      <div class="card" style="grid-column:span 1">
+      <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-triangle-exclamation"></i></div>
           <h3>Удаление</h3>
@@ -1631,8 +1544,7 @@ const LS = {
   profile: 'yurika_profile_v2',
   creds:   'yurika_creds_v1',
   session: 'yurika_session_v1',
-  prefs:   'yurika_privacy_v1',
-  tg:      'yurika_telegram_v1'
+  prefs:   'yurika_privacy_v1'
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
 
@@ -1653,7 +1565,6 @@ $$('[data-auth]').forEach(b=>{
   });
 });
 
-/* Локальные хелперы */
 function loadProfileLocal(){ try{ return JSON.parse(localStorage.getItem(LS.profile) || 'null'); }catch{ return null; } }
 function saveProfileLocal(p){ localStorage.setItem(LS.profile, JSON.stringify(p)); }
 function getCreds(){ try{ return JSON.parse(localStorage.getItem(LS.creds) || 'null'); }catch{ return null; } }
@@ -1663,10 +1574,7 @@ function getSession(){ try{ return JSON.parse(localStorage.getItem(LS.session) |
 function clearSession(){ localStorage.removeItem(LS.session); }
 function loadPrefs(){ try{ return JSON.parse(localStorage.getItem(LS.prefs) || 'null') || {}; }catch{ return {}; } }
 function savePrefs(p){ localStorage.setItem(LS.prefs, JSON.stringify(p)); }
-function loadTg(){ try{ return JSON.parse(localStorage.getItem(LS.tg) || 'null'); }catch{ return null; } }
-function saveTg(t){ localStorage.setItem(LS.tg, JSON.stringify(t)); }
 
-/* Показ кабинета */
 function showCabinet(profile){
   $('#authView').style.display = 'none';
   $('#cabinetView').style.display = 'grid';
@@ -1679,13 +1587,11 @@ function showCabinet(profile){
     avatar: DEFAULT_AVATAR
   }, profile || {});
 
-  /* Профиль-карточка */
   const fullName = `${profile.name||''} ${profile.surname||''}`.trim();
   const shownName = fullName || (profile.username ? '@' + profile.username : 'Без имени');
   $('#pName').textContent  = shownName;
   $('#pEmail').textContent = profile.email || '—';
 
-  /* Соцсети */
   const soc = $('#pSocials'); soc.innerHTML = '';
   const socials = [
     {key:'discord',  icon:'fa-discord',  cls:'discord',  label:'Discord',  url: v=>`https://discord.com/users/${v}`},
@@ -1704,13 +1610,11 @@ function showCabinet(profile){
     }
   });
 
-  /* Био */
   const bio = (profile.bio||'').trim();
   const bioEl = $('#pBio');
   bioEl.textContent = bio || 'Расскажи о себе — добавь био в форме справа.';
   bioEl.classList.toggle('empty', !bio);
 
-  /* Форма */
   $('#inName').value = profile.name || '';
   $('#inSurname').value = profile.surname || '';
   $('#inUsername').value = profile.username || '';
@@ -1726,7 +1630,6 @@ function showCabinet(profile){
   setAvatar(profile.avatar || DEFAULT_AVATAR);
 
   renderPrivacySwitches();
-  renderTelegramBlock();
 }
 function showAuth(){
   $('#cabinetView').style.display = 'none';
@@ -1739,12 +1642,10 @@ function setAvatar(url){
   img.src = url || DEFAULT_AVATAR;
 }
 
-/* Счётчик био */
 $('#inBio').addEventListener('input', e=>{
   $('#bioCount').textContent = e.target.value.length;
 });
 
-/* Форма профиля */
 $('#profileForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const username = $('#inUsername').value.trim().replace(/^@/,'');
@@ -1778,7 +1679,6 @@ $('#profileForm').addEventListener('submit', async e=>{
   toast('Профиль сохранён', 'ok');
 });
 
-/* Пароль */
 $('#passForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const p1 = $('#newPass').value, p2 = $('#newPass2').value;
@@ -1799,7 +1699,6 @@ $('#passForm').addEventListener('submit', async e=>{
   }
 });
 
-/* Аватар */
 $('#btnApplyAvatar').addEventListener('click', ()=>{
   const url = $('#avatarUrl').value.trim();
   if(!url){ toast('Вставьте ссылку на картинку', 'warn'); return; }
@@ -1831,7 +1730,6 @@ $('#avatarFile').addEventListener('change', e=>{
   reader.readAsDataURL(f);
 });
 
-/* Выход */
 $('#btnLogout').addEventListener('click', async ()=>{
   try{ if(fbReady && fbAuth) await fbAuth.signOut(); }catch{}
   clearSession();
@@ -1839,7 +1737,6 @@ $('#btnLogout').addEventListener('click', async ()=>{
   toast('Вы вышли', 'warn');
 });
 
-/* Быстрый вход */
 $('#btnLocal').addEventListener('click', ()=>{
   const profile = loadProfileLocal() || {
     name:'', surname:'', username:'', email:'',
@@ -1852,7 +1749,6 @@ $('#btnLocal').addEventListener('click', ()=>{
   toast('Профиль загружен', 'ok');
 });
 
-/* Регистрация / вход */
 $('#authForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const email = $('#authEmail').value.trim();
@@ -1885,7 +1781,6 @@ $('#authForm').addEventListener('submit', async e=>{
     }
   }
 
-  /* Локальный режим */
   const creds = getCreds();
   if(mode === 'register'){
     const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
@@ -1923,17 +1818,13 @@ const PRIVACY_LABELS = {
   showSocials:   'Показывать соцсети',
   indexable:     'Индексировать в поиске'
 };
-
 function renderPrivacySwitches(){
   const prefs = loadPrefs();
   $$('.switch[data-pref]').forEach(sw=>{
     const key = sw.dataset.pref;
-    const on = prefs[key] !== undefined ? !!prefs[key] : defaultPrivacy(key);
+    const on = prefs[key] !== undefined ? !!prefs[key] : ['publicProfile','showSocials'].includes(key);
     sw.classList.toggle('on', on);
   });
-}
-function defaultPrivacy(key){
-  return ['publicProfile','showSocials'].includes(key);
 }
 function initPrivacySwitches(){
   $$('.switch[data-pref]').forEach(sw=>{
@@ -1951,79 +1842,7 @@ function initPrivacySwitches(){
 }
 
 /* ============================================================
-   7. TELEGRAM-ПРИВЯЗКА
-============================================================ */
-function genTgCode(){
-  const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
-  return 'YURIKA-' + rand;
-}
-function renderTelegramBlock(){
-  const tg = loadTg();
-  const badge = $('#tgStatus');
-  if(tg && tg.linked){
-    $('#tgNotLinked').style.display = 'none';
-    $('#tgLinked').style.display = 'block';
-    $('#tgLinkedName').textContent = '@' + (tg.username || 'yurika_user');
-    badge.innerHTML = '<i class="fa-solid fa-circle" style="color:var(--ok)"></i> привязан';
-
-    /* Настройки уведомлений */
-    const prefs = tg.prefs || {tgEvents:true, tgBot:true, tgSystem:false};
-    $$('#tgLinked .switch[data-pref]').forEach(sw=>{
-      const key = sw.dataset.pref;
-      sw.classList.toggle('on', !!prefs[key]);
-      sw.onclick = ()=>{
-        const on = !sw.classList.contains('on');
-        prefs[key] = on;
-        sw.classList.toggle('on', on);
-        const saved = loadTg() || {}; saved.prefs = prefs; saveTg(saved);
-        toast('Настройка сохранена', 'ok', 1600);
-      };
-    });
-  }else{
-    $('#tgNotLinked').style.display = 'block';
-    $('#tgLinked').style.display = 'none';
-    badge.innerHTML = '<i class="fa-solid fa-circle" style="color:var(--warn)"></i> не привязан';
-    if(!tg || !tg.pendingCode){
-      const code = genTgCode();
-      const saved = { linked:false, pendingCode: code, prefs:{tgEvents:true, tgBot:true, tgSystem:false} };
-      saveTg(saved);
-    }
-    $('#tgCode').textContent = (loadTg() || {}).pendingCode || 'YURIKA-000000';
-  }
-}
-$('#tgGenerate').addEventListener('click', ()=>{
-  const code = genTgCode();
-  const saved = loadTg() || {};
-  saved.pendingCode = code;
-  saved.linked = false;
-  saveTg(saved);
-  $('#tgCode').textContent = code;
-  toast('Код сгенерирован', 'ok');
-});
-$('#tgCopy').addEventListener('click', async ()=>{
-  const code = $('#tgCode').textContent.trim();
-  try{ await navigator.clipboard.writeText(code); toast('Код скопирован', 'ok'); }
-  catch{ toast('Не удалось скопировать', 'err'); }
-});
-$('#tgDone').addEventListener('click', ()=>{
-  /* Здесь на реальном бэкенде мы бы проверяли статус. Сейчас — эмуляция. */
-  const saved = loadTg() || {};
-  saved.linked = true;
-  saved.username = 'yurika_user';
-  saved.prefs = saved.prefs || {tgEvents:true, tgBot:true, tgSystem:false};
-  saveTg(saved);
-  renderTelegramBlock();
-  toast('Telegram привязан', 'ok');
-});
-$('#tgUnlink').addEventListener('click', ()=>{
-  if(!confirm('Отвязать Telegram? Уведомления больше не будут приходить.')) return;
-  localStorage.removeItem(LS.tg);
-  renderTelegramBlock();
-  toast('Telegram отвязан', 'warn');
-});
-
-/* ============================================================
-   8. УДАЛЕНИЕ АККАУНТА
+   7. УДАЛЕНИЕ АККАУНТА
 ============================================================ */
 $('#deleteOpen').addEventListener('click', ()=>{
   $('#deleteModal').style.display = 'flex';
@@ -2045,8 +1864,7 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
     }
   }catch(err){ /* тихо */ }
 
-  /* Чистим всё локальное */
-  [LS.profile, LS.creds, LS.session, LS.prefs, LS.tg].forEach(k=> localStorage.removeItem(k));
+  [LS.profile, LS.creds, LS.session, LS.prefs].forEach(k=> localStorage.removeItem(k));
 
   $('#deleteModal').style.display = 'none';
   showAuth();
@@ -2054,7 +1872,7 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
 });
 
 /* ============================================================
-   9. АВТОЗАГРУЗКА
+   8. АВТОЗАГРУЗКА
 ============================================================ */
 (function init(){
   initPrivacySwitches();
