@@ -230,41 +230,26 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   box-shadow:var(--shadow);
   padding:26px 26px 22px;
 }
-.guide h3{
-  margin:0 0 12px; font-size:20px;
-  display:flex; align-items:center; gap:10px;
-}
+.guide h3{margin:0 0 12px; font-size:20px; display:flex; align-items:center; gap:10px}
 .guide h3 i{color:var(--brand-2)}
 .guide p{margin:0 0 12px; color:var(--muted); font-size:14.8px; line-height:1.75; font-weight:600}
 .guide ol{margin:12px 0 18px; padding-left:22px; color:var(--text); font-size:14.8px; line-height:1.8; font-weight:600}
 .guide ol li{margin-bottom:8px}
 .guide ol li b{color:#fff}
-.step-block{
-  margin:18px 0;
-  border:1px solid var(--stroke);
-  border-radius:18px;
-  background:rgba(255,255,255,.02);
-  overflow:hidden;
-}
-.step-head{
-  display:flex; align-items:center; gap:12px;
-  padding:14px 18px; border-bottom:1px solid var(--stroke);
-}
+.step-block{margin:18px 0; border:1px solid var(--stroke); border-radius:18px; background:rgba(255,255,255,.02); overflow:hidden}
+.step-head{display:flex; align-items:center; gap:12px; padding:14px 18px; border-bottom:1px solid var(--stroke)}
 .step-num{
   width:34px;height:34px;border-radius:50%; display:grid;place-items:center;
   background:linear-gradient(135deg, #7c5cff, #22d3ee); color:#fff;
-  font-weight:800; font-size:14px;
-  box-shadow:0 8px 22px rgba(124,92,255,.45);
+  font-weight:800; font-size:14px; box-shadow:0 8px 22px rgba(124,92,255,.45);
 }
 .step-head b{font-size:15.5px}
 .step-body{padding:18px}
 .step-body p{margin:0 0 12px; color:var(--muted); font-size:14px; line-height:1.7; font-weight:600}
 .shot{
   display:block; width:100%;
-  border-radius:14px;
-  border:1px solid var(--stroke-strong);
-  box-shadow:0 24px 60px rgba(0,0,0,.55);
-  background:#0a0d1c;
+  border-radius:14px; border:1px solid var(--stroke-strong);
+  box-shadow:0 24px 60px rgba(0,0,0,.55); background:#0a0d1c;
 }
 .guide .tip{
   margin-top:16px; padding:14px 16px; border-radius:14px;
@@ -278,23 +263,17 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   background:linear-gradient(135deg,#22d3ee,#37d67a); color:#fff;
 }
 .install-cta{
-  margin-top:22px;
-  display:flex; flex-direction:column; align-items:center; gap:14px;
-  padding:28px 20px;
-  border:1px solid var(--stroke);
-  border-radius:22px;
+  margin-top:22px; display:flex; flex-direction:column; align-items:center; gap:14px;
+  padding:28px 20px; border:1px solid var(--stroke); border-radius:22px;
   background:linear-gradient(180deg, rgba(18,22,42,.85), rgba(18,22,42,.6));
-  box-shadow:var(--shadow);
-  text-align:center;
+  box-shadow:var(--shadow); text-align:center;
 }
 .install-cta h3{margin:0; font-size:22px}
 .install-cta p{margin:0; color:var(--muted); font-weight:600; max-width:620px}
 .btn-install{
   display:inline-flex; align-items:center; justify-content:center; gap:12px;
-  background:#ffffff; color:#000000;
-  font-weight:800; font-size:16px;
-  padding:16px 28px; border-radius:14px;
-  border:none; cursor:pointer;
+  background:#ffffff; color:#000000; font-weight:800; font-size:16px;
+  padding:16px 28px; border-radius:14px; border:none; cursor:pointer;
   box-shadow:0 18px 44px rgba(255,255,255,.18), 0 0 0 1px rgba(255,255,255,.35);
   transition:.2s transform, .2s box-shadow;
 }
@@ -379,6 +358,100 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
 .badge.ok i{color:var(--ok)}
 .badge.warn i{color:var(--warn)}
 
+/* Соцсети */
+.socials{display:flex; gap:8px; flex-wrap:wrap; margin-top:12px}
+.social{
+  display:inline-flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:12px;
+  background:rgba(255,255,255,.04); border:1px solid var(--stroke);
+  font-size:13px; font-weight:800; color:var(--text);
+  transition:.2s transform, .2s border-color, .2s background;
+  text-decoration:none;
+}
+.social:hover{transform:translateY(-2px); border-color:var(--stroke-strong); background:rgba(255,255,255,.08)}
+.social i{font-size:15px}
+.social.discord i{color:#5865F2}
+.social.telegram i{color:#29B6F6}
+.social.github i{color:#e8e8e8}
+.social.youtube i{color:#FF3D3D}
+.social.twitch i{color:#A970FF}
+.social.empty{opacity:.55; cursor:default; pointer-events:none}
+
+/* Био */
+.bio{
+  margin-top:14px;
+  padding:14px 16px;
+  border-radius:14px;
+  border:1px dashed var(--stroke-strong);
+  background:rgba(255,255,255,.02);
+  color:var(--text); font-size:14px; line-height:1.65; font-weight:600;
+  white-space:pre-wrap; word-break:break-word;
+}
+.bio.empty{color:var(--muted); font-style:italic; font-weight:500}
+
+/* Telegram-привязка */
+.tg-link{
+  display:flex; align-items:center; gap:14px;
+  padding:16px;
+  border-radius:16px;
+  border:1px solid rgba(41,182,246,.35);
+  background:linear-gradient(135deg, rgba(41,182,246,.12), rgba(124,92,255,.08));
+}
+.tg-link i{
+  width:46px;height:46px;border-radius:14px;flex:0 0 46px; display:grid;place-items:center;
+  background:linear-gradient(135deg,#29B6F6,#7c5cff); color:#fff; font-size:20px;
+  box-shadow:0 10px 24px rgba(41,182,246,.45);
+}
+.tg-link b{display:block; margin-bottom:3px; font-size:14.5px}
+.tg-link span{color:var(--muted); font-size:13px; font-weight:600; display:block}
+.tg-code{
+  margin-top:12px;
+  font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700;
+  background:rgba(0,0,0,.35); border:1px solid var(--stroke-strong);
+  padding:12px 14px; border-radius:12px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  color:#c9d2ff; letter-spacing:1px;
+}
+.tg-code button{background:none; border:none; color:var(--brand-2); cursor:pointer; font-size:14px}
+
+/* Приватность и удаление */
+.privacy-row{
+  display:flex; align-items:center; gap:12px;
+  padding:12px 14px; border-radius:14px;
+  border:1px solid var(--stroke); background:rgba(255,255,255,.025);
+  margin-bottom:10px;
+}
+.privacy-row .privacy-info{flex:1; min-width:0}
+.privacy-row b{display:block; font-size:14.5px; margin-bottom:2px}
+.privacy-row span{color:var(--muted); font-size:12.5px; font-weight:600; display:block}
+.switch{
+  position:relative; width:48px; height:28px; flex:0 0 48px;
+  background:rgba(255,255,255,.08); border:1px solid var(--stroke-strong);
+  border-radius:999px; cursor:pointer; transition:.2s background;
+}
+.switch::after{
+  content:""; position:absolute; top:3px; left:3px;
+  width:20px; height:20px; border-radius:50%;
+  background:#cfd5f5; transition:.2s transform, .2s background;
+}
+.switch.on{background:linear-gradient(135deg, #7c5cff, #22d3ee); border-color:transparent}
+.switch.on::after{transform:translateX(20px); background:#fff}
+
+.danger-zone{
+  border:1px solid rgba(255,90,106,.35);
+  background:linear-gradient(135deg, rgba(255,90,106,.10), rgba(255,176,32,.06));
+  border-radius:16px; padding:16px;
+  display:flex; gap:14px; align-items:flex-start; flex-wrap:wrap;
+}
+.danger-zone i{
+  width:42px;height:42px;border-radius:12px;flex:0 0 42px; display:grid;place-items:center;
+  background:linear-gradient(135deg,#ff5a6a,#ffb020); color:#fff;
+  box-shadow:0 10px 24px rgba(255,90,106,.35);
+}
+.danger-zone div{flex:1; min-width:200px}
+.danger-zone b{display:block; margin-bottom:4px}
+.danger-zone p{margin:0; color:var(--muted); font-size:13.5px; font-weight:600; line-height:1.55}
+
 /* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
 .toast{
@@ -409,8 +482,7 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
 }
 .cmd-grid{display:grid; gap:14px; grid-template-columns:repeat(2,minmax(0,1fr))}
 .cmd{
-  position:relative;
-  border:1px solid var(--stroke);
+  position:relative; border:1px solid var(--stroke);
   background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
   border-radius:16px; padding:14px 16px;
   transition:.22s transform, .22s border-color, .22s background;
@@ -547,22 +619,10 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       <p><span class="wave">👋</span> Привет, я Юрика! Я — многофункциональный бот, который всегда придёт на помощь. Вот что я умею:</p>
 
       <div class="feature-list">
-        <div class="feature">
-          <i class="fa-solid fa-coins"></i>
-          <div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-paw"></i>
-          <div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-shield-halved"></i>
-          <div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div>
-        </div>
-        <div class="feature">
-          <i class="fa-solid fa-circle-question"></i>
-          <div><b>Справка</b><span>Покажу все команды и функции.</span></div>
-        </div>
+        <div class="feature"><i class="fa-solid fa-coins"></i><div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div></div>
+        <div class="feature"><i class="fa-solid fa-paw"></i><div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div></div>
+        <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div></div>
+        <div class="feature"><i class="fa-solid fa-circle-question"></i><div><b>Справка</b><span>Покажу все команды и функции.</span></div></div>
       </div>
 
       <div class="callout">
@@ -606,18 +666,14 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       <ol>
         <li>Открой страницу установки по кнопке ниже — это официальный экран авторизации бота в Lolka.</li>
         <li>Войди в свой аккаунт Lolka, если ещё не вошёл.</li>
-        <li>В списке серверов выбери тот, куда хочешь добавить <b>Yurika Bot</b>. Если нужного сервера нет в списке — значит, у тебя нет на нём прав «Управление сервером».</li>
-        <li>Проверь список разрешений. Юрике нужны права на: отправку сообщений, управление ролями, управление каналами, модерацию участников и работу с вебхуками.</li>
+        <li>В списке серверов выбери тот, куда хочешь добавить <b>Yurika Bot</b>.</li>
+        <li>Проверь список разрешений: сообщения, роли, каналы, модерация, вебхуки.</li>
         <li>Нажми <b>«Авторизовать»</b> и подтверди действие.</li>
-        <li>После подтверждения Юрика появится на сервере. Напиши ей <b>@Yurika_Bot</b> + любое приветствие — она ответит.</li>
+        <li>После подтверждения Юрика появится на сервере. Напиши ей <b>@Yurika_Bot</b> — она ответит.</li>
       </ol>
 
-      <!-- ШАГ 1: Портал разработчика / выбор сервера -->
       <div class="step-block">
-        <div class="step-head">
-          <div class="step-num">1</div>
-          <b>Открой страницу установки и выбери сервер</b>
-        </div>
+        <div class="step-head"><div class="step-num">1</div><b>Открой страницу установки и выбери сервер</b></div>
         <div class="step-body">
           <p>После нажатия кнопки «Установить на сервер» открывается страница авторизации Lolka. Войди в аккаунт и выбери сервер, куда хочешь добавить Юрику.</p>
           <img class="shot"
@@ -627,14 +683,10 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- ШАГ 2: Авторизация / разрешения -->
       <div class="step-block">
-        <div class="step-head">
-          <div class="step-num">2</div>
-          <b>Проверь разрешения и авторизуй бота</b>
-        </div>
+        <div class="step-head"><div class="step-num">2</div><b>Проверь разрешения и авторизуй бота</b></div>
         <div class="step-body">
-          <p>Убедись, что у Юрики есть доступ к нужным правам (сообщения, роли, каналы, модерация, вебхуки), затем нажми <b>«Авторизовать»</b> и подтверди действие.</p>
+          <p>Убедись, что у Юрики есть доступ к нужным правам, затем нажми <b>«Авторизовать»</b> и подтверди действие.</p>
           <img class="shot"
                src="https://raw.githubusercontent.com/GiantCraft18/Yurika_Site/13f7e4e499ff13abdb41ebf46ba4e361e3629595/step2.png"
                alt="Шаг 2 — авторизация бота"
@@ -644,17 +696,15 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
       <div class="tip">
         <i class="fa-solid fa-circle-info"></i>
-        <div>Если бот не отвечает — проверь, что у него есть доступ к каналу, где ты пишешь, и что упоминание <b>@Yurika_Bot</b> действительно выделено синим цветом. Полный список команд смотри во вкладке «Команды».</div>
+        <div>Если бот не отвечает — проверь, что у него есть доступ к каналу, и что упоминание <b>@Yurika_Bot</b> выделено синим. Полный список команд — во вкладке «Команды».</div>
       </div>
     </div>
 
-    <!-- CTA-кнопка -->
     <div class="install-cta" style="margin-top:22px">
       <h3>Готов добавить Юрику на свой сервер?</h3>
       <p>Нажми кнопку ниже — откроется страница авторизации Lolka, где ты сможешь выбрать сервер и подтвердить установку.</p>
       <a class="btn-install" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
-        <i class="fa-solid fa-plus"></i>
-        Установить на сервер
+        <i class="fa-solid fa-plus"></i> Установить на сервер
       </a>
       <div class="install-note">lolka.app · безопасная авторизация через Lolka</div>
     </div>
@@ -861,6 +911,8 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
     <!-- Кабинет -->
     <div id="cabinetView" class="grid cols-3" style="display:none">
+
+      <!-- Мой профиль -->
       <div class="card" style="grid-column:span 2">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-user-astronaut"></i></div>
@@ -885,24 +937,21 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
                 <span class="badge ok"><i class="fa-solid fa-circle-check"></i> активен</span>
                 <span class="badge"><i class="fa-solid fa-bolt"></i> автосохранение</span>
               </div>
+
+              <div class="socials" id="pSocials">
+                <span class="social discord empty"><i class="fa-brands fa-discord"></i> Discord</span>
+                <span class="social telegram empty"><i class="fa-brands fa-telegram"></i> Telegram</span>
+                <span class="social github empty"><i class="fa-brands fa-github"></i> GitHub</span>
+                <span class="social youtube empty"><i class="fa-brands fa-youtube"></i> YouTube</span>
+              </div>
             </div>
           </div>
 
-          <div class="field" style="margin-top:20px">
-            <label>Аватар по ссылке (URL)</label>
-            <div class="input-wrap"><i class="fa-solid fa-link lead"></i>
-              <input id="avatarUrl" placeholder="https://example.com/avatar.png" />
-            </div>
-            <div class="row">
-              <button class="btn sm" id="btnApplyAvatar"><i class="fa-solid fa-check"></i> Применить</button>
-              <button class="btn ghost sm" id="btnRandomAvatar"><i class="fa-solid fa-shuffle"></i> Случайный</button>
-              <button class="btn ghost sm" id="btnFileAvatar"><i class="fa-solid fa-upload"></i> С устройства</button>
-              <input type="file" id="avatarFile" accept="image/*" hidden />
-            </div>
-          </div>
+          <div class="bio empty" id="pBio">Расскажи о себе — добавь био в форме справа.</div>
         </div>
       </div>
 
+      <!-- Форма редактирования -->
       <div class="card">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-address-card"></i></div>
@@ -910,23 +959,144 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
         <div class="card-pad">
           <form id="profileForm">
-            <div class="field">
-              <label>Имя</label>
-              <div class="input-wrap"><i class="fa-solid fa-user lead"></i><input id="inName" placeholder="Юрика" /></div>
+            <div class="row">
+              <div class="field" style="flex:1; min-width:140px">
+                <label>Имя</label>
+                <div class="input-wrap"><i class="fa-solid fa-user lead"></i><input id="inName" placeholder="Юрика" /></div>
+              </div>
+              <div class="field" style="flex:1; min-width:140px">
+                <label>Фамилия</label>
+                <div class="input-wrap"><i class="fa-solid fa-signature lead"></i><input id="inSurname" placeholder="Ботова" /></div>
+              </div>
             </div>
+
             <div class="field">
-              <label>Фамилия</label>
-              <div class="input-wrap"><i class="fa-solid fa-signature lead"></i><input id="inSurname" placeholder="Ботова" /></div>
+              <label>Никнейм</label>
+              <div class="input-wrap"><i class="fa-solid fa-at lead"></i>
+                <input id="inUsername" maxlength="20" placeholder="yurika" />
+              </div>
+              <div class="hint">Латиница, цифры, «_», от 3 до 20 символов.</div>
             </div>
+
             <div class="field">
               <label>E-mail</label>
               <div class="input-wrap"><i class="fa-solid fa-envelope lead"></i><input id="inEmail" type="email" placeholder="you@example.com" /></div>
             </div>
+
+            <div class="field">
+              <label>Био</label>
+              <textarea id="inBio" maxlength="200" placeholder="Пара слов о себе…" style="min-height:80px"></textarea>
+              <div class="hint"><span id="bioCount">0</span> / 200</div>
+            </div>
+
+            <div class="row">
+              <div class="field" style="flex:1; min-width:140px">
+                <label>Discord</label>
+                <div class="input-wrap"><i class="fa-brands fa-discord lead"></i><input id="inDiscord" placeholder="username" /></div>
+              </div>
+              <div class="field" style="flex:1; min-width:140px">
+                <label>Telegram</label>
+                <div class="input-wrap"><i class="fa-brands fa-telegram lead"></i><input id="inTelegram" placeholder="username" /></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field" style="flex:1; min-width:140px">
+                <label>GitHub</label>
+                <div class="input-wrap"><i class="fa-brands fa-github lead"></i><input id="inGithub" placeholder="username" /></div>
+              </div>
+              <div class="field" style="flex:1; min-width:140px">
+                <label>YouTube</label>
+                <div class="input-wrap"><i class="fa-brands fa-youtube lead"></i><input id="inYoutube" placeholder="@channel" /></div>
+              </div>
+            </div>
+
             <button class="btn block" type="submit"><i class="fa-solid fa-floppy-disk"></i> Сохранить профиль</button>
           </form>
         </div>
       </div>
 
+      <!-- Аватар -->
+      <div class="card" style="grid-column:span 1">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-image"></i></div>
+          <h3>Аватар</h3>
+        </div>
+        <div class="card-pad">
+          <div class="field">
+            <label>Ссылка (URL)</label>
+            <div class="input-wrap"><i class="fa-solid fa-link lead"></i>
+              <input id="avatarUrl" placeholder="https://example.com/avatar.png" />
+            </div>
+          </div>
+          <div class="row">
+            <button class="btn sm" id="btnApplyAvatar"><i class="fa-solid fa-check"></i> Применить</button>
+            <button class="btn ghost sm" id="btnRandomAvatar"><i class="fa-solid fa-shuffle"></i> Случайный</button>
+            <button class="btn ghost sm" id="btnFileAvatar"><i class="fa-solid fa-upload"></i> С устройства</button>
+            <input type="file" id="avatarFile" accept="image/*" hidden />
+          </div>
+          <div class="hint" style="margin-top:10px">PNG, JPG или GIF до 1.5 МБ.</div>
+        </div>
+      </div>
+
+      <!-- Telegram-привязка -->
+      <div class="card" style="grid-column:span 2">
+        <div class="card-head">
+          <div class="ico"><i class="fa-brands fa-telegram"></i></div>
+          <h3>Привязка Telegram</h3>
+          <span class="badge" id="tgStatus" style="margin-left:auto"><i class="fa-solid fa-circle" style="color:var(--warn)"></i> не привязан</span>
+        </div>
+        <div class="card-pad">
+          <div class="tg-link">
+            <i class="fa-brands fa-telegram"></i>
+            <div style="flex:1; min-width:200px">
+              <b>Оповещения от Юрики в Telegram</b>
+              <span>Получай уведомления о событиях на сервере, ответах бота и системных сообщениях прямо в личку Telegram.</span>
+            </div>
+          </div>
+
+          <div id="tgNotLinked" style="margin-top:14px">
+            <p class="hint" style="margin:0 0 10px">Отправь боту в Telegram этот код — он автоматически привяжет аккаунт:</p>
+            <div class="tg-code">
+              <span id="tgCode">YURIKA-000000</span>
+              <button id="tgCopy" type="button" title="Скопировать"><i class="fa-regular fa-clipboard"></i></button>
+            </div>
+            <div class="row" style="margin-top:12px">
+              <button class="btn sm" id="tgGenerate"><i class="fa-solid fa-rotate"></i> Сгенерировать код</button>
+              <button class="btn ghost sm" id="tgDone"><i class="fa-solid fa-check"></i> Я отправил — проверить</button>
+              <a class="btn ghost sm" href="https://t.me/Yurika_Bot" target="_blank" rel="noopener">
+                <i class="fa-brands fa-telegram"></i> Открыть бота
+              </a>
+            </div>
+          </div>
+
+          <div id="tgLinked" style="display:none; margin-top:14px">
+            <div class="privacy-row" style="border-color:rgba(41,182,246,.35); background:linear-gradient(135deg, rgba(41,182,246,.10), rgba(124,92,255,.06))">
+              <i class="fa-brands fa-telegram" style="width:38px;height:38px;border-radius:12px;flex:0 0 38px;display:grid;place-items:center;background:linear-gradient(135deg,#29B6F6,#7c5cff);color:#fff"></i>
+              <div class="privacy-info">
+                <b id="tgLinkedName">@username</b>
+                <span>Telegram успешно привязан · уведомления включены</span>
+              </div>
+              <button class="btn ghost sm" id="tgUnlink"><i class="fa-solid fa-link-slash"></i> Отвязать</button>
+            </div>
+
+            <div class="privacy-row">
+              <div class="privacy-info"><b>События сервера</b><span>Кто зашёл, вышел, изменил настройки</span></div>
+              <div class="switch on" data-pref="tgEvents"></div>
+            </div>
+            <div class="privacy-row">
+              <div class="privacy-info"><b>Ответы бота</b><span>Когда Юрика отвечает на упоминания</span></div>
+              <div class="switch on" data-pref="tgBot"></div>
+            </div>
+            <div class="privacy-row">
+              <div class="privacy-info"><b>Системные сообщения</b><span>Обновления бота, тех. работы</span></div>
+              <div class="switch" data-pref="tgSystem"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Смена пароля -->
       <div class="card" style="grid-column:span 3">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-key"></i></div>
@@ -949,6 +1119,52 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           <div class="hint" style="margin-top:10px">Пароль хранится в защищённом виде.</div>
         </div>
       </div>
+
+      <!-- Приватность -->
+      <div class="card" style="grid-column:span 2">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-user-shield"></i></div>
+          <h3>Приватность</h3>
+        </div>
+        <div class="card-pad">
+          <div class="privacy-row">
+            <div class="privacy-info"><b>Публичный профиль</b><span>Другие пользователи могут видеть вашу страницу</span></div>
+            <div class="switch on" data-pref="publicProfile"></div>
+          </div>
+          <div class="privacy-row">
+            <div class="privacy-info"><b>Показывать e-mail</b><span>Отображать почту в публичном профиле</span></div>
+            <div class="switch" data-pref="showEmail"></div>
+          </div>
+          <div class="privacy-row">
+            <div class="privacy-info"><b>Показывать соцсети</b><span>Discord, Telegram, GitHub, YouTube</span></div>
+            <div class="switch on" data-pref="showSocials"></div>
+          </div>
+          <div class="privacy-row" style="margin-bottom:0">
+            <div class="privacy-info"><b>Индексировать в поиске</b><span>Разрешить поисковикам находить профиль</span></div>
+            <div class="switch" data-pref="indexable"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Удаление аккаунта -->
+      <div class="card" style="grid-column:span 1">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <h3>Удаление</h3>
+        </div>
+        <div class="card-pad">
+          <div class="danger-zone">
+            <i class="fa-solid fa-trash"></i>
+            <div>
+              <b>Удалить аккаунт</b>
+              <p>Это действие необратимо. Профиль, данные и привязки будут удалены навсегда.</p>
+              <button class="btn danger sm" id="deleteOpen" style="margin-top:10px">
+                <i class="fa-solid fa-trash"></i> Удалить аккаунт
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -957,6 +1173,31 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   <span class="dot"></span> Yurika Bot © <span id="year"></span>
   <span style="opacity:.6">· дизайн, профиль и вебхук-конструктор</span>
 </footer>
+
+<!-- Модалка подтверждения удаления -->
+<div id="deleteModal" style="display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.6); backdrop-filter:blur(6px)">
+  <div class="card" style="max-width:460px; width:100%">
+    <div class="card-head">
+      <div class="ico" style="background:linear-gradient(135deg,rgba(255,90,106,.5),rgba(255,176,32,.4))"><i class="fa-solid fa-triangle-exclamation"></i></div>
+      <h3>Удаление аккаунта</h3>
+    </div>
+    <div class="card-pad">
+      <p style="margin:0 0 14px; color:var(--muted); font-weight:600; line-height:1.65">
+        Это действие <b style="color:#fff">необратимо</b>. Чтобы подтвердить, введи в поле ниже слово <b style="color:#fff">УДАЛИТЬ</b>.
+      </p>
+      <div class="field">
+        <label>Подтверждение</label>
+        <div class="input-wrap"><i class="fa-solid fa-keyboard lead"></i>
+          <input id="deleteConfirm" placeholder="УДАЛИТЬ" />
+        </div>
+      </div>
+      <div class="row end">
+        <button class="btn ghost" id="deleteCancel">Отмена</button>
+        <button class="btn danger" id="deleteConfirmBtn" disabled><i class="fa-solid fa-trash"></i> Удалить навсегда</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="toast-zone" id="toasts"></div>
 
@@ -987,7 +1228,7 @@ function escapeHTML(s=''){
 }
 
 /* ============================================================
-   1. FIREBASE (в фоне)
+   1. FIREBASE
 ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
@@ -1009,19 +1250,15 @@ try{
 }catch(e){ /* тихо */ }
 
 /* ============================================================
-   2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
+   2. ВКЛАДКИ
 ============================================================ */
 function switchTab(name){
   $$('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab === name));
   $$('.section').forEach(s=>s.classList.toggle('active', s.id === 'tab-' + name));
   window.scrollTo({top:0, behavior:'smooth'});
 }
-$$('.tab').forEach(btn=>{
-  btn.addEventListener('click', ()=> switchTab(btn.dataset.tab));
-});
-$$('[data-goto]').forEach(b=>{
-  b.addEventListener('click', ()=> switchTab(b.dataset.goto));
-});
+$$('.tab').forEach(btn=> btn.addEventListener('click', ()=> switchTab(btn.dataset.tab)));
+$$('[data-goto]').forEach(b=> b.addEventListener('click', ()=> switchTab(b.dataset.goto)));
 
 /* ============================================================
    3. КОМАНДЫ
@@ -1180,7 +1417,7 @@ $('#cmdSearch').addEventListener('input', e=>{ search = e.target.value; renderCo
 renderCatTabs(); renderCommands();
 
 /* ============================================================
-   4. ВЕБХУК-КОНСТРУКТОР (Yurika Hook)
+   4. ВЕБХУК
 ============================================================ */
 const MAX_EMBEDS = 10;
 const hook = { url:'', name:'', avatar:'', msg:'', file:null, embeds:[] };
@@ -1391,9 +1628,11 @@ updCounters(); renderEmbeds(); renderPreview(); renderEmbedJSON();
    5. ПРОФИЛЬ
 ============================================================ */
 const LS = {
-  profile: 'yurika_profile_v1',
+  profile: 'yurika_profile_v2',
   creds:   'yurika_creds_v1',
-  session: 'yurika_session_v1'
+  session: 'yurika_session_v1',
+  prefs:   'yurika_privacy_v1',
+  tg:      'yurika_telegram_v1'
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
 
@@ -1414,6 +1653,7 @@ $$('[data-auth]').forEach(b=>{
   });
 });
 
+/* Локальные хелперы */
 function loadProfileLocal(){ try{ return JSON.parse(localStorage.getItem(LS.profile) || 'null'); }catch{ return null; } }
 function saveProfileLocal(p){ localStorage.setItem(LS.profile, JSON.stringify(p)); }
 function getCreds(){ try{ return JSON.parse(localStorage.getItem(LS.creds) || 'null'); }catch{ return null; } }
@@ -1421,25 +1661,72 @@ function setCreds(c){ localStorage.setItem(LS.creds, JSON.stringify(c)); }
 function setSession(s){ localStorage.setItem(LS.session, JSON.stringify(s)); }
 function getSession(){ try{ return JSON.parse(localStorage.getItem(LS.session) || 'null'); }catch{ return null; } }
 function clearSession(){ localStorage.removeItem(LS.session); }
+function loadPrefs(){ try{ return JSON.parse(localStorage.getItem(LS.prefs) || 'null') || {}; }catch{ return {}; } }
+function savePrefs(p){ localStorage.setItem(LS.prefs, JSON.stringify(p)); }
+function loadTg(){ try{ return JSON.parse(localStorage.getItem(LS.tg) || 'null'); }catch{ return null; } }
+function saveTg(t){ localStorage.setItem(LS.tg, JSON.stringify(t)); }
 
+/* Показ кабинета */
 function showCabinet(profile){
   $('#authView').style.display = 'none';
   $('#cabinetView').style.display = 'grid';
   $('#profileStatus').textContent = 'Yurika';
 
   profile = Object.assign({
-    name:'Юрика', surname:'Ботова',
-    email:'user@example.com',
+    name:'', surname:'', username:'',
+    email:'', bio:'',
+    discord:'', telegram:'', github:'', youtube:'',
     avatar: DEFAULT_AVATAR
   }, profile || {});
 
-  $('#pName').textContent  = `${profile.name || ''} ${profile.surname || ''}`.trim() || 'Без имени';
+  /* Профиль-карточка */
+  const fullName = `${profile.name||''} ${profile.surname||''}`.trim();
+  const shownName = fullName || (profile.username ? '@' + profile.username : 'Без имени');
+  $('#pName').textContent  = shownName;
   $('#pEmail').textContent = profile.email || '—';
+
+  /* Соцсети */
+  const soc = $('#pSocials'); soc.innerHTML = '';
+  const socials = [
+    {key:'discord',  icon:'fa-discord',  cls:'discord',  label:'Discord',  url: v=>`https://discord.com/users/${v}`},
+    {key:'telegram', icon:'fa-telegram', cls:'telegram', label:'Telegram', url: v=>`https://t.me/${v.replace(/^@/,'')}`},
+    {key:'github',   icon:'fa-github',   cls:'github',   label:'GitHub',   url: v=>`https://github.com/${v}`},
+    {key:'youtube',  icon:'fa-youtube',  cls:'youtube',  label:'YouTube',  url: v=>`https://youtube.com/${v.startsWith('@') ? v : '@'+v}`}
+  ];
+  socials.forEach(s=>{
+    const val = (profile[s.key]||'').trim();
+    if(val){
+      soc.insertAdjacentHTML('beforeend',
+        `<a class="social ${s.cls}" href="${s.url(val)}" target="_blank" rel="noopener"><i class="fa-brands ${s.icon}"></i> ${s.label}</a>`);
+    }else{
+      soc.insertAdjacentHTML('beforeend',
+        `<span class="social ${s.cls} empty"><i class="fa-brands ${s.icon}"></i> ${s.label}</span>`);
+    }
+  });
+
+  /* Био */
+  const bio = (profile.bio||'').trim();
+  const bioEl = $('#pBio');
+  bioEl.textContent = bio || 'Расскажи о себе — добавь био в форме справа.';
+  bioEl.classList.toggle('empty', !bio);
+
+  /* Форма */
   $('#inName').value = profile.name || '';
   $('#inSurname').value = profile.surname || '';
+  $('#inUsername').value = profile.username || '';
   $('#inEmail').value = profile.email || '';
+  $('#inBio').value = profile.bio || '';
+  $('#inDiscord').value = profile.discord || '';
+  $('#inTelegram').value = profile.telegram || '';
+  $('#inGithub').value = profile.github || '';
+  $('#inYoutube').value = profile.youtube || '';
+  $('#bioCount').textContent = (profile.bio||'').length;
+
   $('#avatarUrl').value = (profile.avatar && profile.avatar.startsWith('http')) ? profile.avatar : '';
   setAvatar(profile.avatar || DEFAULT_AVATAR);
+
+  renderPrivacySwitches();
+  renderTelegramBlock();
 }
 function showAuth(){
   $('#cabinetView').style.display = 'none';
@@ -1452,93 +1739,31 @@ function setAvatar(url){
   img.src = url || DEFAULT_AVATAR;
 }
 
-$('#authForm').addEventListener('submit', async e=>{
-  e.preventDefault();
-  const email = $('#authEmail').value.trim();
-  const pass  = $('#authPass').value;
-  const name  = $('#regName').value.trim();
-  const surname = $('#regSurname').value.trim();
-
-  if(!email || pass.length < 6){ toast('Проверьте e-mail и пароль (мин. 6)', 'err'); return; }
-
-  if(fbReady && fbAuth){
-    try{
-      if(mode === 'register'){
-        const cred = await fbAuth.createUserWithEmailAndPassword(email, pass);
-        const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
-        await fbDb.collection('profiles').doc(cred.user.uid).set(profile, {merge:true});
-        saveProfileLocal(profile);
-        showCabinet(profile);
-        toast('Аккаунт создан', 'ok');
-      }else{
-        const cred = await fbAuth.signInWithEmailAndPassword(email, pass);
-        const snap = await fbDb.collection('profiles').doc(cred.user.uid).get();
-        const profile = snap.exists ? snap.data() : { email, name:'', surname:'', avatar:DEFAULT_AVATAR };
-        saveProfileLocal(profile);
-        showCabinet(profile);
-        toast('Вход выполнен', 'ok');
-      }
-      return;
-    }catch(err){
-      toast('Не удалось выполнить вход, попробуйте ещё раз', 'warn', 3200);
-    }
-  }
-
-  const creds = getCreds();
-  if(mode === 'register'){
-    const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
-    setCreds({ email, passHash: await sha256(pass) });
-    saveProfileLocal(profile);
-    setSession({ email });
-    showCabinet(profile);
-    toast('Аккаунт создан', 'ok');
-  }else{
-    if(creds && creds.email === email){
-      const h = await sha256(pass);
-      if(h !== creds.passHash){ toast('Неверный пароль', 'err'); return; }
-      const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
-      setSession({ email });
-      showCabinet(profile);
-      toast('Вход выполнен', 'ok');
-    }else{
-      const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
-      profile.email = email;
-      saveProfileLocal(profile);
-      setCreds({ email, passHash: await sha256(pass) });
-      setSession({ email });
-      showCabinet(profile);
-      toast('Аккаунт создан', 'ok');
-    }
-  }
+/* Счётчик био */
+$('#inBio').addEventListener('input', e=>{
+  $('#bioCount').textContent = e.target.value.length;
 });
 
-$('#btnLocal').addEventListener('click', ()=>{
-  const profile = loadProfileLocal() || {
-    name:'Юрика', surname:'Ботова',
-    email:'user@yurika.bot',
-    avatar: DEFAULT_AVATAR
-  };
-  saveProfileLocal(profile);
-  setSession({ email: profile.email });
-  showCabinet(profile);
-  toast('Профиль загружен', 'ok');
-});
-
-$('#btnLogout').addEventListener('click', async ()=>{
-  try{ if(fbReady && fbAuth) await fbAuth.signOut(); }catch{}
-  clearSession();
-  showAuth();
-  toast('Вы вышли', 'warn');
-});
-
+/* Форма профиля */
 $('#profileForm').addEventListener('submit', async e=>{
   e.preventDefault();
-  const profile = {
+  const username = $('#inUsername').value.trim().replace(/^@/,'');
+  if(username && !/^[a-zA-Z0-9_]{3,20}$/.test(username)){
+    toast('Никнейм: 3–20 символов, латиница, цифры или «_»', 'err'); return;
+  }
+
+  const profile = Object.assign(loadProfileLocal() || {}, {
     name: $('#inName').value.trim(),
     surname: $('#inSurname').value.trim(),
+    username,
     email: $('#inEmail').value.trim(),
-    avatar: $('#avatarImg').src
-  };
+    bio: $('#inBio').value.trim(),
+    discord:  $('#inDiscord').value.trim().replace(/^@/,''),
+    telegram: $('#inTelegram').value.trim().replace(/^@/,''),
+    github:   $('#inGithub').value.trim().replace(/^@/,''),
+    youtube:  $('#inYoutube').value.trim(),
+    avatar:   $('#avatarImg').src
+  });
   saveProfileLocal(profile);
   try{
     if(fbReady && fbAuth && fbAuth.currentUser){
@@ -1549,11 +1774,11 @@ $('#profileForm').addEventListener('submit', async e=>{
     }
   }catch(err){ /* тихо */ }
 
-  $('#pName').textContent = `${profile.name} ${profile.surname}`.trim() || 'Без имени';
-  $('#pEmail').textContent = profile.email || '—';
+  showCabinet(profile);
   toast('Профиль сохранён', 'ok');
 });
 
+/* Пароль */
 $('#passForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const p1 = $('#newPass').value, p2 = $('#newPass2').value;
@@ -1574,6 +1799,7 @@ $('#passForm').addEventListener('submit', async e=>{
   }
 });
 
+/* Аватар */
 $('#btnApplyAvatar').addEventListener('click', ()=>{
   const url = $('#avatarUrl').value.trim();
   if(!url){ toast('Вставьте ссылку на картинку', 'warn'); return; }
@@ -1605,10 +1831,234 @@ $('#avatarFile').addEventListener('change', e=>{
   reader.readAsDataURL(f);
 });
 
+/* Выход */
+$('#btnLogout').addEventListener('click', async ()=>{
+  try{ if(fbReady && fbAuth) await fbAuth.signOut(); }catch{}
+  clearSession();
+  showAuth();
+  toast('Вы вышли', 'warn');
+});
+
+/* Быстрый вход */
+$('#btnLocal').addEventListener('click', ()=>{
+  const profile = loadProfileLocal() || {
+    name:'', surname:'', username:'', email:'',
+    bio:'', discord:'', telegram:'', github:'', youtube:'',
+    avatar: DEFAULT_AVATAR
+  };
+  saveProfileLocal(profile);
+  setSession({ email: profile.email });
+  showCabinet(profile);
+  toast('Профиль загружен', 'ok');
+});
+
+/* Регистрация / вход */
+$('#authForm').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const email = $('#authEmail').value.trim();
+  const pass  = $('#authPass').value;
+  const name  = $('#regName').value.trim();
+  const surname = $('#regSurname').value.trim();
+
+  if(!email || pass.length < 6){ toast('Проверьте e-mail и пароль (мин. 6)', 'err'); return; }
+
+  if(fbReady && fbAuth){
+    try{
+      if(mode === 'register'){
+        const cred = await fbAuth.createUserWithEmailAndPassword(email, pass);
+        const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
+        await fbDb.collection('profiles').doc(cred.user.uid).set(profile, {merge:true});
+        saveProfileLocal(profile);
+        showCabinet(profile);
+        toast('Аккаунт создан', 'ok');
+      }else{
+        const cred = await fbAuth.signInWithEmailAndPassword(email, pass);
+        const snap = await fbDb.collection('profiles').doc(cred.user.uid).get();
+        const profile = snap.exists ? snap.data() : { email, avatar:DEFAULT_AVATAR };
+        saveProfileLocal(profile);
+        showCabinet(profile);
+        toast('Вход выполнен', 'ok');
+      }
+      return;
+    }catch(err){
+      toast('Не удалось выполнить вход, попробуйте ещё раз', 'warn', 3200);
+    }
+  }
+
+  /* Локальный режим */
+  const creds = getCreds();
+  if(mode === 'register'){
+    const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
+    setCreds({ email, passHash: await sha256(pass) });
+    saveProfileLocal(profile);
+    setSession({ email });
+    showCabinet(profile);
+    toast('Аккаунт создан', 'ok');
+  }else{
+    if(creds && creds.email === email){
+      const h = await sha256(pass);
+      if(h !== creds.passHash){ toast('Неверный пароль', 'err'); return; }
+      const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
+      setSession({ email });
+      showCabinet(profile);
+      toast('Вход выполнен', 'ok');
+    }else{
+      const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
+      profile.email = email;
+      saveProfileLocal(profile);
+      setCreds({ email, passHash: await sha256(pass) });
+      setSession({ email });
+      showCabinet(profile);
+      toast('Аккаунт создан', 'ok');
+    }
+  }
+});
+
 /* ============================================================
-   6. АВТОЗАГРУЗКА
+   6. ПРИВАТНОСТЬ
+============================================================ */
+const PRIVACY_LABELS = {
+  publicProfile: 'Публичный профиль',
+  showEmail:     'Показывать e-mail',
+  showSocials:   'Показывать соцсети',
+  indexable:     'Индексировать в поиске'
+};
+
+function renderPrivacySwitches(){
+  const prefs = loadPrefs();
+  $$('.switch[data-pref]').forEach(sw=>{
+    const key = sw.dataset.pref;
+    const on = prefs[key] !== undefined ? !!prefs[key] : defaultPrivacy(key);
+    sw.classList.toggle('on', on);
+  });
+}
+function defaultPrivacy(key){
+  return ['publicProfile','showSocials'].includes(key);
+}
+function initPrivacySwitches(){
+  $$('.switch[data-pref]').forEach(sw=>{
+    sw.addEventListener('click', ()=>{
+      const key = sw.dataset.pref;
+      const prefs = loadPrefs();
+      const newVal = !sw.classList.contains('on');
+      prefs[key] = newVal;
+      savePrefs(prefs);
+      sw.classList.toggle('on', newVal);
+      const label = PRIVACY_LABELS[key] || 'Настройка';
+      toast(`${label}: ${newVal ? 'включено' : 'выключено'}`, newVal ? 'ok' : 'warn', 1800);
+    });
+  });
+}
+
+/* ============================================================
+   7. TELEGRAM-ПРИВЯЗКА
+============================================================ */
+function genTgCode(){
+  const rand = Math.random().toString(36).slice(2, 8).toUpperCase();
+  return 'YURIKA-' + rand;
+}
+function renderTelegramBlock(){
+  const tg = loadTg();
+  const badge = $('#tgStatus');
+  if(tg && tg.linked){
+    $('#tgNotLinked').style.display = 'none';
+    $('#tgLinked').style.display = 'block';
+    $('#tgLinkedName').textContent = '@' + (tg.username || 'yurika_user');
+    badge.innerHTML = '<i class="fa-solid fa-circle" style="color:var(--ok)"></i> привязан';
+
+    /* Настройки уведомлений */
+    const prefs = tg.prefs || {tgEvents:true, tgBot:true, tgSystem:false};
+    $$('#tgLinked .switch[data-pref]').forEach(sw=>{
+      const key = sw.dataset.pref;
+      sw.classList.toggle('on', !!prefs[key]);
+      sw.onclick = ()=>{
+        const on = !sw.classList.contains('on');
+        prefs[key] = on;
+        sw.classList.toggle('on', on);
+        const saved = loadTg() || {}; saved.prefs = prefs; saveTg(saved);
+        toast('Настройка сохранена', 'ok', 1600);
+      };
+    });
+  }else{
+    $('#tgNotLinked').style.display = 'block';
+    $('#tgLinked').style.display = 'none';
+    badge.innerHTML = '<i class="fa-solid fa-circle" style="color:var(--warn)"></i> не привязан';
+    if(!tg || !tg.pendingCode){
+      const code = genTgCode();
+      const saved = { linked:false, pendingCode: code, prefs:{tgEvents:true, tgBot:true, tgSystem:false} };
+      saveTg(saved);
+    }
+    $('#tgCode').textContent = (loadTg() || {}).pendingCode || 'YURIKA-000000';
+  }
+}
+$('#tgGenerate').addEventListener('click', ()=>{
+  const code = genTgCode();
+  const saved = loadTg() || {};
+  saved.pendingCode = code;
+  saved.linked = false;
+  saveTg(saved);
+  $('#tgCode').textContent = code;
+  toast('Код сгенерирован', 'ok');
+});
+$('#tgCopy').addEventListener('click', async ()=>{
+  const code = $('#tgCode').textContent.trim();
+  try{ await navigator.clipboard.writeText(code); toast('Код скопирован', 'ok'); }
+  catch{ toast('Не удалось скопировать', 'err'); }
+});
+$('#tgDone').addEventListener('click', ()=>{
+  /* Здесь на реальном бэкенде мы бы проверяли статус. Сейчас — эмуляция. */
+  const saved = loadTg() || {};
+  saved.linked = true;
+  saved.username = 'yurika_user';
+  saved.prefs = saved.prefs || {tgEvents:true, tgBot:true, tgSystem:false};
+  saveTg(saved);
+  renderTelegramBlock();
+  toast('Telegram привязан', 'ok');
+});
+$('#tgUnlink').addEventListener('click', ()=>{
+  if(!confirm('Отвязать Telegram? Уведомления больше не будут приходить.')) return;
+  localStorage.removeItem(LS.tg);
+  renderTelegramBlock();
+  toast('Telegram отвязан', 'warn');
+});
+
+/* ============================================================
+   8. УДАЛЕНИЕ АККАУНТА
+============================================================ */
+$('#deleteOpen').addEventListener('click', ()=>{
+  $('#deleteModal').style.display = 'flex';
+  $('#deleteConfirm').value = '';
+  $('#deleteConfirmBtn').disabled = true;
+});
+$('#deleteCancel').addEventListener('click', ()=>{
+  $('#deleteModal').style.display = 'none';
+});
+$('#deleteConfirm').addEventListener('input', e=>{
+  $('#deleteConfirmBtn').disabled = e.target.value.trim().toUpperCase() !== 'УДАЛИТЬ';
+});
+$('#deleteConfirmBtn').addEventListener('click', async ()=>{
+  try{
+    if(fbReady && fbAuth && fbAuth.currentUser){
+      const uid = fbAuth.currentUser.uid;
+      try{ await fbDb.collection('profiles').doc(uid).delete(); }catch{}
+      await fbAuth.currentUser.delete();
+    }
+  }catch(err){ /* тихо */ }
+
+  /* Чистим всё локальное */
+  [LS.profile, LS.creds, LS.session, LS.prefs, LS.tg].forEach(k=> localStorage.removeItem(k));
+
+  $('#deleteModal').style.display = 'none';
+  showAuth();
+  toast('Аккаунт удалён', 'err', 3200);
+});
+
+/* ============================================================
+   9. АВТОЗАГРУЗКА
 ============================================================ */
 (function init(){
+  initPrivacySwitches();
+
   const s = getSession();
   if(s){
     const profile = loadProfileLocal();
@@ -1619,7 +2069,7 @@ $('#avatarFile').addEventListener('change', e=>{
       if(user){
         try{
           const snap = await fbDb.collection('profiles').doc(user.uid).get();
-          const profile = snap.exists ? snap.data() : { email:user.email, name:'', surname:'', avatar:DEFAULT_AVATAR };
+          const profile = snap.exists ? snap.data() : { email:user.email, avatar:DEFAULT_AVATAR };
           saveProfileLocal(profile);
           showCabinet(profile);
         }catch(e){ /* тихо */ }
