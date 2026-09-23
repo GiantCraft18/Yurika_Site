@@ -2,7 +2,7 @@
 <html lang="ru" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Юрика-Бот — Твой помощник на сервере Lolka</title>
 <meta name="description" content="Модерация, экономика, бизнесы, браки — всё в одном боте для Lolka. Установка за 10 секунд.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
@@ -130,9 +130,6 @@
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px var(--accent-glow); }
     .btn-outline { background: transparent; color: var(--text); border-color: var(--border); }
     .btn-outline:hover { background: var(--bg-2); border-color: var(--accent); color: var(--accent); }
-    .btn-danger { background: transparent; color: var(--error); border-color: rgba(248,113,113,0.4); }
-    .btn-danger:hover { background: var(--error-subtle); border-color: var(--error); }
-    .btn-sm { padding: 8px 14px; font-size: 13px; }
 
     .badge {
         display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 100px;
@@ -146,7 +143,7 @@
     .section-title { font-size: clamp(28px, 4vw, 40px); font-weight: 800; margin-bottom: 12px; }
     .section-subtitle { font-size: 16px; color: var(--text-muted); }
 
-    /* ===== ВЕБХУК ===== */
+    /* ===== СТИЛИ ВЕБХУКА ===== */
     .wh-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
     @media (min-width: 1024px) { .wh-grid { grid-template-columns: 7fr 5fr; } }
 
@@ -205,76 +202,8 @@
     .wh-actions { display: flex; gap: 12px; flex-wrap: wrap; }
     .wh-actions .btn { flex: 1; min-width: 130px; }
 
-    /* ===== АВТОРИЗАЦИЯ ===== */
-    .auth-grid { display: grid; grid-template-columns: 1fr; gap: 24px; }
-    @media (min-width: 768px) { .auth-grid { grid-template-columns: 1fr 1fr; } }
-
-    .auth-card {
-        background: var(--bg-2); border: 1px solid var(--border); border-radius: var(--radius-xl);
-        padding: 32px 28px; box-shadow: var(--shadow-md);
-    }
-    .auth-card h3 { font-size: 22px; font-weight: 700; margin-bottom: 8px; }
-    .auth-card .desc { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
-    .auth-card .form-group { margin-bottom: 16px; }
-    .auth-card .btn { width: 100%; }
-    .auth-card .switch { text-align: center; margin-top: 16px; font-size: 13.5px; color: var(--text-dim); }
-    .auth-card .switch a { color: var(--accent); font-weight: 600; cursor: pointer; }
-
-    .token-badge {
-        display: inline-block; background: var(--bg-3); border: 1px solid var(--border);
-        border-radius: var(--radius-sm); padding: 4px 10px; font-family: 'JetBrains Mono', monospace;
-        font-size: 12px; color: var(--accent-soft);
-    }
-    .hidden { display: none !important; }
-
-    /* ===== КОНСТРУКТОР КОМАНД ===== */
-    .builder-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-    @media (min-width: 1024px) { .builder-grid { grid-template-columns: 5fr 7fr; } }
-
-    .cmd-item {
-        background: var(--bg-3); border: 1px solid var(--border); border-radius: var(--radius-md);
-        padding: 16px; margin-bottom: 10px;
-        display: flex; align-items: flex-start; justify-content: space-between; gap: 12px;
-        transition: border-color 0.2s, transform 0.15s;
-    }
-    .cmd-item:hover { border-color: var(--accent); transform: translateY(-1px); }
-    .cmd-item-info { flex: 1; min-width: 0; }
-    .cmd-item-name {
-        font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 600;
-        color: var(--accent-soft); margin-bottom: 4px; word-break: break-word;
-    }
-    .cmd-item-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; word-break: break-word; }
-    .cmd-item-meta { display: flex; flex-wrap: wrap; gap: 6px; }
-    .tag {
-        display: inline-flex; align-items: center; gap: 4px;
-        padding: 3px 8px; border-radius: 100px; font-size: 11px; font-weight: 600;
-        background: var(--bg-2); border: 1px solid var(--border); color: var(--text-dim);
-    }
-    .tag-role { background: var(--warning-subtle); color: var(--warning); border-color: rgba(251,191,36,0.25); }
-    .tag-cooldown { background: var(--pink-subtle); color: var(--pink); border-color: rgba(235,69,158,0.25); }
-    .tag-public { background: var(--success-subtle); color: var(--success); border-color: rgba(52,211,153,0.25); }
-    .cmd-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
-
-    .empty-state {
-        text-align: center; padding: 40px 20px; color: var(--text-dim);
-        border: 1px dashed var(--border); border-radius: var(--radius-md);
-    }
-    .empty-state-icon { font-size: 40px; margin-bottom: 12px; opacity: 0.6; }
-
-    .perm-checkboxes { display: flex; flex-wrap: wrap; gap: 10px; }
-    .perm-check {
-        display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-muted);
-        padding: 6px 12px; border-radius: var(--radius-sm); background: var(--bg-3);
-        border: 1px solid var(--border); cursor: pointer; user-select: none;
-        transition: border-color 0.2s, background 0.2s;
-    }
-    .perm-check:hover { border-color: var(--accent); }
-    .perm-check input { accent-color: var(--accent); cursor: pointer; }
-    .perm-check input:checked + span { color: var(--text); font-weight: 600; }
-
     .site-footer { padding: 44px 0 30px; border-top: 1px solid var(--border); text-align: center; margin-top: 60px; }
 
-    /* ===== МОБИЛЬНАЯ АДАПТАЦИЯ ===== */
     @media (max-width: 900px) {
         .burger { display: grid; }
         .nav-list {
@@ -287,19 +216,6 @@
         .nav-list.open { display: flex; }
         .nav-list li { width: 100%; }
         .nav-link { display: block; padding: 12px 16px; }
-        .nav-actions { width: 100%; justify-content: center; padding: 8px 0; }
-    }
-    @media (max-width: 640px) {
-        .section { padding: 56px 0; }
-        .auth-card { padding: 24px 18px; }
-        .hero { padding: 60px 0 32px; }
-        .cmd-card { padding: 18px; }
-        .hero-actions .btn { width: 100%; }
-        .wh-actions .btn { min-width: 100%; }
-        .auth-grid { gap: 16px; }
-        .builder-grid { gap: 16px; }
-        .cmd-item { flex-direction: column; }
-        .cmd-item-actions { width: 100%; justify-content: flex-end; }
     }
 </style>
 </head>
@@ -315,9 +231,7 @@
                 <ul class="nav-list" id="navList">
                     <li><a href="#features" class="nav-link">Возможности</a></li>
                     <li><a href="#commands" class="nav-link">Команды</a></li>
-                    <li><a href="#builder" class="nav-link">Конструктор</a></li>
                     <li><a href="#webhook" class="nav-link">Вебхук</a></li>
-                    <li><a href="#auth" class="nav-link">Вход</a></li>
                     <li><a href="#invite" class="nav-link">Добавить</a></li>
                     <li class="nav-actions">
                         <button class="icon-btn" id="themeToggle" aria-label="Тема">🌙</button>
@@ -338,14 +252,13 @@
                        target="_blank" rel="noopener" class="btn btn-primary">
                         ➕ Пригласить бота
                     </a>
-                    <a href="#builder" class="btn btn-outline">
-                        🛠 Создать команду
+                    <a href="https://lolka.app/#platforms" target="_blank" rel="noopener" class="btn btn-outline">
+                        ⬇ Скачать Lolka
                     </a>
                 </div>
             </div>
         </section>
 
-        <!-- ===== ВОЗМОЖНОСТИ ===== -->
         <section class="section" id="features">
             <div class="container">
                 <div class="section-header">
@@ -355,7 +268,6 @@
             </div>
         </section>
 
-        <!-- ===== КОМАНДЫ ===== -->
         <section class="section" id="commands">
             <div class="container">
                 <div class="section-header">
@@ -364,111 +276,6 @@
                 </div>
             </div>
         </section>
-
-        <!-- ================== КОНСТРУКТОР КОМАНД ================== -->
-        <section class="section" id="builder">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">🛠 Конструктор команд</h2>
-                    <p class="section-subtitle">Создавайте свои команды для бота — они сохраняются в вашем браузере</p>
-                </div>
-
-                <div class="builder-grid">
-                    <!-- Форма создания -->
-                    <div>
-                        <div class="cmd-card">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">➕</div>
-                                <div class="cmd-card-title" id="builderFormTitle">Новая команда</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="cmdName">Название команды <span style="color: var(--error);">*</span></label>
-                                <input class="form-input" type="text" id="cmdName" placeholder="например: привет" maxlength="32" autocomplete="off">
-                                <div class="form-hint">Без пробелов и слеша. Только буквы, цифры, дефис и подчёркивание.</div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="cmdDesc">Описание</label>
-                                <input class="form-input" type="text" id="cmdDesc" placeholder="Краткое описание команды" maxlength="120" autocomplete="off">
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label" for="cmdResponse">Ответ бота <span style="color: var(--error);">*</span></label>
-                                <textarea class="form-input" id="cmdResponse" rows="4" placeholder="Привет, {user}! 👋 Добро пожаловать на сервер {server}." maxlength="2000"></textarea>
-                                <div class="form-hint">
-                                    Переменные: <span class="token-badge">{user}</span>
-                                    <span class="token-badge">{server}</span>
-                                    <span class="token-badge">{channel}</span>
-                                    <span class="token-badge">{args}</span>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="form-label">Права доступа</label>
-                                <div class="perm-checkboxes" id="permCheckboxes">
-                                    <label class="perm-check"><input type="checkbox" value="everyone" checked><span>Все</span></label>
-                                    <label class="perm-check"><input type="checkbox" value="moderator"><span>Модератор</span></label>
-                                    <label class="perm-check"><input type="checkbox" value="admin"><span>Админ</span></label>
-                                    <label class="perm-check"><input type="checkbox" value="owner"><span>Владелец</span></label>
-                                </div>
-                            </div>
-
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
-                                <div class="form-group">
-                                    <label class="form-label" for="cmdCooldown">Кулдаун (сек)</label>
-                                    <input class="form-input" type="number" id="cmdCooldown" placeholder="0" min="0" max="3600" value="0">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label" for="cmdCategory">Категория</label>
-                                    <select class="form-input" id="cmdCategory">
-                                        <option value="general">Общие</option>
-                                        <option value="fun">Развлечения</option>
-                                        <option value="moderation">Модерация</option>
-                                        <option value="economy">Экономика</option>
-                                        <option value="utility">Утилиты</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label class="perm-check" style="width: 100%;">
-                                    <input type="checkbox" id="cmdPublic" checked>
-                                    <span>Показывать в общем списке команд</span>
-                                </label>
-                            </div>
-
-                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                                <button class="btn btn-primary" id="cmdSaveBtn" type="button" style="flex: 1; min-width: 140px;">💾 Сохранить команду</button>
-                                <button class="btn btn-outline" id="cmdResetBtn" type="button" style="flex: 1; min-width: 140px;">↺ Сбросить</button>
-                            </div>
-
-                            <div class="form-message" id="cmdMessage"></div>
-                        </div>
-                    </div>
-
-                    <!-- Список команд -->
-                    <div>
-                        <div class="cmd-card">
-                            <div class="cmd-card-header">
-                                <div class="cmd-card-icon">📋</div>
-                                <div class="cmd-card-title">Мои команды</div>
-                                <div class="cmd-card-count"><span id="cmdCount">0</span></div>
-                            </div>
-
-                            <div id="cmdList"></div>
-
-                            <div style="display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap;">
-                                <button class="btn btn-outline btn-sm" id="cmdExportBtn" type="button" style="flex: 1;">📤 Экспорт JSON</button>
-                                <button class="btn btn-outline btn-sm" id="cmdImportBtn" type="button" style="flex: 1;">📥 Импорт JSON</button>
-                                <input type="file" id="cmdImportFile" accept=".json,application/json" hidden>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ================== /КОНСТРУКТОР КОМАНД ================== -->
 
         <!-- ================== ВЕБХУК ================== -->
         <section class="section" id="webhook">
@@ -479,17 +286,20 @@
                 </div>
 
                 <div class="wh-grid">
+                    <!-- Левая колонка -->
                     <div>
                         <div class="cmd-card" style="margin-bottom: 16px;">
                             <div class="cmd-card-header">
                                 <div class="cmd-card-icon">🔗</div>
                                 <div class="cmd-card-title">Параметры вебхука</div>
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label" for="whUrl">URL вебхука</label>
                                 <input class="form-input" type="text" id="whUrl" placeholder="https://lolka.app/api/webhooks/..." autocomplete="off">
                                 <div class="form-hint">Вставьте URL вебхука из настроек канала Lolka</div>
                             </div>
+
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                                 <div class="form-group">
                                     <label class="form-label" for="whName">Имя отправителя</label>
@@ -508,11 +318,13 @@
                                 <div class="cmd-card-icon">💬</div>
                                 <div class="cmd-card-title">Сообщение</div>
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label" for="whContent">Текст сообщения</label>
                                 <textarea class="form-input" id="whContent" rows="3" placeholder="Привет! Я — Лола 🎀" maxlength="2000"></textarea>
                                 <div class="form-hint"><span id="whContentCount">0</span> / 2000</div>
                             </div>
+
                             <div class="form-group">
                                 <label class="form-label">Вложения (файлы)</label>
                                 <label class="btn btn-outline" style="cursor: pointer; width: 100%;">
@@ -529,17 +341,21 @@
                                 <div class="cmd-card-title">Embed-карточки</div>
                                 <div class="cmd-card-count"><span id="whEmbedCount">0</span> / 10</div>
                             </div>
+
                             <div id="whEmbedsList" style="display: flex; flex-direction: column; gap: 12px;"></div>
+
                             <button class="btn btn-outline" id="whAddEmbed" type="button" style="width: 100%; margin-top: 12px;">➕ Добавить карточку</button>
                         </div>
                     </div>
 
+                    <!-- Правая колонка -->
                     <div>
                         <div class="cmd-card" style="margin-bottom: 16px;">
                             <div class="cmd-card-header">
                                 <div class="cmd-card-icon">👁️</div>
                                 <div class="cmd-card-title">Предпросмотр</div>
                             </div>
+
                             <div class="wh-preview-msg">
                                 <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
                                     <div id="whPreviewAvatar" style="width: 40px; height: 40px; border-radius: 50%; background: var(--gradient); display: grid; place-items: center; color: #fff; font-weight: 700; font-size: 15px; flex-shrink: 0; background-size: cover; background-position: center;">?</div>
@@ -560,6 +376,7 @@
                                 <div class="cmd-card-icon">🚀</div>
                                 <div class="cmd-card-title">Действия</div>
                             </div>
+
                             <div class="wh-actions" style="margin-bottom: 12px;">
                                 <button class="btn btn-primary" id="whSendBtn" type="button">🚀 Отправить</button>
                                 <button class="btn btn-outline" id="whEditBtn" type="button" disabled>✏️ Редактировать</button>
@@ -568,6 +385,7 @@
                                 <button class="btn btn-outline" id="whDeleteBtn" type="button" disabled style="color: var(--error); border-color: rgba(248,113,113,0.4);">🗑 Удалить</button>
                                 <button class="btn btn-outline" id="whClearBtn" type="button">🧹 Очистить</button>
                             </div>
+
                             <div class="form-message" id="whMessage"></div>
                         </div>
                     </div>
@@ -575,59 +393,6 @@
             </div>
         </section>
         <!-- ================== /ВЕБХУК ================== -->
-
-        <!-- ================== АВТОРИЗАЦИЯ ================== -->
-        <section class="section" id="auth">
-            <div class="container">
-                <div class="section-header">
-                    <h2 class="section-title">🔐 Вход и регистрация</h2>
-                    <p class="section-subtitle">Войдите, чтобы сохранять команды в облаке (пока — локально)</p>
-                </div>
-
-                <div class="auth-grid">
-                    <div class="auth-card" id="loginCard">
-                        <h3>Вход</h3>
-                        <p class="desc">Введите токен, полученный командой <span class="token-badge">/дашборд</span> на вашем сервере.</p>
-                        <form id="loginForm" onsubmit="return false;">
-                            <div class="form-group">
-                                <label class="form-label" for="loginToken">Токен</label>
-                                <input class="form-input" type="password" id="loginToken" placeholder="Вставьте токен" autocomplete="off">
-                            </div>
-                            <button class="btn btn-primary" id="loginBtn" type="submit">Войти</button>
-                            <div class="switch">Нет аккаунта? <a id="showRegister">Зарегистрироваться</a></div>
-                        </form>
-                        <div class="form-message" id="loginMessage"></div>
-                    </div>
-
-                    <div class="auth-card hidden" id="registerCard">
-                        <h3>Регистрация</h3>
-                        <p class="desc">Создайте аккаунт для доступа к конструктору команд.</p>
-                        <form id="registerForm" onsubmit="return false;">
-                            <div class="form-group">
-                                <label class="form-label" for="regName">Имя пользователя</label>
-                                <input class="form-input" type="text" id="regName" placeholder="Ваше имя" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="regEmail">Email</label>
-                                <input class="form-input" type="email" id="regEmail" placeholder="you@example.com" autocomplete="off">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="regPassword">Пароль</label>
-                                <input class="form-input" type="password" id="regPassword" placeholder="Минимум 8 символов" autocomplete="new-password">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="regToken">Токен команды /дашборд</label>
-                                <input class="form-input" type="password" id="regToken" placeholder="Вставьте токен" autocomplete="off">
-                            </div>
-                            <button class="btn btn-primary" id="registerBtn" type="submit">Создать аккаунт</button>
-                            <div class="switch">Уже есть аккаунт? <a id="showLogin">Войти</a></div>
-                        </form>
-                        <div class="form-message" id="registerMessage"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- ================== /АВТОРИЗАЦИЯ ================== -->
 
         <section class="section" id="invite">
             <div class="container">
@@ -668,317 +433,6 @@
         const burger = document.getElementById('burger');
         const navList = document.getElementById('navList');
         burger.addEventListener('click', () => navList.classList.toggle('open'));
-        navList.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => navList.classList.remove('open'));
-        });
-
-        /* ===== ХЕДЕР ПРИ СКРОЛЛЕ ===== */
-        const header = document.getElementById('siteHeader');
-        window.addEventListener('scroll', () => {
-            header.classList.toggle('scrolled', window.scrollY > 10);
-        });
-
-        /* ===== АВТОРИЗАЦИЯ ===== */
-        const loginCard = document.getElementById('loginCard');
-        const registerCard = document.getElementById('registerCard');
-        document.getElementById('showRegister').addEventListener('click', () => {
-            loginCard.classList.add('hidden');
-            registerCard.classList.remove('hidden');
-        });
-        document.getElementById('showLogin').addEventListener('click', () => {
-            registerCard.classList.add('hidden');
-            loginCard.classList.remove('hidden');
-        });
-
-        function showAuthMessage(el, text, type) {
-            el.className = 'form-message visible ' + (type || 'error');
-            el.textContent = (type === 'error' ? '⚠️ ' : '✓ ') + text;
-        }
-        function clearAuthMessage(el) {
-            el.className = 'form-message';
-            el.textContent = '';
-        }
-
-        document.getElementById('loginBtn').addEventListener('click', function() {
-            const token = document.getElementById('loginToken').value.trim();
-            const msg = document.getElementById('loginMessage');
-            clearAuthMessage(msg);
-            if (!token) { showAuthMessage(msg, 'Введите токен', 'error'); return; }
-            this.disabled = true;
-            setTimeout(() => {
-                this.disabled = false;
-                if (token.length >= 8) {
-                    showAuthMessage(msg, 'Успешный вход!', 'success');
-                    localStorage.setItem('yurika_token', token);
-                } else {
-                    showAuthMessage(msg, 'Неверный токен. Проверьте команду /дашборд', 'error');
-                }
-            }, 600);
-        });
-
-        document.getElementById('registerBtn').addEventListener('click', function() {
-            const name = document.getElementById('regName').value.trim();
-            const email = document.getElementById('regEmail').value.trim();
-            const password = document.getElementById('regPassword').value;
-            const token = document.getElementById('regToken').value.trim();
-            const msg = document.getElementById('registerMessage');
-            clearAuthMessage(msg);
-
-            if (!name) { showAuthMessage(msg, 'Введите имя пользователя', 'error'); return; }
-            if (!email || !/^\S+@\S+\.\S+$/.test(email)) { showAuthMessage(msg, 'Введите корректный Email', 'error'); return; }
-            if (!password || password.length < 8) { showAuthMessage(msg, 'Пароль должен быть не менее 8 символов', 'error'); return; }
-            if (!token) { showAuthMessage(msg, 'Введите токен из команды /дашборд', 'error'); return; }
-
-            this.disabled = true;
-            setTimeout(() => {
-                this.disabled = false;
-                showAuthMessage(msg, 'Аккаунт создан! Теперь вы можете войти.', 'success');
-                setTimeout(() => {
-                    registerCard.classList.add('hidden');
-                    loginCard.classList.remove('hidden');
-                    document.getElementById('loginToken').value = token;
-                    clearAuthMessage(msg);
-                }, 1200);
-            }, 700);
-        });
-
-        /* ===== КОНСТРУКТОР КОМАНД ===== */
-        const STORAGE_KEY = 'yurika_custom_commands';
-        let customCommands = [];
-        let editingId = null;
-
-        const cmdName = document.getElementById('cmdName');
-        const cmdDesc = document.getElementById('cmdDesc');
-        const cmdResponse = document.getElementById('cmdResponse');
-        const cmdCooldown = document.getElementById('cmdCooldown');
-        const cmdCategory = document.getElementById('cmdCategory');
-        const cmdPublic = document.getElementById('cmdPublic');
-        const cmdMessage = document.getElementById('cmdMessage');
-        const cmdList = document.getElementById('cmdList');
-        const cmdCount = document.getElementById('cmdCount');
-        const builderFormTitle = document.getElementById('builderFormTitle');
-
-        function loadCommands() {
-            try {
-                const raw = localStorage.getItem(STORAGE_KEY);
-                customCommands = raw ? JSON.parse(raw) : [];
-            } catch (e) { customCommands = []; }
-        }
-        function saveCommands() {
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(customCommands));
-        }
-        function showCmdMessage(text, type) {
-            cmdMessage.className = 'form-message visible ' + (type || 'error');
-            cmdMessage.textContent = (type === 'error' ? '⚠️ ' : '✓ ') + text;
-            if (type === 'success') {
-                setTimeout(() => clearCmdMessage(), 2500);
-            }
-        }
-        function clearCmdMessage() {
-            cmdMessage.className = 'form-message';
-            cmdMessage.textContent = '';
-        }
-
-        function getSelectedPerms() {
-            return Array.from(document.querySelectorAll('#permCheckboxes input:checked'))
-                .map(cb => cb.value);
-        }
-
-        function resetForm() {
-            editingId = null;
-            cmdName.value = '';
-            cmdDesc.value = '';
-            cmdResponse.value = '';
-            cmdCooldown.value = '0';
-            cmdCategory.value = 'general';
-            cmdPublic.checked = true;
-            document.querySelectorAll('#permCheckboxes input').forEach(cb => {
-                cb.checked = cb.value === 'everyone';
-            });
-            builderFormTitle.textContent = 'Новая команда';
-            document.getElementById('cmdSaveBtn').innerHTML = '💾 Сохранить команду';
-            clearCmdMessage();
-        }
-
-        function validateCommand() {
-            const name = cmdName.value.trim().toLowerCase();
-            const response = cmdResponse.value.trim();
-            if (!name) return 'Введите название команды';
-            if (!/^[a-z0-9_-]{2,32}$/.test(name)) return 'Название: 2–32 символа, буквы/цифры/дефис/подчёркивание';
-            if (!response) return 'Введите ответ бота';
-            const perms = getSelectedPerms();
-            if (perms.length === 0) return 'Выберите хотя бы одну роль';
-            return null;
-        }
-
-        function saveCommand() {
-            clearCmdMessage();
-            const error = validateCommand();
-            if (error) { showCmdMessage(error, 'error'); return; }
-
-            const name = cmdName.value.trim().toLowerCase();
-            // Проверка уникальности (если не редактируем)
-            if (!editingId && customCommands.some(c => c.name === name)) {
-                showCmdMessage('Команда с таким названием уже существует', 'error');
-                return;
-            }
-
-            const data = {
-                id: editingId || Date.now().toString(36) + Math.random().toString(36).slice(2, 6),
-                name: name,
-                description: cmdDesc.value.trim(),
-                response: cmdResponse.value.trim(),
-                permissions: getSelectedPerms(),
-                cooldown: parseInt(cmdCooldown.value, 10) || 0,
-                category: cmdCategory.value,
-                isPublic: cmdPublic.checked,
-                createdAt: editingId ? (customCommands.find(c => c.id === editingId)?.createdAt || Date.now()) : Date.now(),
-                updatedAt: Date.now()
-            };
-
-            if (editingId) {
-                const idx = customCommands.findIndex(c => c.id === editingId);
-                if (idx !== -1) customCommands[idx] = data;
-            } else {
-                customCommands.push(data);
-            }
-            saveCommands();
-            renderCommands();
-            showCmdMessage(editingId ? 'Команда обновлена' : 'Команда создана', 'success');
-            resetForm();
-        }
-
-        function editCommand(id) {
-            const cmd = customCommands.find(c => c.id === id);
-            if (!cmd) return;
-            editingId = id;
-            cmdName.value = cmd.name;
-            cmdDesc.value = cmd.description || '';
-            cmdResponse.value = cmd.response;
-            cmdCooldown.value = cmd.cooldown || 0;
-            cmdCategory.value = cmd.category || 'general';
-            cmdPublic.checked = cmd.isPublic !== false;
-            document.querySelectorAll('#permCheckboxes input').forEach(cb => {
-                cb.checked = cmd.permissions.includes(cb.value);
-            });
-            builderFormTitle.textContent = 'Редактирование команды';
-            document.getElementById('cmdSaveBtn').innerHTML = '💾 Обновить команду';
-            document.getElementById('builder').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function deleteCommand(id) {
-            const cmd = customCommands.find(c => c.id === id);
-            if (!cmd) return;
-            if (!confirm('Удалить команду «' + cmd.name + '»?')) return;
-            customCommands = customCommands.filter(c => c.id !== id);
-            saveCommands();
-            renderCommands();
-            if (editingId === id) resetForm();
-        }
-
-        function renderCommands() {
-            cmdCount.textContent = customCommands.length;
-            if (customCommands.length === 0) {
-                cmdList.innerHTML = '<div class="empty-state"><div class="empty-state-icon">📭</div><div>Пока нет команд. Создайте первую!</div></div>';
-                return;
-            }
-            cmdList.innerHTML = '';
-            // Сортировка по дате обновления
-            const sorted = [...customCommands].sort((a, b) => (b.updatedAt || 0) - (a.updatedAt || 0));
-            sorted.forEach(cmd => {
-                const div = document.createElement('div');
-                div.className = 'cmd-item';
-                const perms = (cmd.permissions || []).map(p => {
-                    const labels = { everyone: 'Все', moderator: 'Модератор', admin: 'Админ', owner: 'Владелец' };
-                    return '<span class="tag tag-role">' + (labels[p] || p) + '</span>';
-                }).join('');
-                const cooldownTag = cmd.cooldown > 0
-                    ? '<span class="tag tag-cooldown">⏱ ' + cmd.cooldown + 'с</span>'
-                    : '';
-                const publicTag = cmd.isPublic
-                    ? '<span class="tag tag-public">👁 Публичная</span>'
-                    : '<span class="tag">🔒 Скрытая</span>';
-                const catLabels = { general: 'Общие', fun: 'Развлечения', moderation: 'Модерация', economy: 'Экономика', utility: 'Утилиты' };
-                const catTag = '<span class="tag">' + (catLabels[cmd.category] || cmd.category) + '</span>';
-
-                div.innerHTML =
-                    '<div class="cmd-item-info">' +
-                        '<div class="cmd-item-name">/' + escapeHtml(cmd.name) + '</div>' +
-                        (cmd.description ? '<div class="cmd-item-desc">' + escapeHtml(cmd.description) + '</div>' : '') +
-                        '<div class="cmd-item-meta">' + perms + cooldownTag + publicTag + catTag + '</div>' +
-                    '</div>' +
-                    '<div class="cmd-item-actions">' +
-                        '<button class="btn btn-outline btn-sm" data-edit="' + cmd.id + '">✏️</button>' +
-                        '<button class="btn btn-danger btn-sm" data-delete="' + cmd.id + '">🗑</button>' +
-                    '</div>';
-                cmdList.appendChild(div);
-            });
-            cmdList.querySelectorAll('[data-edit]').forEach(btn => {
-                btn.addEventListener('click', () => editCommand(btn.dataset.edit));
-            });
-            cmdList.querySelectorAll('[data-delete]').forEach(btn => {
-                btn.addEventListener('click', () => deleteCommand(btn.dataset.delete));
-            });
-        }
-
-        function escapeHtml(str) {
-            if (str === null || str === undefined) return '';
-            return String(str)
-                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
-
-        document.getElementById('cmdSaveBtn').addEventListener('click', saveCommand);
-        document.getElementById('cmdResetBtn').addEventListener('click', resetForm);
-
-        // Экспорт
-        document.getElementById('cmdExportBtn').addEventListener('click', () => {
-            const data = JSON.stringify(customCommands, null, 2);
-            const blob = new Blob([data], { type: 'application/json' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'yurika-commands.json';
-            a.click();
-            URL.revokeObjectURL(url);
-        });
-
-        // Импорт
-        document.getElementById('cmdImportBtn').addEventListener('click', () => {
-            document.getElementById('cmdImportFile').click();
-        });
-        document.getElementById('cmdImportFile').addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            reader.onload = (ev) => {
-                try {
-                    const imported = JSON.parse(ev.target.result);
-                    if (!Array.isArray(imported)) throw new Error('Не массив');
-                    // Проверка структуры
-                    const valid = imported.every(c => c.name && c.response);
-                    if (!valid) throw new Error('Неверная структура');
-                    // Объединение (по id)
-                    const existingIds = new Set(customCommands.map(c => c.id));
-                    let added = 0;
-                    imported.forEach(c => {
-                        if (!existingIds.has(c.id)) {
-                            customCommands.push(c);
-                            added++;
-                        }
-                    });
-                    saveCommands();
-                    renderCommands();
-                    showCmdMessage('Импортировано команд: ' + added, 'success');
-                } catch (err) {
-                    showCmdMessage('Ошибка импорта: ' + err.message, 'error');
-                }
-                e.target.value = '';
-            };
-            reader.readAsText(file);
-        });
-
-        loadCommands();
-        renderCommands();
 
         /* ===== ВЕБХУК ===== */
         const whUrl = document.getElementById('whUrl');
@@ -1094,6 +548,12 @@
                     updateWhPreview();
                 });
             });
+        }
+
+        function escapeHtml(str) {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
         }
 
         function updateWhPreview() {
