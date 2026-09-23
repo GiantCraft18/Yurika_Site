@@ -93,11 +93,14 @@ header.topbar{
 }
 .logo{display:flex; align-items:center; gap:12px; font-weight:800; letter-spacing:.3px}
 .logo-badge{
-  width:42px;height:42px;border-radius:14px;
-  background:conic-gradient(from 210deg, var(--brand), var(--brand-2), var(--brand-3), var(--brand));
-  display:grid;place-items:center; color:#fff; font-size:20px;
-  box-shadow:0 10px 30px rgba(124,92,255,.45), inset 0 0 0 1px rgba(255,255,255,.25);
+  width:44px;height:44px;border-radius:14px;
+  overflow:hidden; flex:0 0 44px;
+  border:1px solid var(--stroke-strong);
+  background:linear-gradient(135deg, #1b2140, #0d1020);
+  box-shadow:0 10px 30px rgba(124,92,255,.45), 0 0 0 2px rgba(255,255,255,.06);
+  display:grid;place-items:center;
 }
+.logo-badge img{width:100%; height:100%; object-fit:cover; display:block}
 .logo-text small{display:block; font-weight:600; font-size:11px; color:var(--muted); letter-spacing:2px}
 nav.tabs{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap}
 .tab{
@@ -220,11 +223,27 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
 .callout p{margin:0; color:var(--text); opacity:.92; font-size:14.5px; line-height:1.6}
 
 /* ============ УСТАНОВКА ============ */
-.steps{display:grid; gap:18px}
-.step{
+.guide{
+  border:1px solid var(--stroke);
+  border-radius:22px;
+  background:linear-gradient(180deg, rgba(18,22,42,.82), rgba(18,22,42,.6));
+  box-shadow:var(--shadow);
+  padding:26px 26px 22px;
+}
+.guide h3{
+  margin:0 0 12px; font-size:20px;
+  display:flex; align-items:center; gap:10px;
+}
+.guide h3 i{color:var(--brand-2)}
+.guide p{margin:0 0 12px; color:var(--muted); font-size:14.8px; line-height:1.75; font-weight:600}
+.guide ol{margin:12px 0 18px; padding-left:22px; color:var(--text); font-size:14.8px; line-height:1.8; font-weight:600}
+.guide ol li{margin-bottom:8px}
+.guide ol li b{color:#fff}
+.step-block{
+  margin:18px 0;
   border:1px solid var(--stroke);
   border-radius:18px;
-  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  background:rgba(255,255,255,.02);
   overflow:hidden;
 }
 .step-head{
@@ -239,7 +258,7 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
 }
 .step-head b{font-size:15.5px}
 .step-body{padding:18px}
-.step-body p{margin:0 0 12px; color:var(--muted); font-size:14px; line-height:1.65; font-weight:600}
+.step-body p{margin:0 0 12px; color:var(--muted); font-size:14px; line-height:1.7; font-weight:600}
 .shot{
   display:block; width:100%;
   border-radius:14px;
@@ -247,8 +266,19 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   box-shadow:0 24px 60px rgba(0,0,0,.55);
   background:#0a0d1c;
 }
+.guide .tip{
+  margin-top:16px; padding:14px 16px; border-radius:14px;
+  border:1px solid rgba(34,211,238,.35);
+  background:linear-gradient(135deg, rgba(34,211,238,.14), rgba(124,92,255,.10));
+  color:var(--text); font-weight:700; font-size:14px; line-height:1.65;
+  display:flex; gap:12px; align-items:flex-start;
+}
+.guide .tip i{
+  width:34px;height:34px;border-radius:10px;flex:0 0 34px; display:grid;place-items:center;
+  background:linear-gradient(135deg,#22d3ee,#37d67a); color:#fff;
+}
 .install-cta{
-  margin-top:8px;
+  margin-top:22px;
   display:flex; flex-direction:column; align-items:center; gap:14px;
   padding:28px 20px;
   border:1px solid var(--stroke);
@@ -305,10 +335,7 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
 }
 .btn:hover{transform:translateY(-2px); filter:saturate(1.1)}
 .btn:active{transform:translateY(0)}
-.btn.ghost{
-  background:rgba(255,255,255,.04); color:var(--text);
-  box-shadow:none; border:1px solid var(--stroke-strong);
-}
+.btn.ghost{background:rgba(255,255,255,.04); color:var(--text); box-shadow:none; border:1px solid var(--stroke-strong)}
 .btn.ghost:hover{background:rgba(255,255,255,.08)}
 .btn.pink{--b1:#ff5cae; --b2:#7c5cff}
 .btn.cyan{--b1:#22d3ee; --b2:#37d67a}
@@ -418,10 +445,7 @@ pre.code{
 .hook-row label{font-size:12.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:var(--muted)}
 .counter{font-size:12px; font-weight:800; color:var(--muted)}
 .counter.over{color:var(--err)}
-.embed-box{
-  border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px;
-  background:rgba(255,255,255,.025);
-}
+.embed-box{border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.025)}
 .embed-box .embed-top{display:flex; align-items:center; gap:10px; margin-bottom:10px}
 .embed-box .embed-top strong{font-size:13.5px}
 .embed-box .embed-top .btn{margin-left:auto}
@@ -432,16 +456,10 @@ pre.code{
   min-height:220px;
 }
 .preview .msg{font-weight:600; font-size:14.5px; line-height:1.55; white-space:pre-wrap; word-break:break-word}
-.preview .e{
-  margin-top:12px; border-left:4px solid var(--brand); border-radius:10px;
-  background:rgba(255,255,255,.035); padding:12px 14px;
-}
+.preview .e{margin-top:12px; border-left:4px solid var(--brand); border-radius:10px; background:rgba(255,255,255,.035); padding:12px 14px}
 .preview .e h4{margin:0 0 6px; font-size:14px}
 .preview .e p{margin:0; color:var(--muted); font-size:13px; font-weight:600; white-space:pre-wrap; word-break:break-word}
-.empty{
-  display:grid; place-items:center; text-align:center; color:var(--muted);
-  min-height:180px; font-weight:700; gap:10px;
-}
+.empty{display:grid; place-items:center; text-align:center; color:var(--muted); min-height:180px; font-weight:700; gap:10px}
 .empty i{font-size:32px; color:var(--brand)}
 
 /* ============ АВТОРИЗАЦИЯ ============ */
@@ -480,6 +498,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .section-title .pill{display:none}
   .card[style*="position:sticky"]{position:static !important}
   .hero{padding:24px 18px}
+  .guide{padding:20px 18px}
   .install-cta h3{font-size:18px}
   .btn-install{font-size:15px; padding:14px 22px; width:100%}
 }
@@ -499,7 +518,10 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 <header class="topbar">
   <div class="topbar-inner">
     <div class="logo">
-      <div class="logo-badge"><i class="fa-solid fa-robot"></i></div>
+      <div class="logo-badge">
+        <img src="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" alt="Yurika Bot"
+             onerror="this.style.display='none'">
+      </div>
       <div class="logo-text">
         <div>Yurika Bot</div>
         <small>WEB PANEL</small>
@@ -573,49 +595,60 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   <section class="section" id="tab-install">
     <div class="section-title">
       <h2><i class="fa-solid fa-download" style="color:var(--brand-2)"></i> Установить бота</h2>
-      <span class="pill">пошаговая инструкция</span>
+      <span class="pill">инструкция</span>
     </div>
 
-    <div class="steps">
+    <div class="guide">
+      <h3><i class="fa-solid fa-book-open"></i> Как добавить Юрику на сервер</h3>
 
-      <div class="step">
+      <p>Установка занимает меньше минуты. Юрика работает через платформу <b style="color:#fff">Lolka</b>, поэтому добавление происходит по стандартной схеме авторизации бота на сервере.</p>
+
+      <ol>
+        <li>Открой страницу установки по кнопке ниже — это официальный экран авторизации бота в Lolka.</li>
+        <li>Войди в свой аккаунт Lolka, если ещё не вошёл.</li>
+        <li>В списке серверов выбери тот, куда хочешь добавить <b>Yurika Bot</b>. Если нужного сервера нет в списке — значит, у тебя нет на нём прав «Управление сервером».</li>
+        <li>Проверь список разрешений. Юрике нужны права на: отправку сообщений, управление ролями, управление каналами, модерацию участников и работу с вебхуками.</li>
+        <li>Нажми <b>«Авторизовать»</b> и подтверди действие.</li>
+        <li>После подтверждения Юрика появится на сервере. Напиши ей <b>@Yurika_Bot</b> + любое приветствие — она ответит.</li>
+      </ol>
+
+      <!-- ШАГ 1: Портал разработчика / выбор сервера -->
+      <div class="step-block">
         <div class="step-head">
           <div class="step-num">1</div>
-          <b>Открой портал разработчика Lolka</b>
+          <b>Открой страницу установки и выбери сервер</b>
         </div>
         <div class="step-body">
-          <p>Перейди на <b style="color:#fff">lolka.app/developers/portal</b>, войди в аккаунт и найди приложение <b style="color:#fff">«Юрика Бот»</b> в списке своих приложений.</p>
-          <img class="shot" src="https://i.ibb.co/7J8mZ1W/lolka-portal.jpg" alt="Портал разработчика Lolka"
-               onerror="this.onerror=null;this.src='https://placehold.co/1200x600/0b0d1a/9aa3c7?text=%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB+%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0'">
+          <p>После нажатия кнопки «Установить на сервер» открывается страница авторизации Lolka. Войди в аккаунт и выбери сервер, куда хочешь добавить Юрику.</p>
+          <img class="shot"
+               src="https://raw.githubusercontent.com/GiantCraft18/Yurika_Site/13f7e4e499ff13abdb41ebf46ba4e361e3629595/step1.png"
+               alt="Шаг 1 — выбор сервера"
+               onerror="this.onerror=null;this.src='https://placehold.co/1200x700/0b0d1a/9aa3c7?text=step1.png'">
         </div>
       </div>
 
-      <div class="step">
+      <!-- ШАГ 2: Авторизация / разрешения -->
+      <div class="step-block">
         <div class="step-head">
           <div class="step-num">2</div>
-          <b>Авторизуй бота на сервере</b>
+          <b>Проверь разрешения и авторизуй бота</b>
         </div>
         <div class="step-body">
-          <p>Выбери нужный сервер из списка, проверь список разрешений (экономика, питомцы, модерация, справка) и нажми <b style="color:#fff">«Авторизовать»</b>.</p>
-          <img class="shot" src="https://i.ibb.co/Lk1zvGY/lolka-authorize.jpg" alt="Авторизация бота"
-               onerror="this.onerror=null;this.src='https://placehold.co/1200x900/0b0d1a/9aa3c7?text=%D0%90%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F'">
+          <p>Убедись, что у Юрики есть доступ к нужным правам (сообщения, роли, каналы, модерация, вебхуки), затем нажми <b>«Авторизовать»</b> и подтверди действие.</p>
+          <img class="shot"
+               src="https://raw.githubusercontent.com/GiantCraft18/Yurika_Site/13f7e4e499ff13abdb41ebf46ba4e361e3629595/step2.png"
+               alt="Шаг 2 — авторизация бота"
+               onerror="this.onerror=null;this.src='https://placehold.co/1200x700/0b0d1a/9aa3c7?text=step2.png'">
         </div>
       </div>
 
-      <div class="step">
-        <div class="step-head">
-          <div class="step-num">3</div>
-          <b>Готово — бот на сервере!</b>
-        </div>
-        <div class="step-body">
-          <p>После подтверждения Юрика появится на твоём сервере. Напиши <b style="color:#fff">@Yurika_Bot</b> приветствие — и она ответит. Все команды доступны во вкладке «Команды».</p>
-          <img class="shot" src="https://i.ibb.co/6PmVb0r/lolka-installed.jpg" alt="Бот установлен"
-               onerror="this.onerror=null;this.src='https://placehold.co/1200x600/0b0d1a/9aa3c7?text=%D0%91%D0%BE%D1%82+%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD'">
-        </div>
+      <div class="tip">
+        <i class="fa-solid fa-circle-info"></i>
+        <div>Если бот не отвечает — проверь, что у него есть доступ к каналу, где ты пишешь, и что упоминание <b>@Yurika_Bot</b> действительно выделено синим цветом. Полный список команд смотри во вкладке «Команды».</div>
       </div>
-
     </div>
 
+    <!-- CTA-кнопка -->
     <div class="install-cta" style="margin-top:22px">
       <h3>Готов добавить Юрику на свой сервер?</h3>
       <p>Нажми кнопку ниже — откроется страница авторизации Lolka, где ты сможешь выбрать сервер и подтвердить установку.</p>
