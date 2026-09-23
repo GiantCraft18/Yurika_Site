@@ -422,6 +422,69 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
 .danger-zone b{display:block; margin-bottom:4px}
 .danger-zone p{margin:0; color:var(--muted); font-size:13.5px; font-weight:600; line-height:1.55}
 
+/* Сообщество и активность */
+.server-item{
+  display:flex; align-items:center; gap:14px;
+  padding:14px;
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  margin-bottom:10px;
+  transition:.2s transform, .2s border-color;
+}
+.server-item:hover{transform:translateY(-2px); border-color:var(--stroke-strong)}
+.server-avatar{
+  width:52px;height:52px;border-radius:14px; flex:0 0 52px;
+  background:linear-gradient(135deg, #7c5cff, #22d3ee);
+  display:grid; place-items:center; color:#fff; font-size:20px; font-weight:800;
+  box-shadow:0 10px 24px rgba(124,92,255,.35);
+  overflow:hidden;
+}
+.server-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.server-info{flex:1; min-width:0}
+.server-info b{display:block; font-size:15px; margin-bottom:3px}
+.server-info span{color:var(--muted); font-size:12.5px; font-weight:600; display:block}
+.server-actions{display:flex; gap:6px; flex-wrap:wrap}
+.chip-status{
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:11.5px; font-weight:800;
+  padding:4px 9px; border-radius:999px;
+  border:1px solid var(--stroke-strong);
+  color:var(--muted); background:rgba(255,255,255,.03);
+}
+.chip-status.ok{color:var(--ok); border-color:rgba(55,214,122,.4); background:rgba(55,214,122,.10)}
+.chip-status.warn{color:var(--warn); border-color:rgba(255,176,32,.4); background:rgba(255,176,32,.10)}
+
+.stat-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.stat{
+  padding:14px;
+  border:1px solid var(--stroke);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  text-align:center;
+}
+.stat b{display:block; font-size:22px; font-weight:800;
+  background:linear-gradient(135deg, #ffffff, #22d3ee);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  margin-bottom:4px;
+}
+.stat span{font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.3px; text-transform:uppercase}
+
+.share-row{
+  display:flex; align-items:center; gap:10px;
+  padding:14px;
+  border:1px dashed var(--stroke-strong);
+  border-radius:14px;
+  background:rgba(255,255,255,.02);
+  margin-top:10px;
+}
+.share-row i.lead{color:var(--brand-2); font-size:16px}
+.share-row input{
+  padding:10px 12px;
+  font-family:'JetBrains Mono',monospace; font-size:13px;
+  background:rgba(0,0,0,.35);
+}
+
 /* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
 .toast{
@@ -529,6 +592,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
   .cmd-grid{grid-template-columns:1fr}
   .feature-list{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr}
   nav.tabs{width:100%; margin-left:0; order:3; padding-top:6px}
   .topbar-inner{flex-wrap:wrap}
   .tab{flex:1 1 auto; justify-content:center; padding:9px 10px; font-size:12.5px}
@@ -1009,6 +1073,46 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
+      <!-- Мои серверы и активность -->
+      <div class="card" style="grid-column:span 2">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-server"></i></div>
+          <h3>Мои серверы</h3>
+          <button class="btn sm ghost" id="serversAdd" style="margin-left:auto"><i class="fa-solid fa-plus"></i> Добавить</button>
+        </div>
+        <div class="card-pad">
+          <div id="serversList"></div>
+          <div class="empty" id="serversEmpty" style="min-height:120px">
+            <i class="fa-regular fa-square-plus"></i>
+            <div>Пока нет серверов. Добавь первый — укажи имя и ID.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Активность -->
+      <div class="card">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-chart-simple"></i></div>
+          <h3>Активность</h3>
+        </div>
+        <div class="card-pad">
+          <div class="stat-grid">
+            <div class="stat"><b id="statServers">0</b><span>Серверов</span></div>
+            <div class="stat"><b id="statDays">0</b><span>Дней с нами</span></div>
+            <div class="stat"><b id="statVisits">0</b><span>Заходов</span></div>
+          </div>
+
+          <div class="share-row">
+            <i class="fa-solid fa-link lead"></i>
+            <input id="shareLink" readonly placeholder="Ссылка на профиль появится здесь" />
+            <button class="btn sm cyan" id="shareCopy" type="button" title="Скопировать">
+              <i class="fa-solid fa-copy"></i>
+            </button>
+          </div>
+          <div class="hint" style="margin-top:8px">Поделись ссылкой на свой профиль с другими пользователями.</div>
+        </div>
+      </div>
+
       <!-- Смена пароля -->
       <div class="card" style="grid-column:span 3">
         <div class="card-head">
@@ -1051,6 +1155,10 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           <div class="privacy-row">
             <div class="privacy-info"><b>Показывать соцсети</b><span>Discord, Telegram, GitHub, YouTube</span></div>
             <div class="switch on" data-pref="showSocials"></div>
+          </div>
+          <div class="privacy-row">
+            <div class="privacy-info"><b>Показывать серверы</b><span>Список серверов, где стоит Юрика</span></div>
+            <div class="switch on" data-pref="showServers"></div>
           </div>
           <div class="privacy-row" style="margin-bottom:0">
             <div class="privacy-info"><b>Индексировать в поиске</b><span>Разрешить поисковикам находить профиль</span></div>
@@ -1112,6 +1220,40 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   </div>
 </div>
 
+<!-- Модалка добавления сервера -->
+<div id="serverModal" style="display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.6); backdrop-filter:blur(6px)">
+  <div class="card" style="max-width:460px; width:100%">
+    <div class="card-head">
+      <div class="ico"><i class="fa-solid fa-server"></i></div>
+      <h3>Добавить сервер</h3>
+    </div>
+    <div class="card-pad">
+      <div class="field">
+        <label>Название</label>
+        <div class="input-wrap"><i class="fa-solid fa-signature lead"></i>
+          <input id="srvName" placeholder="Мой сервер" />
+        </div>
+      </div>
+      <div class="field">
+        <label>ID сервера</label>
+        <div class="input-wrap"><i class="fa-solid fa-hashtag lead"></i>
+          <input id="srvId" placeholder="123456789" />
+        </div>
+      </div>
+      <div class="field">
+        <label>Ссылка на аватар (необязательно)</label>
+        <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
+          <input id="srvAvatar" placeholder="https://example.com/server.png" />
+        </div>
+      </div>
+      <div class="row end">
+        <button class="btn ghost" id="srvCancel">Отмена</button>
+        <button class="btn" id="srvSave"><i class="fa-solid fa-plus"></i> Добавить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast-zone" id="toasts"></div>
 
 <script>
@@ -1138,6 +1280,10 @@ async function sha256(str){
 }
 function escapeHTML(s=''){
   return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+function initials(name){
+  const n = (name||'?').trim();
+  return n ? n[0].toUpperCase() : '?';
 }
 
 /* ============================================================
@@ -1541,10 +1687,12 @@ updCounters(); renderEmbeds(); renderPreview(); renderEmbedJSON();
    5. ПРОФИЛЬ
 ============================================================ */
 const LS = {
-  profile: 'yurika_profile_v2',
+  profile: 'yurika_profile_v3',
   creds:   'yurika_creds_v1',
   session: 'yurika_session_v1',
-  prefs:   'yurika_privacy_v1'
+  prefs:   'yurika_privacy_v1',
+  servers: 'yurika_servers_v1',
+  meta:    'yurika_meta_v1'
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
 
@@ -1574,6 +1722,30 @@ function getSession(){ try{ return JSON.parse(localStorage.getItem(LS.session) |
 function clearSession(){ localStorage.removeItem(LS.session); }
 function loadPrefs(){ try{ return JSON.parse(localStorage.getItem(LS.prefs) || 'null') || {}; }catch{ return {}; } }
 function savePrefs(p){ localStorage.setItem(LS.prefs, JSON.stringify(p)); }
+function loadServers(){ try{ return JSON.parse(localStorage.getItem(LS.servers) || '[]'); }catch{ return []; } }
+function saveServers(arr){ localStorage.setItem(LS.servers, JSON.stringify(arr)); }
+function loadMeta(){ try{ return JSON.parse(localStorage.getItem(LS.meta) || 'null') || {}; }catch{ return {}; } }
+function saveMeta(m){ localStorage.setItem(LS.meta, JSON.stringify(m)); }
+
+function touchMeta(){
+  const m = loadMeta();
+  if(!m.firstSeen) m.firstSeen = Date.now();
+  m.visits = (m.visits || 0) + 1;
+  m.lastVisit = Date.now();
+  saveMeta(m);
+}
+
+function renderMeta(profile){
+  const m = loadMeta();
+  const days = m.firstSeen ? Math.max(1, Math.floor((Date.now() - m.firstSeen) / (1000*60*60*24)) + 1) : 1;
+  $('#statServers').textContent = loadServers().length;
+  $('#statDays').textContent = days;
+  $('#statVisits').textContent = m.visits || 0;
+
+  const uname = (profile && profile.username) ? profile.username : 'user';
+  const link = `${location.origin}${location.pathname}#u=${encodeURIComponent(uname)}`;
+  $('#shareLink').value = link;
+}
 
 function showCabinet(profile){
   $('#authView').style.display = 'none';
@@ -1630,6 +1802,8 @@ function showCabinet(profile){
   setAvatar(profile.avatar || DEFAULT_AVATAR);
 
   renderPrivacySwitches();
+  renderServers();
+  renderMeta(profile);
 }
 function showAuth(){
   $('#cabinetView').style.display = 'none';
@@ -1816,13 +1990,16 @@ const PRIVACY_LABELS = {
   publicProfile: 'Публичный профиль',
   showEmail:     'Показывать e-mail',
   showSocials:   'Показывать соцсети',
+  showServers:   'Показывать серверы',
   indexable:     'Индексировать в поиске'
 };
+const PRIVACY_DEFAULT_ON = ['publicProfile','showSocials','showServers'];
+
 function renderPrivacySwitches(){
   const prefs = loadPrefs();
   $$('.switch[data-pref]').forEach(sw=>{
     const key = sw.dataset.pref;
-    const on = prefs[key] !== undefined ? !!prefs[key] : ['publicProfile','showSocials'].includes(key);
+    const on = prefs[key] !== undefined ? !!prefs[key] : PRIVACY_DEFAULT_ON.includes(key);
     sw.classList.toggle('on', on);
   });
 }
@@ -1837,12 +2014,114 @@ function initPrivacySwitches(){
       sw.classList.toggle('on', newVal);
       const label = PRIVACY_LABELS[key] || 'Настройка';
       toast(`${label}: ${newVal ? 'включено' : 'выключено'}`, newVal ? 'ok' : 'warn', 1800);
+      if(key === 'showServers') renderServers();
     });
   });
 }
 
 /* ============================================================
-   7. УДАЛЕНИЕ АККАУНТА
+   7. МОИ СЕРВЕРЫ
+============================================================ */
+function renderServers(){
+  const prefs = loadPrefs();
+  const show = prefs.showServers !== undefined ? !!prefs.showServers : true;
+  const list = loadServers();
+  const wrap = $('#serversList');
+  wrap.innerHTML = '';
+  $('#serversEmpty').style.display = list.length ? 'none' : 'grid';
+
+  if(!show && list.length){
+    wrap.innerHTML = `<div class="hint" style="margin-bottom:10px"><i class="fa-solid fa-eye-slash"></i> Список серверов скрыт в настройках приватности.</div>`;
+  }
+
+  list.forEach((s, i)=>{
+    const d = document.createElement('div');
+    d.className = 'server-item';
+    d.innerHTML = `
+      <div class="server-avatar">
+        ${s.avatar ? `<img src="${escapeHTML(s.avatar)}" onerror="this.replaceWith(document.createTextNode('${escapeHTML(initials(s.name))}'))">` : escapeHTML(initials(s.name))}
+      </div>
+      <div class="server-info">
+        <b>${escapeHTML(s.name || 'Сервер')}</b>
+        <span>ID: ${escapeHTML(s.id || '—')}</span>
+        <div class="row" style="margin-top:6px">
+          <span class="chip-status ok"><i class="fa-solid fa-circle-check"></i> Юрика работает</span>
+          <span class="chip-status"><i class="fa-solid fa-clock"></i> ${escapeHTML(s.addedAt || '')}</span>
+        </div>
+      </div>
+      <div class="server-actions">
+        <button class="btn sm ghost" data-act="open" data-i="${i}"><i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть</button>
+        <button class="btn sm ghost" data-act="settings" data-i="${i}"><i class="fa-solid fa-gear"></i></button>
+        <button class="btn sm danger" data-act="kick" data-i="${i}"><i class="fa-solid fa-trash"></i></button>
+      </div>
+    `;
+    wrap.appendChild(d);
+  });
+
+  wrap.querySelectorAll('[data-act]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const i = +btn.dataset.i, act = btn.dataset.act;
+      const list = loadServers();
+      const s = list[i]; if(!s) return;
+      if(act === 'open'){
+        const url = s.id ? `https://lolka.app/servers/${encodeURIComponent(s.id)}` : 'https://lolka.app/';
+        window.open(url, '_blank', 'noopener');
+      }
+      if(act === 'settings'){
+        toast('Открываю настройки сервера: ' + (s.name || 'Сервер'), 'info');
+      }
+      if(act === 'kick'){
+        if(!confirm(`Убрать «${s.name || 'Сервер'}» из списка?`)) return;
+        list.splice(i,1);
+        saveServers(list);
+        renderServers();
+        renderMeta(loadProfileLocal());
+        toast('Сервер удалён из списка', 'warn');
+      }
+    });
+  });
+}
+
+function openServerModal(){
+  $('#serverModal').style.display = 'flex';
+  $('#srvName').value = '';
+  $('#srvId').value = '';
+  $('#srvAvatar').value = '';
+  $('#srvName').focus();
+}
+function closeServerModal(){ $('#serverModal').style.display = 'none'; }
+
+$('#serversAdd').addEventListener('click', openServerModal);
+$('#srvCancel').addEventListener('click', closeServerModal);
+$('#srvSave').addEventListener('click', ()=>{
+  const name = $('#srvName').value.trim();
+  const id = $('#srvId').value.trim();
+  const avatar = $('#srvAvatar').value.trim();
+  if(!name){ toast('Введите название сервера', 'err'); return; }
+  const list = loadServers();
+  list.push({
+    name, id, avatar,
+    addedAt: new Date().toLocaleDateString('ru-RU')
+  });
+  saveServers(list);
+  closeServerModal();
+  renderServers();
+  renderMeta(loadProfileLocal());
+  toast('Сервер добавлен', 'ok');
+});
+
+/* ============================================================
+   8. ПОДЕЛИТЬСЯ ПРОФИЛЕМ
+============================================================ */
+$('#shareCopy').addEventListener('click', async ()=>{
+  const val = $('#shareLink').value;
+  if(!val){ toast('Сначала сохрани никнейм', 'warn'); return; }
+  try{ await navigator.clipboard.writeText(val); toast('Ссылка скопирована', 'ok'); }
+  catch{ toast('Не удалось скопировать', 'err'); }
+});
+
+/* ============================================================
+   9. УДАЛЕНИЕ АККАУНТА
 ============================================================ */
 $('#deleteOpen').addEventListener('click', ()=>{
   $('#deleteModal').style.display = 'flex';
@@ -1864,7 +2143,7 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
     }
   }catch(err){ /* тихо */ }
 
-  [LS.profile, LS.creds, LS.session, LS.prefs].forEach(k=> localStorage.removeItem(k));
+  [LS.profile, LS.creds, LS.session, LS.prefs, LS.servers, LS.meta].forEach(k=> localStorage.removeItem(k));
 
   $('#deleteModal').style.display = 'none';
   showAuth();
@@ -1872,10 +2151,11 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
 });
 
 /* ============================================================
-   8. АВТОЗАГРУЗКА
+   10. АВТОЗАГРУЗКА
 ============================================================ */
 (function init(){
   initPrivacySwitches();
+  touchMeta();
 
   const s = getSession();
   if(s){
