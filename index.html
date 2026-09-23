@@ -301,6 +301,20 @@ input:focus,textarea:focus,select:focus{border-color:var(--brand); box-shadow:va
 input::placeholder,textarea::placeholder{color:#6b74a3}
 .hint{font-size:12px; color:var(--muted)}
 
+/* Select */
+.select-wrap{position:relative; display:flex; align-items:center}
+.select-wrap i.lead{position:absolute; left:14px; color:var(--brand-2); font-size:14px; pointer-events:none; z-index:2}
+.select-wrap::after{
+  content:"\f107";
+  font-family:"Font Awesome 6 Free"; font-weight:900;
+  position:absolute; right:14px; color:var(--muted); pointer-events:none;
+}
+select{
+  appearance:none; -webkit-appearance:none;
+  padding-right:40px; cursor:pointer;
+}
+select option{background:#12162a; color:var(--text)}
+
 /* Кнопки */
 .btn{
   --b1:var(--brand); --b2:var(--brand-2);
@@ -528,6 +542,22 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
 .toggle-row .info{flex:1; min-width:0}
 .toggle-row b{display:block; font-size:14px; margin-bottom:2px}
 .toggle-row span{font-size:12px; color:var(--muted); font-weight:600; display:block}
+
+/* Плейсхолдеры-чипы для текстов */
+.ph-row{
+  display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;
+}
+.ph-chip{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11.5px; font-weight:700;
+  padding:3px 8px; border-radius:999px;
+  background:rgba(124,92,255,.16);
+  border:1px solid rgba(124,92,255,.32);
+  color:#d7dcff;
+  cursor:pointer;
+  transition:.2s background, .2s transform;
+}
+.ph-chip:hover{background:rgba(124,92,255,.28); transform:translateY(-1px)}
 
 /* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
@@ -1328,10 +1358,25 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <input id="spId" placeholder="123456789" />
           </div>
         </div>
-        <div class="field" style="margin:0">
+        <div class="field" style="margin:0 0 12px">
           <label>Аватар (URL)</label>
           <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
             <input id="spAvatar" placeholder="https://example.com/server.png" />
+          </div>
+        </div>
+        <div class="field" style="margin:0 0 12px">
+          <label>Описание сервера</label>
+          <textarea id="spDescription" maxlength="180" placeholder="Коротко о сервере…" style="min-height:70px"></textarea>
+          <div class="hint"><span id="spDescCount">0</span> / 180 · отображается под названием</div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>Язык бота</label>
+          <div class="select-wrap"><i class="fa-solid fa-language lead"></i>
+            <select id="spLanguage">
+              <option value="ru">Русский (RU)</option>
+              <option value="en">English (EN)</option>
+              <option value="ua">Українська (UA)</option>
+            </select>
           </div>
         </div>
       </div>
@@ -1379,6 +1424,51 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           <div class="input-wrap"><i class="fa-solid fa-terminal lead"></i>
             <input id="spPrefix" placeholder="/" maxlength="4" />
           </div>
+        </div>
+      </div>
+
+      <!-- Приветствие / прощание -->
+      <div class="panel-section">
+        <h4><i class="fa-solid fa-hand-sparkles"></i> Приветствие / прощание</h4>
+
+        <div class="field" style="margin:0 0 12px">
+          <label>Текст приветствия</label>
+          <textarea id="spWelcomeText" maxlength="400" placeholder="Привет, {user}! Добро пожаловать на {server} 🎉" style="min-height:80px"></textarea>
+          <div class="hint">Плейсхолдеры (клик — вставить):</div>
+          <div class="ph-row">
+            <span class="ph-chip" data-target="spWelcomeText">{user}</span>
+            <span class="ph-chip" data-target="spWelcomeText">{server}</span>
+            <span class="ph-chip" data-target="spWelcomeText">{memberCount}</span>
+          </div>
+        </div>
+
+        <div class="field" style="margin:0 0 12px">
+          <label>Текст прощания</label>
+          <textarea id="spGoodbyeText" maxlength="400" placeholder="{user} покинул(а) сервер. Всего участников: {memberCount}" style="min-height:80px"></textarea>
+          <div class="hint">Плейсхолдеры (клик — вставить):</div>
+          <div class="ph-row">
+            <span class="ph-chip" data-target="spGoodbyeText">{user}</span>
+            <span class="ph-chip" data-target="spGoodbyeText">{server}</span>
+            <span class="ph-chip" data-target="spGoodbyeText">{memberCount}</span>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="info"><b>Картинка-баннер</b><span>Прикрепить баннер к приветствию</span></div>
+          <div class="switch on" data-sp="welcomeBanner"></div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="info"><b>ЛС новичку</b><span>Отправлять приветствие и правила в личные сообщения</span></div>
+          <div class="switch on" data-sp="welcomeDM"></div>
+        </div>
+
+        <div class="field" style="margin:12px 0 0">
+          <label>Задержка авто-роли, минуты</label>
+          <div class="input-wrap"><i class="fa-solid fa-clock lead"></i>
+            <input id="spAutoRoleDelay" type="number" min="0" max="1440" placeholder="0" />
+          </div>
+          <div class="hint">0 — выдать сразу при входе. До 1440 минут (24 часа).</div>
         </div>
       </div>
 
@@ -2230,9 +2320,11 @@ function renderServers(){
       <div class="server-info">
         <b>${escapeHTML(s.name || 'Сервер')}</b>
         <span>ID: ${escapeHTML(s.id || '—')}</span>
+        ${s.description ? `<span style="margin-top:4px">${escapeHTML(s.description)}</span>` : ''}
         <div class="row" style="margin-top:6px">
           <span class="chip-status ok"><i class="fa-solid fa-circle-check"></i> Юрика работает</span>
           <span class="chip-status"><i class="fa-solid fa-clock"></i> ${escapeHTML(s.addedAt || '')}</span>
+          ${s.settings && s.settings.language ? `<span class="chip-status"><i class="fa-solid fa-language"></i> ${escapeHTML(String(s.settings.language).toUpperCase())}</span>` : ''}
         </div>
       </div>
       <div class="server-actions">
@@ -2292,11 +2384,17 @@ $('#srvSave').addEventListener('click', ()=>{
   list.push({
     name, id, avatar,
     addedAt: new Date().toLocaleDateString('ru-RU'),
+    description: '',
     settings: {
+      language: 'ru',
       logChannel: '', welcomeChannel: '', announceChannel: '',
       autoRole: '', modRole: '', prefix: '/',
+      welcomeText: '',
+      goodbyeText: '',
+      autoRoleDelay: 0,
       modules: { econ:true, pets:true, mod:true, love:true, ai:true,
-                 autoMod:false, welcome:true, logging:true }
+                 autoMod:false, welcome:true, logging:true,
+                 welcomeBanner:true, welcomeDM:true }
     }
   });
   saveServers(list);
@@ -2311,23 +2409,51 @@ $('#srvSave').addEventListener('click', ()=>{
 ============================================================ */
 let spIndex = -1;
 
+/* Плейсхолдеры: клик — вставить в соответствующее поле */
+$$('.ph-chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    const id = chip.dataset.target;
+    const el = document.getElementById(id);
+    if(!el) return;
+    const pos = el.selectionStart ?? el.value.length;
+    const txt = chip.textContent.trim();
+    el.value = el.value.slice(0,pos) + txt + el.value.slice(pos);
+    el.focus();
+    el.selectionStart = el.selectionEnd = pos + txt.length;
+    if(id === 'spWelcomeText' || id === 'spGoodbyeText'){ /* счётчиков нет */ }
+  });
+});
+
 function openServerPanel(index){
   const list = loadServers();
   const s = list[index];
   if(!s){ toast('Сервер не найден', 'err'); return; }
   spIndex = index;
 
-  // Заполняем форму из данных сервера (или дефолты)
   const st = s.settings || {};
+
+  // Основное
   $('#spName').value = s.name || '';
   $('#spId').value = s.id || '';
   $('#spAvatar').value = s.avatar || '';
+  $('#spDescription').value = s.description || '';
+  $('#spDescCount').textContent = (s.description || '').length;
+  $('#spLanguage').value = st.language || 'ru';
+
+  // Каналы
   $('#spLogChannel').value = st.logChannel || '';
   $('#spWelcomeChannel').value = st.welcomeChannel || '';
   $('#spAnnounceChannel').value = st.announceChannel || '';
+
+  // Роли
   $('#spAutoRole').value = st.autoRole || '';
   $('#spModRole').value = st.modRole || '';
   $('#spPrefix').value = st.prefix || '/';
+
+  // Приветствие / прощание
+  $('#spWelcomeText').value = st.welcomeText || '';
+  $('#spGoodbyeText').value = st.goodbyeText || '';
+  $('#spAutoRoleDelay').value = st.autoRoleDelay || 0;
 
   // Иконка и заголовок
   const icon = $('#spIcon');
@@ -2339,11 +2465,11 @@ function openServerPanel(index){
   $('#spTitle').textContent = s.name ? `Настройки · ${s.name}` : 'Настройки сервера';
 
   // Тумблеры модулей
-  const mods = (st.modules) || {};
+  const mods = st.modules || {};
+  const DEFAULTS_ON = ['econ','pets','mod','love','ai','welcome','logging','welcomeBanner','welcomeDM'];
   $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
     const key = sw.dataset.sp;
-    const def = !['autoMod'].includes(key);
-    const on = mods[key] !== undefined ? !!mods[key] : def;
+    const on = mods[key] !== undefined ? !!mods[key] : DEFAULTS_ON.includes(key);
     sw.classList.toggle('on', on);
   });
 
@@ -2356,6 +2482,11 @@ function closeServerPanel(){
 
 $('#spClose2').addEventListener('click', closeServerPanel);
 $('#spCancel').addEventListener('click', closeServerPanel);
+
+// Счётчик описания сервера
+$('#spDescription').addEventListener('input', e=>{
+  $('#spDescCount').textContent = e.target.value.length;
+});
 
 // Тумблеры модулей в панели — переключаются по клику
 $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
@@ -2378,13 +2509,19 @@ $('#spSave').addEventListener('click', ()=>{
   s.name = $('#spName').value.trim() || s.name;
   s.id = $('#spId').value.trim() || s.id;
   s.avatar = $('#spAvatar').value.trim();
+  s.description = $('#spDescription').value.trim();
+
   s.settings = {
+    language: $('#spLanguage').value || 'ru',
     logChannel: $('#spLogChannel').value.trim(),
     welcomeChannel: $('#spWelcomeChannel').value.trim(),
     announceChannel: $('#spAnnounceChannel').value.trim(),
     autoRole: $('#spAutoRole').value.trim(),
     modRole: $('#spModRole').value.trim(),
     prefix: $('#spPrefix').value.trim() || '/',
+    welcomeText: $('#spWelcomeText').value,
+    goodbyeText: $('#spGoodbyeText').value,
+    autoRoleDelay: Math.max(0, Math.min(1440, parseInt($('#spAutoRoleDelay').value || '0', 10) || 0)),
     modules: mods
   };
   saveServers(list);
