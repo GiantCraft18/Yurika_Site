@@ -388,6 +388,11 @@ select option{background:#12162a; color:var(--text)}
 .social.telegram i{color:#29B6F6}
 .social.github i{color:#e8e8e8}
 .social.youtube i{color:#FF3D3D}
+.social.twitch i{color:#A970FF}
+.social.vk i{color:#3B82F6}
+.social.lolka i{color:#7c5cff}
+.social.tiktok i{color:#f1f1f1}
+.social.twitter i{color:#e8e8e8}
 .social.empty{opacity:.55; cursor:default; pointer-events:none}
 
 /* Био */
@@ -1310,6 +1315,11 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
                 <span class="social telegram empty"><i class="fa-brands fa-telegram"></i> Telegram</span>
                 <span class="social github empty"><i class="fa-brands fa-github"></i> GitHub</span>
                 <span class="social youtube empty"><i class="fa-brands fa-youtube"></i> YouTube</span>
+                <span class="social twitch empty"><i class="fa-brands fa-twitch"></i> Twitch</span>
+                <span class="social vk empty"><i class="fa-brands fa-vk"></i> ВКонтакте</span>
+                <span class="social lolka empty"><i class="fa-solid fa-robot"></i> Lolka</span>
+                <span class="social tiktok empty"><i class="fa-brands fa-tiktok"></i> TikTok</span>
+                <span class="social twitter empty"><i class="fa-brands fa-x-twitter"></i> X</span>
               </div>
             </div>
           </div>
@@ -1376,6 +1386,33 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
                 <label>YouTube</label>
                 <div class="input-wrap"><i class="fa-brands fa-youtube lead"></i><input id="inYoutube" placeholder="@channel" /></div>
               </div>
+            </div>
+
+            <div class="row">
+              <div class="field" style="flex:1; min-width:140px">
+                <label>Twitch</label>
+                <div class="input-wrap"><i class="fa-brands fa-twitch lead"></i><input id="inTwitch" placeholder="username" /></div>
+              </div>
+              <div class="field" style="flex:1; min-width:140px">
+                <label>ВКонтакте</label>
+                <div class="input-wrap"><i class="fa-brands fa-vk lead"></i><input id="inVk" placeholder="username или id" /></div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="field" style="flex:1; min-width:140px">
+                <label>Lolka</label>
+                <div class="input-wrap"><i class="fa-solid fa-robot lead"></i><input id="inLolka" placeholder="username" /></div>
+              </div>
+              <div class="field" style="flex:1; min-width:140px">
+                <label>TikTok</label>
+                <div class="input-wrap"><i class="fa-brands fa-tiktok lead"></i><input id="inTiktok" placeholder="@username" /></div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label>X (Twitter)</label>
+              <div class="input-wrap"><i class="fa-brands fa-x-twitter lead"></i><input id="inTwitter" placeholder="username" /></div>
             </div>
 
             <button class="btn block" type="submit"><i class="fa-solid fa-floppy-disk"></i> Сохранить профиль</button>
@@ -1486,7 +1523,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <div class="switch" data-pref="showEmail"></div>
           </div>
           <div class="privacy-row">
-            <div class="privacy-info"><b>Показывать соцсети</b><span>Discord, Telegram, GitHub, YouTube</span></div>
+            <div class="privacy-info"><b>Показывать соцсети</b><span>Discord, Telegram, GitHub, YouTube, Twitch, VK, Lolka и др.</span></div>
             <div class="switch on" data-pref="showSocials"></div>
           </div>
           <div class="privacy-row">
@@ -2862,6 +2899,19 @@ const LS = {
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
 
+// Список соцсетей
+const SOCIALS = [
+  { key:'discord',  icon:'fa-discord',   cls:'discord',  label:'Discord',   url: v=>`https://discord.com/users/${v}` },
+  { key:'telegram', icon:'fa-telegram',  cls:'telegram', label:'Telegram',  url: v=>`https://t.me/${v.replace(/^@/,'')}` },
+  { key:'github',   icon:'fa-github',    cls:'github',   label:'GitHub',    url: v=>`https://github.com/${v}` },
+  { key:'youtube',  icon:'fa-youtube',   cls:'youtube',  label:'YouTube',   url: v=>`https://youtube.com/${v.startsWith('@') ? v : '@'+v}` },
+  { key:'twitch',   icon:'fa-twitch',    cls:'twitch',   label:'Twitch',    url: v=>`https://twitch.tv/${v}` },
+  { key:'vk',       icon:'fa-vk',        cls:'vk',       label:'ВКонтакте', url: v=>`https://vk.com/${v}` },
+  { key:'lolka',    icon:'fa-robot',     cls:'lolka',    label:'Lolka',     url: v=>`https://lolka.app/users/${v}` },
+  { key:'tiktok',   icon:'fa-tiktok',    cls:'tiktok',   label:'TikTok',    url: v=>`https://tiktok.com/@${v.replace(/^@/,'')}` },
+  { key:'twitter',  icon:'fa-x-twitter', cls:'twitter',  label:'X',         url: v=>`https://x.com/${v}` }
+];
+
 let mode = 'auth';
 $$('[data-auth]').forEach(b=>{
   b.addEventListener('click', ()=>{
@@ -2922,6 +2972,7 @@ function showCabinet(profile){
     name:'', surname:'', username:'',
     email:'', bio:'',
     discord:'', telegram:'', github:'', youtube:'',
+    twitch:'', vk:'', lolka:'', tiktok:'', twitter:'',
     avatar: DEFAULT_AVATAR
   }, profile || {});
 
@@ -2930,14 +2981,9 @@ function showCabinet(profile){
   $('#pName').textContent  = shownName;
   $('#pEmail').textContent = profile.email || '—';
 
+  // Рендер соцсетей
   const soc = $('#pSocials'); soc.innerHTML = '';
-  const socials = [
-    {key:'discord',  icon:'fa-discord',  cls:'discord',  label:'Discord',  url: v=>`https://discord.com/users/${v}`},
-    {key:'telegram', icon:'fa-telegram', cls:'telegram', label:'Telegram', url: v=>`https://t.me/${v.replace(/^@/,'')}`},
-    {key:'github',   icon:'fa-github',   cls:'github',   label:'GitHub',   url: v=>`https://github.com/${v}`},
-    {key:'youtube',  icon:'fa-youtube',  cls:'youtube',  label:'YouTube',  url: v=>`https://youtube.com/${v.startsWith('@') ? v : '@'+v}`}
-  ];
-  socials.forEach(s=>{
+  SOCIALS.forEach(s=>{
     const val = (profile[s.key]||'').trim();
     if(val){
       soc.insertAdjacentHTML('beforeend',
@@ -2953,6 +2999,7 @@ function showCabinet(profile){
   bioEl.textContent = bio || 'Расскажи о себе — добавь био в форме справа.';
   bioEl.classList.toggle('empty', !bio);
 
+  // Заполнение формы
   $('#inName').value = profile.name || '';
   $('#inSurname').value = profile.surname || '';
   $('#inUsername').value = profile.username || '';
@@ -2962,6 +3009,11 @@ function showCabinet(profile){
   $('#inTelegram').value = profile.telegram || '';
   $('#inGithub').value = profile.github || '';
   $('#inYoutube').value = profile.youtube || '';
+  $('#inTwitch').value = profile.twitch || '';
+  $('#inVk').value = profile.vk || '';
+  $('#inLolka').value = profile.lolka || '';
+  $('#inTiktok').value = profile.tiktok || '';
+  $('#inTwitter').value = profile.twitter || '';
   $('#bioCount').textContent = (profile.bio||'').length;
 
   $('#avatarUrl').value = (profile.avatar && profile.avatar.startsWith('http')) ? profile.avatar : '';
@@ -3003,6 +3055,11 @@ $('#profileForm').addEventListener('submit', async e=>{
     telegram: $('#inTelegram').value.trim().replace(/^@/,''),
     github:   $('#inGithub').value.trim().replace(/^@/,''),
     youtube:  $('#inYoutube').value.trim(),
+    twitch:   $('#inTwitch').value.trim(),
+    vk:       $('#inVk').value.trim(),
+    lolka:    $('#inLolka').value.trim().replace(/^@/,''),
+    tiktok:   $('#inTiktok').value.trim(),
+    twitter:  $('#inTwitter').value.trim().replace(/^@/,''),
     avatar:   $('#avatarImg').src
   });
   saveProfileLocal(profile);
@@ -3081,6 +3138,7 @@ $('#btnLocal').addEventListener('click', ()=>{
   const profile = loadProfileLocal() || {
     name:'', surname:'', username:'', email:'',
     bio:'', discord:'', telegram:'', github:'', youtube:'',
+    twitch:'', vk:'', lolka:'', tiktok:'', twitter:'',
     avatar: DEFAULT_AVATAR
   };
   saveProfileLocal(profile);
