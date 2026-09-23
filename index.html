@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Yurika Bot — Личный кабинет</title>
+<title>Yurika Bot</title>
 <meta name="theme-color" content="#0b0d1a" />
+
+<!-- Иконка сайта -->
+<link rel="icon" type="image/jpeg" href="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" />
+<link rel="apple-touch-icon" href="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" />
+<link rel="shortcut icon" href="https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg" />
 
 <!-- Иконки + шрифт -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
@@ -401,7 +406,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   <section class="section active" id="tab-profile">
     <div class="section-title">
       <h2><i class="fa-solid fa-id-badge" style="color:var(--brand-2)"></i> Личный кабинет</h2>
-      <span class="pill" id="profileStatus">не авторизован</span>
+      <span class="pill" id="profileStatus">Yurika</span>
     </div>
 
     <!-- Авторизация -->
@@ -452,7 +457,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
         <div class="divider">или</div>
         <button class="btn ghost block" id="btnLocal">
-          <i class="fa-solid fa-hard-drive"></i> Быстрый локальный профиль (без сервера)
+          <i class="fa-solid fa-user"></i> Быстрый вход без пароля
         </button>
       </div>
     </div>
@@ -480,8 +485,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
               <h3 id="pName">— —</h3>
               <p id="pEmail">—</p>
               <div class="badges">
-                <span class="badge ok"><i class="fa-solid fa-circle-check"></i> <span id="pSource">local</span></span>
-                <span class="badge"><i class="fa-solid fa-shield-halved"></i> 2FA позже</span>
+                <span class="badge ok"><i class="fa-solid fa-circle-check"></i> активен</span>
                 <span class="badge"><i class="fa-solid fa-bolt"></i> автосохранение</span>
               </div>
             </div>
@@ -545,7 +549,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
               <button class="btn block pink" type="submit"><i class="fa-solid fa-shield-halved"></i> Обновить пароль</button>
             </div>
           </form>
-          <div class="hint" style="margin-top:10px">В локальном режиме пароль хранится как хэш (SHA-256) в вашем браузере.</div>
+          <div class="hint" style="margin-top:10px">Пароль хранится в защищённом виде.</div>
         </div>
       </div>
     </div>
@@ -731,7 +735,7 @@ function escapeHTML(s=''){
 }
 
 /* ============================================================
-   1. FIREBASE (работает в фоне, вкладка скрыта от пользователя)
+   1. FIREBASE (работает в фоне)
 ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
@@ -745,12 +749,12 @@ const firebaseConfig = {
 let fbAuth = null, fbDb = null, fbReady = false;
 try{
   if(window.firebase){
-    const app = firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
+    firebase.apps.length ? firebase.app() : firebase.initializeApp(firebaseConfig);
     fbAuth = firebase.auth();
     fbDb   = firebase.firestore();
     fbReady = true;
   }
-}catch(e){ console.warn('Firebase init error:', e); }
+}catch(e){ /* тихо */ }
 
 /* ============================================================
    2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
@@ -955,7 +959,6 @@ $('#hookFile').addEventListener('change', e=>{
   renderPreview();
 });
 
-/* Загрузка по ссылке/ID */
 $('#hookLoad').addEventListener('click', async ()=>{
   const ref = $('#hookLoadBy').value.trim();
   if(!ref){ toast('Укажите ссылку или ID', 'warn'); return; }
@@ -977,12 +980,10 @@ $('#hookLoad').addEventListener('click', async ()=>{
     updCounters(); renderPreview(); renderEmbedJSON();
     toast('Загружено', 'ok');
   }catch(err){
-    console.warn(err);
-    toast('Не удалось загрузить (CORS/URL). Вставьте данные вручную.', 'err', 3500);
+    toast('Не удалось загрузить по ссылке', 'err', 3200);
   }
 });
 
-/* Кнопки действий */
 $('#hookSend').addEventListener('click', async ()=>{
   if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
   try{
@@ -993,13 +994,12 @@ $('#hookSend').addEventListener('click', async ()=>{
     if(!res.ok) throw new Error('HTTP ' + res.status);
     toast('Отправлено', 'ok');
   }catch(err){
-    console.warn(err);
-    toast('Ошибка отправки (CORS/URL). JSON можно скопировать.', 'err', 3500);
+    toast('Не удалось отправить. JSON можно скопировать.', 'err', 3200);
   }
 });
 $('#hookEdit').addEventListener('click', ()=>{
   if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
-  toast('Режим редактирования: измените поля и нажмите «Отправить».', 'info', 3200);
+  toast('Измените поля и нажмите «Отправить».', 'info', 3000);
   $('#hookMsg').focus();
 });
 $('#hookDelete').addEventListener('click', ()=>{
@@ -1007,7 +1007,7 @@ $('#hookDelete').addEventListener('click', ()=>{
   if(!confirm('Удалить сообщение по этому вебхуку?')) return;
   fetch(hook.url, {method:'DELETE'})
     .then(r=>{ toast(r.ok ? 'Удалено' : 'Не удалось удалить', r.ok ? 'ok':'err'); })
-    .catch(()=> toast('Ошибка запроса (CORS)', 'err'));
+    .catch(()=> toast('Ошибка запроса', 'err'));
 });
 $('#hookClear').addEventListener('click', ()=>{
   hook.url=''; hook.name=''; hook.avatar=''; hook.msg=''; hook.file=null; hook.embeds=[];
@@ -1017,7 +1017,6 @@ $('#hookClear').addEventListener('click', ()=>{
   toast('Очищено', 'warn');
 });
 
-/* Embed-карточки */
 $('#hookAddEmbed').addEventListener('click', ()=>{
   if(hook.embeds.length >= MAX_EMBEDS) return;
   hook.embeds.push({ title:'', desc:'', color:'#7c5cff' });
@@ -1064,7 +1063,6 @@ function renderEmbeds(){
   });
 }
 
-/* Табы Редактор/JSON */
 $$('[data-embed-tab]').forEach(b=>{
   b.addEventListener('click', ()=>{
     $$('[data-embed-tab]').forEach(x=>x.classList.remove('active'));
@@ -1086,7 +1084,6 @@ function renderEmbedJSON(){
   $('#embedJSON').textContent = JSON.stringify(clean, null, 2);
 }
 
-/* Предпросмотр */
 function renderPreview(){
   const p = $('#hookPreview');
   const hasMsg = hook.msg.trim().length > 0;
@@ -1135,11 +1132,10 @@ $('#hookCopy').addEventListener('click', async ()=>{
   catch{ toast('Не удалось скопировать', 'err'); }
 });
 
-/* init */
 updCounters(); renderEmbeds(); renderPreview(); renderEmbedJSON();
 
 /* ============================================================
-   5. ПРОФИЛЬ: АВТОРИЗАЦИЯ / ЛОКАЛЬНЫЙ РЕЖИМ / FIREBASE
+   5. ПРОФИЛЬ
 ============================================================ */
 const LS = {
   profile: 'yurika_profile_v1',
@@ -1173,10 +1169,10 @@ function setSession(s){ localStorage.setItem(LS.session, JSON.stringify(s)); }
 function getSession(){ try{ return JSON.parse(localStorage.getItem(LS.session) || 'null'); }catch{ return null; } }
 function clearSession(){ localStorage.removeItem(LS.session); }
 
-function showCabinet(profile, source){
+function showCabinet(profile){
   $('#authView').style.display = 'none';
   $('#cabinetView').style.display = 'grid';
-  $('#profileStatus').textContent = 'авторизован · ' + source;
+  $('#profileStatus').textContent = 'Yurika';
 
   profile = Object.assign({
     name:'Юрика', surname:'Ботова',
@@ -1186,7 +1182,6 @@ function showCabinet(profile, source){
 
   $('#pName').textContent  = `${profile.name || ''} ${profile.surname || ''}`.trim() || 'Без имени';
   $('#pEmail').textContent = profile.email || '—';
-  $('#pSource').textContent = source;
   $('#inName').value = profile.name || '';
   $('#inSurname').value = profile.surname || '';
   $('#inEmail').value = profile.email || '';
@@ -1196,7 +1191,7 @@ function showCabinet(profile, source){
 function showAuth(){
   $('#cabinetView').style.display = 'none';
   $('#authView').style.display = 'block';
-  $('#profileStatus').textContent = 'не авторизован';
+  $('#profileStatus').textContent = 'Yurika';
 }
 function setAvatar(url){
   const img = $('#avatarImg');
@@ -1220,20 +1215,19 @@ $('#authForm').addEventListener('submit', async e=>{
         const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
         await fbDb.collection('profiles').doc(cred.user.uid).set(profile, {merge:true});
         saveProfileLocal(profile);
-        showCabinet(profile, 'Firebase');
+        showCabinet(profile);
         toast('Аккаунт создан', 'ok');
       }else{
         const cred = await fbAuth.signInWithEmailAndPassword(email, pass);
         const snap = await fbDb.collection('profiles').doc(cred.user.uid).get();
         const profile = snap.exists ? snap.data() : { email, name:'', surname:'', avatar:DEFAULT_AVATAR };
         saveProfileLocal(profile);
-        showCabinet(profile, 'Firebase');
+        showCabinet(profile);
         toast('Вход выполнен', 'ok');
       }
       return;
     }catch(err){
-      console.warn('Firebase Auth error:', err);
-      toast(err.message || 'Ошибка Firebase — переключаюсь в локальный режим', 'warn', 3500);
+      toast('Не удалось выполнить вход, попробуйте ещё раз', 'warn', 3200);
     }
   }
 
@@ -1242,25 +1236,25 @@ $('#authForm').addEventListener('submit', async e=>{
     const profile = { name, surname, email, avatar: DEFAULT_AVATAR };
     setCreds({ email, passHash: await sha256(pass) });
     saveProfileLocal(profile);
-    setSession({ email, source:'local' });
-    showCabinet(profile, 'local');
-    toast('Аккаунт создан (локально)', 'ok');
+    setSession({ email });
+    showCabinet(profile);
+    toast('Аккаунт создан', 'ok');
   }else{
     if(creds && creds.email === email){
       const h = await sha256(pass);
       if(h !== creds.passHash){ toast('Неверный пароль', 'err'); return; }
       const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
-      setSession({ email, source:'local' });
-      showCabinet(profile, 'local');
+      setSession({ email });
+      showCabinet(profile);
       toast('Вход выполнен', 'ok');
     }else{
       const profile = loadProfileLocal() || { name:'', surname:'', email, avatar:DEFAULT_AVATAR };
       profile.email = email;
       saveProfileLocal(profile);
       setCreds({ email, passHash: await sha256(pass) });
-      setSession({ email, source:'local' });
-      showCabinet(profile, 'local');
-      toast('Локальный профиль создан', 'ok');
+      setSession({ email });
+      showCabinet(profile);
+      toast('Аккаунт создан', 'ok');
     }
   }
 });
@@ -1268,13 +1262,13 @@ $('#authForm').addEventListener('submit', async e=>{
 $('#btnLocal').addEventListener('click', ()=>{
   const profile = loadProfileLocal() || {
     name:'Юрика', surname:'Ботова',
-    email:'local@yurika.bot',
+    email:'user@yurika.bot',
     avatar: DEFAULT_AVATAR
   };
   saveProfileLocal(profile);
-  setSession({ email: profile.email, source:'local' });
-  showCabinet(profile, 'local');
-  toast('Локальный профиль загружен', 'ok');
+  setSession({ email: profile.email });
+  showCabinet(profile);
+  toast('Профиль загружен', 'ok');
 });
 
 $('#btnLogout').addEventListener('click', async ()=>{
@@ -1300,7 +1294,7 @@ $('#profileForm').addEventListener('submit', async e=>{
         await fbAuth.currentUser.updateEmail(profile.email);
       }
     }
-  }catch(err){ console.warn(err); toast('Профиль сохранён локально', 'warn'); }
+  }catch(err){ /* тихо */ }
 
   $('#pName').textContent = `${profile.name} ${profile.surname}`.trim() || 'Без имени';
   $('#pEmail').textContent = profile.email || '—';
@@ -1315,17 +1309,15 @@ $('#passForm').addEventListener('submit', async e=>{
   try{
     if(fbReady && fbAuth && fbAuth.currentUser){
       await fbAuth.currentUser.updatePassword(p1);
-      toast('Пароль обновлён в Firebase', 'ok');
     }else{
       const creds = getCreds() || {};
       creds.passHash = await sha256(p1);
       setCreds(creds);
-      toast('Пароль обновлён (локально)', 'ok');
     }
+    toast('Пароль обновлён', 'ok');
     $('#newPass').value = ''; $('#newPass2').value = '';
   }catch(err){
-    console.warn(err);
-    toast(err.message || 'Не удалось обновить пароль', 'err', 3500);
+    toast('Не удалось обновить пароль', 'err', 3200);
   }
 });
 
@@ -1361,13 +1353,13 @@ $('#avatarFile').addEventListener('change', e=>{
 });
 
 /* ============================================================
-   6. АВТОЗАГРУЗКА СЕССИИ
+   6. АВТОЗАГРУЗКА
 ============================================================ */
 (function init(){
   const s = getSession();
   if(s){
     const profile = loadProfileLocal();
-    if(profile) showCabinet(profile, s.source || 'local');
+    if(profile) showCabinet(profile);
   }
   if(fbReady && fbAuth){
     fbAuth.onAuthStateChanged(async user=>{
@@ -1376,8 +1368,8 @@ $('#avatarFile').addEventListener('change', e=>{
           const snap = await fbDb.collection('profiles').doc(user.uid).get();
           const profile = snap.exists ? snap.data() : { email:user.email, name:'', surname:'', avatar:DEFAULT_AVATAR };
           saveProfileLocal(profile);
-          showCabinet(profile, 'Firebase');
-        }catch(e){ console.warn(e); }
+          showCabinet(profile);
+        }catch(e){ /* тихо */ }
       }
     });
   }
@@ -1385,7 +1377,7 @@ $('#avatarFile').addEventListener('change', e=>{
 
 if(!localStorage.getItem('yurika_hint_shown')){
   localStorage.setItem('yurika_hint_shown','1');
-  setTimeout(()=>toast('Совет: можно войти локально — кнопка внизу формы', 'info', 4200), 900);
+  setTimeout(()=>toast('Совет: можно войти без пароля — кнопка внизу формы', 'info', 4200), 900);
 }
 </script>
 </body>
