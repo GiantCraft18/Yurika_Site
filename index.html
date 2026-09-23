@@ -335,6 +335,7 @@ select option{background:#12162a; color:var(--text)}
 .btn.danger{--b1:#ff5a6a; --b2:#ffb020}
 .btn.block{width:100%}
 .btn.sm{padding:10px 14px; font-size:13px; border-radius:12px}
+.btn.xs{padding:6px 10px; font-size:12px; border-radius:10px}
 
 .row{display:flex; gap:10px; flex-wrap:wrap}
 .row.end{justify-content:flex-end}
@@ -509,6 +510,7 @@ select option{background:#12162a; color:var(--text)}
 .modal-overlay.open{display:flex}
 .modal-card{max-width:640px; width:100%; margin:auto}
 .modal-card.small{max-width:460px}
+.modal-card.wide{max-width:820px}
 .modal-card .card-head{
   position:sticky; top:0; z-index:2;
   background:linear-gradient(180deg, rgba(18,22,42,.98), rgba(18,22,42,.92));
@@ -558,6 +560,203 @@ select option{background:#12162a; color:var(--text)}
   transition:.2s background, .2s transform;
 }
 .ph-chip:hover{background:rgba(124,92,255,.28); transform:translateY(-1px)}
+
+/* ============ ВЕБХУК: РАСШИРЕНИЯ ============ */
+.hook-toolbar{
+  display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+  padding:10px 12px;
+  border-bottom:1px solid var(--stroke);
+  background:rgba(255,255,255,.02);
+}
+.md-btn{
+  width:32px;height:32px;border-radius:10px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(255,255,255,.04);
+  color:var(--text); cursor:pointer;
+  display:grid;place-items:center;
+  font-size:12.5px; font-weight:800;
+  transition:.2s background, .2s transform, .2s border-color;
+}
+.md-btn:hover{background:rgba(255,255,255,.09); transform:translateY(-1px); border-color:var(--brand)}
+.md-btn i{font-size:12.5px}
+.emoji-wrap{position:relative}
+.emoji-pop{
+  position:absolute; top:calc(100% + 8px); left:0;
+  z-index:20;
+  display:none;
+  padding:10px;
+  border-radius:14px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(18,22,42,.98);
+  box-shadow:var(--shadow);
+  grid-template-columns:repeat(8,1fr);
+  gap:6px;
+  width:min(320px, 90vw);
+}
+.emoji-pop.open{display:grid}
+.emoji-pop button{
+  background:none; border:none; cursor:pointer;
+  font-size:18px; padding:4px; border-radius:8px;
+  line-height:1;
+}
+.emoji-pop button:hover{background:rgba(255,255,255,.08)}
+
+.tabs-mini{
+  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;
+}
+.tabs-mini .chip{padding:7px 12px; font-size:12px}
+
+.preset-row{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
+.preset{
+  padding:7px 12px; border-radius:999px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(255,255,255,.04);
+  color:var(--text); font-weight:800; font-size:12px; cursor:pointer;
+  display:inline-flex; align-items:center; gap:6px;
+  transition:.2s background, .2s transform;
+}
+.preset:hover{background:rgba(255,255,255,.09); transform:translateY(-1px)}
+.preset i{font-size:11px}
+
+/* Color palette */
+.color-palette{
+  display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;
+}
+.color-swatch{
+  width:26px;height:26px;border-radius:8px;
+  border:2px solid var(--stroke-strong);
+  cursor:pointer;
+  transition:.2s transform, .2s border-color;
+}
+.color-swatch:hover{transform:translateY(-2px); border-color:#fff}
+
+/* Поля embed (author/footer/fields) */
+.mini-grid{display:grid; gap:8px; grid-template-columns:1fr 1fr}
+.mini-grid.one{grid-template-columns:1fr}
+.fields-list{display:flex; flex-direction:column; gap:8px; margin-top:8px}
+.field-item{
+  border:1px dashed var(--stroke-strong);
+  border-radius:12px; padding:10px;
+  background:rgba(255,255,255,.02);
+}
+.field-item .field-item-head{display:flex; gap:6px; align-items:center; margin-bottom:8px}
+.field-item .field-item-head b{font-size:12px; color:var(--muted); letter-spacing:.4px}
+.field-item .field-item-head .btn{margin-left:auto}
+
+/* Кнопки-компоненты */
+.buttons-list{display:flex; flex-direction:column; gap:8px; margin-top:8px}
+.btn-row{
+  display:flex; gap:6px; flex-wrap:wrap;
+  padding:10px; border-radius:12px;
+  border:1px dashed var(--stroke-strong);
+  background:rgba(255,255,255,.02);
+}
+.btn-row .btn-prev{
+  padding:6px 12px; border-radius:8px;
+  font-weight:800; font-size:12px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(88,101,242,.3);
+  color:#fff;
+  display:inline-flex; align-items:center; gap:6px;
+}
+.btn-prev.style-primary{background:#5865F2; border-color:#5865F2}
+.btn-prev.style-secondary{background:#4f545c; border-color:#4f545c}
+.btn-prev.style-success{background:#3ba55c; border-color:#3ba55c}
+.btn-prev.style-danger{background:#ed4245; border-color:#ed4245}
+.btn-prev.style-link{background:#3b3f47; border-color:#3b3f47}
+
+.select-prev{
+  display:flex; align-items:center; gap:8px;
+  padding:8px 12px; border-radius:8px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(43,45,49,.8);
+  color:var(--muted); font-weight:700; font-size:12.5px;
+}
+.select-prev::after{
+  content:"\f078";
+  font-family:"Font Awesome 6 Free"; font-weight:900;
+  margin-left:auto; font-size:10px;
+}
+
+/* Точное превью Discord */
+.discord-preview{
+  border-radius:14px;
+  padding:16px;
+  font-family:'Manrope', system-ui, sans-serif;
+  font-size:14.5px; line-height:1.55;
+  word-break:break-word;
+  transition:background .2s, color .2s;
+}
+.discord-preview.theme-dark{background:#313338; color:#dbdee1}
+.discord-preview.theme-light{background:#ffffff; color:#060607}
+.discord-preview .dp-head{display:flex; align-items:center; gap:10px; margin-bottom:6px}
+.discord-preview .dp-avatar{
+  width:40px;height:40px;border-radius:50%; flex:0 0 40px;
+  background:linear-gradient(135deg,#7c5cff,#22d3ee);
+  display:grid;place-items:center; color:#fff; font-weight:800;
+  overflow:hidden;
+}
+.discord-preview .dp-avatar img{width:100%;height:100%;object-fit:cover}
+.discord-preview .dp-name{font-weight:700}
+.discord-preview .dp-bot{
+  font-size:10px; font-weight:800;
+  background:#5865F2; color:#fff;
+  padding:2px 5px; border-radius:4px; margin-left:6px;
+  vertical-align:middle;
+}
+.discord-preview .dp-msg{white-space:pre-wrap; margin-bottom:4px}
+.discord-preview .dp-embed{
+  border-left:4px solid #5865F2;
+  border-radius:4px;
+  padding:12px 14px;
+  margin-top:8px;
+  background:rgba(0,0,0,.06);
+}
+.discord-preview.theme-dark .dp-embed{background:#2b2d31}
+.discord-preview.theme-light .dp-embed{background:#f2f3f5}
+.dp-embed .dp-author{display:flex; align-items:center; gap:8px; margin-bottom:8px}
+.dp-embed .dp-author img{width:22px;height:22px;border-radius:50%;object-fit:cover}
+.dp-embed .dp-author span{font-size:12.5px; font-weight:700}
+.dp-embed .dp-title{margin:0 0 6px; font-size:15px; font-weight:700; color:inherit}
+.dp-embed .dp-desc{margin:0; font-size:13.5px; opacity:.92; white-space:pre-wrap}
+.dp-embed .dp-fields{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
+.dp-embed .dp-field{min-width:100px; flex:1 1 40%; font-size:13px}
+.dp-embed .dp-field b{display:block; font-size:12.5px; margin-bottom:3px}
+.dp-embed .dp-thumb{
+  float:right; margin:0 0 8px 12px;
+  width:80px; height:80px; border-radius:6px; object-fit:cover;
+}
+.dp-embed .dp-img{
+  margin-top:10px; border-radius:6px; max-width:100%; display:block;
+}
+.dp-embed .dp-footer{display:flex; align-items:center; gap:8px; margin-top:10px}
+.dp-embed .dp-footer img{width:20px;height:20px;border-radius:50%;object-fit:cover}
+.dp-embed .dp-footer span{font-size:12px; opacity:.75}
+.dp-embed .dp-footer .dp-timestamp{font-size:11.5px; opacity:.65}
+
+/* Валидация */
+.checklist{
+  display:flex; flex-direction:column; gap:8px;
+}
+.chk{
+  display:flex; align-items:center; gap:10px;
+  padding:10px 12px; border-radius:12px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.02);
+  font-size:13.5px; font-weight:600;
+}
+.chk i{width:20px; text-align:center}
+.chk.ok{border-color:rgba(55,214,122,.4); background:rgba(55,214,122,.08)}
+.chk.ok i{color:var(--ok)}
+.chk.err{border-color:rgba(255,90,106,.4); background:rgba(255,90,106,.08)}
+.chk.err i{color:var(--err)}
+.chk.warn{border-color:rgba(255,176,32,.4); background:rgba(255,176,32,.08)}
+.chk.warn i{color:var(--warn)}
+
+/* Экспорт-табы */
+.export-code{
+  margin-top:10px;
+}
 
 /* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
@@ -667,6 +866,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .cmd-grid{grid-template-columns:1fr}
   .feature-list{grid-template-columns:1fr}
   .stat-grid{grid-template-columns:1fr}
+  .mini-grid{grid-template-columns:1fr}
   nav.tabs{width:100%; margin-left:0; order:3; padding-top:6px}
   .topbar-inner{flex-wrap:wrap}
   .tab{flex:1 1 auto; justify-content:center; padding:9px 10px; font-size:12.5px}
@@ -843,115 +1043,222 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       <h2><i class="fa-solid fa-bolt" style="color:var(--warn)"></i> Yurika Hook</h2>
       <span class="pill">визуальный конструктор вебхуков</span>
     </div>
-    <p class="hint" style="max-width:640px; margin:-6px 0 18px">
-      Визуальный конструктор сообщений и embed-карточек для вебхуков Yurika Bot.
-      Всё работает в браузере, шаблоны не сохраняются.
+    <p class="hint" style="max-width:780px; margin:-6px 0 18px">
+      Визуальный конструктор сообщений, embed-карточек и компонентов для вебхуков Yurika Bot.
+      Все работает в браузере, шаблоны не отправляются на сервер.
     </p>
 
+    <div class="tabs-mini" id="hookTabs">
+      <button class="chip active" data-hooktab="editor"><i class="fa-solid fa-pen-to-square"></i> Редактор</button>
+      <button class="chip" data-hooktab="templates"><i class="fa-solid fa-wand-magic-sparkles"></i> Шаблоны</button>
+      <button class="chip" data-hooktab="validate"><i class="fa-solid fa-list-check"></i> Проверка</button>
+      <button class="chip" data-hooktab="export"><i class="fa-solid fa-file-export"></i> Экспорт</button>
+    </div>
+
     <div class="hook-grid">
+      <!-- ЛЕВАЯ КОЛОНКА -->
       <div style="display:flex; flex-direction:column; gap:16px">
 
-        <div class="card">
-          <div class="card-head">
-            <div class="ico"><i class="fa-solid fa-link"></i></div>
-            <h3>Вебхук</h3>
-          </div>
-          <div class="card-pad">
-            <div class="field" style="margin-bottom:10px">
-              <div class="input-wrap"><i class="fa-solid fa-globe lead"></i>
-                <input id="hookUrl" maxlength="200" placeholder="URL вебхука" />
-              </div>
-            </div>
+        <!-- Редактор -->
+        <div id="hookPane-editor" style="display:flex; flex-direction:column; gap:16px">
 
-            <div class="grid cols-2" style="gap:10px">
-              <div class="field" style="margin:0">
-                <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
-                  <input id="hookName" maxlength="80" placeholder="Имя отправителя" />
+          <!-- Вебхук -->
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-link"></i></div>
+              <h3>Вебхук</h3>
+              <span class="badge" id="saveBadge" style="margin-left:auto"><i class="fa-solid fa-cloud"></i> черновик сохранён</span>
+            </div>
+            <div class="card-pad">
+              <div class="field" style="margin-bottom:10px">
+                <div class="input-wrap"><i class="fa-solid fa-globe lead"></i>
+                  <input id="hookUrl" maxlength="200" placeholder="URL вебхука" />
                 </div>
               </div>
-              <div class="field" style="margin:0">
-                <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
-                  <input id="hookAvatar" maxlength="300" placeholder="Аватар (URL)" />
+
+              <div class="grid cols-2" style="gap:10px">
+                <div class="field" style="margin:0">
+                  <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
+                    <input id="hookName" maxlength="80" placeholder="Имя отправителя" />
+                  </div>
+                </div>
+                <div class="field" style="margin:0">
+                  <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
+                    <input id="hookAvatar" maxlength="300" placeholder="Аватар (URL)" />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div class="hint" style="margin:6px 0 12px"><span id="cntUrl">0 / 80</span></div>
+              <div class="hint" style="margin:6px 0 12px"><span id="cntUrl">0 / 80</span></div>
 
-            <div class="grid cols-2" style="gap:10px">
-              <div class="field" style="margin:0">
-                <div class="input-wrap"><i class="fa-solid fa-message lead"></i>
-                  <input id="hookLoadBy" placeholder="Загрузить сообщение по ссылке или ID" />
+              <div class="grid cols-2" style="gap:10px">
+                <div class="field" style="margin:0">
+                  <div class="input-wrap"><i class="fa-solid fa-message lead"></i>
+                    <input id="hookLoadBy" placeholder="Загрузить сообщение по ссылке или ID" />
+                  </div>
                 </div>
+                <button class="btn cyan" id="hookLoad" type="button">
+                  <i class="fa-solid fa-download"></i> Загрузить
+                </button>
               </div>
-              <button class="btn cyan" id="hookLoad" type="button">
-                <i class="fa-solid fa-download"></i> Загрузить
-              </button>
             </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-pad" style="padding:12px 14px">
-            <div class="row">
-              <button class="btn sm" id="hookSend"><i class="fa-solid fa-paper-plane"></i> Отправить</button>
-              <button class="btn ghost sm" id="hookEdit"><i class="fa-solid fa-pen"></i> Редактировать</button>
-              <button class="btn ghost sm" id="hookDelete"><i class="fa-solid fa-trash"></i> Удалить</button>
-              <button class="btn ghost sm" id="hookClear" style="margin-left:auto"><i class="fa-solid fa-broom"></i> Очистить</button>
+          <!-- Панель кнопок -->
+          <div class="card">
+            <div class="card-pad" style="padding:12px 14px">
+              <div class="row">
+                <button class="btn sm" id="hookSend"><i class="fa-solid fa-paper-plane"></i> Отправить</button>
+                <button class="btn ghost sm" id="hookEdit"><i class="fa-solid fa-pen"></i> Редактировать</button>
+                <button class="btn ghost sm" id="hookDelete"><i class="fa-solid fa-trash"></i> Удалить</button>
+                <button class="btn ghost sm" id="hookShare" style="margin-left:auto"><i class="fa-solid fa-share-nodes"></i> Ссылка-шаблон</button>
+                <button class="btn ghost sm" id="hookClear"><i class="fa-solid fa-broom"></i> Очистить</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="card">
-          <div class="card-head">
-            <div class="ico"><i class="fa-solid fa-comment-dots"></i></div>
-            <h3>Сообщение</h3>
-            <span class="counter" id="cntMsg" style="margin-left:auto">0 / 2000</span>
-          </div>
-          <div class="card-pad">
-            <textarea id="hookMsg" maxlength="2000" placeholder="Текст сообщения" style="min-height:120px"></textarea>
-
-            <div class="row" style="margin-top:12px">
-              <button class="btn ghost sm" id="hookAttach"><i class="fa-solid fa-paperclip"></i> Прикрепить файл</button>
-              <input type="file" id="hookFile" hidden />
-              <span class="hint" id="hookFileName"></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="card">
-          <div class="card-head">
-            <div class="ico"><i class="fa-solid fa-layer-group"></i></div>
-            <h3>Embed-карточки</h3>
-            <span class="badge" id="cntEmbBadge" style="margin-left:auto">0 / 10</span>
-            <button class="btn sm" id="hookAddEmbed"><i class="fa-solid fa-plus"></i> Добавить</button>
-          </div>
-          <div class="card-pad">
-            <div class="auth-tabs" style="margin-bottom:14px">
-              <button class="chip active" data-embed-tab="editor"><i class="fa-solid fa-pen-to-square"></i> Редактор</button>
-              <button class="chip" data-embed-tab="json"><i class="fa-solid fa-code"></i> JSON</button>
+          <!-- Сообщение -->
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-comment-dots"></i></div>
+              <h3>Сообщение</h3>
+              <span class="counter" id="cntMsg" style="margin-left:auto">0 / 2000</span>
             </div>
 
-            <div id="embedEditor">
+            <div class="hook-toolbar">
+              <button class="md-btn" data-md="b" title="Жирный (Ctrl+B)"><i class="fa-solid fa-bold"></i></button>
+              <button class="md-btn" data-md="i" title="Курсив (Ctrl+I)"><i class="fa-solid fa-italic"></i></button>
+              <button class="md-btn" data-md="s" title="Зачёркнутый"><i class="fa-solid fa-strikethrough"></i></button>
+              <button class="md-btn" data-md="code" title="Код">&lt;/&gt;</button>
+              <button class="md-btn" data-md="codeblock" title="Блок кода"><i class="fa-solid fa-code"></i></button>
+              <button class="md-btn" data-md="spoiler" title="Спойлер">||</button>
+              <button class="md-btn" data-md="quote" title="Цитата"><i class="fa-solid fa-quote-left"></i></button>
+              <button class="md-btn" data-md="link" title="Ссылка"><i class="fa-solid fa-link"></i></button>
+              <div class="emoji-wrap" style="margin-left:auto">
+                <button class="md-btn" id="emojiBtn" title="Эмодзи"><i class="fa-regular fa-face-smile"></i></button>
+                <div class="emoji-pop" id="emojiPop"></div>
+              </div>
+            </div>
+
+            <div class="card-pad">
+              <textarea id="hookMsg" maxlength="2000" placeholder="Текст сообщения…" style="min-height:120px"></textarea>
+
+              <div class="row" style="margin-top:12px">
+                <button class="btn ghost sm" id="hookAttach"><i class="fa-solid fa-paperclip"></i> Прикрепить файл</button>
+                <input type="file" id="hookFile" hidden />
+                <span class="hint" id="hookFileName"></span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Embed-карточки -->
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-layer-group"></i></div>
+              <h3>Embed-карточки</h3>
+              <span class="badge" id="cntEmbBadge" style="margin-left:auto">0 / 10</span>
+              <button class="btn sm" id="hookAddEmbed"><i class="fa-solid fa-plus"></i> Добавить</button>
+            </div>
+            <div class="card-pad">
               <div id="embeds"></div>
               <div class="empty" id="embedsEmpty" style="min-height:120px">
                 <i class="fa-regular fa-square-plus"></i>
                 <div>Нет embed-карточек. Нажмите «Добавить».</div>
               </div>
             </div>
+          </div>
 
-            <pre class="code" id="embedJSON" style="display:none; max-height:340px">{}</pre>
+          <!-- Компоненты -->
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-square-poll-vertical"></i></div>
+              <h3>Компоненты</h3>
+              <span class="badge" id="cntCompBadge" style="margin-left:auto">0 / 5 рядов</span>
+              <button class="btn sm" id="hookAddRow"><i class="fa-solid fa-plus"></i> Добавить ряд</button>
+            </div>
+            <div class="card-pad">
+              <div id="compRows"></div>
+              <div class="empty" id="compEmpty" style="min-height:120px">
+                <i class="fa-solid fa-square-plus"></i>
+                <div>Нет рядов. Добавьте кнопки или select-меню.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Шаблоны -->
+        <div id="hookPane-templates" style="display:none">
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+              <h3>Готовые шаблоны</h3>
+            </div>
+            <div class="card-pad">
+              <p class="hint" style="margin:0 0 12px">Нажми на шаблон — он заменит текущее содержимое редактора. Отменить можно кнопкой «Очистить».</p>
+              <div id="templatesList" class="preset-row"></div>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:16px">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-bookmark"></i></div>
+              <h3>Мои шаблоны</h3>
+              <button class="btn sm ghost" id="tplSaveMine" style="margin-left:auto"><i class="fa-solid fa-floppy-disk"></i> Сохранить текущий</button>
+            </div>
+            <div class="card-pad">
+              <div id="myTemplates" class="preset-row"></div>
+              <div class="hint" id="myTplEmpty">Пока нет сохранённых шаблонов.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Проверка -->
+        <div id="hookPane-validate" style="display:none">
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-list-check"></i></div>
+              <h3>Проверка (dry-run)</h3>
+              <button class="btn sm cyan" id="runCheck" style="margin-left:auto"><i class="fa-solid fa-play"></i> Проверить</button>
+            </div>
+            <div class="card-pad">
+              <div class="checklist" id="checklist">
+                <div class="chk"><i class="fa-solid fa-circle-notch"></i> Нажмите «Проверить», чтобы запустить валидацию.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Экспорт -->
+        <div id="hookPane-export" style="display:none">
+          <div class="card">
+            <div class="card-head">
+              <div class="ico"><i class="fa-solid fa-file-export"></i></div>
+              <h3>Экспорт</h3>
+              <button class="btn sm cyan" id="copyExport" style="margin-left:auto"><i class="fa-solid fa-copy"></i> Копировать</button>
+            </div>
+            <div class="card-pad">
+              <div class="tabs-mini" id="exportTabs">
+                <button class="chip active" data-export="json">JSON</button>
+                <button class="chip" data-export="curl">curl</button>
+                <button class="chip" data-export="discordjs">discord.js</button>
+                <button class="chip" data-export="python">Python</button>
+                <button class="chip" data-export="fetch">fetch()</button>
+              </div>
+              <pre class="code export-code" id="exportCode">{}</pre>
+            </div>
           </div>
         </div>
       </div>
 
+      <!-- ПРАВАЯ КОЛОНКА: ПРЕДПРОСМОТР -->
       <div class="card" style="align-self:start; position:sticky; top:80px">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-eye"></i></div>
           <h3>Предпросмотр</h3>
-          <button class="btn sm cyan" id="hookCopy" style="margin-left:auto"><i class="fa-solid fa-copy"></i> JSON</button>
+          <button class="btn xs ghost" id="themeToggle" style="margin-left:auto"><i class="fa-solid fa-circle-half-stroke"></i> Тема</button>
+          <button class="btn sm cyan" id="hookCopy"><i class="fa-solid fa-copy"></i> JSON</button>
         </div>
         <div class="card-pad">
-          <div class="preview" id="hookPreview">
+          <div class="discord-preview theme-dark" id="hookPreview">
             <div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>
           </div>
         </div>
@@ -1561,6 +1868,7 @@ function initials(name){
   const n = (name||'?').trim();
   return n ? n[0].toUpperCase() : '?';
 }
+function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
 
 /* ============================================================
    1. FIREBASE
@@ -1752,38 +2060,123 @@ $('#cmdSearch').addEventListener('input', e=>{ search = e.target.value; renderCo
 renderCatTabs(); renderCommands();
 
 /* ============================================================
-   4. ВЕБХУК
+   4. ВЕБХУК — РАСШИРЕННЫЙ КОНСТРУКТОР
 ============================================================ */
 const MAX_EMBEDS = 10;
-const hook = { url:'', name:'', avatar:'', msg:'', file:null, embeds:[] };
+const MAX_BTN_ROWS = 5;
+const MAX_BTNS_PER_ROW = 5;
 
+const DISCORD_COLORS = [
+  '#5865F2', '#57F287', '#FEE75C', '#EB459E', '#ED4245',
+  '#3BA55C', '#FAA61A', '#FF73FA', '#FFFFFF', '#000000'
+];
+
+const state = {
+  url:'', name:'', avatar:'', msg:'', file:null,
+  embeds:[],  // каждый: {title,desc,color,author:{name,icon,url},footer:{text,icon},image,thumbnail,fields:[{name,value,inline}]}
+  rows:[],    // каждый: {type:'buttons'|'select', buttons:[{label,emoji,style,url}], select:{placeholder,options:[{label,value,desc}]}}
+  theme:'dark'
+};
+
+/* ----- Управление вкладками самого конструктора ----- */
+$$('#hookTabs .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    $$('#hookTabs .chip').forEach(x=>x.classList.remove('active'));
+    chip.classList.add('active');
+    const t = chip.dataset.hooktab;
+    ['editor','templates','validate','export'].forEach(name=>{
+      $('#hookPane-' + name).style.display = (name === t) ? 'block' : 'none';
+    });
+    if(t === 'validate') runChecklist();
+    if(t === 'export')  renderExport();
+  });
+});
+
+/* ----- Markdown-панель ----- */
+function applyMd(wrap){
+  const ta = $('#hookMsg');
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  const value = ta.value;
+  const sel = value.slice(start, end);
+  const before = value.slice(0, start);
+  const after = value.slice(end);
+  let insert = '';
+  if(wrap === 'link'){ insert = `[${sel || 'текст'}](https://example.com)`; }
+  else if(wrap === 'codeblock'){ insert = '```\n' + (sel || 'код') + '\n```'; }
+  else insert = wrap + (sel || 'текст') + wrap;
+  ta.value = before + insert + after;
+  ta.focus();
+  const pos = before.length + insert.length;
+  ta.selectionStart = ta.selectionEnd = pos;
+  state.msg = ta.value; updCounters(); renderPreview(); saveDraft();
+}
+$$('.md-btn[data-md]').forEach(b=>{
+  b.addEventListener('click', ()=> applyMd(b.dataset.md));
+});
+
+/* ----- Эмодзи-пикер ----- */
+const EMOJIS = ['😀','😂','🥰','😎','🤔','😴','🤯','🥳','😭','🤩','👍','👎','🔥','✨','💜','💙','💚','💛','🧡','❤️','🎉','🎁','🎮','🎧','🚀','⚡','🌟','🍀','🌈','🍕','🍔','🍩','☕','🐱','🐶','🦊','🐼','🐸','🦄','🌸','🌺','🌊','🍎','🍓','🍒','🥇','🏆','📌','📎','🔔','🔒','🔑','💎','⭐','🌙','☀️','🌧️','⚔️','🛡️','💬','📢','📣','💡','💯','✅','❌','⚠️','ℹ️'];
+function buildEmojiPop(){
+  const pop = $('#emojiPop');
+  pop.innerHTML = '';
+  EMOJIS.forEach(e=>{
+    const b = document.createElement('button');
+    b.type = 'button';
+    b.textContent = e;
+    b.onclick = ()=>{
+      const ta = $('#hookMsg');
+      const start = ta.selectionStart, end = ta.selectionEnd;
+      ta.value = ta.value.slice(0,start) + e + ta.value.slice(end);
+      ta.focus();
+      ta.selectionStart = ta.selectionEnd = start + e.length;
+      state.msg = ta.value; updCounters(); renderPreview(); saveDraft();
+      pop.classList.remove('open');
+    };
+    pop.appendChild(b);
+  });
+}
+buildEmojiPop();
+$('#emojiBtn').addEventListener('click', (e)=>{
+  e.stopPropagation();
+  $('#emojiPop').classList.toggle('open');
+});
+document.addEventListener('click', ()=> $('#emojiPop').classList.remove('open'));
+
+/* ----- Счётчики ----- */
 function counter(el, val, max){
   if(!el) return;
   el.textContent = `${val} / ${max}`;
   el.classList.toggle('over', val > max);
 }
 function updCounters(){
-  counter($('#cntUrl'), hook.url.length, 80);
-  counter($('#cntMsg'), hook.msg.length, 2000);
-  const badge = $('#cntEmbBadge');
-  if(badge){
-    badge.textContent = `${hook.embeds.length} / ${MAX_EMBEDS}`;
-    badge.classList.toggle('warn', hook.embeds.length >= MAX_EMBEDS);
+  counter($('#cntUrl'), state.url.length, 80);
+  counter($('#cntMsg'), state.msg.length, 2000);
+  const eBadge = $('#cntEmbBadge');
+  if(eBadge){
+    eBadge.textContent = `${state.embeds.length} / ${MAX_EMBEDS}`;
+    eBadge.classList.toggle('warn', state.embeds.length >= MAX_EMBEDS);
+  }
+  const cBadge = $('#cntCompBadge');
+  if(cBadge){
+    cBadge.textContent = `${state.rows.length} / ${MAX_BTN_ROWS} рядов`;
+    cBadge.classList.toggle('warn', state.rows.length >= MAX_BTN_ROWS);
   }
 }
 
-$('#hookUrl').addEventListener('input', e=>{ hook.url = e.target.value; updCounters(); });
-$('#hookName').addEventListener('input', e=>{ hook.name = e.target.value; renderPreview(); });
-$('#hookAvatar').addEventListener('input', e=>{ hook.avatar = e.target.value; renderPreview(); });
-$('#hookMsg').addEventListener('input', e=>{ hook.msg = e.target.value; updCounters(); renderPreview(); });
+/* ----- Привязка полей ----- */
+$('#hookUrl').addEventListener('input', e=>{ state.url = e.target.value; updCounters(); saveDraft(); });
+$('#hookName').addEventListener('input', e=>{ state.name = e.target.value; renderPreview(); saveDraft(); });
+$('#hookAvatar').addEventListener('input', e=>{ state.avatar = e.target.value; renderPreview(); saveDraft(); });
+$('#hookMsg').addEventListener('input', e=>{ state.msg = e.target.value; updCounters(); renderPreview(); saveDraft(); });
 
 $('#hookAttach').addEventListener('click', ()=> $('#hookFile').click());
 $('#hookFile').addEventListener('change', e=>{
-  const f = e.target.files[0]; hook.file = f || null;
+  const f = e.target.files[0]; state.file = f || null;
   $('#hookFileName').textContent = f ? f.name : '';
   renderPreview();
 });
 
+/* ----- Загрузка по ссылке ----- */
 $('#hookLoad').addEventListener('click', async ()=>{
   const ref = $('#hookLoadBy').value.trim();
   if(!ref){ toast('Укажите ссылку или ID', 'warn'); return; }
@@ -1792,27 +2185,32 @@ $('#hookLoad').addEventListener('click', async ()=>{
     const res = await fetch(ref);
     if(!res.ok) throw new Error('HTTP ' + res.status);
     const data = await res.json();
-    if(data.content){ hook.msg = data.content; $('#hookMsg').value = data.content; }
-    if(data.username){ hook.name = data.username; $('#hookName').value = data.username; }
-    if(data.avatar_url){ hook.avatar = data.avatar_url; $('#hookAvatar').value = data.avatar_url; }
+    if(data.content){ state.msg = data.content; $('#hookMsg').value = data.content; }
+    if(data.username){ state.name = data.username; $('#hookName').value = data.username; }
+    if(data.avatar_url){ state.avatar = data.avatar_url; $('#hookAvatar').value = data.avatar_url; }
     if(Array.isArray(data.embeds)){
-      hook.embeds = data.embeds.slice(0, MAX_EMBEDS).map(e=>({
-        title:e.title||'', desc:e.description||'',
-        color: e.color ? '#'+e.color.toString(16).padStart(6,'0') : '#7c5cff'
+      state.embeds = data.embeds.slice(0, MAX_EMBEDS).map(e=>({
+        title: e.title||'', desc: e.description||'',
+        color: e.color ? '#'+e.color.toString(16).padStart(6,'0') : '#5865F2',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'',icon:''},
+        image:'', thumbnail:'',
+        fields: Array.isArray(e.fields) ? e.fields.map(f=>({name:f.name||'',value:f.value||'',inline:!!f.inline})) : []
       }));
       renderEmbeds();
     }
-    updCounters(); renderPreview(); renderEmbedJSON();
+    updCounters(); renderPreview(); saveDraft();
     toast('Загружено', 'ok');
   }catch(err){
     toast('Не удалось загрузить по ссылке', 'err', 3200);
   }
 });
 
+/* ----- Отправка / удаление / очистка ----- */
 $('#hookSend').addEventListener('click', async ()=>{
-  if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
+  if(!state.url){ toast('Укажите URL вебхука', 'err'); return; }
   try{
-    const res = await fetch(hook.url, {
+    const res = await fetch(state.url, {
       method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify(buildPayload())
     });
@@ -1823,141 +2221,822 @@ $('#hookSend').addEventListener('click', async ()=>{
   }
 });
 $('#hookEdit').addEventListener('click', ()=>{
-  if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
+  if(!state.url){ toast('Укажите URL вебхука', 'err'); return; }
   toast('Измените поля и нажмите «Отправить».', 'info', 3000);
   $('#hookMsg').focus();
 });
 $('#hookDelete').addEventListener('click', ()=>{
-  if(!hook.url){ toast('Укажите URL вебхука', 'err'); return; }
+  if(!state.url){ toast('Укажите URL вебхука', 'err'); return; }
   if(!confirm('Удалить сообщение по этому вебхуку?')) return;
-  fetch(hook.url, {method:'DELETE'})
+  fetch(state.url, {method:'DELETE'})
     .then(r=>{ toast(r.ok ? 'Удалено' : 'Не удалось удалить', r.ok ? 'ok':'err'); })
     .catch(()=> toast('Ошибка запроса', 'err'));
 });
 $('#hookClear').addEventListener('click', ()=>{
-  hook.url=''; hook.name=''; hook.avatar=''; hook.msg=''; hook.file=null; hook.embeds=[];
+  state.url=''; state.name=''; state.avatar=''; state.msg=''; state.file=null;
+  state.embeds=[]; state.rows=[];
   $('#hookUrl').value=''; $('#hookName').value=''; $('#hookAvatar').value='';
   $('#hookMsg').value=''; $('#hookFileName').textContent=''; $('#hookLoadBy').value='';
-  renderEmbeds(); updCounters(); renderPreview(); renderEmbedJSON();
+  renderEmbeds(); renderComp(); updCounters(); renderPreview(); saveDraft();
   toast('Очищено', 'warn');
 });
-
-$('#hookAddEmbed').addEventListener('click', ()=>{
-  if(hook.embeds.length >= MAX_EMBEDS) return;
-  hook.embeds.push({ title:'', desc:'', color:'#7c5cff' });
-  renderEmbeds(); updCounters(); renderPreview(); renderEmbedJSON();
-});
-
-function renderEmbeds(){
-  const box = $('#embeds'); box.innerHTML = '';
-  hook.embeds.forEach((em, i)=>{
-    const d = document.createElement('div');
-    d.className = 'embed-box';
-    d.innerHTML = `
-      <div class="embed-top">
-        <i class="fa-solid fa-layer-group" style="color:var(--brand-2)"></i>
-        <strong>Embed #${i+1}</strong>
-        <button class="btn ghost sm" data-del="${i}"><i class="fa-solid fa-trash"></i></button>
-      </div>
-      <div class="color-line" style="background:${em.color || '#7c5cff'}"></div>
-      <div class="field"><label>Заголовок</label>
-        <input data-i="${i}" data-f="title" maxlength="256" placeholder="Заголовок" value="${escapeHTML(em.title||'')}">
-      </div>
-      <div class="field"><label>Описание</label>
-        <textarea data-i="${i}" data-f="desc" maxlength="6000" placeholder="Описание…" style="min-height:80px">${escapeHTML(em.desc||'')}</textarea>
-      </div>
-      <div class="field" style="margin-bottom:0"><label>Цвет</label>
-        <input type="color" data-i="${i}" data-f="color" value="${em.color||'#7c5cff'}" style="padding:6px; height:44px">
-      </div>`;
-    box.appendChild(d);
-  });
-  $('#embedsEmpty').style.display = hook.embeds.length ? 'none' : 'grid';
-  $('#hookAddEmbed').disabled = hook.embeds.length >= MAX_EMBEDS;
-  $('#hookAddEmbed').style.opacity = hook.embeds.length >= MAX_EMBEDS ? .5 : 1;
-
-  box.querySelectorAll('[data-del]').forEach(b=>{
-    b.onclick = ()=>{ hook.embeds.splice(+b.dataset.del,1); renderEmbeds(); updCounters(); renderPreview(); renderEmbedJSON(); };
-  });
-  box.querySelectorAll('[data-i]').forEach(inp=>{
-    inp.oninput = ()=>{
-      const i = +inp.dataset.i, f = inp.dataset.f;
-      hook.embeds[i][f] = inp.value;
-      if(f === 'color') renderEmbeds();
-      renderPreview(); renderEmbedJSON();
-    };
-  });
-}
-
-$$('[data-embed-tab]').forEach(b=>{
-  b.addEventListener('click', ()=>{
-    $$('[data-embed-tab]').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    const t = b.dataset.embedTab;
-    $('#embedEditor').style.display = t === 'editor' ? 'block' : 'none';
-    $('#embedJSON').style.display  = t === 'json'   ? 'block' : 'none';
-    if(t === 'json') renderEmbedJSON();
-  });
-});
-function renderEmbedJSON(){
-  const clean = hook.embeds
-    .filter(e => (e.title||'').trim() || (e.desc||'').trim())
-    .map(e => ({
-      title: e.title || undefined,
-      description: e.desc || undefined,
-      color: e.color ? parseInt(e.color.replace('#',''),16) : undefined
-    }));
-  $('#embedJSON').textContent = JSON.stringify(clean, null, 2);
-}
-
-function renderPreview(){
-  const p = $('#hookPreview');
-  const hasMsg = hook.msg.trim().length > 0;
-  const hasEmb = hook.embeds.some(e => (e.title||'').trim() || (e.desc||'').trim());
-  const hasFile = !!hook.file;
-  if(!hasMsg && !hasEmb && !hasFile && !hook.name && !hook.avatar){
-    p.innerHTML = `<div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>`;
-    return;
-  }
-  let html = '';
-  if(hook.name || hook.avatar){
-    html += `<div style="display:flex; align-items:center; gap:10px; margin-bottom:10px">
-      ${hook.avatar ? `<img src="${escapeHTML(hook.avatar)}" style="width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid var(--stroke-strong)" onerror="this.style.display='none'">` : ''}
-      ${hook.name ? `<strong style="font-size:14px">${escapeHTML(hook.name)}</strong>` : ''}
-    </div>`;
-  }
-  if(hasMsg) html += `<div class="msg">${escapeHTML(hook.msg)}</div>`;
-  if(hasFile) html += `<div class="hint" style="margin-top:10px"><i class="fa-solid fa-paperclip"></i> ${escapeHTML(hook.file.name)}</div>`;
-  hook.embeds.forEach(e=>{
-    if(!(e.title||'').trim() && !(e.desc||'').trim()) return;
-    html += `<div class="e" style="border-left-color:${e.color||'#7c5cff'}">
-      ${e.title ? `<h4>${escapeHTML(e.title)}</h4>` : ''}
-      ${e.desc ? `<p>${escapeHTML(e.desc)}</p>` : ''}
-    </div>`;
-  });
-  p.innerHTML = html || `<div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>`;
-}
-
-function buildPayload(){
-  return {
-    url: hook.url || undefined,
-    username: hook.name || undefined,
-    avatar_url: hook.avatar || undefined,
-    content: hook.msg || undefined,
-    embeds: hook.embeds
-      .filter(e => (e.title||'').trim() || (e.desc||'').trim())
-      .map(e => ({
-        title: e.title || undefined,
-        description: e.desc || undefined,
-        color: e.color ? parseInt(e.color.replace('#',''),16) : undefined
-      }))
-  };
-}
 $('#hookCopy').addEventListener('click', async ()=>{
   try{ await navigator.clipboard.writeText(JSON.stringify(buildPayload(), null, 2)); toast('JSON скопирован', 'ok'); }
   catch{ toast('Не удалось скопировать', 'err'); }
 });
 
-updCounters(); renderEmbeds(); renderPreview(); renderEmbedJSON();
+/* ----- Ссылка-шаблон ----- */
+$('#hookShare').addEventListener('click', async ()=>{
+  try{
+    const data = btoa(unescape(encodeURIComponent(JSON.stringify(buildPayload()))));
+    const link = location.origin + location.pathname + '#hook=' + data;
+    await navigator.clipboard.writeText(link);
+    toast('Ссылка-шаблон скопирована', 'ok', 3200);
+  }catch(err){
+    toast('Не удалось сформировать ссылку', 'err');
+  }
+});
+
+/* ----- EMBEDS ----- */
+$('#hookAddEmbed').addEventListener('click', ()=>{
+  if(state.embeds.length >= MAX_EMBEDS) return;
+  state.embeds.push({
+    title:'', desc:'', color:'#5865F2',
+    author:{name:'',icon:'',url:''},
+    footer:{text:'',icon:''},
+    image:'', thumbnail:'',
+    fields:[]
+  });
+  renderEmbeds(); updCounters(); renderPreview(); saveDraft();
+});
+
+function buildColorPalette(current, idx, prop){
+  return `<div class="color-palette">${
+    DISCORD_COLORS.map(c=>`<div class="color-swatch" style="background:${c}" data-color="${c}" data-emb="${idx}" data-prop="${prop}" title="${c}"></div>`).join('')
+  }</div>`;
+}
+
+function renderEmbeds(){
+  const box = $('#embeds'); box.innerHTML = '';
+  state.embeds.forEach((em, i)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'embed-box';
+    wrap.innerHTML = `
+      <div class="embed-top">
+        <i class="fa-solid fa-layer-group" style="color:var(--brand-2)"></i>
+        <strong>Embed #${i+1}</strong>
+        <button class="btn ghost sm" data-dupl="${i}" title="Дублировать"><i class="fa-solid fa-clone"></i></button>
+        <button class="btn ghost sm" data-del="${i}" title="Удалить"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="color-line" style="background:${em.color || '#5865F2'}"></div>
+
+      <div class="tabs-mini">
+        <button class="chip active" data-embtab="main" data-i="${i}">Основное</button>
+        <button class="chip" data-embtab="author" data-i="${i}">Автор</button>
+        <button class="chip" data-embtab="media" data-i="${i}">Медиа</button>
+        <button class="chip" data-embtab="footer" data-i="${i}">Футер</button>
+        <button class="chip" data-embtab="fields" data-i="${i}">Поля (${em.fields.length})</button>
+      </div>
+
+      <div class="emb-pane" data-pane="main">
+        <div class="field"><label>Заголовок</label>
+          <input data-i="${i}" data-f="title" maxlength="256" placeholder="Заголовок" value="${escapeHTML(em.title||'')}">
+        </div>
+        <div class="field"><label>Описание</label>
+          <textarea data-i="${i}" data-f="desc" maxlength="4096" placeholder="Описание…" style="min-height:80px">${escapeHTML(em.desc||'')}</textarea>
+        </div>
+        <div class="field" style="margin-bottom:0"><label>Цвет</label>
+          <input type="color" data-i="${i}" data-f="color" value="${em.color||'#5865F2'}" style="padding:6px; height:44px">
+          ${buildColorPalette(em.color, i, 'color')}
+        </div>
+      </div>
+
+      <div class="emb-pane" data-pane="author" style="display:none">
+        <div class="mini-grid">
+          <div class="field"><label>Имя автора</label>
+            <input data-i="${i}" data-f="author.name" maxlength="256" placeholder="Юрика" value="${escapeHTML(em.author.name||'')}">
+          </div>
+          <div class="field"><label>Иконка (URL)</label>
+            <input data-i="${i}" data-f="author.icon" maxlength="400" placeholder="https://…" value="${escapeHTML(em.author.icon||'')}">
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:0"><label>Ссылка автора</label>
+          <input data-i="${i}" data-f="author.url" maxlength="400" placeholder="https://…" value="${escapeHTML(em.author.url||'')}">
+        </div>
+      </div>
+
+      <div class="emb-pane" data-pane="media" style="display:none">
+        <div class="mini-grid">
+          <div class="field"><label>Thumbnail (URL)</label>
+            <input data-i="${i}" data-f="thumbnail" maxlength="400" placeholder="https://…" value="${escapeHTML(em.thumbnail||'')}">
+          </div>
+          <div class="field"><label>Image (URL)</label>
+            <input data-i="${i}" data-f="image" maxlength="400" placeholder="https://…" value="${escapeHTML(em.image||'')}">
+          </div>
+        </div>
+      </div>
+
+      <div class="emb-pane" data-pane="footer" style="display:none">
+        <div class="mini-grid">
+          <div class="field"><label>Текст футера</label>
+            <input data-i="${i}" data-f="footer.text" maxlength="2048" placeholder="Сделано на Yurika Bot" value="${escapeHTML(em.footer.text||'')}">
+          </div>
+          <div class="field"><label>Иконка футера (URL)</label>
+            <input data-i="${i}" data-f="footer.icon" maxlength="400" placeholder="https://…" value="${escapeHTML(em.footer.icon||'')}">
+          </div>
+        </div>
+        <div class="hint" style="margin-top:4px">Автоматически добавляется timestamp — показывается в превью.</div>
+      </div>
+
+      <div class="emb-pane" data-pane="fields" style="display:none">
+        <div class="fields-list" data-fields="${i}">
+          ${em.fields.map((f,fi)=>`
+            <div class="field-item">
+              <div class="field-item-head">
+                <b>Поле #${fi+1}</b>
+                <button class="btn ghost xs" data-ffield-del="${i}" data-fi="${fi}"><i class="fa-solid fa-trash"></i></button>
+              </div>
+              <input data-i="${i}" data-fi="${fi}" data-ff="name" placeholder="Имя поля" value="${escapeHTML(f.name||'')}" style="margin-bottom:6px">
+              <textarea data-i="${i}" data-fi="${fi}" data-ff="value" placeholder="Значение" style="min-height:60px; margin-bottom:6px">${escapeHTML(f.value||'')}</textarea>
+              <label style="display:flex; align-items:center; gap:8px; font-size:13px; font-weight:600">
+                <input type="checkbox" data-i="${i}" data-fi="${fi}" data-ff="inline" ${f.inline?'checked':''} style="width:auto; padding:0">
+                Inline
+              </label>
+            </div>
+          `).join('')}
+        </div>
+        <button class="btn ghost sm" data-fields-add="${i}" style="margin-top:8px"><i class="fa-solid fa-plus"></i> Добавить поле</button>
+      </div>
+    `;
+    box.appendChild(wrap);
+  });
+  $('#embedsEmpty').style.display = state.embeds.length ? 'none' : 'grid';
+  $('#hookAddEmbed').disabled = state.embeds.length >= MAX_EMBEDS;
+  $('#hookAddEmbed').style.opacity = state.embeds.length >= MAX_EMBEDS ? .5 : 1;
+
+  /* ---- обработчики ---- */
+  box.querySelectorAll('[data-del]').forEach(b=>{
+    b.onclick = ()=>{ state.embeds.splice(+b.dataset.del,1); renderEmbeds(); updCounters(); renderPreview(); saveDraft(); };
+  });
+  box.querySelectorAll('[data-dupl]').forEach(b=>{
+    b.onclick = ()=>{
+      const i = +b.dataset.dupl;
+      const copy = JSON.parse(JSON.stringify(state.embeds[i]));
+      state.embeds.splice(i+1, 0, copy);
+      renderEmbeds(); updCounters(); renderPreview(); saveDraft();
+    };
+  });
+  box.querySelectorAll('[data-embtab]').forEach(chip=>{
+    chip.onclick = ()=>{
+      const i = +chip.dataset.i;
+      const t = chip.dataset.embtab;
+      const wrap = chip.closest('.embed-box');
+      wrap.querySelectorAll('.tabs-mini .chip').forEach(c=>c.classList.remove('active'));
+      chip.classList.add('active');
+      wrap.querySelectorAll('.emb-pane').forEach(p=>{
+        p.style.display = (p.dataset.pane === t) ? 'block' : 'none';
+      });
+    };
+  });
+  box.querySelectorAll('input[data-f], textarea[data-f]').forEach(inp=>{
+    const path = inp.dataset.f;
+    inp.oninput = ()=>{
+      const i = +inp.dataset.i;
+      const val = inp.value;
+      const parts = path.split('.');
+      if(parts.length === 1){ state.embeds[i][parts[0]] = val; }
+      else { state.embeds[i][parts[0]][parts[1]] = val; }
+      if(path === 'color'){ wrap.querySelector('.color-line').style.background = val; }
+      renderPreview(); saveDraft();
+    };
+  });
+  box.querySelectorAll('.color-swatch').forEach(sw=>{
+    sw.onclick = ()=>{
+      const i = +sw.dataset.emb;
+      const c = sw.dataset.color;
+      state.embeds[i].color = c;
+      renderEmbeds(); renderPreview(); saveDraft();
+    };
+  });
+  box.querySelectorAll('[data-ffield-del]').forEach(b=>{
+    b.onclick = ()=>{ state.embeds[+b.dataset.ffieldDel].fields.splice(+b.dataset.fi,1); renderEmbeds(); renderPreview(); saveDraft(); };
+  });
+  box.querySelectorAll('input[data-ff], textarea[data-ff]').forEach(inp=>{
+    const i = +inp.dataset.i, fi = +inp.dataset.fi, f = inp.dataset.ff;
+    inp.oninput = ()=>{
+      const v = (f === 'inline') ? inp.checked : inp.value;
+      state.embeds[i].fields[fi][f] = v;
+      renderPreview(); saveDraft();
+    };
+    if(f === 'inline'){ inp.onchange = inp.oninput; }
+  });
+  box.querySelectorAll('[data-fields-add]').forEach(b=>{
+    b.onclick = ()=>{ state.embeds[+b.dataset.fieldsAdd].fields.push({name:'',value:'',inline:false}); renderEmbeds(); renderPreview(); saveDraft(); };
+  });
+}
+
+/* ----- КОМПОНЕНТЫ: КНОПКИ И SELECT ----- */
+$('#hookAddRow').addEventListener('click', ()=>{
+  if(state.rows.length >= MAX_BTN_ROWS) return;
+  state.rows.push({ type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] });
+  renderComp(); updCounters(); renderPreview(); saveDraft();
+});
+
+function renderComp(){
+  const box = $('#compRows'); box.innerHTML = '';
+  state.rows.forEach((row, i)=>{
+    const wrap = document.createElement('div');
+    wrap.className = 'btn-row';
+    wrap.dataset.row = i;
+    wrap.innerHTML = `
+      <div style="width:100%; display:flex; gap:8px; align-items:center; margin-bottom:8px">
+        <select data-row-type="${i}" style="width:auto; padding:8px 32px 8px 12px">
+          <option value="buttons" ${row.type==='buttons'?'selected':''}>Кнопки</option>
+          <option value="select" ${row.type==='select'?'selected':''}>Select-меню</option>
+        </select>
+        <button class="btn ghost xs" data-row-del="${i}" style="margin-left:auto"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div data-row-body="${i}"></div>
+    `;
+    box.appendChild(wrap);
+
+    const body = wrap.querySelector(`[data-row-body="${i}"]`);
+    if(row.type === 'buttons'){
+      const btnBox = document.createElement('div');
+      btnBox.style.display = 'flex';
+      btnBox.style.flexWrap = 'wrap';
+      btnBox.style.gap = '6px';
+      row.buttons.forEach((bt, bi)=>{
+        const el = document.createElement('div');
+        el.className = 'btn-prev style-' + bt.style;
+        el.innerHTML = `${bt.emoji ? escapeHTML(bt.emoji) + ' ' : ''}${escapeHTML(bt.label || 'Кнопка')}`;
+        el.title = 'Клик — редактировать, ПКМ — удалить';
+        el.onclick = ()=> editButton(i, bi);
+        el.oncontextmenu = (e)=>{ e.preventDefault(); row.buttons.splice(bi,1); renderComp(); renderPreview(); saveDraft(); };
+        btnBox.appendChild(el);
+      });
+      if(row.buttons.length < MAX_BTNS_PER_ROW){
+        const add = document.createElement('button');
+        add.className = 'btn ghost xs';
+        add.innerHTML = '<i class="fa-solid fa-plus"></i> Кнопка';
+        add.onclick = ()=>{ row.buttons.push({label:'Кнопка', emoji:'', style:'primary', url:''}); renderComp(); renderPreview(); saveDraft(); };
+        btnBox.appendChild(add);
+      }
+      body.appendChild(btnBox);
+    }else{
+      // select
+      const sel = document.createElement('div');
+      sel.className = 'select-prev';
+      sel.textContent = row.select.placeholder || 'Выберите…';
+      body.appendChild(sel);
+      const opts = document.createElement('div');
+      opts.style.marginTop = '8px';
+      opts.innerHTML = (row.select.options || []).map((o,oi)=>`
+        <div style="display:flex; gap:6px; align-items:center; margin-bottom:6px">
+          <input data-sel-opt="${i}" data-oi="${oi}" data-k="label" placeholder="Label" value="${escapeHTML(o.label||'')}">
+          <input data-sel-opt="${i}" data-oi="${oi}" data-k="value" placeholder="Value" value="${escapeHTML(o.value||'')}">
+          <button class="btn ghost xs" data-sel-del="${i}" data-oi="${oi}"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      `).join('');
+      body.appendChild(opts);
+      const addOpt = document.createElement('button');
+      addOpt.className = 'btn ghost xs';
+      addOpt.innerHTML = '<i class="fa-solid fa-plus"></i> Опция';
+      addOpt.onclick = ()=>{ row.select.options.push({label:'Опция',value:'opt'}); renderComp(); renderPreview(); saveDraft(); };
+      body.appendChild(addOpt);
+    }
+  });
+  $('#compEmpty').style.display = state.rows.length ? 'none' : 'grid';
+
+  /* ---- обработчики ---- */
+  box.querySelectorAll('[data-row-type]').forEach(sel=>{
+    sel.onchange = ()=>{
+      const i = +sel.dataset.rowType;
+      const t = sel.value;
+      if(t === 'select'){
+        state.rows[i] = { type:'select', select:{ placeholder:'Выберите…', options:[{label:'Опция 1',value:'opt1'}] } };
+      }else{
+        state.rows[i] = { type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] };
+      }
+      renderComp(); renderPreview(); saveDraft();
+    };
+  });
+  box.querySelectorAll('[data-row-del]').forEach(b=>{
+    b.onclick = ()=>{ state.rows.splice(+b.dataset.rowDel,1); renderComp(); updCounters(); renderPreview(); saveDraft(); };
+  });
+  box.querySelectorAll('[data-sel-opt]').forEach(inp=>{
+    inp.oninput = ()=>{
+      const i = +inp.dataset.selOpt, oi = +inp.dataset.oi, k = inp.dataset.k;
+      state.rows[i].select.options[oi][k] = inp.value;
+      renderPreview(); saveDraft();
+    };
+  });
+  box.querySelectorAll('[data-sel-del]').forEach(b=>{
+    b.onclick = ()=>{ state.rows[+b.dataset.selDel].select.options.splice(+b.dataset.oi,1); renderComp(); renderPreview(); saveDraft(); };
+  });
+}
+
+function editButton(rowI, btnI){
+  const row = state.rows[rowI];
+  const bt = row.buttons[btnI];
+  const label = prompt('Текст кнопки:', bt.label || '');
+  if(label === null) return;
+  const emoji = prompt('Эмодзи (необязательно):', bt.emoji || '');
+  if(emoji === null) return;
+  const style = prompt('Стиль: primary / secondary / success / danger / link', bt.style || 'primary');
+  if(style === null) return;
+  const url = (style === 'link') ? prompt('URL для link-кнопки:', bt.url || '') : '';
+  bt.label = label.slice(0,80);
+  bt.emoji = (emoji||'').slice(0,8);
+  bt.style = ['primary','secondary','success','danger','link'].includes(style) ? style : 'primary';
+  bt.url = url || '';
+  renderComp(); renderPreview(); saveDraft();
+}
+
+/* ----- ПРЕДПРОСМОТР ----- */
+function renderPreview(){
+  const p = $('#hookPreview');
+  p.className = 'discord-preview theme-' + state.theme;
+
+  const hasMsg = state.msg.trim().length > 0;
+  const hasEmb = state.embeds.some(e => (e.title||'').trim() || (e.desc||'').trim() || e.author.name || e.footer.text || e.image || e.thumbnail || (e.fields && e.fields.length));
+  const hasComp = state.rows.some(r => (r.type==='buttons' && r.buttons.length) || (r.type==='select' && r.select.options.length));
+  const hasFile = !!state.file;
+
+  if(!hasMsg && !hasEmb && !hasComp && !hasFile && !state.name && !state.avatar){
+    p.innerHTML = `<div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>`;
+    return;
+  }
+
+  let html = '';
+  const av = state.avatar
+    ? `<img src="${escapeHTML(state.avatar)}" alt="" onerror="this.style.display='none'">`
+    : `<i class="fa-solid fa-robot"></i>`;
+  const nm = escapeHTML(state.name || 'Yurika Bot');
+  html += `<div class="dp-head">
+    <div class="dp-avatar">${av}</div>
+    <div>
+      <span class="dp-name">${nm}</span>
+      <span class="dp-bot">BOT</span>
+      <div style="font-size:12px; opacity:.65">сегодня в 12:00</div>
+    </div>
+  </div>`;
+
+  if(hasMsg) html += `<div class="dp-msg">${escapeHTML(state.msg)}</div>`;
+  if(hasFile) html += `<div class="dp-msg" style="opacity:.7"><i class="fa-solid fa-paperclip"></i> ${escapeHTML(state.file.name)}</div>`;
+
+  state.embeds.forEach(e=>{
+    const hasAny = (e.title||'').trim() || (e.desc||'').trim() || e.author.name || e.footer.text || e.image || e.thumbnail || (e.fields && e.fields.length);
+    if(!hasAny) return;
+
+    let inner = '';
+    if(e.author.name){
+      inner += `<div class="dp-author">
+        ${e.author.icon ? `<img src="${escapeHTML(e.author.icon)}" onerror="this.style.display='none'">` : ''}
+        <span>${escapeHTML(e.author.name)}</span>
+      </div>`;
+    }
+    if(e.thumbnail) inner += `<img class="dp-thumb" src="${escapeHTML(e.thumbnail)}" onerror="this.style.display='none'">`;
+    if(e.title) inner += `<div class="dp-title">${escapeHTML(e.title)}</div>`;
+    if(e.desc) inner += `<div class="dp-desc">${escapeHTML(e.desc)}</div>`;
+    if(e.fields && e.fields.length){
+      inner += '<div class="dp-fields">';
+      e.fields.forEach(f=>{
+        if(!(f.name||'').trim() && !(f.value||'').trim()) return;
+        const style = f.inline ? 'flex:1 1 45%' : 'flex:1 1 100%';
+        inner += `<div class="dp-field" style="${style}"><b>${escapeHTML(f.name||'')}</b>${escapeHTML(f.value||'')}</div>`;
+      });
+      inner += '</div>';
+    }
+    if(e.image) inner += `<img class="dp-img" src="${escapeHTML(e.image)}" onerror="this.style.display='none'">`;
+    if(e.footer.text || e.footer.icon){
+      inner += `<div class="dp-footer">
+        ${e.footer.icon ? `<img src="${escapeHTML(e.footer.icon)}" onerror="this.style.display='none'">` : ''}
+        <span>${escapeHTML(e.footer.text||'')}</span>
+        <span class="dp-timestamp">• сегодня в 12:00</span>
+      </div>`;
+    }
+
+    html += `<div class="dp-embed" style="border-left-color:${e.color || '#5865F2'}">${inner}</div>`;
+  });
+
+  if(hasComp){
+    state.rows.forEach(row=>{
+      html += `<div style="margin-top:8px; display:flex; gap:6px; flex-wrap:wrap">`;
+      if(row.type === 'buttons'){
+        row.buttons.forEach(b=>{
+          const cls = 'btn-prev style-' + b.style;
+          html += `<div class="${cls}" style="padding:8px 14px; font-size:13px">${b.emoji ? escapeHTML(b.emoji)+' ' : ''}${escapeHTML(b.label||'Кнопка')}</div>`;
+        });
+      }else{
+        html += `<div class="select-prev" style="width:100%">${escapeHTML(row.select.placeholder||'Выберите…')}</div>`;
+      }
+      html += `</div>`;
+    });
+  }
+
+  p.innerHTML = html;
+}
+
+/* ----- Тема превью ----- */
+$('#themeToggle').addEventListener('click', ()=>{
+  state.theme = state.theme === 'dark' ? 'light' : 'dark';
+  renderPreview(); saveDraft();
+});
+
+/* ----- Проверка (dry-run) ----- */
+function runChecklist(){
+  const items = [];
+  const payload = buildPayload();
+
+  const urlOk = /^https?:\/\//.test(state.url);
+  items.push({ ok:urlOk, text: urlOk ? 'URL вебхука указан корректно' : 'URL вебхука пустой или некорректный' });
+
+  const msgLen = (state.msg || '').length;
+  items.push({ ok: msgLen <= 2000, text: `Длина сообщения: ${msgLen} / 2000` });
+
+  if(state.embeds.length > 10) items.push({ ok:false, text:'Слишком много embed-карточек (макс. 10)' });
+  const embOk = state.embeds.every(e => ((e.title||'').length <= 256 && (e.desc||'').length <= 4096));
+  items.push({ ok: embOk, text: embOk ? 'Все embed-карточки в пределах лимитов' : 'Есть embed-карточки со слишком длинными полями' });
+
+  const embSum = state.embeds.reduce((sum,e)=> sum + (e.title||'').length + (e.desc||'').length, 0);
+  items.push({ ok: embSum <= 6000, text: `Суммарная длина embeds: ${embSum} / 6000` });
+
+  if(state.rows.length > 5) items.push({ ok:false, text:'Слишком много рядов компонентов (макс. 5)' });
+  let rowOk = true;
+  state.rows.forEach(r=>{
+    if(r.type === 'buttons' && r.buttons.length > 5) rowOk = false;
+  });
+  items.push({ ok: rowOk, text: rowOk ? 'Ряды кнопок в пределах 5 штук' : 'Есть ряд с >5 кнопками' });
+
+  const jsonSize = JSON.stringify(payload).length;
+  items.push({ ok: jsonSize < 100000, text: `Размер JSON: ${(jsonSize/1024).toFixed(1)} КБ` });
+
+  const wrap = $('#checklist'); wrap.innerHTML = '';
+  items.forEach(it=>{
+    const d = document.createElement('div');
+    d.className = 'chk ' + (it.ok ? 'ok' : 'err');
+    d.innerHTML = `<i class="fa-solid ${it.ok ? 'fa-circle-check' : 'fa-circle-xmark'}"></i><span>${escapeHTML(it.text)}</span>`;
+    wrap.appendChild(d);
+  });
+  if(items.every(i=>i.ok)){
+    const d = document.createElement('div');
+    d.className = 'chk ok';
+    d.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Всё готово к отправке ✅</span>`;
+    wrap.appendChild(d);
+  }
+}
+$('#runCheck').addEventListener('click', runChecklist);
+
+/* ----- Экспорт ----- */
+let exportKind = 'json';
+$$('#exportTabs .chip').forEach(chip=>{
+  chip.addEventListener('click', ()=>{
+    $$('#exportTabs .chip').forEach(c=>c.classList.remove('active'));
+    chip.classList.add('active');
+    exportKind = chip.dataset.export;
+    renderExport();
+  });
+});
+function renderExport(){
+  const payload = buildPayload();
+  const url = state.url || 'https://discord.com/api/webhooks/XXX/YYY';
+  let out = '';
+  if(exportKind === 'json'){
+    out = JSON.stringify(payload, null, 2);
+  }else if(exportKind === 'curl'){
+    out = `curl -X POST "${url}" \\\n  -H "Content-Type: application/json" \\\n  -d '${JSON.stringify(payload)}'`;
+  }else if(exportKind === 'discordjs'){
+    out = `const { WebhookClient } = require('discord.js');\n\nconst webhook = new WebhookClient({ url: '${url}' });\n\nwebhook.send({\n  username: ${JSON.stringify(state.name || 'Yurika Bot')},\n  avatarURL: ${JSON.stringify(state.avatar || '')},\n  content: ${JSON.stringify(state.msg || '')},\n  embeds: ${JSON.stringify(payload.embeds || [], null, 2)},\n});`;
+  }else if(exportKind === 'python'){
+    out = `import requests, json\n\nurl = "${url}"\ndata = ${JSON.stringify(payload, null, 2)}\n\nr = requests.post(url, json=data)\nprint(r.status_code)`;
+  }else if(exportKind === 'fetch'){
+    out = `await fetch("${url}", {\n  method: "POST",\n  headers: { "Content-Type": "application/json" },\n  body: JSON.stringify(${JSON.stringify(payload, null, 2)})\n});`;
+  }
+  $('#exportCode').textContent = out;
+}
+$('#copyExport').addEventListener('click', async ()=>{
+  try{ await navigator.clipboard.writeText($('#exportCode').textContent); toast('Скопировано', 'ok'); }
+  catch{ toast('Не удалось скопировать', 'err'); }
+});
+
+/* ----- Сборка payload ----- */
+function buildPayload(){
+  const embeds = state.embeds
+    .filter(e => (e.title||'').trim() || (e.desc||'').trim() || e.author.name || e.footer.text || e.image || e.thumbnail || (e.fields && e.fields.some(f=>(f.name||f.value))))
+    .map(e => {
+      const o = {};
+      if(e.title) o.title = e.title;
+      if(e.desc) o.description = e.desc;
+      if(e.color) o.color = parseInt(e.color.replace('#',''),16);
+      if(e.author.name) o.author = { name:e.author.name, icon_url:e.author.icon||undefined, url:e.author.url||undefined };
+      if(e.footer.text || e.footer.icon) o.footer = { text:e.footer.text||'', icon_url:e.footer.icon||undefined };
+      if(e.thumbnail) o.thumbnail = { url: e.thumbnail };
+      if(e.image) o.image = { url: e.image };
+      if(e.fields && e.fields.length){
+        o.fields = e.fields
+          .filter(f => (f.name||'').trim() || (f.value||'').trim())
+          .map(f => ({ name:f.name||'', value:f.value||'', inline:!!f.inline }));
+      }
+      o.timestamp = new Date().toISOString();
+      return o;
+    });
+  const payload = {
+    username: state.name || undefined,
+    avatar_url: state.avatar || undefined,
+    content: state.msg || undefined,
+    embeds: embeds.length ? embeds : undefined
+  };
+  if(state.rows.length){
+    payload.components = state.rows.map(r=>{
+      if(r.type === 'buttons'){
+        return { type:1, components: r.buttons.slice(0,5).map(b=>({
+          type:2,
+          style: { primary:1, secondary:2, success:3, danger:4, link:5 }[b.style] || 1,
+          label: b.label || undefined,
+          emoji: b.emoji ? { name: b.emoji } : undefined,
+          url: b.style === 'link' ? b.url : undefined
+        }))};
+      }else{
+        return { type:1, components:[{ type:3, placeholder: r.select.placeholder || 'Выберите…', options: r.select.options.slice(0,25).map(o=>({ label:o.label||'Опция', value:o.value||'opt' })) }]};
+      }
+    });
+  }
+  return payload;
+}
+
+/* ----- Черновик ----- */
+const DRAFT_KEY = 'yurika_hook_draft_v1';
+let saveTimer = null;
+function saveDraft(){
+  clearTimeout(saveTimer);
+  saveTimer = setTimeout(()=>{
+    try{
+      const d = {
+        url:state.url, name:state.name, avatar:state.avatar, msg:state.msg, theme:state.theme,
+        embeds:state.embeds, rows:state.rows
+      };
+      localStorage.setItem(DRAFT_KEY, JSON.stringify(d));
+      const b = $('#saveBadge');
+      if(b){ b.innerHTML = '<i class="fa-solid fa-cloud"></i> черновик сохранён'; }
+    }catch(e){}
+  }, 400);
+}
+function loadDraft(){
+  try{
+    const raw = localStorage.getItem(DRAFT_KEY);
+    if(!raw) return;
+    const d = JSON.parse(raw);
+    state.url = d.url || '';
+    state.name = d.name || '';
+    state.avatar = d.avatar || '';
+    state.msg = d.msg || '';
+    state.theme = d.theme || 'dark';
+    state.embeds = Array.isArray(d.embeds) ? d.embeds : [];
+    state.rows = Array.isArray(d.rows) ? d.rows : [];
+
+    $('#hookUrl').value = state.url;
+    $('#hookName').value = state.name;
+    $('#hookAvatar').value = state.avatar;
+    $('#hookMsg').value = state.msg;
+
+    renderEmbeds(); renderComp(); updCounters(); renderPreview();
+  }catch(e){ /* тихо */ }
+}
+
+/* ----- Горячие клавиши ----- */
+document.addEventListener('keydown', (e)=>{
+  if(e.ctrlKey || e.metaKey){
+    if(e.key === 'Enter'){ e.preventDefault(); $('#hookSend').click(); }
+    if(e.key.toLowerCase() === 's'){ e.preventDefault(); saveDraft(); toast('Черновик сохранён', 'ok'); }
+    if(e.key.toLowerCase() === 'b'){ e.preventDefault(); applyMd('**'); }
+    if(e.key.toLowerCase() === 'i'){ e.preventDefault(); applyMd('*'); }
+  }
+});
+
+/* ----- Шаблоны ----- */
+const TEMPLATES = {
+  news: {
+    name:'Новость', icon:'fa-newspaper',
+    build(){
+      state.name = 'Yurika News';
+      state.avatar = 'https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg';
+      state.msg = '@everyone';
+      state.embeds = [{
+        title:'🎉 Обновление Yurika Bot 2.0',
+        desc:'Мы выпустили крупное обновление:\n• Новые команды экономики\n• Улучшения ИИ GigaChat\n• Множество исправлений',
+        color:'#5865F2',
+        author:{name:'Yurika Bot', icon:'', url:''},
+        footer:{text:'Yurika Bot · Обновления', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Версия', value:'2.0.0', inline:true},
+          {name:'Дата', value:new Date().toLocaleDateString('ru-RU'), inline:true}
+        ]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com/changelog'},
+        {label:'Обсудить', emoji:'💬', style:'primary', url:''}
+      ]}];
+    }
+  },
+  announce: {
+    name:'Анонс', icon:'fa-bullhorn',
+    build(){
+      state.name = 'Yurika';
+      state.avatar = '';
+      state.msg = '@here';
+      state.embeds = [{
+        title:'📢 Важное объявление',
+        desc:'Сегодня в 20:00 по МСК состоится ивент.\nНе пропусти!',
+        color:'#FEE75C',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Yurika Bot', icon:''},
+        image:'', thumbnail:'',
+        fields:[{name:'Время', value:'20:00 МСК', inline:true},{name:'Место', value:'Голосовой канал', inline:true}]
+      }];
+      state.rows = [{ type:'buttons', buttons:[
+        {label:'Участвовать', emoji:'🎉', style:'success', url:''},
+        {label:'Напомнить', emoji:'🔔', style:'secondary', url:''}
+      ]}];
+    }
+  },
+  rules: {
+    name:'Правила', icon:'fa-book',
+    build(){
+      state.name = 'Yurika Rules';
+      state.avatar = '';
+      state.msg = '';
+      state.embeds = [{
+        title:'📕 Правила сервера',
+        desc:'1. Будь вежлив.\n2. Без спама и рекламы.\n3. Соблюдай тематику каналов.\n4. Не оскорбляй других.\n5. Следуй указаниям модераторов.',
+        color:'#ED4245',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Незнание правил не освобождает от ответственности', icon:''},
+        image:'', thumbnail:'',
+        fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+  error: {
+    name:'Ошибка', icon:'fa-triangle-exclamation',
+    build(){
+      state.name = 'Yurika';
+      state.avatar = '';
+      state.msg = '';
+      state.embeds = [{
+        title:'⚠️ Ошибка выполнения',
+        desc:'Команда не может быть выполнена. Причина: недостаточно прав.',
+        color:'#ED4245',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Попробуйте позже или обратитесь к модерации', icon:''},
+        image:'', thumbnail:'',
+        fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+  success: {
+    name:'Успех', icon:'fa-circle-check',
+    build(){
+      state.name = 'Yurika';
+      state.avatar = '';
+      state.msg = '';
+      state.embeds = [{
+        title:'✅ Готово',
+        desc:'Действие успешно выполнено.',
+        color:'#3BA55C',
+        author:{name:'',icon:'',url:''},
+        footer:{text:'Yurika Bot', icon:''},
+        image:'', thumbnail:'',
+        fields:[]
+      }];
+      state.rows = [];
+    }
+  },
+  update: {
+    name:'Обновление', icon:'fa-arrows-rotate',
+    build(){
+      state.name = 'Yurika Bot';
+      state.avatar = '';
+      state.msg = '';
+      state.embeds = [{
+        title:'🚀 Обновление 1.5',
+        desc:'Что нового:\n• Улучшена скорость работы\n• Добавлены новые команды\n• Исправлены баги',
+        color:'#57F287',
+        author:{name:'Yurika Bot',icon:'',url:''},
+        footer:{text:'Спасибо, что пользуетесь нашим ботом!', icon:''},
+        image:'', thumbnail:'',
+        fields:[
+          {name:'Версия',value:'1.5.0',inline:true},
+          {name:'Дата',value:new Date().toLocaleDateString('ru-RU'),inline:true}
+        ]
+      }];
+      state.rows = [];
+    }
+  }
+};
+
+function buildTemplateButtons(){
+  const box = $('#templatesList'); box.innerHTML = '';
+  Object.entries(TEMPLATES).forEach(([key, tpl])=>{
+    const b = document.createElement('button');
+    b.className = 'preset';
+    b.innerHTML = `<i class="fa-solid ${tpl.icon}"></i> ${tpl.name}`;
+    b.onclick = ()=>{
+      tpl.build();
+      $('#hookName').value = state.name || '';
+      $('#hookAvatar').value = state.avatar || '';
+      $('#hookMsg').value = state.msg || '';
+      renderEmbeds(); renderComp(); updCounters(); renderPreview(); saveDraft();
+      toast(`Шаблон «${tpl.name}» применён`, 'ok');
+      $$('#hookTabs .chip').forEach(c=>c.classList.remove('active'));
+      document.querySelector('#hookTabs [data-hooktab="editor"]').classList.add('active');
+      ['editor','templates','validate','export'].forEach(name=>{
+        $('#hookPane-' + name).style.display = (name === 'editor') ? 'block' : 'none';
+      });
+    };
+    box.appendChild(b);
+  });
+}
+buildTemplateButtons();
+
+/* Мои шаблоны */
+const MY_TPL_KEY = 'yurika_hook_mytpl_v1';
+function loadMyTemplates(){ try{ return JSON.parse(localStorage.getItem(MY_TPL_KEY) || '{}'); }catch{ return {}; } }
+function saveMyTemplates(obj){ localStorage.setItem(MY_TPL_KEY, JSON.stringify(obj)); }
+
+$('#tplSaveMine').addEventListener('click', ()=>{
+  const name = prompt('Название шаблона:');
+  if(!name) return;
+  const mine = loadMyTemplates();
+  mine[name] = {
+    url:state.url, name:state.name, avatar:state.avatar, msg:state.msg,
+    embeds:JSON.parse(JSON.stringify(state.embeds)),
+    rows:JSON.parse(JSON.stringify(state.rows))
+  };
+  saveMyTemplates(mine);
+  buildMyTemplateButtons();
+  toast('Шаблон сохранён', 'ok');
+});
+function buildMyTemplateButtons(){
+  const box = $('#myTemplates'); box.innerHTML = '';
+  const mine = loadMyTemplates();
+  const keys = Object.keys(mine);
+  $('#myTplEmpty').style.display = keys.length ? 'none' : 'block';
+  keys.forEach(k=>{
+    const b = document.createElement('button');
+    b.className = 'preset';
+    b.innerHTML = `<i class="fa-solid fa-bookmark"></i> ${escapeHTML(k)} <span data-del-my="${escapeHTML(k)}" style="opacity:.6; margin-left:4px">×</span>`;
+    b.onclick = (e)=>{
+      if(e.target.dataset.delMy){ delete mine[k]; saveMyTemplates(mine); buildMyTemplateButtons(); return; }
+      const t = mine[k];
+      state.url=t.url||''; state.name=t.name||''; state.avatar=t.avatar||''; state.msg=t.msg||'';
+      state.embeds=JSON.parse(JSON.stringify(t.embeds||[]));
+      state.rows=JSON.parse(JSON.stringify(t.rows||[]));
+      $('#hookUrl').value=state.url; $('#hookName').value=state.name;
+      $('#hookAvatar').value=state.avatar; $('#hookMsg').value=state.msg;
+      renderEmbeds(); renderComp(); updCounters(); renderPreview(); saveDraft();
+      toast('Шаблон загружен', 'ok');
+    };
+    box.appendChild(b);
+  });
+}
+buildMyTemplateButtons();
+
+/* URL с зашитым шаблоном */
+function checkShareLink(){
+  const h = location.hash;
+  if(!h.startsWith('#hook=')) return;
+  try{
+    const raw = decodeURIComponent(escape(atob(h.slice(6))));
+    const data = JSON.parse(raw);
+    if(data.content){ state.msg = data.content; $('#hookMsg').value = data.content; }
+    if(data.username){ state.name = data.username; $('#hookName').value = data.username; }
+    if(data.avatar_url){ state.avatar = data.avatar_url; $('#hookAvatar').value = data.avatar_url; }
+    if(Array.isArray(data.embeds)){
+      state.embeds = data.embeds.map(e=>({
+        title:e.title||'', desc:e.description||'',
+        color: e.color ? '#'+e.color.toString(16).padStart(6,'0') : '#5865F2',
+        author:{name:(e.author&&e.author.name)||'',icon:(e.author&&e.author.icon_url)||'',url:(e.author&&e.author.url)||''},
+        footer:{text:(e.footer&&e.footer.text)||'',icon:(e.footer&&e.footer.icon_url)||''},
+        image:(e.image&&e.image.url)||'', thumbnail:(e.thumbnail&&e.thumbnail.url)||'',
+        fields: Array.isArray(e.fields) ? e.fields.map(f=>({name:f.name||'',value:f.value||'',inline:!!f.inline})) : []
+      }));
+    }
+    renderEmbeds(); updCounters(); renderPreview();
+    toast('Шаблон загружен из ссылки', 'ok');
+  }catch(err){ /* тихо */ }
+}
+
+/* Инициализация вебхука */
+loadDraft();
+checkShareLink();
+updCounters(); renderEmbeds(); renderComp(); renderPreview();
+if(!state.embeds.length && !state.msg){
+  // первый визит — покажем, что можно
+}
 
 /* ============================================================
    5. ПРОФИЛЬ
@@ -2345,29 +3424,23 @@ function renderServers(){
         const url = s.id ? `https://lolka.app/servers/${encodeURIComponent(s.id)}` : 'https://lolka.app/';
         window.open(url, '_blank', 'noopener');
       }
-      if(act === 'settings'){
-        openServerPanel(i);
-      }
+      if(act === 'settings'){ openServerPanel(i); }
       if(act === 'kick'){
         const list = loadServers();
         const s = list[i]; if(!s) return;
         if(!confirm(`Убрать «${s.name || 'Сервер'}» из списка?`)) return;
         list.splice(i,1);
         saveServers(list);
-        renderServers();
-        renderMeta(loadProfileLocal());
+        renderServers(); renderMeta(loadProfileLocal());
         toast('Сервер удалён из списка', 'warn');
       }
     });
   });
 }
 
-/* ---------- Добавление сервера ---------- */
 function openServerModal(){
   $('#serverModal').classList.add('open');
-  $('#srvName').value = '';
-  $('#srvId').value = '';
-  $('#srvAvatar').value = '';
+  $('#srvName').value = ''; $('#srvId').value = ''; $('#srvAvatar').value = '';
   setTimeout(()=> $('#srvName').focus(), 50);
 }
 function closeServerModal(){ $('#serverModal').classList.remove('open'); }
@@ -2386,21 +3459,18 @@ $('#srvSave').addEventListener('click', ()=>{
     addedAt: new Date().toLocaleDateString('ru-RU'),
     description: '',
     settings: {
-      language: 'ru',
-      logChannel: '', welcomeChannel: '', announceChannel: '',
-      autoRole: '', modRole: '', prefix: '/',
-      welcomeText: '',
-      goodbyeText: '',
-      autoRoleDelay: 0,
-      modules: { econ:true, pets:true, mod:true, love:true, ai:true,
-                 autoMod:false, welcome:true, logging:true,
-                 welcomeBanner:true, welcomeDM:true }
+      language:'ru',
+      logChannel:'', welcomeChannel:'', announceChannel:'',
+      autoRole:'', modRole:'', prefix:'/',
+      welcomeText:'', goodbyeText:'', autoRoleDelay:0,
+      modules:{ econ:true, pets:true, mod:true, love:true, ai:true,
+                autoMod:false, welcome:true, logging:true,
+                welcomeBanner:true, welcomeDM:true }
     }
   });
   saveServers(list);
   closeServerModal();
-  renderServers();
-  renderMeta(loadProfileLocal());
+  renderServers(); renderMeta(loadProfileLocal());
   toast('Сервер добавлен', 'ok');
 });
 
@@ -2409,7 +3479,6 @@ $('#srvSave').addEventListener('click', ()=>{
 ============================================================ */
 let spIndex = -1;
 
-/* Плейсхолдеры: клик — вставить в соответствующее поле */
 $$('.ph-chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
     const id = chip.dataset.target;
@@ -2420,7 +3489,6 @@ $$('.ph-chip').forEach(chip=>{
     el.value = el.value.slice(0,pos) + txt + el.value.slice(pos);
     el.focus();
     el.selectionStart = el.selectionEnd = pos + txt.length;
-    if(id === 'spWelcomeText' || id === 'spGoodbyeText'){ /* счётчиков нет */ }
   });
 });
 
@@ -2431,8 +3499,6 @@ function openServerPanel(index){
   spIndex = index;
 
   const st = s.settings || {};
-
-  // Основное
   $('#spName').value = s.name || '';
   $('#spId').value = s.id || '';
   $('#spAvatar').value = s.avatar || '';
@@ -2440,22 +3506,18 @@ function openServerPanel(index){
   $('#spDescCount').textContent = (s.description || '').length;
   $('#spLanguage').value = st.language || 'ru';
 
-  // Каналы
   $('#spLogChannel').value = st.logChannel || '';
   $('#spWelcomeChannel').value = st.welcomeChannel || '';
   $('#spAnnounceChannel').value = st.announceChannel || '';
 
-  // Роли
   $('#spAutoRole').value = st.autoRole || '';
   $('#spModRole').value = st.modRole || '';
   $('#spPrefix').value = st.prefix || '/';
 
-  // Приветствие / прощание
   $('#spWelcomeText').value = st.welcomeText || '';
   $('#spGoodbyeText').value = st.goodbyeText || '';
   $('#spAutoRoleDelay').value = st.autoRoleDelay || 0;
 
-  // Иконка и заголовок
   const icon = $('#spIcon');
   if(s.avatar){
     icon.innerHTML = `<img src="${escapeHTML(s.avatar)}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.parentNode.innerHTML='<i class=\\'fa-solid fa-gear\\'></i>'">`;
@@ -2464,7 +3526,6 @@ function openServerPanel(index){
   }
   $('#spTitle').textContent = s.name ? `Настройки · ${s.name}` : 'Настройки сервера';
 
-  // Тумблеры модулей
   const mods = st.modules || {};
   const DEFAULTS_ON = ['econ','pets','mod','love','ai','welcome','logging','welcomeBanner','welcomeDM'];
   $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
@@ -2482,35 +3543,24 @@ function closeServerPanel(){
 
 $('#spClose2').addEventListener('click', closeServerPanel);
 $('#spCancel').addEventListener('click', closeServerPanel);
-
-// Счётчик описания сервера
 $('#spDescription').addEventListener('input', e=>{
   $('#spDescCount').textContent = e.target.value.length;
 });
-
-// Тумблеры модулей в панели — переключаются по клику
 $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
-  sw.addEventListener('click', ()=>{
-    sw.classList.toggle('on');
-  });
+  sw.addEventListener('click', ()=> sw.classList.toggle('on'));
 });
-
-// Сохранить настройки
 $('#spSave').addEventListener('click', ()=>{
   if(spIndex < 0){ toast('Сервер не выбран', 'err'); return; }
   const list = loadServers();
   const s = list[spIndex]; if(!s) return;
 
   const mods = {};
-  $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
-    mods[sw.dataset.sp] = sw.classList.contains('on');
-  });
+  $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{ mods[sw.dataset.sp] = sw.classList.contains('on'); });
 
   s.name = $('#spName').value.trim() || s.name;
   s.id = $('#spId').value.trim() || s.id;
   s.avatar = $('#spAvatar').value.trim();
   s.description = $('#spDescription').value.trim();
-
   s.settings = {
     language: $('#spLanguage').value || 'ru',
     logChannel: $('#spLogChannel').value.trim(),
@@ -2521,17 +3571,14 @@ $('#spSave').addEventListener('click', ()=>{
     prefix: $('#spPrefix').value.trim() || '/',
     welcomeText: $('#spWelcomeText').value,
     goodbyeText: $('#spGoodbyeText').value,
-    autoRoleDelay: Math.max(0, Math.min(1440, parseInt($('#spAutoRoleDelay').value || '0', 10) || 0)),
+    autoRoleDelay: clamp(parseInt($('#spAutoRoleDelay').value || '0', 10) || 0, 0, 1440),
     modules: mods
   };
   saveServers(list);
-  renderServers();
-  renderMeta(loadProfileLocal());
+  renderServers(); renderMeta(loadProfileLocal());
   closeServerPanel();
   toast('Настройки сохранены', 'ok');
 });
-
-// Убрать бота с сервера
 $('#spKick').addEventListener('click', ()=>{
   if(spIndex < 0) return;
   const list = loadServers();
@@ -2539,8 +3586,7 @@ $('#spKick').addEventListener('click', ()=>{
   if(!confirm(`Убрать Юрику с «${s.name || 'Сервер'}»?`)) return;
   list.splice(spIndex, 1);
   saveServers(list);
-  renderServers();
-  renderMeta(loadProfileLocal());
+  renderServers(); renderMeta(loadProfileLocal());
   closeServerPanel();
   toast('Бот убран с сервера', 'warn');
 });
@@ -2563,12 +3609,8 @@ $('#deleteOpen').addEventListener('click', ()=>{
   $('#deleteConfirm').value = '';
   $('#deleteConfirmBtn').disabled = true;
 });
-$('#deleteCancel').addEventListener('click', ()=>{
-  $('#deleteModal').classList.remove('open');
-});
-$('#deleteCancel2').addEventListener('click', ()=>{
-  $('#deleteModal').classList.remove('open');
-});
+$('#deleteCancel').addEventListener('click', ()=> $('#deleteModal').classList.remove('open'));
+$('#deleteCancel2').addEventListener('click', ()=> $('#deleteModal').classList.remove('open'));
 $('#deleteConfirm').addEventListener('input', e=>{
   $('#deleteConfirmBtn').disabled = e.target.value.trim().toUpperCase() !== 'УДАЛИТЬ';
 });
@@ -2582,7 +3624,6 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
   }catch(err){ /* тихо */ }
 
   [LS.profile, LS.creds, LS.session, LS.prefs, LS.servers, LS.meta].forEach(k=> localStorage.removeItem(k));
-
   $('#deleteModal').classList.remove('open');
   showAuth();
   toast('Аккаунт удалён', 'err', 3200);
@@ -2595,7 +3636,6 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
   initPrivacySwitches();
   touchMeta();
 
-  // Закрытие модалок по клику на фон
   $$('.modal-overlay').forEach(m=>{
     m.addEventListener('click', e=>{
       if(e.target === m) m.classList.remove('open');
