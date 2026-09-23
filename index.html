@@ -545,19 +545,13 @@ select option{background:#12162a; color:var(--text)}
 .toggle-row b{display:block; font-size:14px; margin-bottom:2px}
 .toggle-row span{font-size:12px; color:var(--muted); font-weight:600; display:block}
 
-/* Плейсхолдеры-чипы для текстов */
-.ph-row{
-  display:flex; gap:6px; flex-wrap:wrap; margin-top:6px;
-}
+/* Плейсхолдеры-чипы */
+.ph-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
 .ph-chip{
-  font-family:'JetBrains Mono',monospace;
-  font-size:11.5px; font-weight:700;
+  font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
   padding:3px 8px; border-radius:999px;
-  background:rgba(124,92,255,.16);
-  border:1px solid rgba(124,92,255,.32);
-  color:#d7dcff;
-  cursor:pointer;
-  transition:.2s background, .2s transform;
+  background:rgba(124,92,255,.16); border:1px solid rgba(124,92,255,.32);
+  color:#d7dcff; cursor:pointer; transition:.2s background, .2s transform;
 }
 .ph-chip:hover{background:rgba(124,92,255,.28); transform:translateY(-1px)}
 
@@ -579,31 +573,60 @@ select option{background:#12162a; color:var(--text)}
 }
 .md-btn:hover{background:rgba(255,255,255,.09); transform:translateY(-1px); border-color:var(--brand)}
 .md-btn i{font-size:12.5px}
+
+/* ---- Эмодзи-попап (ИСПРАВЛЕНО) ---- */
 .emoji-wrap{position:relative}
 .emoji-pop{
-  position:absolute; top:calc(100% + 8px); left:0;
-  z-index:20;
+  position:fixed;
+  z-index:2000;
   display:none;
+  flex-direction:column;
   padding:10px;
   border-radius:14px;
   border:1px solid var(--stroke-strong);
   background:rgba(18,22,42,.98);
-  box-shadow:var(--shadow);
-  grid-template-columns:repeat(8,1fr);
-  gap:6px;
-  width:min(320px, 90vw);
+  box-shadow:0 20px 60px rgba(0,0,0,.65);
+  width:min(320px, calc(100vw - 24px));
+  max-height:min(360px, 60vh);
+  overflow:hidden;
 }
-.emoji-pop.open{display:grid}
-.emoji-pop button{
+.emoji-pop.open{display:flex}
+.emoji-pop .emoji-head{
+  display:flex; align-items:center; gap:8px;
+  padding:2px 6px 8px 6px;
+  border-bottom:1px solid var(--stroke);
+  margin-bottom:8px;
+  font-size:12px; font-weight:800; letter-spacing:.5px;
+  color:var(--muted); text-transform:uppercase;
+}
+.emoji-pop .emoji-close{
+  margin-left:auto; width:26px;height:26px;border-radius:8px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(255,255,255,.04);
+  color:var(--text); cursor:pointer;
+  display:grid; place-items:center;
+}
+.emoji-pop .emoji-close:hover{background:rgba(255,255,255,.09)}
+.emoji-pop .emoji-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(32px, 1fr));
+  gap:4px;
+  overflow-y:auto;
+  padding-right:4px;
+}
+.emoji-pop .emoji-grid::-webkit-scrollbar{width:6px}
+.emoji-pop .emoji-grid::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15); border-radius:99px}
+.emoji-pop .emoji-grid::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.25)}
+.emoji-pop .emoji-grid button{
   background:none; border:none; cursor:pointer;
-  font-size:18px; padding:4px; border-radius:8px;
-  line-height:1;
+  font-size:19px; line-height:1;
+  padding:6px 0;
+  border-radius:8px;
+  transition:background .15s;
 }
-.emoji-pop button:hover{background:rgba(255,255,255,.08)}
+.emoji-pop .emoji-grid button:hover{background:rgba(255,255,255,.09)}
 
-.tabs-mini{
-  display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;
-}
+.tabs-mini{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
 .tabs-mini .chip{padding:7px 12px; font-size:12px}
 
 .preset-row{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
@@ -619,9 +642,7 @@ select option{background:#12162a; color:var(--text)}
 .preset i{font-size:11px}
 
 /* Color palette */
-.color-palette{
-  display:flex; gap:6px; flex-wrap:wrap; margin-top:8px;
-}
+.color-palette{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
 .color-swatch{
   width:26px;height:26px;border-radius:8px;
   border:2px solid var(--stroke-strong);
@@ -735,9 +756,7 @@ select option{background:#12162a; color:var(--text)}
 .dp-embed .dp-footer .dp-timestamp{font-size:11.5px; opacity:.65}
 
 /* Валидация */
-.checklist{
-  display:flex; flex-direction:column; gap:8px;
-}
+.checklist{display:flex; flex-direction:column; gap:8px}
 .chk{
   display:flex; align-items:center; gap:10px;
   padding:10px 12px; border-radius:12px;
@@ -753,10 +772,7 @@ select option{background:#12162a; color:var(--text)}
 .chk.warn{border-color:rgba(255,176,32,.4); background:rgba(255,176,32,.08)}
 .chk.warn i{color:var(--warn)}
 
-/* Экспорт-табы */
-.export-code{
-  margin-top:10px;
-}
+.export-code{margin-top:10px}
 
 /* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
@@ -883,6 +899,17 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .btn-install{font-size:15px; padding:14px 22px; width:100%}
   .server-item{flex-wrap:wrap}
   .server-actions{width:100%; justify-content:flex-end}
+
+  /* На телефоне попап эмодзи — по центру снизу */
+  .emoji-pop{
+    left:50% !important;
+    top:auto !important;
+    bottom:16px !important;
+    transform:translateX(-50%);
+    width:calc(100vw - 24px);
+    max-width:420px;
+    max-height:50vh;
+  }
 }
 @media (max-width:420px){
   .tab span{display:none}
@@ -1045,7 +1072,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
     <p class="hint" style="max-width:780px; margin:-6px 0 18px">
       Визуальный конструктор сообщений, embed-карточек и компонентов для вебхуков Yurika Bot.
-      Все работает в браузере, шаблоны не отправляются на сервер.
+      Всё работает в браузере, шаблоны не отправляются на сервер.
     </p>
 
     <div class="tabs-mini" id="hookTabs">
@@ -1135,7 +1162,13 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
               <button class="md-btn" data-md="link" title="Ссылка"><i class="fa-solid fa-link"></i></button>
               <div class="emoji-wrap" style="margin-left:auto">
                 <button class="md-btn" id="emojiBtn" title="Эмодзи"><i class="fa-regular fa-face-smile"></i></button>
-                <div class="emoji-pop" id="emojiPop"></div>
+                <div class="emoji-pop" id="emojiPop">
+                  <div class="emoji-head">
+                    <i class="fa-regular fa-face-smile"></i> Эмодзи
+                    <button class="emoji-close" id="emojiClose" title="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+                  <div class="emoji-grid" id="emojiGrid"></div>
+                </div>
               </div>
             </div>
 
@@ -2073,12 +2106,12 @@ const DISCORD_COLORS = [
 
 const state = {
   url:'', name:'', avatar:'', msg:'', file:null,
-  embeds:[],  // каждый: {title,desc,color,author:{name,icon,url},footer:{text,icon},image,thumbnail,fields:[{name,value,inline}]}
-  rows:[],    // каждый: {type:'buttons'|'select', buttons:[{label,emoji,style,url}], select:{placeholder,options:[{label,value,desc}]}}
+  embeds:[],
+  rows:[],
   theme:'dark'
 };
 
-/* ----- Управление вкладками самого конструктора ----- */
+/* ----- Вкладки конструктора ----- */
 $$('#hookTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
     $$('#hookTabs .chip').forEach(x=>x.classList.remove('active'));
@@ -2092,7 +2125,7 @@ $$('#hookTabs .chip').forEach(chip=>{
   });
 });
 
-/* ----- Markdown-панель ----- */
+/* ----- Markdown ----- */
 function applyMd(wrap){
   const ta = $('#hookMsg');
   const start = ta.selectionStart, end = ta.selectionEnd;
@@ -2114,11 +2147,12 @@ $$('.md-btn[data-md]').forEach(b=>{
   b.addEventListener('click', ()=> applyMd(b.dataset.md));
 });
 
-/* ----- Эмодзи-пикер ----- */
+/* ----- Эмодзи-пикер (ИСПРАВЛЕНО) ----- */
 const EMOJIS = ['😀','😂','🥰','😎','🤔','😴','🤯','🥳','😭','🤩','👍','👎','🔥','✨','💜','💙','💚','💛','🧡','❤️','🎉','🎁','🎮','🎧','🚀','⚡','🌟','🍀','🌈','🍕','🍔','🍩','☕','🐱','🐶','🦊','🐼','🐸','🦄','🌸','🌺','🌊','🍎','🍓','🍒','🥇','🏆','📌','📎','🔔','🔒','🔑','💎','⭐','🌙','☀️','🌧️','⚔️','🛡️','💬','📢','📣','💡','💯','✅','❌','⚠️','ℹ️'];
-function buildEmojiPop(){
-  const pop = $('#emojiPop');
-  pop.innerHTML = '';
+
+function buildEmojiGrid(){
+  const grid = $('#emojiGrid');
+  grid.innerHTML = '';
   EMOJIS.forEach(e=>{
     const b = document.createElement('button');
     b.type = 'button';
@@ -2130,17 +2164,76 @@ function buildEmojiPop(){
       ta.focus();
       ta.selectionStart = ta.selectionEnd = start + e.length;
       state.msg = ta.value; updCounters(); renderPreview(); saveDraft();
-      pop.classList.remove('open');
+      closeEmoji();
     };
-    pop.appendChild(b);
+    grid.appendChild(b);
   });
 }
-buildEmojiPop();
+buildEmojiGrid();
+
+function positionEmojiPop(){
+  const pop = $('#emojiPop');
+  const btn = $('#emojiBtn');
+  if(!pop || !btn) return;
+  // На мобильных — CSS уже решает (в media-query bottom-center)
+  if(window.matchMedia('(max-width:760px)').matches){
+    pop.style.left = '';
+    pop.style.top = '';
+    return;
+  }
+  const r = btn.getBoundingClientRect();
+  const popW = pop.offsetWidth || 320;
+  const popH = pop.offsetHeight || 320;
+  const margin = 12;
+
+  // По умолчанию под кнопкой, прижав к правому краю
+  let left = r.right - popW;
+  let top = r.bottom + 8;
+
+  // Не выходим за левый край
+  if(left < margin) left = margin;
+  // Не выходим за правый край
+  if(left + popW > window.innerWidth - margin){
+    left = window.innerWidth - popW - margin;
+  }
+  // Если снизу не влезает — открываем вверх
+  if(top + popH > window.innerHeight - margin){
+    top = r.top - popH - 8;
+    if(top < margin) top = margin;
+  }
+  pop.style.left = left + 'px';
+  pop.style.top = top + 'px';
+}
+
+function openEmoji(){
+  const pop = $('#emojiPop');
+  pop.classList.add('open');
+  // Сначала измерим размеры
+  pop.style.visibility = 'hidden';
+  requestAnimationFrame(()=>{
+    positionEmojiPop();
+    pop.style.visibility = 'visible';
+  });
+}
+function closeEmoji(){
+  $('#emojiPop').classList.remove('open');
+}
 $('#emojiBtn').addEventListener('click', (e)=>{
   e.stopPropagation();
-  $('#emojiPop').classList.toggle('open');
+  const pop = $('#emojiPop');
+  if(pop.classList.contains('open')) closeEmoji();
+  else openEmoji();
 });
-document.addEventListener('click', ()=> $('#emojiPop').classList.remove('open'));
+$('#emojiClose').addEventListener('click', closeEmoji);
+document.addEventListener('click', (e)=>{
+  const pop = $('#emojiPop');
+  if(!pop || !pop.classList.contains('open')) return;
+  if(pop.contains(e.target)) return;
+  if(e.target.closest('#emojiBtn')) return;
+  closeEmoji();
+});
+window.addEventListener('resize', ()=>{ if($('#emojiPop').classList.contains('open')) positionEmojiPop(); });
+window.addEventListener('scroll', ()=>{ if($('#emojiPop').classList.contains('open')) positionEmojiPop(); }, true);
 
 /* ----- Счётчики ----- */
 function counter(el, val, max){
@@ -2163,7 +2256,7 @@ function updCounters(){
   }
 }
 
-/* ----- Привязка полей ----- */
+/* ----- Поля ----- */
 $('#hookUrl').addEventListener('input', e=>{ state.url = e.target.value; updCounters(); saveDraft(); });
 $('#hookName').addEventListener('input', e=>{ state.name = e.target.value; renderPreview(); saveDraft(); });
 $('#hookAvatar').addEventListener('input', e=>{ state.avatar = e.target.value; renderPreview(); saveDraft(); });
@@ -2192,9 +2285,9 @@ $('#hookLoad').addEventListener('click', async ()=>{
       state.embeds = data.embeds.slice(0, MAX_EMBEDS).map(e=>({
         title: e.title||'', desc: e.description||'',
         color: e.color ? '#'+e.color.toString(16).padStart(6,'0') : '#5865F2',
-        author:{name:'',icon:'',url:''},
-        footer:{text:'',icon:''},
-        image:'', thumbnail:'',
+        author:{name:(e.author&&e.author.name)||'', icon:(e.author&&e.author.icon_url)||'', url:(e.author&&e.author.url)||''},
+        footer:{text:(e.footer&&e.footer.text)||'', icon:(e.footer&&e.footer.icon_url)||''},
+        image:(e.image&&e.image.url)||'', thumbnail:(e.thumbnail&&e.thumbnail.url)||'',
         fields: Array.isArray(e.fields) ? e.fields.map(f=>({name:f.name||'',value:f.value||'',inline:!!f.inline})) : []
       }));
       renderEmbeds();
@@ -2374,7 +2467,6 @@ function renderEmbeds(){
   $('#hookAddEmbed').disabled = state.embeds.length >= MAX_EMBEDS;
   $('#hookAddEmbed').style.opacity = state.embeds.length >= MAX_EMBEDS ? .5 : 1;
 
-  /* ---- обработчики ---- */
   box.querySelectorAll('[data-del]').forEach(b=>{
     b.onclick = ()=>{ state.embeds.splice(+b.dataset.del,1); renderEmbeds(); updCounters(); renderPreview(); saveDraft(); };
   });
@@ -2435,7 +2527,7 @@ function renderEmbeds(){
   });
 }
 
-/* ----- КОМПОНЕНТЫ: КНОПКИ И SELECT ----- */
+/* ----- КОМПОНЕНТЫ ----- */
 $('#hookAddRow').addEventListener('click', ()=>{
   if(state.rows.length >= MAX_BTN_ROWS) return;
   state.rows.push({ type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] });
@@ -2484,7 +2576,6 @@ function renderComp(){
       }
       body.appendChild(btnBox);
     }else{
-      // select
       const sel = document.createElement('div');
       sel.className = 'select-prev';
       sel.textContent = row.select.placeholder || 'Выберите…';
@@ -2508,7 +2599,6 @@ function renderComp(){
   });
   $('#compEmpty').style.display = state.rows.length ? 'none' : 'grid';
 
-  /* ---- обработчики ---- */
   box.querySelectorAll('[data-row-type]').forEach(sel=>{
     sel.onchange = ()=>{
       const i = +sel.dataset.rowType;
@@ -2644,7 +2734,7 @@ $('#themeToggle').addEventListener('click', ()=>{
   renderPreview(); saveDraft();
 });
 
-/* ----- Проверка (dry-run) ----- */
+/* ----- Валидация ----- */
 function runChecklist(){
   const items = [];
   const payload = buildPayload();
@@ -2812,130 +2902,43 @@ document.addEventListener('keydown', (e)=>{
     if(e.key.toLowerCase() === 'b'){ e.preventDefault(); applyMd('**'); }
     if(e.key.toLowerCase() === 'i'){ e.preventDefault(); applyMd('*'); }
   }
+  if(e.key === 'Escape'){ closeEmoji(); }
 });
 
 /* ----- Шаблоны ----- */
 const TEMPLATES = {
-  news: {
-    name:'Новость', icon:'fa-newspaper',
-    build(){
-      state.name = 'Yurika News';
-      state.avatar = 'https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg';
-      state.msg = '@everyone';
-      state.embeds = [{
-        title:'🎉 Обновление Yurika Bot 2.0',
-        desc:'Мы выпустили крупное обновление:\n• Новые команды экономики\n• Улучшения ИИ GigaChat\n• Множество исправлений',
-        color:'#5865F2',
-        author:{name:'Yurika Bot', icon:'', url:''},
-        footer:{text:'Yurika Bot · Обновления', icon:''},
-        image:'', thumbnail:'',
-        fields:[
-          {name:'Версия', value:'2.0.0', inline:true},
-          {name:'Дата', value:new Date().toLocaleDateString('ru-RU'), inline:true}
-        ]
-      }];
-      state.rows = [{ type:'buttons', buttons:[
-        {label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com/changelog'},
-        {label:'Обсудить', emoji:'💬', style:'primary', url:''}
-      ]}];
-    }
-  },
-  announce: {
-    name:'Анонс', icon:'fa-bullhorn',
-    build(){
-      state.name = 'Yurika';
-      state.avatar = '';
-      state.msg = '@here';
-      state.embeds = [{
-        title:'📢 Важное объявление',
-        desc:'Сегодня в 20:00 по МСК состоится ивент.\nНе пропусти!',
-        color:'#FEE75C',
-        author:{name:'',icon:'',url:''},
-        footer:{text:'Yurika Bot', icon:''},
-        image:'', thumbnail:'',
-        fields:[{name:'Время', value:'20:00 МСК', inline:true},{name:'Место', value:'Голосовой канал', inline:true}]
-      }];
-      state.rows = [{ type:'buttons', buttons:[
-        {label:'Участвовать', emoji:'🎉', style:'success', url:''},
-        {label:'Напомнить', emoji:'🔔', style:'secondary', url:''}
-      ]}];
-    }
-  },
-  rules: {
-    name:'Правила', icon:'fa-book',
-    build(){
-      state.name = 'Yurika Rules';
-      state.avatar = '';
-      state.msg = '';
-      state.embeds = [{
-        title:'📕 Правила сервера',
-        desc:'1. Будь вежлив.\n2. Без спама и рекламы.\n3. Соблюдай тематику каналов.\n4. Не оскорбляй других.\n5. Следуй указаниям модераторов.',
-        color:'#ED4245',
-        author:{name:'',icon:'',url:''},
-        footer:{text:'Незнание правил не освобождает от ответственности', icon:''},
-        image:'', thumbnail:'',
-        fields:[]
-      }];
-      state.rows = [];
-    }
-  },
-  error: {
-    name:'Ошибка', icon:'fa-triangle-exclamation',
-    build(){
-      state.name = 'Yurika';
-      state.avatar = '';
-      state.msg = '';
-      state.embeds = [{
-        title:'⚠️ Ошибка выполнения',
-        desc:'Команда не может быть выполнена. Причина: недостаточно прав.',
-        color:'#ED4245',
-        author:{name:'',icon:'',url:''},
-        footer:{text:'Попробуйте позже или обратитесь к модерации', icon:''},
-        image:'', thumbnail:'',
-        fields:[]
-      }];
-      state.rows = [];
-    }
-  },
-  success: {
-    name:'Успех', icon:'fa-circle-check',
-    build(){
-      state.name = 'Yurika';
-      state.avatar = '';
-      state.msg = '';
-      state.embeds = [{
-        title:'✅ Готово',
-        desc:'Действие успешно выполнено.',
-        color:'#3BA55C',
-        author:{name:'',icon:'',url:''},
-        footer:{text:'Yurika Bot', icon:''},
-        image:'', thumbnail:'',
-        fields:[]
-      }];
-      state.rows = [];
-    }
-  },
-  update: {
-    name:'Обновление', icon:'fa-arrows-rotate',
-    build(){
-      state.name = 'Yurika Bot';
-      state.avatar = '';
-      state.msg = '';
-      state.embeds = [{
-        title:'🚀 Обновление 1.5',
-        desc:'Что нового:\n• Улучшена скорость работы\n• Добавлены новые команды\n• Исправлены баги',
-        color:'#57F287',
-        author:{name:'Yurika Bot',icon:'',url:''},
-        footer:{text:'Спасибо, что пользуетесь нашим ботом!', icon:''},
-        image:'', thumbnail:'',
-        fields:[
-          {name:'Версия',value:'1.5.0',inline:true},
-          {name:'Дата',value:new Date().toLocaleDateString('ru-RU'),inline:true}
-        ]
-      }];
-      state.rows = [];
-    }
-  }
+  news: { name:'Новость', icon:'fa-newspaper', build(){
+    state.name = 'Yurika News';
+    state.avatar = 'https://i.pinimg.com/736x/05/88/60/058860ed21eea28a2e47bb12bfae4dc0.jpg';
+    state.msg = '@everyone';
+    state.embeds = [{ title:'🎉 Обновление Yurika Bot 2.0', desc:'Мы выпустили крупное обновление:\n• Новые команды экономики\n• Улучшения ИИ GigaChat\n• Множество исправлений', color:'#5865F2', author:{name:'Yurika Bot', icon:'', url:''}, footer:{text:'Yurika Bot · Обновления', icon:''}, image:'', thumbnail:'', fields:[{name:'Версия', value:'2.0.0', inline:true},{name:'Дата', value:new Date().toLocaleDateString('ru-RU'), inline:true}] }];
+    state.rows = [{ type:'buttons', buttons:[{label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com/changelog'},{label:'Обсудить', emoji:'💬', style:'primary', url:''}] }];
+  }},
+  announce: { name:'Анонс', icon:'fa-bullhorn', build(){
+    state.name = 'Yurika'; state.avatar = ''; state.msg = '@here';
+    state.embeds = [{ title:'📢 Важное объявление', desc:'Сегодня в 20:00 по МСК состоится ивент.\nНе пропусти!', color:'#FEE75C', author:{name:'',icon:'',url:''}, footer:{text:'Yurika Bot', icon:''}, image:'', thumbnail:'', fields:[{name:'Время', value:'20:00 МСК', inline:true},{name:'Место', value:'Голосовой канал', inline:true}] }];
+    state.rows = [{ type:'buttons', buttons:[{label:'Участвовать', emoji:'🎉', style:'success', url:''},{label:'Напомнить', emoji:'🔔', style:'secondary', url:''}] }];
+  }},
+  rules: { name:'Правила', icon:'fa-book', build(){
+    state.name = 'Yurika Rules'; state.avatar = ''; state.msg = '';
+    state.embeds = [{ title:'📕 Правила сервера', desc:'1. Будь вежлив.\n2. Без спама и рекламы.\n3. Соблюдай тематику каналов.\n4. Не оскорбляй других.\n5. Следуй указаниям модераторов.', color:'#ED4245', author:{name:'',icon:'',url:''}, footer:{text:'Незнание правил не освобождает от ответственности', icon:''}, image:'', thumbnail:'', fields:[] }];
+    state.rows = [];
+  }},
+  error: { name:'Ошибка', icon:'fa-triangle-exclamation', build(){
+    state.name = 'Yurika'; state.avatar = ''; state.msg = '';
+    state.embeds = [{ title:'⚠️ Ошибка выполнения', desc:'Команда не может быть выполнена. Причина: недостаточно прав.', color:'#ED4245', author:{name:'',icon:'',url:''}, footer:{text:'Попробуйте позже или обратитесь к модерации', icon:''}, image:'', thumbnail:'', fields:[] }];
+    state.rows = [];
+  }},
+  success: { name:'Успех', icon:'fa-circle-check', build(){
+    state.name = 'Yurika'; state.avatar = ''; state.msg = '';
+    state.embeds = [{ title:'✅ Готово', desc:'Действие успешно выполнено.', color:'#3BA55C', author:{name:'',icon:'',url:''}, footer:{text:'Yurika Bot', icon:''}, image:'', thumbnail:'', fields:[] }];
+    state.rows = [];
+  }},
+  update: { name:'Обновление', icon:'fa-arrows-rotate', build(){
+    state.name = 'Yurika Bot'; state.avatar = ''; state.msg = '';
+    state.embeds = [{ title:'🚀 Обновление 1.5', desc:'Что нового:\n• Улучшена скорость работы\n• Добавлены новые команды\n• Исправлены баги', color:'#57F287', author:{name:'Yurika Bot',icon:'',url:''}, footer:{text:'Спасибо, что пользуетесь нашим ботом!', icon:''}, image:'', thumbnail:'', fields:[{name:'Версия',value:'1.5.0',inline:true},{name:'Дата',value:new Date().toLocaleDateString('ru-RU'),inline:true}] }];
+    state.rows = [];
+  }}
 };
 
 function buildTemplateButtons(){
@@ -3005,7 +3008,7 @@ function buildMyTemplateButtons(){
 }
 buildMyTemplateButtons();
 
-/* URL с зашитым шаблоном */
+/* URL с шаблоном */
 function checkShareLink(){
   const h = location.hash;
   if(!h.startsWith('#hook=')) return;
@@ -3034,9 +3037,6 @@ function checkShareLink(){
 loadDraft();
 checkShareLink();
 updCounters(); renderEmbeds(); renderComp(); renderPreview();
-if(!state.embeds.length && !state.msg){
-  // первый визит — покажем, что можно
-}
 
 /* ============================================================
    5. ПРОФИЛЬ
