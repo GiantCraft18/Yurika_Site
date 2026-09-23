@@ -485,6 +485,50 @@ input::placeholder,textarea::placeholder{color:#6b74a3}
   background:rgba(0,0,0,.35);
 }
 
+/* Модалки */
+.modal-overlay{
+  display:none; position:fixed; inset:0; z-index:1000;
+  align-items:center; justify-content:center; padding:20px;
+  background:rgba(0,0,0,.65); backdrop-filter:blur(6px);
+  overflow-y:auto;
+}
+.modal-overlay.open{display:flex}
+.modal-card{max-width:640px; width:100%; margin:auto}
+.modal-card.small{max-width:460px}
+.modal-card .card-head{
+  position:sticky; top:0; z-index:2;
+  background:linear-gradient(180deg, rgba(18,22,42,.98), rgba(18,22,42,.92));
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--stroke);
+  border-radius:var(--radius) var(--radius) 0 0;
+}
+.modal-body{max-height:calc(100vh - 200px); overflow-y:auto}
+
+/* Панель настроек — секции */
+.panel-section{
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  background:rgba(255,255,255,.02);
+  padding:14px 16px;
+  margin-bottom:14px;
+}
+.panel-section h4{
+  margin:0 0 10px; font-size:13px;
+  color:var(--muted); font-weight:800;
+  letter-spacing:.5px; text-transform:uppercase;
+  display:flex; align-items:center; gap:8px;
+}
+.panel-section h4 i{color:var(--brand-2); font-size:13px}
+.toggle-row{
+  display:flex; align-items:center; gap:12px;
+  padding:10px 0;
+  border-bottom:1px dashed rgba(255,255,255,.06);
+}
+.toggle-row:last-child{border-bottom:none; padding-bottom:0}
+.toggle-row .info{flex:1; min-width:0}
+.toggle-row b{display:block; font-size:14px; margin-bottom:2px}
+.toggle-row span{font-size:12px; color:var(--muted); font-weight:600; display:block}
+
 /* Тост */
 .toast-zone{position:fixed; right:16px; bottom:16px; z-index:999; display:flex; flex-direction:column; gap:10px}
 .toast{
@@ -607,6 +651,8 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .guide{padding:20px 18px}
   .install-cta h3{font-size:18px}
   .btn-install{font-size:15px; padding:14px 22px; width:100%}
+  .server-item{flex-wrap:wrap}
+  .server-actions{width:100%; justify-content:flex-end}
 }
 @media (max-width:420px){
   .tab span{display:none}
@@ -1073,7 +1119,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
-      <!-- Мои серверы и активность -->
+      <!-- Мои серверы -->
       <div class="card" style="grid-column:span 2">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-server"></i></div>
@@ -1195,12 +1241,13 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   <span style="opacity:.6">· дизайн, профиль и вебхук-конструктор</span>
 </footer>
 
-<!-- Модалка подтверждения удаления -->
-<div id="deleteModal" style="display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.6); backdrop-filter:blur(6px)">
-  <div class="card" style="max-width:460px; width:100%">
+<!-- ===== Модалка: удаление аккаунта ===== -->
+<div id="deleteModal" class="modal-overlay">
+  <div class="card modal-card small">
     <div class="card-head">
       <div class="ico" style="background:linear-gradient(135deg,rgba(255,90,106,.5),rgba(255,176,32,.4))"><i class="fa-solid fa-triangle-exclamation"></i></div>
       <h3>Удаление аккаунта</h3>
+      <button class="btn ghost sm" id="deleteCancel2" style="margin-left:auto" title="Закрыть"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="card-pad">
       <p style="margin:0 0 14px; color:var(--muted); font-weight:600; line-height:1.65">
@@ -1220,12 +1267,13 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   </div>
 </div>
 
-<!-- Модалка добавления сервера -->
-<div id="serverModal" style="display:none; position:fixed; inset:0; z-index:1000; align-items:center; justify-content:center; padding:20px; background:rgba(0,0,0,.6); backdrop-filter:blur(6px)">
-  <div class="card" style="max-width:460px; width:100%">
+<!-- ===== Модалка: добавление сервера ===== -->
+<div id="serverModal" class="modal-overlay">
+  <div class="card modal-card small">
     <div class="card-head">
       <div class="ico"><i class="fa-solid fa-server"></i></div>
       <h3>Добавить сервер</h3>
+      <button class="btn ghost sm" id="srvCancel2" style="margin-left:auto" title="Закрыть"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="card-pad">
       <div class="field">
@@ -1250,6 +1298,144 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         <button class="btn ghost" id="srvCancel">Отмена</button>
         <button class="btn" id="srvSave"><i class="fa-solid fa-plus"></i> Добавить</button>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== Модалка: панель настройки сервера ===== -->
+<div id="serverPanelModal" class="modal-overlay">
+  <div class="card modal-card">
+    <div class="card-head">
+      <div class="ico" id="spIcon"><i class="fa-solid fa-gear"></i></div>
+      <h3 id="spTitle">Настройки сервера</h3>
+      <button class="btn ghost sm" id="spClose2" style="margin-left:auto" title="Закрыть"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <div class="card-pad modal-body">
+
+      <!-- Основное -->
+      <div class="panel-section">
+        <h4><i class="fa-solid fa-circle-info"></i> Основное</h4>
+        <div class="field" style="margin:0 0 12px">
+          <label>Название сервера</label>
+          <div class="input-wrap"><i class="fa-solid fa-signature lead"></i>
+            <input id="spName" placeholder="Мой сервер" />
+          </div>
+        </div>
+        <div class="field" style="margin:0 0 12px">
+          <label>ID сервера</label>
+          <div class="input-wrap"><i class="fa-solid fa-hashtag lead"></i>
+            <input id="spId" placeholder="123456789" />
+          </div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>Аватар (URL)</label>
+          <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
+            <input id="spAvatar" placeholder="https://example.com/server.png" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Каналы -->
+      <div class="panel-section">
+        <h4><i class="fa-solid fa-hashtag"></i> Каналы</h4>
+        <div class="field" style="margin:0 0 12px">
+          <label>Канал логов</label>
+          <div class="input-wrap"><i class="fa-solid fa-clipboard-list lead"></i>
+            <input id="spLogChannel" placeholder="#logs" />
+          </div>
+        </div>
+        <div class="field" style="margin:0 0 12px">
+          <label>Канал приветствий</label>
+          <div class="input-wrap"><i class="fa-solid fa-hand-sparkles lead"></i>
+            <input id="spWelcomeChannel" placeholder="#welcome" />
+          </div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>Канал объявлений</label>
+          <div class="input-wrap"><i class="fa-solid fa-bullhorn lead"></i>
+            <input id="spAnnounceChannel" placeholder="#announcements" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Роли и права -->
+      <div class="panel-section">
+        <h4><i class="fa-solid fa-user-shield"></i> Роли и права</h4>
+        <div class="field" style="margin:0 0 12px">
+          <label>Авто-роль новым участникам</label>
+          <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
+            <input id="spAutoRole" placeholder="Member" />
+          </div>
+        </div>
+        <div class="field" style="margin:0 0 12px">
+          <label>Роль модератора</label>
+          <div class="input-wrap"><i class="fa-solid fa-gavel lead"></i>
+            <input id="spModRole" placeholder="Moderator" />
+          </div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>Префикс команд</label>
+          <div class="input-wrap"><i class="fa-solid fa-terminal lead"></i>
+            <input id="spPrefix" placeholder="/" maxlength="4" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Модули -->
+      <div class="panel-section">
+        <h4><i class="fa-solid fa-puzzle-piece"></i> Модули</h4>
+
+        <div class="toggle-row">
+          <div class="info"><b>Экономика</b><span>Баланс, магазин, ежедневный бонус</span></div>
+          <div class="switch on" data-sp="econ"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>Питомцы</b><span>Питомцы, кормление, прокачка</span></div>
+          <div class="switch on" data-sp="pets"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>Модерация</b><span>Бан, мут, предупреждения</span></div>
+          <div class="switch on" data-sp="mod"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>Браки</b><span>Обнимашки, шип, предложения</span></div>
+          <div class="switch on" data-sp="love"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>ИИ GigaChat</b><span>Ответы на упоминания бота</span></div>
+          <div class="switch on" data-sp="ai"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>Авто-модерация</b><span>Фильтр мата и спама</span></div>
+          <div class="switch" data-sp="autoMod"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>Приветствие</b><span>Отправлять приветствие в канал</span></div>
+          <div class="switch on" data-sp="welcome"></div>
+        </div>
+        <div class="toggle-row">
+          <div class="info"><b>Логирование</b><span>Писать события в канал логов</span></div>
+          <div class="switch on" data-sp="logging"></div>
+        </div>
+      </div>
+
+      <!-- Опасная зона -->
+      <div class="panel-section" style="border-color:rgba(255,90,106,.35); background:linear-gradient(135deg, rgba(255,90,106,.10), rgba(255,176,32,.06))">
+        <h4 style="color:#ff8a96"><i class="fa-solid fa-triangle-exclamation" style="color:#ff5a6a"></i> Опасная зона</h4>
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
+          <div style="flex:1; min-width:200px">
+            <b style="display:block; margin-bottom:4px">Убрать Юрику с этого сервера</b>
+            <span class="hint">Настройки будут удалены из вашего списка. Отменить это действие нельзя.</span>
+          </div>
+          <button class="btn danger sm" id="spKick"><i class="fa-solid fa-user-minus"></i> Убрать бота</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-head" style="border-top:1px solid var(--stroke); border-bottom:none; border-radius:0 0 var(--radius) var(--radius); position:sticky; bottom:0; background:linear-gradient(0deg, rgba(18,22,42,.98), rgba(18,22,42,.92)); backdrop-filter:blur(8px)">
+      <button class="btn ghost" id="spCancel">Отмена</button>
+      <button class="btn" id="spSave" style="margin-left:auto"><i class="fa-solid fa-floppy-disk"></i> Сохранить настройки</button>
     </div>
   </div>
 </div>
@@ -2051,7 +2237,7 @@ function renderServers(){
       </div>
       <div class="server-actions">
         <button class="btn sm ghost" data-act="open" data-i="${i}"><i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть</button>
-        <button class="btn sm ghost" data-act="settings" data-i="${i}"><i class="fa-solid fa-gear"></i></button>
+        <button class="btn sm ghost" data-act="settings" data-i="${i}"><i class="fa-solid fa-gear"></i> Настроить</button>
         <button class="btn sm danger" data-act="kick" data-i="${i}"><i class="fa-solid fa-trash"></i></button>
       </div>
     `;
@@ -2061,16 +2247,18 @@ function renderServers(){
   wrap.querySelectorAll('[data-act]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const i = +btn.dataset.i, act = btn.dataset.act;
-      const list = loadServers();
-      const s = list[i]; if(!s) return;
       if(act === 'open'){
+        const list = loadServers();
+        const s = list[i]; if(!s) return;
         const url = s.id ? `https://lolka.app/servers/${encodeURIComponent(s.id)}` : 'https://lolka.app/';
         window.open(url, '_blank', 'noopener');
       }
       if(act === 'settings'){
-        toast('Открываю настройки сервера: ' + (s.name || 'Сервер'), 'info');
+        openServerPanel(i);
       }
       if(act === 'kick'){
+        const list = loadServers();
+        const s = list[i]; if(!s) return;
         if(!confirm(`Убрать «${s.name || 'Сервер'}» из списка?`)) return;
         list.splice(i,1);
         saveServers(list);
@@ -2082,17 +2270,19 @@ function renderServers(){
   });
 }
 
+/* ---------- Добавление сервера ---------- */
 function openServerModal(){
-  $('#serverModal').style.display = 'flex';
+  $('#serverModal').classList.add('open');
   $('#srvName').value = '';
   $('#srvId').value = '';
   $('#srvAvatar').value = '';
-  $('#srvName').focus();
+  setTimeout(()=> $('#srvName').focus(), 50);
 }
-function closeServerModal(){ $('#serverModal').style.display = 'none'; }
+function closeServerModal(){ $('#serverModal').classList.remove('open'); }
 
 $('#serversAdd').addEventListener('click', openServerModal);
 $('#srvCancel').addEventListener('click', closeServerModal);
+$('#srvCancel2').addEventListener('click', closeServerModal);
 $('#srvSave').addEventListener('click', ()=>{
   const name = $('#srvName').value.trim();
   const id = $('#srvId').value.trim();
@@ -2101,7 +2291,13 @@ $('#srvSave').addEventListener('click', ()=>{
   const list = loadServers();
   list.push({
     name, id, avatar,
-    addedAt: new Date().toLocaleDateString('ru-RU')
+    addedAt: new Date().toLocaleDateString('ru-RU'),
+    settings: {
+      logChannel: '', welcomeChannel: '', announceChannel: '',
+      autoRole: '', modRole: '', prefix: '/',
+      modules: { econ:true, pets:true, mod:true, love:true, ai:true,
+                 autoMod:false, welcome:true, logging:true }
+    }
   });
   saveServers(list);
   closeServerModal();
@@ -2111,7 +2307,109 @@ $('#srvSave').addEventListener('click', ()=>{
 });
 
 /* ============================================================
-   8. ПОДЕЛИТЬСЯ ПРОФИЛЕМ
+   8. ПАНЕЛЬ НАСТРОЙКИ СЕРВЕРА
+============================================================ */
+let spIndex = -1;
+
+function openServerPanel(index){
+  const list = loadServers();
+  const s = list[index];
+  if(!s){ toast('Сервер не найден', 'err'); return; }
+  spIndex = index;
+
+  // Заполняем форму из данных сервера (или дефолты)
+  const st = s.settings || {};
+  $('#spName').value = s.name || '';
+  $('#spId').value = s.id || '';
+  $('#spAvatar').value = s.avatar || '';
+  $('#spLogChannel').value = st.logChannel || '';
+  $('#spWelcomeChannel').value = st.welcomeChannel || '';
+  $('#spAnnounceChannel').value = st.announceChannel || '';
+  $('#spAutoRole').value = st.autoRole || '';
+  $('#spModRole').value = st.modRole || '';
+  $('#spPrefix').value = st.prefix || '/';
+
+  // Иконка и заголовок
+  const icon = $('#spIcon');
+  if(s.avatar){
+    icon.innerHTML = `<img src="${escapeHTML(s.avatar)}" style="width:100%;height:100%;object-fit:cover;border-radius:12px" onerror="this.parentNode.innerHTML='<i class=\\'fa-solid fa-gear\\'></i>'">`;
+  }else{
+    icon.innerHTML = `<i class="fa-solid fa-gear"></i>`;
+  }
+  $('#spTitle').textContent = s.name ? `Настройки · ${s.name}` : 'Настройки сервера';
+
+  // Тумблеры модулей
+  const mods = (st.modules) || {};
+  $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
+    const key = sw.dataset.sp;
+    const def = !['autoMod'].includes(key);
+    const on = mods[key] !== undefined ? !!mods[key] : def;
+    sw.classList.toggle('on', on);
+  });
+
+  $('#serverPanelModal').classList.add('open');
+}
+function closeServerPanel(){
+  $('#serverPanelModal').classList.remove('open');
+  spIndex = -1;
+}
+
+$('#spClose2').addEventListener('click', closeServerPanel);
+$('#spCancel').addEventListener('click', closeServerPanel);
+
+// Тумблеры модулей в панели — переключаются по клику
+$$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
+  sw.addEventListener('click', ()=>{
+    sw.classList.toggle('on');
+  });
+});
+
+// Сохранить настройки
+$('#spSave').addEventListener('click', ()=>{
+  if(spIndex < 0){ toast('Сервер не выбран', 'err'); return; }
+  const list = loadServers();
+  const s = list[spIndex]; if(!s) return;
+
+  const mods = {};
+  $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
+    mods[sw.dataset.sp] = sw.classList.contains('on');
+  });
+
+  s.name = $('#spName').value.trim() || s.name;
+  s.id = $('#spId').value.trim() || s.id;
+  s.avatar = $('#spAvatar').value.trim();
+  s.settings = {
+    logChannel: $('#spLogChannel').value.trim(),
+    welcomeChannel: $('#spWelcomeChannel').value.trim(),
+    announceChannel: $('#spAnnounceChannel').value.trim(),
+    autoRole: $('#spAutoRole').value.trim(),
+    modRole: $('#spModRole').value.trim(),
+    prefix: $('#spPrefix').value.trim() || '/',
+    modules: mods
+  };
+  saveServers(list);
+  renderServers();
+  renderMeta(loadProfileLocal());
+  closeServerPanel();
+  toast('Настройки сохранены', 'ok');
+});
+
+// Убрать бота с сервера
+$('#spKick').addEventListener('click', ()=>{
+  if(spIndex < 0) return;
+  const list = loadServers();
+  const s = list[spIndex]; if(!s) return;
+  if(!confirm(`Убрать Юрику с «${s.name || 'Сервер'}»?`)) return;
+  list.splice(spIndex, 1);
+  saveServers(list);
+  renderServers();
+  renderMeta(loadProfileLocal());
+  closeServerPanel();
+  toast('Бот убран с сервера', 'warn');
+});
+
+/* ============================================================
+   9. ПОДЕЛИТЬСЯ ПРОФИЛЕМ
 ============================================================ */
 $('#shareCopy').addEventListener('click', async ()=>{
   const val = $('#shareLink').value;
@@ -2121,15 +2419,18 @@ $('#shareCopy').addEventListener('click', async ()=>{
 });
 
 /* ============================================================
-   9. УДАЛЕНИЕ АККАУНТА
+   10. УДАЛЕНИЕ АККАУНТА
 ============================================================ */
 $('#deleteOpen').addEventListener('click', ()=>{
-  $('#deleteModal').style.display = 'flex';
+  $('#deleteModal').classList.add('open');
   $('#deleteConfirm').value = '';
   $('#deleteConfirmBtn').disabled = true;
 });
 $('#deleteCancel').addEventListener('click', ()=>{
-  $('#deleteModal').style.display = 'none';
+  $('#deleteModal').classList.remove('open');
+});
+$('#deleteCancel2').addEventListener('click', ()=>{
+  $('#deleteModal').classList.remove('open');
 });
 $('#deleteConfirm').addEventListener('input', e=>{
   $('#deleteConfirmBtn').disabled = e.target.value.trim().toUpperCase() !== 'УДАЛИТЬ';
@@ -2145,17 +2446,24 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
 
   [LS.profile, LS.creds, LS.session, LS.prefs, LS.servers, LS.meta].forEach(k=> localStorage.removeItem(k));
 
-  $('#deleteModal').style.display = 'none';
+  $('#deleteModal').classList.remove('open');
   showAuth();
   toast('Аккаунт удалён', 'err', 3200);
 });
 
 /* ============================================================
-   10. АВТОЗАГРУЗКА
+   11. АВТОЗАГРУЗКА
 ============================================================ */
 (function init(){
   initPrivacySwitches();
   touchMeta();
+
+  // Закрытие модалок по клику на фон
+  $$('.modal-overlay').forEach(m=>{
+    m.addEventListener('click', e=>{
+      if(e.target === m) m.classList.remove('open');
+    });
+  });
 
   const s = getSession();
   if(s){
