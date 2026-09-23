@@ -162,6 +162,116 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
   border:1px solid var(--stroke-strong); color:#fff; font-size:16px;
 }
 
+/* ============ ГЛАВНАЯ ============ */
+.hero{
+  position:relative;
+  border:1px solid var(--stroke);
+  border-radius:24px;
+  padding:36px 30px;
+  background:linear-gradient(180deg, rgba(18,22,42,.78), rgba(18,22,42,.55));
+  backdrop-filter:blur(12px);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:-1px;
+  background:conic-gradient(from 180deg, rgba(124,92,255,.55), rgba(34,211,238,.35), rgba(255,92,174,.45), rgba(124,92,255,.55));
+  filter:blur(40px); opacity:.35; z-index:-1;
+}
+.hero h1{
+  margin:0 0 14px;
+  font-size:clamp(24px,3.4vw,38px);
+  line-height:1.15;
+  letter-spacing:.2px;
+  background:linear-gradient(135deg, #ffffff, #c9d2ff 60%, #22d3ee);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero p{color:var(--muted); font-size:15.5px; line-height:1.7; margin:0 0 12px; max-width:900px}
+.hero .wave{font-size:18px}
+.feature-list{display:grid; gap:12px; grid-template-columns:repeat(2,minmax(0,1fr)); margin:22px 0}
+.feature{
+  display:flex; gap:12px; align-items:flex-start;
+  padding:14px 16px; border-radius:16px;
+  border:1px solid var(--stroke); background:rgba(255,255,255,.03);
+  transition:.2s transform, .2s border-color;
+}
+.feature:hover{transform:translateY(-2px); border-color:var(--stroke-strong)}
+.feature i{
+  width:38px;height:38px;border-radius:12px; flex:0 0 38px;
+  display:grid;place-items:center; color:#fff;
+  background:linear-gradient(135deg, rgba(124,92,255,.55), rgba(34,211,238,.45));
+  border:1px solid var(--stroke-strong);
+}
+.feature b{display:block; font-size:15px; margin-bottom:3px}
+.feature span{color:var(--muted); font-size:13.5px; font-weight:600}
+.callout{
+  margin-top:18px;
+  border:1px solid rgba(124,92,255,.35);
+  background:linear-gradient(135deg, rgba(124,92,255,.18), rgba(34,211,238,.12));
+  border-radius:16px; padding:16px 18px;
+  display:flex; gap:14px; align-items:flex-start;
+}
+.callout i{
+  width:42px;height:42px;border-radius:12px;flex:0 0 42px; display:grid;place-items:center;
+  background:linear-gradient(135deg, #7c5cff, #22d3ee); color:#fff;
+  box-shadow:0 10px 24px rgba(124,92,255,.45);
+}
+.callout b{display:block; margin-bottom:4px}
+.callout p{margin:0; color:var(--text); opacity:.92; font-size:14.5px; line-height:1.6}
+
+/* ============ УСТАНОВКА ============ */
+.steps{display:grid; gap:18px}
+.step{
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
+  overflow:hidden;
+}
+.step-head{
+  display:flex; align-items:center; gap:12px;
+  padding:14px 18px; border-bottom:1px solid var(--stroke);
+}
+.step-num{
+  width:34px;height:34px;border-radius:50%; display:grid;place-items:center;
+  background:linear-gradient(135deg, #7c5cff, #22d3ee); color:#fff;
+  font-weight:800; font-size:14px;
+  box-shadow:0 8px 22px rgba(124,92,255,.45);
+}
+.step-head b{font-size:15.5px}
+.step-body{padding:18px}
+.step-body p{margin:0 0 12px; color:var(--muted); font-size:14px; line-height:1.65; font-weight:600}
+.shot{
+  display:block; width:100%;
+  border-radius:14px;
+  border:1px solid var(--stroke-strong);
+  box-shadow:0 24px 60px rgba(0,0,0,.55);
+  background:#0a0d1c;
+}
+.install-cta{
+  margin-top:8px;
+  display:flex; flex-direction:column; align-items:center; gap:14px;
+  padding:28px 20px;
+  border:1px solid var(--stroke);
+  border-radius:22px;
+  background:linear-gradient(180deg, rgba(18,22,42,.85), rgba(18,22,42,.6));
+  box-shadow:var(--shadow);
+  text-align:center;
+}
+.install-cta h3{margin:0; font-size:22px}
+.install-cta p{margin:0; color:var(--muted); font-weight:600; max-width:620px}
+.btn-install{
+  display:inline-flex; align-items:center; justify-content:center; gap:12px;
+  background:#ffffff; color:#000000;
+  font-weight:800; font-size:16px;
+  padding:16px 28px; border-radius:14px;
+  border:none; cursor:pointer;
+  box-shadow:0 18px 44px rgba(255,255,255,.18), 0 0 0 1px rgba(255,255,255,.35);
+  transition:.2s transform, .2s box-shadow;
+}
+.btn-install i{color:#000}
+.btn-install:hover{transform:translateY(-2px); box-shadow:0 24px 60px rgba(255,255,255,.28), 0 0 0 1px rgba(255,255,255,.55)}
+.install-note{font-size:12.5px; color:var(--muted); font-weight:700; letter-spacing:.3px}
+
 /* ============ ПОЛЯ ФОРМ ============ */
 .field{display:flex; flex-direction:column; gap:7px; margin-bottom:14px}
 .field label{font-size:12.5px; font-weight:800; color:var(--muted); letter-spacing:.4px; text-transform:uppercase}
@@ -358,6 +468,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 @media (max-width:760px){
   .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
   .cmd-grid{grid-template-columns:1fr}
+  .feature-list{grid-template-columns:1fr}
   nav.tabs{width:100%; margin-left:0; order:3; padding-top:6px}
   .topbar-inner{flex-wrap:wrap}
   .tab{flex:1 1 auto; justify-content:center; padding:9px 10px; font-size:12.5px}
@@ -368,6 +479,9 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .toast-zone{left:12px; right:12px}
   .section-title .pill{display:none}
   .card[style*="position:sticky"]{position:static !important}
+  .hero{padding:24px 18px}
+  .install-cta h3{font-size:18px}
+  .btn-install{font-size:15px; padding:14px 22px; width:100%}
 }
 @media (max-width:420px){
   .tab span{display:none}
@@ -393,17 +507,267 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
 
     <nav class="tabs">
-      <button class="tab active" data-tab="profile"><i class="fa-solid fa-user-astronaut"></i><span>Профиль</span></button>
+      <button class="tab active" data-tab="home"><i class="fa-solid fa-house"></i><span>Главная</span></button>
+      <button class="tab" data-tab="install"><i class="fa-solid fa-download"></i><span>Установить бота</span></button>
       <button class="tab" data-tab="commands"><i class="fa-solid fa-terminal"></i><span>Команды</span></button>
       <button class="tab" data-tab="webhook"><i class="fa-solid fa-bolt"></i><span>Вебхук</span></button>
+      <button class="tab" data-tab="profile"><i class="fa-solid fa-user-astronaut"></i><span>Профиль</span></button>
     </nav>
   </div>
 </header>
 
 <main>
 
+  <!-- ===================== ГЛАВНАЯ ===================== -->
+  <section class="section active" id="tab-home">
+    <div class="hero">
+      <h1>YurikaBot — твой идеальный помощник на сервере!</h1>
+      <p><span class="wave">👋</span> Привет, я Юрика! Я — многофункциональный бот, который всегда придёт на помощь. Вот что я умею:</p>
+
+      <div class="feature-list">
+        <div class="feature">
+          <i class="fa-solid fa-coins"></i>
+          <div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-paw"></i>
+          <div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-shield-halved"></i>
+          <div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div>
+        </div>
+        <div class="feature">
+          <i class="fa-solid fa-circle-question"></i>
+          <div><b>Справка</b><span>Покажу все команды и функции.</span></div>
+        </div>
+      </div>
+
+      <div class="callout">
+        <i class="fa-solid fa-comments"></i>
+        <div>
+          <b>💬 Живое общение</b>
+          <p>Во мне встроен API-ключ GigaChat от Сбербанка! Просто выдели мой ник <b style="color:#fff">@Yurika_Bot</b> и напиши мне вопрос или приветствие — я всегда отвечу!</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:14px; border-color:rgba(34,211,238,.4); background:linear-gradient(135deg, rgba(34,211,238,.16), rgba(124,92,255,.14))">
+        <i class="fa-solid fa-download" style="background:linear-gradient(135deg,#22d3ee,#37d67a)"></i>
+        <div>
+          <b>📥 Как установить?</b>
+          <p>Загляни во вкладку <b style="color:#fff">«Установить бота»</b> — там подробная инструкция, как правильно меня добавить и настроить на твоём сервере.</p>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top:22px">
+        <a class="btn" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
+          <i class="fa-solid fa-rocket"></i> Установить на сервер
+        </a>
+        <button class="btn ghost" data-goto="commands"><i class="fa-solid fa-terminal"></i> Посмотреть команды</button>
+        <button class="btn ghost" data-goto="webhook"><i class="fa-solid fa-bolt"></i> Вебхук-конструктор</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== УСТАНОВИТЬ БОТА ===================== -->
+  <section class="section" id="tab-install">
+    <div class="section-title">
+      <h2><i class="fa-solid fa-download" style="color:var(--brand-2)"></i> Установить бота</h2>
+      <span class="pill">пошаговая инструкция</span>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">1</div>
+          <b>Открой портал разработчика Lolka</b>
+        </div>
+        <div class="step-body">
+          <p>Перейди на <b style="color:#fff">lolka.app/developers/portal</b>, войди в аккаунт и найди приложение <b style="color:#fff">«Юрика Бот»</b> в списке своих приложений.</p>
+          <img class="shot" src="https://i.ibb.co/7J8mZ1W/lolka-portal.jpg" alt="Портал разработчика Lolka"
+               onerror="this.onerror=null;this.src='https://placehold.co/1200x600/0b0d1a/9aa3c7?text=%D0%9F%D0%BE%D1%80%D1%82%D0%B0%D0%BB+%D1%80%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D1%87%D0%B8%D0%BA%D0%B0'">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">2</div>
+          <b>Авторизуй бота на сервере</b>
+        </div>
+        <div class="step-body">
+          <p>Выбери нужный сервер из списка, проверь список разрешений (экономика, питомцы, модерация, справка) и нажми <b style="color:#fff">«Авторизовать»</b>.</p>
+          <img class="shot" src="https://i.ibb.co/Lk1zvGY/lolka-authorize.jpg" alt="Авторизация бота"
+               onerror="this.onerror=null;this.src='https://placehold.co/1200x900/0b0d1a/9aa3c7?text=%D0%90%D0%B2%D1%82%D0%BE%D1%80%D0%B8%D0%B7%D0%B0%D1%86%D0%B8%D1%8F'">
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-head">
+          <div class="step-num">3</div>
+          <b>Готово — бот на сервере!</b>
+        </div>
+        <div class="step-body">
+          <p>После подтверждения Юрика появится на твоём сервере. Напиши <b style="color:#fff">@Yurika_Bot</b> приветствие — и она ответит. Все команды доступны во вкладке «Команды».</p>
+          <img class="shot" src="https://i.ibb.co/6PmVb0r/lolka-installed.jpg" alt="Бот установлен"
+               onerror="this.onerror=null;this.src='https://placehold.co/1200x600/0b0d1a/9aa3c7?text=%D0%91%D0%BE%D1%82+%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD'">
+        </div>
+      </div>
+
+    </div>
+
+    <div class="install-cta" style="margin-top:22px">
+      <h3>Готов добавить Юрику на свой сервер?</h3>
+      <p>Нажми кнопку ниже — откроется страница авторизации Lolka, где ты сможешь выбрать сервер и подтвердить установку.</p>
+      <a class="btn-install" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
+        <i class="fa-solid fa-plus"></i>
+        Установить на сервер
+      </a>
+      <div class="install-note">lolka.app · безопасная авторизация через Lolka</div>
+    </div>
+  </section>
+
+  <!-- ===================== КОМАНДЫ ===================== -->
+  <section class="section" id="tab-commands">
+    <div class="section-title">
+      <h2><i class="fa-solid fa-terminal" style="color:var(--brand-3)"></i> Команды Yurika Bot</h2>
+      <span class="pill" id="cmdCount">0 команд</span>
+    </div>
+
+    <div class="field" style="max-width:420px">
+      <div class="input-wrap"><i class="fa-solid fa-magnifying-glass lead"></i>
+        <input id="cmdSearch" placeholder="Поиск команды или алиаса…" />
+      </div>
+    </div>
+
+    <div class="cat-tabs" id="catTabs"></div>
+    <div class="cmd-grid" id="cmdGrid"></div>
+  </section>
+
+  <!-- ===================== ВЕБХУК ===================== -->
+  <section class="section" id="tab-webhook">
+    <div class="section-title">
+      <h2><i class="fa-solid fa-bolt" style="color:var(--warn)"></i> Yurika Hook</h2>
+      <span class="pill">визуальный конструктор вебхуков</span>
+    </div>
+    <p class="hint" style="max-width:640px; margin:-6px 0 18px">
+      Визуальный конструктор сообщений и embed-карточек для вебхуков Yurika Bot.
+      Всё работает в браузере, шаблоны не сохраняются.
+    </p>
+
+    <div class="hook-grid">
+      <div style="display:flex; flex-direction:column; gap:16px">
+
+        <div class="card">
+          <div class="card-head">
+            <div class="ico"><i class="fa-solid fa-link"></i></div>
+            <h3>Вебхук</h3>
+          </div>
+          <div class="card-pad">
+            <div class="field" style="margin-bottom:10px">
+              <div class="input-wrap"><i class="fa-solid fa-globe lead"></i>
+                <input id="hookUrl" maxlength="200" placeholder="URL вебхука" />
+              </div>
+            </div>
+
+            <div class="grid cols-2" style="gap:10px">
+              <div class="field" style="margin:0">
+                <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
+                  <input id="hookName" maxlength="80" placeholder="Имя отправителя" />
+                </div>
+              </div>
+              <div class="field" style="margin:0">
+                <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
+                  <input id="hookAvatar" maxlength="300" placeholder="Аватар (URL)" />
+                </div>
+              </div>
+            </div>
+            <div class="hint" style="margin:6px 0 12px"><span id="cntUrl">0 / 80</span></div>
+
+            <div class="grid cols-2" style="gap:10px">
+              <div class="field" style="margin:0">
+                <div class="input-wrap"><i class="fa-solid fa-message lead"></i>
+                  <input id="hookLoadBy" placeholder="Загрузить сообщение по ссылке или ID" />
+                </div>
+              </div>
+              <button class="btn cyan" id="hookLoad" type="button">
+                <i class="fa-solid fa-download"></i> Загрузить
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-pad" style="padding:12px 14px">
+            <div class="row">
+              <button class="btn sm" id="hookSend"><i class="fa-solid fa-paper-plane"></i> Отправить</button>
+              <button class="btn ghost sm" id="hookEdit"><i class="fa-solid fa-pen"></i> Редактировать</button>
+              <button class="btn ghost sm" id="hookDelete"><i class="fa-solid fa-trash"></i> Удалить</button>
+              <button class="btn ghost sm" id="hookClear" style="margin-left:auto"><i class="fa-solid fa-broom"></i> Очистить</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="ico"><i class="fa-solid fa-comment-dots"></i></div>
+            <h3>Сообщение</h3>
+            <span class="counter" id="cntMsg" style="margin-left:auto">0 / 2000</span>
+          </div>
+          <div class="card-pad">
+            <textarea id="hookMsg" maxlength="2000" placeholder="Текст сообщения" style="min-height:120px"></textarea>
+
+            <div class="row" style="margin-top:12px">
+              <button class="btn ghost sm" id="hookAttach"><i class="fa-solid fa-paperclip"></i> Прикрепить файл</button>
+              <input type="file" id="hookFile" hidden />
+              <span class="hint" id="hookFileName"></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-head">
+            <div class="ico"><i class="fa-solid fa-layer-group"></i></div>
+            <h3>Embed-карточки</h3>
+            <span class="badge" id="cntEmbBadge" style="margin-left:auto">0 / 10</span>
+            <button class="btn sm" id="hookAddEmbed"><i class="fa-solid fa-plus"></i> Добавить</button>
+          </div>
+          <div class="card-pad">
+            <div class="auth-tabs" style="margin-bottom:14px">
+              <button class="chip active" data-embed-tab="editor"><i class="fa-solid fa-pen-to-square"></i> Редактор</button>
+              <button class="chip" data-embed-tab="json"><i class="fa-solid fa-code"></i> JSON</button>
+            </div>
+
+            <div id="embedEditor">
+              <div id="embeds"></div>
+              <div class="empty" id="embedsEmpty" style="min-height:120px">
+                <i class="fa-regular fa-square-plus"></i>
+                <div>Нет embed-карточек. Нажмите «Добавить».</div>
+              </div>
+            </div>
+
+            <pre class="code" id="embedJSON" style="display:none; max-height:340px">{}</pre>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="align-self:start; position:sticky; top:80px">
+        <div class="card-head">
+          <div class="ico"><i class="fa-solid fa-eye"></i></div>
+          <h3>Предпросмотр</h3>
+          <button class="btn sm cyan" id="hookCopy" style="margin-left:auto"><i class="fa-solid fa-copy"></i> JSON</button>
+        </div>
+        <div class="card-pad">
+          <div class="preview" id="hookPreview">
+            <div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== ПРОФИЛЬ ===================== -->
-  <section class="section active" id="tab-profile">
+  <section class="section" id="tab-profile">
     <div class="section-title">
       <h2><i class="fa-solid fa-id-badge" style="color:var(--brand-2)"></i> Личный кабинет</h2>
       <span class="pill" id="profileStatus">Yurika</span>
@@ -554,151 +918,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       </div>
     </div>
   </section>
-
-  <!-- ===================== КОМАНДЫ ===================== -->
-  <section class="section" id="tab-commands">
-    <div class="section-title">
-      <h2><i class="fa-solid fa-terminal" style="color:var(--brand-3)"></i> Команды Yurika Bot</h2>
-      <span class="pill" id="cmdCount">0 команд</span>
-    </div>
-
-    <div class="field" style="max-width:420px">
-      <div class="input-wrap"><i class="fa-solid fa-magnifying-glass lead"></i>
-        <input id="cmdSearch" placeholder="Поиск команды или алиаса…" />
-      </div>
-    </div>
-
-    <div class="cat-tabs" id="catTabs"></div>
-    <div class="cmd-grid" id="cmdGrid"></div>
-  </section>
-
-  <!-- ===================== ВЕБХУК ===================== -->
-  <section class="section" id="tab-webhook">
-    <div class="section-title">
-      <h2><i class="fa-solid fa-bolt" style="color:var(--warn)"></i> Yurika Hook</h2>
-      <span class="pill">визуальный конструктор вебхуков</span>
-    </div>
-    <p class="hint" style="max-width:640px; margin:-6px 0 18px">
-      Визуальный конструктор сообщений и embed-карточек для вебхуков Yurika Bot.
-      Всё работает в браузере, шаблоны не сохраняются.
-    </p>
-
-    <div class="hook-grid">
-      <!-- ЛЕВАЯ КОЛОНКА -->
-      <div style="display:flex; flex-direction:column; gap:16px">
-
-        <!-- ВЕБХУК -->
-        <div class="card">
-          <div class="card-head">
-            <div class="ico"><i class="fa-solid fa-link"></i></div>
-            <h3>Вебхук</h3>
-          </div>
-          <div class="card-pad">
-            <div class="field" style="margin-bottom:10px">
-              <div class="input-wrap"><i class="fa-solid fa-globe lead"></i>
-                <input id="hookUrl" maxlength="200" placeholder="URL вебхука" />
-              </div>
-            </div>
-
-            <div class="grid cols-2" style="gap:10px">
-              <div class="field" style="margin:0">
-                <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
-                  <input id="hookName" maxlength="80" placeholder="Имя отправителя" />
-                </div>
-              </div>
-              <div class="field" style="margin:0">
-                <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
-                  <input id="hookAvatar" maxlength="300" placeholder="Аватар (URL)" />
-                </div>
-              </div>
-            </div>
-            <div class="hint" style="margin:6px 0 12px"><span id="cntUrl">0 / 80</span></div>
-
-            <div class="grid cols-2" style="gap:10px">
-              <div class="field" style="margin:0">
-                <div class="input-wrap"><i class="fa-solid fa-message lead"></i>
-                  <input id="hookLoadBy" placeholder="Загрузить сообщение по ссылке или ID" />
-                </div>
-              </div>
-              <button class="btn cyan" id="hookLoad" type="button">
-                <i class="fa-solid fa-download"></i> Загрузить
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- ПАНЕЛЬ КНОПОК -->
-        <div class="card">
-          <div class="card-pad" style="padding:12px 14px">
-            <div class="row">
-              <button class="btn sm" id="hookSend"><i class="fa-solid fa-paper-plane"></i> Отправить</button>
-              <button class="btn ghost sm" id="hookEdit"><i class="fa-solid fa-pen"></i> Редактировать</button>
-              <button class="btn ghost sm" id="hookDelete"><i class="fa-solid fa-trash"></i> Удалить</button>
-              <button class="btn ghost sm" id="hookClear" style="margin-left:auto"><i class="fa-solid fa-broom"></i> Очистить</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- СООБЩЕНИЕ -->
-        <div class="card">
-          <div class="card-head">
-            <div class="ico"><i class="fa-solid fa-comment-dots"></i></div>
-            <h3>Сообщение</h3>
-            <span class="counter" id="cntMsg" style="margin-left:auto">0 / 2000</span>
-          </div>
-          <div class="card-pad">
-            <textarea id="hookMsg" maxlength="2000" placeholder="Текст сообщения" style="min-height:120px"></textarea>
-
-            <div class="row" style="margin-top:12px">
-              <button class="btn ghost sm" id="hookAttach"><i class="fa-solid fa-paperclip"></i> Прикрепить файл</button>
-              <input type="file" id="hookFile" hidden />
-              <span class="hint" id="hookFileName"></span>
-            </div>
-          </div>
-        </div>
-
-        <!-- EMBED-КАРТОЧКИ -->
-        <div class="card">
-          <div class="card-head">
-            <div class="ico"><i class="fa-solid fa-layer-group"></i></div>
-            <h3>Embed-карточки</h3>
-            <span class="badge" id="cntEmbBadge" style="margin-left:auto">0 / 10</span>
-            <button class="btn sm" id="hookAddEmbed"><i class="fa-solid fa-plus"></i> Добавить</button>
-          </div>
-          <div class="card-pad">
-            <div class="auth-tabs" style="margin-bottom:14px">
-              <button class="chip active" data-embed-tab="editor"><i class="fa-solid fa-pen-to-square"></i> Редактор</button>
-              <button class="chip" data-embed-tab="json"><i class="fa-solid fa-code"></i> JSON</button>
-            </div>
-
-            <div id="embedEditor">
-              <div id="embeds"></div>
-              <div class="empty" id="embedsEmpty" style="min-height:120px">
-                <i class="fa-regular fa-square-plus"></i>
-                <div>Нет embed-карточек. Нажмите «Добавить».</div>
-              </div>
-            </div>
-
-            <pre class="code" id="embedJSON" style="display:none; max-height:340px">{}</pre>
-          </div>
-        </div>
-      </div>
-
-      <!-- ПРАВАЯ КОЛОНКА: ПРЕДПРОСМОТР -->
-      <div class="card" style="align-self:start; position:sticky; top:80px">
-        <div class="card-head">
-          <div class="ico"><i class="fa-solid fa-eye"></i></div>
-          <h3>Предпросмотр</h3>
-          <button class="btn sm cyan" id="hookCopy" style="margin-left:auto"><i class="fa-solid fa-copy"></i> JSON</button>
-        </div>
-        <div class="card-pad">
-          <div class="preview" id="hookPreview">
-            <div class="empty"><i class="fa-regular fa-comment-dots"></i> Заполните сообщение, чтобы увидеть предпросмотр</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
 </main>
 
 <footer>
@@ -735,7 +954,7 @@ function escapeHTML(s=''){
 }
 
 /* ============================================================
-   1. FIREBASE (работает в фоне)
+   1. FIREBASE (в фоне)
 ============================================================ */
 const firebaseConfig = {
   apiKey: "AIzaSyDJ14cmKH4yAMQtAevua4c4Pp5e7JL8dII",
@@ -759,14 +978,16 @@ try{
 /* ============================================================
    2. ПЕРЕКЛЮЧЕНИЕ ВКЛАДОК
 ============================================================ */
+function switchTab(name){
+  $$('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab === name));
+  $$('.section').forEach(s=>s.classList.toggle('active', s.id === 'tab-' + name));
+  window.scrollTo({top:0, behavior:'smooth'});
+}
 $$('.tab').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    $$('.tab').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    const id = 'tab-' + btn.dataset.tab;
-    $$('.section').forEach(s=>s.classList.toggle('active', s.id===id));
-    window.scrollTo({top:0, behavior:'smooth'});
-  });
+  btn.addEventListener('click', ()=> switchTab(btn.dataset.tab));
+});
+$$('[data-goto]').forEach(b=>{
+  b.addEventListener('click', ()=> switchTab(b.dataset.goto));
 });
 
 /* ============================================================
@@ -887,7 +1108,6 @@ function renderCatTabs(){
     el.appendChild(b);
   });
 }
-
 function renderCommands(){
   const grid = $('#cmdGrid'); grid.innerHTML = '';
   const q = search.trim().toLowerCase();
@@ -1374,11 +1594,6 @@ $('#avatarFile').addEventListener('change', e=>{
     });
   }
 })();
-
-if(!localStorage.getItem('yurika_hint_shown')){
-  localStorage.setItem('yurika_hint_shown','1');
-  setTimeout(()=>toast('Совет: можно войти без пароля — кнопка внизу формы', 'info', 4200), 900);
-}
 </script>
 </body>
 </html>
