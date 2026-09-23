@@ -222,6 +222,43 @@ main{max-width:1240px; margin:0 auto; padding:22px 18px 80px}
 .callout b{display:block; margin-bottom:4px}
 .callout p{margin:0; color:var(--text); opacity:.92; font-size:14.5px; line-height:1.6}
 
+/* Категории команд на главной */
+.cats-strip{
+  margin-top:22px;
+  padding:20px 20px 18px;
+  border:1px solid var(--stroke);
+  border-radius:20px;
+  background:linear-gradient(180deg, rgba(18,22,42,.72), rgba(18,22,42,.5));
+  backdrop-filter:blur(10px);
+}
+.cats-strip h3{
+  margin:0 0 14px;
+  font-size:14px; font-weight:800;
+  letter-spacing:.4px; text-transform:uppercase;
+  color:var(--muted);
+  display:flex; align-items:center; gap:8px;
+}
+.cats-strip h3 i{color:var(--brand-2)}
+.cats-grid{
+  display:grid;
+  gap:10px;
+  grid-template-columns:repeat(auto-fill, minmax(180px, 1fr));
+}
+.cat-pill{
+  display:inline-flex; align-items:center; gap:10px;
+  padding:11px 14px; border-radius:14px;
+  border:1px solid var(--stroke); background:rgba(255,255,255,.03);
+  color:var(--text); font-weight:700; font-size:13.5px;
+  transition:.2s transform, .2s border-color, .2s background;
+}
+.cat-pill:hover{transform:translateY(-2px); border-color:var(--stroke-strong); background:rgba(255,255,255,.07)}
+.cat-pill i{
+  width:32px;height:32px;border-radius:10px; flex:0 0 32px;
+  display:grid;place-items:center; color:#fff; font-size:13px;
+  background:linear-gradient(135deg, rgba(124,92,255,.55), rgba(34,211,238,.45));
+  border:1px solid var(--stroke-strong);
+}
+
 /* ============ УСТАНОВКА ============ */
 .guide{
   border:1px solid var(--stroke);
@@ -837,6 +874,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .feature-list{grid-template-columns:1fr}
   .stat-grid{grid-template-columns:1fr}
   .mini-grid{grid-template-columns:1fr}
+  .cats-grid{grid-template-columns:1fr}
   nav.tabs{width:100%; margin-left:0; order:3; padding-top:6px}
   .topbar-inner{flex-wrap:wrap}
   .tab{flex:1 1 auto; justify-content:center; padding:9px 10px; font-size:12.5px}
@@ -892,44 +930,57 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
 <main>
 
-  <!-- ===================== ГЛАВНАЯ ===================== -->
-  <section class="section active" id="tab-home">
-    <div class="hero">
-      <h1>YurikaBot — твой идеальный помощник на сервере!</h1>
-      <p><span class="wave">👋</span> Привет, я Юрика! Я — многофункциональный бот, который всегда придёт на помощь. Вот что я умею:</p>
+<!-- ===================== ГЛАВНАЯ ===================== -->
+<section class="section active" id="tab-home">
+  <div class="hero">
+    <h1>YurikaBot — твой идеальный помощник на сервере!</h1>
+    <p><span class="wave">👋</span> Привет, я Юрика! Я — многофункциональный бот, который всегда придёт на помощь. Вот что я умею:</p>
 
-      <div class="feature-list">
-        <div class="feature"><i class="fa-solid fa-coins"></i><div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div></div>
-        <div class="feature"><i class="fa-solid fa-paw"></i><div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div></div>
-        <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div></div>
-        <div class="feature"><i class="fa-solid fa-circle-question"></i><div><b>Справка</b><span>Покажу все команды и функции.</span></div></div>
-      </div>
+    <div class="feature-list">
+      <div class="feature"><i class="fa-solid fa-coins"></i><div><b>Экономика</b><span>Команды для управления балансом и валютой.</span></div></div>
+      <div class="feature"><i class="fa-solid fa-paw"></i><div><b>Питомцы</b><span>Системы питомцев и ухода за ними.</span></div></div>
+      <div class="feature"><i class="fa-solid fa-shield-halved"></i><div><b>Модерация</b><span>Помощь в поддержании порядка на сервере.</span></div></div>
+      <div class="feature"><i class="fa-solid fa-circle-question"></i><div><b>Справка</b><span>Покажу все команды и функции.</span></div></div>
+    </div>
 
-      <div class="callout">
-        <i class="fa-solid fa-comments"></i>
-        <div>
-          <b>💬 Живое общение</b>
-          <p>Во мне встроен API-ключ GigaChat от Сбербанка! Просто выдели мой ник <b style="color:#fff">@Yurika_Bot</b> и напиши мне вопрос или приветствие — я всегда отвечу!</p>
-        </div>
-      </div>
-
-      <div class="callout" style="margin-top:14px; border-color:rgba(34,211,238,.4); background:linear-gradient(135deg, rgba(34,211,238,.16), rgba(124,92,255,.14))">
-        <i class="fa-solid fa-download" style="background:linear-gradient(135deg,#22d3ee,#37d67a)"></i>
-        <div>
-          <b>📥 Как установить?</b>
-          <p>Загляни во вкладку <b style="color:#fff">«Установить бота»</b> — там подробная инструкция, как правильно меня добавить и настроить на твоём сервере.</p>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top:22px">
-        <a class="btn" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
-          <i class="fa-solid fa-rocket"></i> Установить на сервер
-        </a>
-        <button class="btn ghost" data-goto="commands"><i class="fa-solid fa-terminal"></i> Посмотреть команды</button>
-        <button class="btn ghost" data-goto="webhook"><i class="fa-solid fa-bolt"></i> Вебхук-конструктор</button>
+    <!-- Остальные категории команд (без дублей с фичами выше) -->
+    <div class="cats-strip">
+      <h3><i class="fa-solid fa-layer-group"></i> Другие категории команд</h3>
+      <div class="cats-grid">
+        <div class="cat-pill"><i class="fa-solid fa-brain"></i> Нейросеть GigaChat-2</div>
+        <div class="cat-pill"><i class="fa-solid fa-briefcase"></i> Бизнесы</div>
+        <div class="cat-pill"><i class="fa-solid fa-heart"></i> Браки</div>
+        <div class="cat-pill"><i class="fa-solid fa-gear"></i> Конфигурация</div>
+        <div class="cat-pill"><i class="fa-solid fa-circle-play"></i> Основное</div>
+        <div class="cat-pill"><i class="fa-solid fa-users"></i> Пользователи</div>
       </div>
     </div>
-  </section>
+
+    <div class="callout">
+      <i class="fa-solid fa-comments"></i>
+      <div>
+        <b>💬 Живое общение</b>
+        <p>Во мне встроен API-ключ GigaChat от Сбербанка! Просто выдели мой ник <b style="color:#fff">@Yurika_Bot</b> и напиши мне вопрос или приветствие — я всегда отвечу!</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:14px; border-color:rgba(34,211,238,.4); background:linear-gradient(135deg, rgba(34,211,238,.16), rgba(124,92,255,.14))">
+      <i class="fa-solid fa-download" style="background:linear-gradient(135deg,#22d3ee,#37d67a)"></i>
+      <div>
+        <b>📥 Как установить?</b>
+        <p>Загляни во вкладку <b style="color:#fff">«Установить бота»</b> — там подробная инструкция, как правильно меня добавить и настроить на твоём сервере.</p>
+      </div>
+    </div>
+
+    <div class="row" style="margin-top:22px">
+      <a class="btn" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
+        <i class="fa-solid fa-rocket"></i> Установить на сервер
+      </a>
+      <button class="btn ghost" data-goto="commands"><i class="fa-solid fa-terminal"></i> Посмотреть команды</button>
+      <button class="btn ghost" data-goto="webhook"><i class="fa-solid fa-bolt"></i> Вебхук-конструктор</button>
+    </div>
+  </div>
+</section>
 
   <!-- ===================== УСТАНОВИТЬ БОТА ===================== -->
   <section class="section" id="tab-install">
