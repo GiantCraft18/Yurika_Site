@@ -574,58 +574,6 @@ select option{background:#12162a; color:var(--text)}
 .md-btn:hover{background:rgba(255,255,255,.09); transform:translateY(-1px); border-color:var(--brand)}
 .md-btn i{font-size:12.5px}
 
-/* ---- Эмодзи-попап (ИСПРАВЛЕНО) ---- */
-.emoji-wrap{position:relative}
-.emoji-pop{
-  position:fixed;
-  z-index:2000;
-  display:none;
-  flex-direction:column;
-  padding:10px;
-  border-radius:14px;
-  border:1px solid var(--stroke-strong);
-  background:rgba(18,22,42,.98);
-  box-shadow:0 20px 60px rgba(0,0,0,.65);
-  width:min(320px, calc(100vw - 24px));
-  max-height:min(360px, 60vh);
-  overflow:hidden;
-}
-.emoji-pop.open{display:flex}
-.emoji-pop .emoji-head{
-  display:flex; align-items:center; gap:8px;
-  padding:2px 6px 8px 6px;
-  border-bottom:1px solid var(--stroke);
-  margin-bottom:8px;
-  font-size:12px; font-weight:800; letter-spacing:.5px;
-  color:var(--muted); text-transform:uppercase;
-}
-.emoji-pop .emoji-close{
-  margin-left:auto; width:26px;height:26px;border-radius:8px;
-  border:1px solid var(--stroke-strong);
-  background:rgba(255,255,255,.04);
-  color:var(--text); cursor:pointer;
-  display:grid; place-items:center;
-}
-.emoji-pop .emoji-close:hover{background:rgba(255,255,255,.09)}
-.emoji-pop .emoji-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(32px, 1fr));
-  gap:4px;
-  overflow-y:auto;
-  padding-right:4px;
-}
-.emoji-pop .emoji-grid::-webkit-scrollbar{width:6px}
-.emoji-pop .emoji-grid::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15); border-radius:99px}
-.emoji-pop .emoji-grid::-webkit-scrollbar-thumb:hover{background:rgba(255,255,255,.25)}
-.emoji-pop .emoji-grid button{
-  background:none; border:none; cursor:pointer;
-  font-size:19px; line-height:1;
-  padding:6px 0;
-  border-radius:8px;
-  transition:background .15s;
-}
-.emoji-pop .emoji-grid button:hover{background:rgba(255,255,255,.09)}
-
 .tabs-mini{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
 .tabs-mini .chip{padding:7px 12px; font-size:12px}
 
@@ -899,17 +847,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .btn-install{font-size:15px; padding:14px 22px; width:100%}
   .server-item{flex-wrap:wrap}
   .server-actions{width:100%; justify-content:flex-end}
-
-  /* На телефоне попап эмодзи — по центру снизу */
-  .emoji-pop{
-    left:50% !important;
-    top:auto !important;
-    bottom:16px !important;
-    transform:translateX(-50%);
-    width:calc(100vw - 24px);
-    max-width:420px;
-    max-height:50vh;
-  }
 }
 @media (max-width:420px){
   .tab span{display:none}
@@ -1160,16 +1097,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
               <button class="md-btn" data-md="spoiler" title="Спойлер">||</button>
               <button class="md-btn" data-md="quote" title="Цитата"><i class="fa-solid fa-quote-left"></i></button>
               <button class="md-btn" data-md="link" title="Ссылка"><i class="fa-solid fa-link"></i></button>
-              <div class="emoji-wrap" style="margin-left:auto">
-                <button class="md-btn" id="emojiBtn" title="Эмодзи"><i class="fa-regular fa-face-smile"></i></button>
-                <div class="emoji-pop" id="emojiPop">
-                  <div class="emoji-head">
-                    <i class="fa-regular fa-face-smile"></i> Эмодзи
-                    <button class="emoji-close" id="emojiClose" title="Закрыть"><i class="fa-solid fa-xmark"></i></button>
-                  </div>
-                  <div class="emoji-grid" id="emojiGrid"></div>
-                </div>
-              </div>
             </div>
 
             <div class="card-pad">
@@ -2147,94 +2074,6 @@ $$('.md-btn[data-md]').forEach(b=>{
   b.addEventListener('click', ()=> applyMd(b.dataset.md));
 });
 
-/* ----- Эмодзи-пикер (ИСПРАВЛЕНО) ----- */
-const EMOJIS = ['😀','😂','🥰','😎','🤔','😴','🤯','🥳','😭','🤩','👍','👎','🔥','✨','💜','💙','💚','💛','🧡','❤️','🎉','🎁','🎮','🎧','🚀','⚡','🌟','🍀','🌈','🍕','🍔','🍩','☕','🐱','🐶','🦊','🐼','🐸','🦄','🌸','🌺','🌊','🍎','🍓','🍒','🥇','🏆','📌','📎','🔔','🔒','🔑','💎','⭐','🌙','☀️','🌧️','⚔️','🛡️','💬','📢','📣','💡','💯','✅','❌','⚠️','ℹ️'];
-
-function buildEmojiGrid(){
-  const grid = $('#emojiGrid');
-  grid.innerHTML = '';
-  EMOJIS.forEach(e=>{
-    const b = document.createElement('button');
-    b.type = 'button';
-    b.textContent = e;
-    b.onclick = ()=>{
-      const ta = $('#hookMsg');
-      const start = ta.selectionStart, end = ta.selectionEnd;
-      ta.value = ta.value.slice(0,start) + e + ta.value.slice(end);
-      ta.focus();
-      ta.selectionStart = ta.selectionEnd = start + e.length;
-      state.msg = ta.value; updCounters(); renderPreview(); saveDraft();
-      closeEmoji();
-    };
-    grid.appendChild(b);
-  });
-}
-buildEmojiGrid();
-
-function positionEmojiPop(){
-  const pop = $('#emojiPop');
-  const btn = $('#emojiBtn');
-  if(!pop || !btn) return;
-  // На мобильных — CSS уже решает (в media-query bottom-center)
-  if(window.matchMedia('(max-width:760px)').matches){
-    pop.style.left = '';
-    pop.style.top = '';
-    return;
-  }
-  const r = btn.getBoundingClientRect();
-  const popW = pop.offsetWidth || 320;
-  const popH = pop.offsetHeight || 320;
-  const margin = 12;
-
-  // По умолчанию под кнопкой, прижав к правому краю
-  let left = r.right - popW;
-  let top = r.bottom + 8;
-
-  // Не выходим за левый край
-  if(left < margin) left = margin;
-  // Не выходим за правый край
-  if(left + popW > window.innerWidth - margin){
-    left = window.innerWidth - popW - margin;
-  }
-  // Если снизу не влезает — открываем вверх
-  if(top + popH > window.innerHeight - margin){
-    top = r.top - popH - 8;
-    if(top < margin) top = margin;
-  }
-  pop.style.left = left + 'px';
-  pop.style.top = top + 'px';
-}
-
-function openEmoji(){
-  const pop = $('#emojiPop');
-  pop.classList.add('open');
-  // Сначала измерим размеры
-  pop.style.visibility = 'hidden';
-  requestAnimationFrame(()=>{
-    positionEmojiPop();
-    pop.style.visibility = 'visible';
-  });
-}
-function closeEmoji(){
-  $('#emojiPop').classList.remove('open');
-}
-$('#emojiBtn').addEventListener('click', (e)=>{
-  e.stopPropagation();
-  const pop = $('#emojiPop');
-  if(pop.classList.contains('open')) closeEmoji();
-  else openEmoji();
-});
-$('#emojiClose').addEventListener('click', closeEmoji);
-document.addEventListener('click', (e)=>{
-  const pop = $('#emojiPop');
-  if(!pop || !pop.classList.contains('open')) return;
-  if(pop.contains(e.target)) return;
-  if(e.target.closest('#emojiBtn')) return;
-  closeEmoji();
-});
-window.addEventListener('resize', ()=>{ if($('#emojiPop').classList.contains('open')) positionEmojiPop(); });
-window.addEventListener('scroll', ()=>{ if($('#emojiPop').classList.contains('open')) positionEmojiPop(); }, true);
-
 /* ----- Счётчики ----- */
 function counter(el, val, max){
   if(!el) return;
@@ -2902,7 +2741,6 @@ document.addEventListener('keydown', (e)=>{
     if(e.key.toLowerCase() === 'b'){ e.preventDefault(); applyMd('**'); }
     if(e.key.toLowerCase() === 'i'){ e.preventDefault(); applyMd('*'); }
   }
-  if(e.key === 'Escape'){ closeEmoji(); }
 });
 
 /* ----- Шаблоны ----- */
