@@ -653,39 +653,182 @@ select option{background:#12162a; color:var(--text)}
 .field-item .field-item-head b{font-size:12px; color:var(--muted); letter-spacing:.4px}
 .field-item .field-item-head .btn{margin-left:auto}
 
-.btn-row{
-  display:flex; gap:6px; flex-wrap:wrap;
+/* ============ КОМПОНЕНТЫ (НОВОЕ) ============ */
+.comp-row{
+  position:relative;
+  border:1px solid var(--stroke);
+  border-radius:16px;
+  padding:14px;
+  margin-bottom:12px;
+  background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.008));
+  transition:.2s border-color, .2s box-shadow;
+}
+.comp-row:hover{border-color:var(--stroke-strong)}
+.comp-row.drag-over{
+  border-color:var(--brand-2);
+  box-shadow:0 0 0 2px rgba(34,211,238,.3);
+}
+.comp-row.dragging{opacity:.5}
+
+.comp-head{
+  display:flex; align-items:center; gap:10px; margin-bottom:12px;
+  padding-bottom:10px; border-bottom:1px dashed rgba(255,255,255,.08);
+}
+.comp-head .drag-handle{
+  cursor:grab; color:var(--muted); font-size:14px; padding:4px 6px;
+  border-radius:8px; transition:.15s;
+}
+.comp-head .drag-handle:hover{background:rgba(255,255,255,.06); color:var(--text)}
+.comp-head .drag-handle:active{cursor:grabbing}
+.comp-head .row-type-badge{
+  font-size:10.5px; font-weight:800; letter-spacing:.4px;
+  padding:4px 10px; border-radius:999px;
+  background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(34,211,238,.25));
+  border:1px solid var(--stroke-strong); color:#fff;
+  text-transform:uppercase;
+}
+.comp-head strong{font-size:13.5px; flex:1}
+.comp-actions{display:flex; gap:6px}
+.comp-actions .icon-btn{
+  width:30px;height:30px;border-radius:9px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(255,255,255,.04);
+  color:var(--text); cursor:pointer;
+  display:grid;place-items:center; font-size:12px;
+  transition:.15s;
+}
+.comp-actions .icon-btn:hover{background:rgba(255,255,255,.1); transform:translateY(-1px)}
+
+/* Превью кнопок */
+.btn-preview-row{
+  display:flex; flex-wrap:wrap; gap:8px;
   padding:10px; border-radius:12px;
   border:1px dashed var(--stroke-strong);
-  background:rgba(255,255,255,.02);
+  background:rgba(0,0,0,.15);
 }
-.btn-row .btn-prev{
-  padding:6px 12px; border-radius:8px;
-  font-weight:800; font-size:12px;
+.btn-preview{
+  position:relative;
+  padding:8px 14px; border-radius:8px;
+  font-weight:700; font-size:12.5px;
   border:1px solid var(--stroke-strong);
-  background:rgba(88,101,242,.3);
   color:#fff;
   display:inline-flex; align-items:center; gap:6px;
+  cursor:grab;
+  transition:.15s;
+  user-select:none;
 }
-.btn-prev.style-primary{background:#5865F2; border-color:#5865F2}
-.btn-prev.style-secondary{background:#4f545c; border-color:#4f545c}
-.btn-prev.style-success{background:#3ba55c; border-color:#3ba55c}
-.btn-prev.style-danger{background:#ed4245; border-color:#ed4245}
-.btn-prev.style-link{background:#3b3f47; border-color:#3b3f47}
+.btn-preview:hover{transform:translateY(-1px); filter:brightness(1.1)}
+.btn-preview:active{cursor:grabbing}
+.btn-preview.disabled{opacity:.5; cursor:not-allowed; filter:grayscale(.5)}
+.btn-preview .btn-idx{
+  position:absolute; top:-6px; left:-6px;
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(0,0,0,.7); border:1px solid rgba(255,255,255,.3);
+  font-size:9.5px; font-weight:800;
+  display:grid;place-items:center; color:#fff;
+}
+.btn-preview.style-primary{background:#5865F2; border-color:#5865F2}
+.btn-preview.style-secondary{background:#4f545c; border-color:#4f545c}
+.btn-preview.style-success{background:#3ba55c; border-color:#3ba55c}
+.btn-preview.style-danger{background:#ed4245; border-color:#ed4245}
+.btn-preview.style-link{background:#3b3f47; border-color:#3b3f47}
+.btn-preview .btn-remove{
+  margin-left:4px; opacity:.6;
+  background:none; border:none; color:inherit; cursor:pointer;
+  font-size:11px; padding:0;
+}
+.btn-preview .btn-remove:hover{opacity:1; color:#ff8a96}
 
-.select-prev{
-  display:flex; align-items:center; gap:8px;
-  padding:8px 12px; border-radius:8px;
-  border:1px solid var(--stroke-strong);
-  background:rgba(43,45,49,.8);
-  color:var(--muted); font-weight:700; font-size:12.5px;
+.add-btn-tile{
+  padding:8px 14px; border-radius:8px;
+  border:1px dashed var(--stroke-strong);
+  background:rgba(255,255,255,.03);
+  color:var(--muted); font-weight:800; font-size:12.5px;
+  cursor:pointer; transition:.15s;
+  display:inline-flex; align-items:center; gap:6px;
 }
-.select-prev::after{
+.add-btn-tile:hover{background:rgba(255,255,255,.08); color:var(--text); border-color:var(--brand)}
+
+/* Превью select */
+.select-preview{
+  display:flex; align-items:center; gap:8px;
+  padding:10px 14px; border-radius:8px;
+  border:1px solid var(--stroke-strong);
+  background:rgba(43,45,49,.85);
+  color:var(--muted); font-weight:700; font-size:13px;
+  cursor:default;
+}
+.select-preview::after{
   content:"\f078";
   font-family:"Font Awesome 6 Free"; font-weight:900;
-  margin-left:auto; font-size:10px;
+  margin-left:auto; font-size:11px;
 }
+.select-options-list{
+  display:flex; flex-direction:column; gap:8px;
+  margin-top:10px; padding:10px;
+  border-radius:12px;
+  border:1px dashed var(--stroke-strong);
+  background:rgba(0,0,0,.15);
+}
+.select-opt{
+  display:flex; gap:6px; align-items:center;
+  padding:8px;
+  border-radius:8px;
+  background:rgba(255,255,255,.025);
+  border:1px solid var(--stroke);
+}
+.select-opt .opt-emoji{
+  width:38px; text-align:center;
+  font-size:16px;
+}
+.select-opt input{flex:1}
+.select-opt .opt-del{
+  width:30px;height:30px;border-radius:9px;
+  border:1px solid rgba(255,90,106,.35);
+  background:rgba(255,90,106,.12);
+  color:#ff8a96; cursor:pointer;
+  display:grid;place-items:center; font-size:11px;
+  flex:0 0 30px;
+}
+.select-opt .opt-del:hover{background:#ff5a6a; color:#fff}
 
+.select-settings{
+  display:grid; gap:10px; grid-template-columns:1fr 1fr 1fr;
+  padding:10px; margin-bottom:10px;
+  border-radius:12px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,.02);
+}
+.select-settings .field{margin:0}
+.select-settings .field input{padding:10px 12px 10px 38px}
+.select-settings .field label{font-size:11px}
+
+.comp-empty{
+  display:grid; place-items:center; text-align:center;
+  color:var(--muted); min-height:120px; font-weight:700; gap:10px;
+}
+.comp-empty i{font-size:32px; color:var(--brand)}
+
+/* Модалка редактирования кнопки */
+.btn-edit-form{display:flex; flex-direction:column; gap:14px}
+.style-picker{display:grid; grid-template-columns:repeat(5,1fr); gap:8px}
+.style-opt{
+  padding:10px 6px; border-radius:10px;
+  border:2px solid var(--stroke-strong);
+  background:rgba(255,255,255,.04);
+  color:#fff; font-weight:800; font-size:11px;
+  cursor:pointer; text-align:center;
+  transition:.15s;
+}
+.style-opt:hover{transform:translateY(-2px)}
+.style-opt.active{border-color:var(--brand-2); box-shadow:0 0 0 3px rgba(34,211,238,.25)}
+.style-opt.s-primary{background:#5865F2; border-color:#5865F2}
+.style-opt.s-secondary{background:#4f545c; border-color:#4f545c}
+.style-opt.s-success{background:#3ba55c; border-color:#3ba55c}
+.style-opt.s-danger{background:#ed4245; border-color:#ed4245}
+.style-opt.s-link{background:#3b3f47; border-color:#3b3f47}
+
+/* ============ ФИНАЛ ============ */
 .discord-preview{
   border-radius:14px;
   padding:16px;
@@ -721,25 +864,35 @@ select option{background:#12162a; color:var(--text)}
 }
 .discord-preview.theme-dark .dp-embed{background:#2b2d31}
 .discord-preview.theme-light .dp-embed{background:#f2f3f5}
-.dp-embed .dp-author{display:flex; align-items:center; gap:8px; margin-bottom:8px}
-.dp-embed .dp-author img{width:22px;height:22px;border-radius:50%;object-fit:cover}
-.dp-embed .dp-author span{font-size:12.5px; font-weight:700}
-.dp-embed .dp-title{margin:0 0 6px; font-size:15px; font-weight:700; color:inherit}
+.dp-embed .dp-title{margin:0 0 6px; font-size:15px; font-weight:700}
 .dp-embed .dp-desc{margin:0; font-size:13.5px; opacity:.92; white-space:pre-wrap}
-.dp-embed .dp-fields{display:flex; flex-wrap:wrap; gap:10px; margin-top:10px}
-.dp-embed .dp-field{min-width:100px; flex:1 1 40%; font-size:13px}
-.dp-embed .dp-field b{display:block; font-size:12.5px; margin-bottom:3px}
-.dp-embed .dp-thumb{
-  float:right; margin:0 0 8px 12px;
-  width:80px; height:80px; border-radius:6px; object-fit:cover;
+.dp-components{display:flex; flex-direction:column; gap:6px; margin-top:8px}
+.dp-components .dp-row{display:flex; gap:6px; flex-wrap:wrap}
+.dp-btn{
+  padding:8px 14px; border-radius:6px;
+  font-weight:700; font-size:13px;
+  border:none; cursor:default; color:#fff;
+  display:inline-flex; align-items:center; gap:6px;
 }
-.dp-embed .dp-img{
-  margin-top:10px; border-radius:6px; max-width:100%; display:block;
+.dp-btn.style-primary{background:#5865F2}
+.dp-btn.style-secondary{background:#4f545c}
+.dp-btn.style-success{background:#3ba55c}
+.dp-btn.style-danger{background:#ed4245}
+.dp-btn.style-link{background:#3b3f47}
+.dp-btn.disabled{opacity:.5}
+.dp-select{
+  width:100%;
+  padding:10px 12px; border-radius:6px;
+  background:#2b2d31; color:#9aa3c7;
+  border:1px solid #1e1f22;
+  font-weight:700; font-size:13px;
+  display:flex; align-items:center;
 }
-.dp-embed .dp-footer{display:flex; align-items:center; gap:8px; margin-top:10px}
-.dp-embed .dp-footer img{width:20px;height:20px;border-radius:50%;object-fit:cover}
-.dp-embed .dp-footer span{font-size:12px; opacity:.75}
-.dp-embed .dp-footer .dp-timestamp{font-size:11.5px; opacity:.65}
+.dp-select::after{
+  content:"\f078";
+  font-family:"Font Awesome 6 Free"; font-weight:900;
+  margin-left:auto; font-size:10px;
+}
 
 .files-grid{
   display:grid;
@@ -753,79 +906,48 @@ select option{background:#12162a; color:var(--text)}
   border-radius:12px;
   overflow:hidden;
   background:rgba(255,255,255,.025);
-  transition:.2s transform, .2s border-color;
 }
-.file-card:hover{transform:translateY(-2px); border-color:var(--stroke-strong)}
 .file-card .file-preview{
-  width:100%;
-  height:110px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  background:rgba(0,0,0,.35);
-  overflow:hidden;
+  width:100%; height:110px;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.35); overflow:hidden;
 }
-.file-card .file-preview img{
-  width:100%; height:100%; object-fit:cover; display:block;
-}
-.file-card .file-preview .file-icon{
-  font-size:34px; color:var(--brand-2);
-}
+.file-card .file-preview img{width:100%; height:100%; object-fit:cover}
+.file-card .file-preview .file-icon{font-size:34px; color:var(--brand-2)}
 .file-card .file-info{
-  padding:8px 10px;
-  font-size:11.5px;
-  font-weight:700;
+  padding:8px 10px; font-size:11.5px; font-weight:700;
   color:var(--muted);
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:6px;
+  display:flex; align-items:center; justify-content:space-between; gap:6px;
 }
 .file-card .file-info .file-name{
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  flex:1; min-width:0;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; min-width:0;
 }
 .file-card .file-info .file-size{
-  font-family:'JetBrains Mono',monospace;
-  font-size:10.5px;
-  color:var(--muted);
-  flex:0 0 auto;
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; color:var(--muted); flex:0 0 auto;
 }
 .file-card .file-remove{
-  position:absolute;
-  top:6px; right:6px;
+  position:absolute; top:6px; right:6px;
   width:26px;height:26px;border-radius:8px;
   border:1px solid rgba(255,255,255,.28);
   background:rgba(255,90,106,.85);
   color:#fff; cursor:pointer;
-  display:grid;place-items:center;
-  font-size:11px;
-  transition:.2s transform, .2s background;
+  display:grid;place-items:center; font-size:11px;
 }
-.file-card .file-remove:hover{transform:scale(1.08); background:#ff5a6a}
+.file-card .file-remove:hover{background:#ff5a6a}
 .file-card .file-badge{
-  position:absolute;
-  top:6px; left:6px;
+  position:absolute; top:6px; left:6px;
   padding:2px 7px; border-radius:999px;
   font-size:9.5px; font-weight:800;
   background:rgba(0,0,0,.6); border:1px solid rgba(255,255,255,.2);
-  color:#fff; text-transform:uppercase;
-  letter-spacing:.4px;
+  color:#fff; text-transform:uppercase; letter-spacing:.4px;
 }
 .attach-zone{
   border:2px dashed var(--stroke-strong);
-  border-radius:14px;
-  padding:18px;
-  text-align:center;
-  cursor:pointer;
-  transition:.2s border-color, .2s background;
+  border-radius:14px; padding:18px; text-align:center;
+  cursor:pointer; transition:.2s;
   background:rgba(255,255,255,.015);
 }
-.attach-zone:hover,
-.attach-zone.dragover{
-  border-color:var(--brand-2);
-  background:rgba(34,211,238,.06);
-}
+.attach-zone:hover,.attach-zone.dragover{border-color:var(--brand-2); background:rgba(34,211,238,.06)}
 .attach-zone i{font-size:26px; color:var(--brand-2); margin-bottom:8px}
 .attach-zone b{display:block; margin-bottom:4px}
 .attach-zone span{font-size:12px; color:var(--muted); font-weight:600}
@@ -834,8 +956,7 @@ select option{background:#12162a; color:var(--text)}
 .chk{
   display:flex; align-items:center; gap:10px;
   padding:10px 12px; border-radius:12px;
-  border:1px solid var(--stroke);
-  background:rgba(255,255,255,.02);
+  border:1px solid var(--stroke); background:rgba(255,255,255,.02);
   font-size:13.5px; font-weight:600;
 }
 .chk i{width:20px; text-align:center}
@@ -879,9 +1000,9 @@ select option{background:#12162a; color:var(--text)}
   position:relative; border:1px solid var(--stroke);
   background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
   border-radius:16px; padding:14px 16px;
-  transition:.22s transform, .22s border-color, .22s background;
+  transition:.22s;
 }
-.cmd:hover{transform:translateY(-3px); border-color:var(--stroke-strong); background:rgba(255,255,255,.06)}
+.cmd:hover{transform:translateY(-3px); border-color:var(--stroke-strong)}
 .cmd code{
   font-family:'JetBrains Mono',monospace; font-weight:600; font-size:13.5px;
   color:#d7dcff; background:rgba(124,92,255,.16);
@@ -907,7 +1028,7 @@ pre.code{
 .hook-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:16px}
 .counter{font-size:12px; font-weight:800; color:var(--muted)}
 .counter.over{color:var(--err)}
-.embed-box{border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.025); transition:border-color .2s, box-shadow .2s, opacity .2s}
+.embed-box{border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.025); transition:.2s}
 .embed-box .embed-top{display:flex; align-items:center; gap:10px; margin-bottom:10px}
 .embed-box .embed-top strong{font-size:13.5px}
 .color-line{height:5px; border-radius:99px; margin-bottom:12px}
@@ -918,11 +1039,8 @@ pre.code{
 .embed-box.collapsed .embed-top{margin-bottom:0}
 .embed-box .collapse-btn{
   width:32px;height:32px;border-radius:10px;
-  border:1px solid var(--stroke-strong);
-  background:rgba(255,255,255,.04);
-  color:var(--text); cursor:pointer;
-  display:grid;place-items:center;
-  transition:.2s background;
+  border:1px solid var(--stroke-strong); background:rgba(255,255,255,.04);
+  color:var(--text); cursor:pointer; display:grid;place-items:center;
 }
 .embed-box .collapse-btn:hover{background:rgba(255,255,255,.09); border-color:var(--brand)}
 .drag-handle{
@@ -943,8 +1061,7 @@ input.limit-over, textarea.limit-over{
 .color-palette{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
 .color-swatch{
   width:26px;height:26px;border-radius:8px;
-  border:2px solid var(--stroke-strong);
-  cursor:pointer;
+  border:2px solid var(--stroke-strong); cursor:pointer;
 }
 .empty{display:grid; place-items:center; text-align:center; color:var(--muted); min-height:180px; font-weight:700; gap:10px}
 .empty i{font-size:32px; color:var(--brand)}
@@ -966,6 +1083,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .hook-grid{grid-template-columns:1fr}
   .grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .select-settings{grid-template-columns:1fr 1fr}
 }
 @media (max-width:760px){
   .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
@@ -991,6 +1109,8 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .server-actions{width:100%; justify-content:flex-end}
   .files-grid{grid-template-columns:repeat(auto-fill, minmax(130px, 1fr))}
   .stat-row{grid-template-columns:1fr}
+  .select-settings{grid-template-columns:1fr}
+  .style-picker{grid-template-columns:repeat(3,1fr)}
 }
 @media (max-width:420px){
   .tab span{display:none}
@@ -1030,7 +1150,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
 <main>
 
-  <!-- ============ ГЛАВНАЯ ============ -->
+  <!-- ГЛАВНАЯ -->
   <section class="section active" id="tab-home">
     <div class="hero">
       <h1>YurikaBot — твой идеальный помощник на сервере!</h1>
@@ -1073,7 +1193,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
   </section>
 
-  <!-- ============ УСТАНОВКА ============ -->
+  <!-- УСТАНОВКА -->
   <section class="section" id="tab-install">
     <div class="section-title">
       <h2><i class="fa-solid fa-download" style="color:var(--brand-2)"></i> Установить бота</h2>
@@ -1129,7 +1249,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
   </section>
 
-  <!-- ============ КОМАНДЫ ============ -->
+  <!-- КОМАНДЫ -->
   <section class="section" id="tab-commands">
     <div class="section-title">
       <h2><i class="fa-solid fa-terminal" style="color:var(--brand-3)"></i> Команды Yurika Bot</h2>
@@ -1146,7 +1266,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     <div class="cmd-grid" id="cmdGrid"></div>
   </section>
 
-  <!-- ============ ВЕБХУК ============ -->
+  <!-- ВЕБХУК -->
   <section class="section" id="tab-webhook">
     <div class="section-title">
       <h2><i class="fa-solid fa-bolt" style="color:var(--warn)"></i> Yurika Hook</h2>
@@ -1272,23 +1392,30 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             </div>
           </div>
 
+          <!-- КОМПОНЕНТЫ (УЛУЧШЕНО) -->
           <div class="card">
             <div class="card-head">
               <div class="ico"><i class="fa-solid fa-square-poll-vertical"></i></div>
-              <h3>Компоненты</h3>
+              <h3>Компоненты (кнопки и меню)</h3>
               <span class="badge" id="cntCompBadge" style="margin-left:auto">0 / 5 рядов</span>
-              <button class="btn sm" id="hookAddRow"><i class="fa-solid fa-plus"></i> Добавить ряд</button>
+              <button class="btn sm ghost" id="hookAddBtnRow" type="button">
+                <i class="fa-solid fa-hand-pointer"></i> Кнопки
+              </button>
+              <button class="btn sm cyan" id="hookAddSelectRow" type="button">
+                <i class="fa-solid fa-list"></i> Select
+              </button>
             </div>
             <div class="card-pad">
               <div id="compRows"></div>
-              <div class="empty" id="compEmpty" style="min-height:120px">
+              <div class="comp-empty" id="compEmpty">
                 <i class="fa-solid fa-square-plus"></i>
-                <div>Нет рядов</div>
+                <div>Нет компонентов. Добавь ряд кнопок или select-меню.</div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- ШАБЛОНЫ -->
         <div id="hookPane-templates" style="display:none">
           <div class="card">
             <div class="card-head">
@@ -1313,6 +1440,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           </div>
         </div>
 
+        <!-- ПРОВЕРКА -->
         <div id="hookPane-validate" style="display:none">
           <div class="card">
             <div class="card-head">
@@ -1328,6 +1456,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           </div>
         </div>
 
+        <!-- ЭКСПОРТ -->
         <div id="hookPane-export" style="display:none">
           <div class="card">
             <div class="card-head">
@@ -1349,6 +1478,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         </div>
       </div>
 
+      <!-- ПРЕДПРОСМОТР -->
       <div class="card" style="align-self:start; position:sticky; top:80px">
         <div class="card-head">
           <div class="ico"><i class="fa-solid fa-eye"></i></div>
@@ -1365,7 +1495,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
     </div>
   </section>
 
-  <!-- ============ ПРОФИЛЬ ============ -->
+  <!-- ПРОФИЛЬ -->
   <section class="section" id="tab-profile">
     <div class="section-title">
       <h2><i class="fa-solid fa-id-badge" style="color:var(--brand-2)"></i> Личный кабинет</h2>
@@ -1430,8 +1560,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <div class="avatar-wrap">
               <div class="avatar-ring"></div>
               <img id="avatarImg" class="avatar"
-                   src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika"
-                   alt="Аватар" />
+                   src="https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika" alt="Аватар" />
               <button class="avatar-edit" id="btnPickAvatar"><i class="fa-solid fa-camera"></i></button>
             </div>
             <div class="profile-info" style="flex:1; min-width:220px">
@@ -1726,6 +1855,69 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   </div>
 </div>
 
+<!-- МОДАЛКА РЕДАКТИРОВАНИЯ КНОПКИ -->
+<div id="btnEditModal" class="modal-overlay">
+  <div class="card modal-card">
+    <div class="card-head">
+      <div class="ico"><i class="fa-solid fa-hand-pointer"></i></div>
+      <h3 id="btnEditTitle">Редактировать кнопку</h3>
+      <button class="btn ghost sm" id="btnEditClose" style="margin-left:auto"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="card-pad btn-edit-form">
+      <div class="grid cols-2" style="gap:10px">
+        <div class="field" style="margin:0">
+          <label>Текст кнопки</label>
+          <div class="input-wrap"><i class="fa-solid fa-tag lead"></i>
+            <input id="btnEditLabel" maxlength="80" placeholder="Нажми меня" />
+          </div>
+          <div class="hint"><span id="btnEditLabelCnt">0</span> / 80</div>
+        </div>
+        <div class="field" style="margin:0">
+          <label>Эмодзи (опционально)</label>
+          <div class="input-wrap"><i class="fa-solid fa-face-smile lead"></i>
+            <input id="btnEditEmoji" maxlength="8" placeholder="🎉" />
+          </div>
+        </div>
+      </div>
+
+      <div class="field" style="margin:0">
+        <label>Стиль</label>
+        <div class="style-picker" id="btnEditStylePicker">
+          <div class="style-opt s-primary active" data-style="primary">Primary</div>
+          <div class="style-opt s-secondary" data-style="secondary">Secondary</div>
+          <div class="style-opt s-success" data-style="success">Success</div>
+          <div class="style-opt s-danger" data-style="danger">Danger</div>
+          <div class="style-opt s-link" data-style="link">Link</div>
+        </div>
+      </div>
+
+      <div class="field" style="margin:0" id="btnEditUrlField">
+        <label>URL (только для Link)</label>
+        <div class="input-wrap"><i class="fa-solid fa-link lead"></i>
+          <input id="btnEditUrl" placeholder="https://example.com" />
+        </div>
+      </div>
+
+      <div class="field" style="margin:0" id="btnEditCustomIdField">
+        <label>Custom ID (для обработки ботом)</label>
+        <div class="input-wrap"><i class="fa-solid fa-keyboard lead"></i>
+          <input id="btnEditCustomId" maxlength="100" placeholder="my_button_1" />
+        </div>
+      </div>
+
+      <div class="toggle-row">
+        <div class="info"><b>Отключена</b><span>Кнопка не нажимается</span></div>
+        <div class="switch" id="btnEditDisabled"></div>
+      </div>
+
+      <div class="row end" style="margin-top:12px">
+        <button class="btn ghost" id="btnEditCancel">Отмена</button>
+        <button class="btn" id="btnEditSave"><i class="fa-solid fa-check"></i> Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="toast-zone" id="toasts"></div>
 
 <script>
@@ -1766,6 +1958,7 @@ function humanSize(bytes){
 }
 function isImage(file){ return file && file.type && file.type.startsWith('image/'); }
 function isGif(file){ return file && (file.type === 'image/gif' || /\.gif$/i.test(file.name)); }
+function uid(prefix='id'){ return prefix + '_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
 
 /* ============================================================
    FIREBASE
@@ -1927,9 +2120,13 @@ renderCatTabs(); renderCommands();
 /* ============================================================
    ВЕБХУК
 ============================================================ */
-const MAX_EMBEDS = 10, MAX_BTN_ROWS = 5, MAX_BTNS_PER_ROW = 5, MAX_FILES = 10;
+const MAX_EMBEDS = 10, MAX_BTN_ROWS = 5, MAX_BTNS_PER_ROW = 5, MAX_FILES = 10, MAX_SELECT_OPTIONS = 25;
 const DISCORD_COLORS = ['#5865F2','#57F287','#FEE75C','#EB459E','#ED4245','#3BA55C','#FAA61A','#FF73FA','#FFFFFF','#000000'];
 const state = { url:'', name:'', avatar:'', msg:'', files:[], embeds:[], rows:[], theme:'dark' };
+
+// Row types: 'buttons' | 'select'
+// Button: { id, label, emoji, style:primary|secondary|success|danger|link, url, custom_id, disabled }
+// Select: { id, placeholder, min_values, max_values, options: [{ id, label, value, description, emoji, default }] }
 
 $$('#hookTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
@@ -2089,6 +2286,8 @@ $('#hookShare').addEventListener('click', async ()=>{
     toast('Ссылка скопирована', 'ok', 3200);
   }catch{ toast('Ошибка', 'err'); }
 });
+
+/* ============ EMBEDS ============ */
 $('#hookAddEmbed').addEventListener('click', ()=>{
   if(state.embeds.length >= MAX_EMBEDS) return;
   state.embeds.push({ title:'', desc:'', color:'#5865F2', author:{name:'',icon:'',url:''}, footer:{text:'',icon:''}, image:'', thumbnail:'', fields:[] });
@@ -2107,7 +2306,7 @@ function renderEmbeds(){
     wrap.dataset.idx = i;
     wrap.innerHTML = `
       <div class="embed-top">
-        <span class="drag-handle" data-drag="${i}"><i class="fa-solid fa-grip-vertical"></i></span>
+        <span class="drag-handle"><i class="fa-solid fa-grip-vertical"></i></span>
         <i class="fa-solid fa-layer-group" style="color:var(--brand-2)"></i>
         <strong>Embed #${i+1}</strong>
         <button class="btn ghost sm" data-copy-emb="${i}" title="JSON"><i class="fa-solid fa-copy"></i></button>
@@ -2125,17 +2324,11 @@ function renderEmbeds(){
       </div>
       <div class="emb-pane" data-pane="main">
         <div class="field">
-          <div style="display:flex; align-items:center; justify-content:space-between">
-            <label style="margin:0">Заголовок</label>
-            <span class="counter" data-cnt="title-${i}">${(em.title||'').length} / 256</span>
-          </div>
+          <label>Заголовок</label>
           <input data-i="${i}" data-f="title" maxlength="256" placeholder="Заголовок" value="${escapeHTML(em.title||'')}">
         </div>
         <div class="field">
-          <div style="display:flex; align-items:center; justify-content:space-between">
-            <label style="margin:0">Описание</label>
-            <span class="counter" data-cnt="desc-${i}">${(em.desc||'').length} / 4096</span>
-          </div>
+          <label>Описание</label>
           <textarea data-i="${i}" data-f="desc" maxlength="4096" placeholder="Описание…" style="min-height:90px">${escapeHTML(em.desc||'')}</textarea>
         </div>
         <div class="field" style="margin-bottom:0">
@@ -2175,7 +2368,7 @@ function renderEmbeds(){
         </div>
       </div>
       <div class="emb-pane" data-pane="fields" style="display:none">
-        <div class="fields-list" data-fields="${i}">
+        <div class="fields-list">
           ${em.fields.map((f,fi)=>`
             <div class="field-item">
               <div class="field-item-head">
@@ -2278,85 +2471,488 @@ function renderEmbeds(){
     b.onclick = ()=>{ state.embeds[+b.dataset.fieldsAdd].fields.push({name:'',value:'',inline:false}); renderEmbeds(); renderPreview(); saveDraft(); };
   });
 }
-$('#hookAddRow').addEventListener('click', ()=>{
-  if(state.rows.length >= MAX_BTN_ROWS) return;
-  state.rows.push({ type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] });
+
+/* ============================================================
+   КОМПОНЕНТЫ (УЛУЧШЕНО)
+============================================================ */
+
+// --- Добавление рядов ---
+$('#hookAddBtnRow').addEventListener('click', ()=>{
+  if(state.rows.length >= MAX_BTN_ROWS){ toast('Максимум ' + MAX_BTN_ROWS + ' рядов', 'warn'); return; }
+  state.rows.push({
+    id: uid('row'),
+    type: 'buttons',
+    buttons: [{ id: uid('btn'), label: 'Кнопка', emoji: '', style: 'primary', url: '', custom_id: '', disabled: false }]
+  });
   renderComp(); updCounters(); renderPreview(); saveDraft();
 });
-function renderComp(){
-  const box = $('#compRows'); box.innerHTML = '';
-  state.rows.forEach((row, i)=>{
-    const wrap = document.createElement('div');
-    wrap.className = 'btn-row';
-    wrap.innerHTML = `
-      <div style="width:100%; display:flex; gap:8px; align-items:center; margin-bottom:8px">
-        <select data-row-type="${i}" style="width:auto; padding:8px 32px 8px 12px">
-          <option value="buttons" ${row.type==='buttons'?'selected':''}>Кнопки</option>
-          <option value="select" ${row.type==='select'?'selected':''}>Select-меню</option>
-        </select>
-        <button class="btn ghost xs" data-row-del="${i}" style="margin-left:auto"><i class="fa-solid fa-trash"></i></button>
-      </div>
-      <div data-row-body="${i}"></div>
-    `;
-    box.appendChild(wrap);
-    const body = wrap.querySelector(`[data-row-body="${i}"]`);
-    if(row.type === 'buttons'){
-      const btnBox = document.createElement('div');
-      btnBox.style.display = 'flex';
-      btnBox.style.flexWrap = 'wrap';
-      btnBox.style.gap = '6px';
-      row.buttons.forEach((bt, bi)=>{
-        const el = document.createElement('div');
-        el.className = 'btn-prev style-' + bt.style;
-        el.innerHTML = `${bt.emoji ? escapeHTML(bt.emoji) + ' ' : ''}${escapeHTML(bt.label || 'Кнопка')}`;
-        el.onclick = ()=> editButton(i, bi);
-        el.oncontextmenu = (e)=>{ e.preventDefault(); row.buttons.splice(bi,1); renderComp(); renderPreview(); saveDraft(); };
-        btnBox.appendChild(el);
-      });
-      if(row.buttons.length < MAX_BTNS_PER_ROW){
-        const add = document.createElement('button');
-        add.className = 'btn ghost xs';
-        add.innerHTML = '<i class="fa-solid fa-plus"></i> Кнопка';
-        add.onclick = ()=>{ row.buttons.push({label:'Кнопка', emoji:'', style:'primary', url:''}); renderComp(); renderPreview(); saveDraft(); };
-        btnBox.appendChild(add);
-      }
-      body.appendChild(btnBox);
-    }else{
-      const sel = document.createElement('div');
-      sel.className = 'select-prev';
-      sel.textContent = row.select.placeholder || 'Выберите…';
-      body.appendChild(sel);
+$('#hookAddSelectRow').addEventListener('click', ()=>{
+  if(state.rows.length >= MAX_BTN_ROWS){ toast('Максимум ' + MAX_BTN_ROWS + ' рядов', 'warn'); return; }
+  state.rows.push({
+    id: uid('row'),
+    type: 'select',
+    select: {
+      placeholder: 'Выберите опцию…',
+      min_values: 1,
+      max_values: 1,
+      options: [
+        { id: uid('opt'), label: 'Опция 1', value: 'opt1', description: '', emoji: '', default: false }
+      ]
     }
   });
+  renderComp(); updCounters(); renderPreview(); saveDraft();
+});
+
+// --- Рендер всех рядов ---
+function renderComp(){
+  const box = $('#compRows');
+  box.innerHTML = '';
+
+  state.rows.forEach((row, i)=>{
+    const el = document.createElement('div');
+    el.className = 'comp-row';
+    el.dataset.rowIdx = i;
+    el.draggable = false;
+
+    const isBtns = row.type === 'buttons';
+    const rowTypeLabel = isBtns ? 'Кнопки' : 'Select-меню';
+    const countLabel = isBtns ? `${row.buttons.length}/${MAX_BTNS_PER_ROW}` : `${row.select.options.length}/${MAX_SELECT_OPTIONS}`;
+
+    el.innerHTML = `
+      <div class="comp-head">
+        <span class="drag-handle" data-drag-row="${i}" title="Перетащи">
+          <i class="fa-solid fa-grip-vertical"></i>
+        </span>
+        <span class="row-type-badge">${rowTypeLabel}</span>
+        <strong>Ряд #${i+1} · ${countLabel}</strong>
+        <div class="comp-actions">
+          <button class="icon-btn" data-comp-copy="${i}" title="Копировать JSON"><i class="fa-solid fa-copy"></i></button>
+          <button class="icon-btn" data-comp-dupl="${i}" title="Дублировать ряд"><i class="fa-solid fa-clone"></i></button>
+          <button class="icon-btn" data-comp-up="${i}" title="Вверх" ${i===0?'disabled style="opacity:.4;cursor:not-allowed"':''}><i class="fa-solid fa-arrow-up"></i></button>
+          <button class="icon-btn" data-comp-down="${i}" title="Вниз" ${i===state.rows.length-1?'disabled style="opacity:.4;cursor:not-allowed"':''}><i class="fa-solid fa-arrow-down"></i></button>
+          <button class="icon-btn" data-comp-del="${i}" title="Удалить" style="color:#ff8a96; border-color:rgba(255,90,106,.35)"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      ${isBtns ? renderButtonsRow(row, i) : renderSelectRow(row, i)}
+    `;
+    box.appendChild(el);
+  });
+
   $('#compEmpty').style.display = state.rows.length ? 'none' : 'grid';
-  box.querySelectorAll('[data-row-type]').forEach(sel=>{
-    sel.onchange = ()=>{
-      const i = +sel.dataset.rowType;
-      if(sel.value === 'select'){
-        state.rows[i] = { type:'select', select:{ placeholder:'Выберите…', options:[{label:'Опция 1',value:'opt1'}] } };
-      }else{
-        state.rows[i] = { type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] };
-      }
+
+  // === Обработчики ===
+
+  // Удалить / дублировать / переместить
+  box.querySelectorAll('[data-comp-del]').forEach(b=>{
+    b.onclick = ()=>{
+      const i = +b.dataset.compDel;
+      if(!confirm(`Удалить ряд #${i+1}?`)) return;
+      state.rows.splice(i,1);
+      renderComp(); updCounters(); renderPreview(); saveDraft();
+    };
+  });
+  box.querySelectorAll('[data-comp-dupl]').forEach(b=>{
+    b.onclick = ()=>{
+      const i = +b.dataset.compDupl;
+      if(state.rows.length >= MAX_BTN_ROWS){ toast('Максимум рядов', 'warn'); return; }
+      const copy = JSON.parse(JSON.stringify(state.rows[i]));
+      copy.id = uid('row');
+      if(copy.type === 'buttons') copy.buttons.forEach(bt => bt.id = uid('btn'));
+      if(copy.type === 'select') copy.select.options.forEach(o => o.id = uid('opt'));
+      state.rows.splice(i+1, 0, copy);
+      renderComp(); updCounters(); renderPreview(); saveDraft();
+      toast('Ряд скопирован', 'ok', 1400);
+    };
+  });
+  box.querySelectorAll('[data-comp-copy]').forEach(b=>{
+    b.onclick = async ()=>{
+      const i = +b.dataset.compCopy;
+      const row = state.rows[i];
+      const json = JSON.stringify(rowToDiscordJSON(row), null, 2);
+      try{ await navigator.clipboard.writeText(json); toast('JSON ряда скопирован', 'ok'); }
+      catch{ toast('Ошибка', 'err'); }
+    };
+  });
+  box.querySelectorAll('[data-comp-up]').forEach(b=>{
+    b.onclick = ()=>{
+      const i = +b.dataset.compUp;
+      if(i <= 0) return;
+      [state.rows[i-1], state.rows[i]] = [state.rows[i], state.rows[i-1]];
       renderComp(); renderPreview(); saveDraft();
     };
   });
-  box.querySelectorAll('[data-row-del]').forEach(b=>{
-    b.onclick = ()=>{ state.rows.splice(+b.dataset.rowDel,1); renderComp(); updCounters(); renderPreview(); saveDraft(); };
+  box.querySelectorAll('[data-comp-down]').forEach(b=>{
+    b.onclick = ()=>{
+      const i = +b.dataset.compDown;
+      if(i >= state.rows.length-1) return;
+      [state.rows[i+1], state.rows[i]] = [state.rows[i], state.rows[i+1]];
+      renderComp(); renderPreview(); saveDraft();
+    };
+  });
+
+  // Drag-n-drop рядов
+  setupRowDragDrop(box);
+
+  // === Кнопки ===
+  if(isBtns){
+    box.querySelectorAll('[data-btn-edit]').forEach(b=>{
+      b.onclick = (e)=>{
+        if(e.target.closest('.btn-remove')) return;
+        editButtonModal(+b.dataset.rowIdx, +b.dataset.btnIdx);
+      };
+    });
+    box.querySelectorAll('[data-btn-del]').forEach(b=>{
+      b.onclick = (e)=>{
+        e.stopPropagation();
+        const r = +b.dataset.rowIdx, bi = +b.dataset.btnIdx;
+        state.rows[r].buttons.splice(bi,1);
+        renderComp(); renderPreview(); saveDraft();
+      };
+    });
+    box.querySelectorAll('[data-btn-add]').forEach(b=>{
+      b.onclick = ()=>{
+        const r = +b.dataset.rowIdx;
+        if(state.rows[r].buttons.length >= MAX_BTNS_PER_ROW){ toast('Максимум ' + MAX_BTNS_PER_ROW + ' кнопок в ряду', 'warn'); return; }
+        state.rows[r].buttons.push({ id: uid('btn'), label: 'Кнопка', emoji: '', style: 'primary', url: '', custom_id: '', disabled: false });
+        renderComp(); renderPreview(); saveDraft();
+      };
+    });
+    setupButtonDragDrop(box);
+  }
+
+  // === Select ===
+  if(!isBtns){
+    // Плейсхолдер
+    const phInput = box.querySelector('[data-select-ph]');
+    if(phInput){
+      phInput.oninput = ()=>{
+        const r = +phInput.dataset.rowIdx;
+        state.rows[r].select.placeholder = phInput.value;
+        renderPreview(); saveDraft();
+      };
+    }
+    // Min / Max
+    box.querySelectorAll('[data-select-min]').forEach(inp=>{
+      inp.oninput = ()=>{
+        const r = +inp.dataset.rowIdx;
+        let v = parseInt(inp.value, 10);
+        if(isNaN(v) || v < 0) v = 0;
+        if(v > 25) v = 25;
+        state.rows[r].select.min_values = v;
+        if(state.rows[r].select.max_values < v) state.rows[r].select.max_values = v;
+        renderPreview(); saveDraft();
+      };
+    });
+    box.querySelectorAll('[data-select-max]').forEach(inp=>{
+      inp.oninput = ()=>{
+        const r = +inp.dataset.rowIdx;
+        let v = parseInt(inp.value, 10);
+        if(isNaN(v) || v < 1) v = 1;
+        if(v > 25) v = 25;
+        state.rows[r].select.max_values = v;
+        if(state.rows[r].select.min_values > v) state.rows[r].select.min_values = v;
+        renderPreview(); saveDraft();
+      };
+    });
+    // Опции
+    box.querySelectorAll('[data-opt-edit]').forEach(inp=>{
+      inp.oninput = ()=>{
+        const r = +inp.dataset.rowIdx, oi = +inp.dataset.optIdx, f = inp.dataset.optField;
+        state.rows[r].select.options[oi][f] = inp.value;
+        renderPreview(); saveDraft();
+      };
+    });
+    box.querySelectorAll('[data-opt-default]').forEach(cb=>{
+      cb.onchange = ()=>{
+        const r = +cb.dataset.rowIdx, oi = +cb.dataset.optIdx;
+        state.rows[r].select.options[oi].default = cb.checked;
+        renderPreview(); saveDraft();
+      };
+    });
+    box.querySelectorAll('[data-opt-del]').forEach(b=>{
+      b.onclick = ()=>{
+        const r = +b.dataset.rowIdx, oi = +b.dataset.optIdx;
+        if(state.rows[r].select.options.length <= 1){ toast('Минимум 1 опция', 'warn'); return; }
+        state.rows[r].select.options.splice(oi,1);
+        renderComp(); renderPreview(); saveDraft();
+      };
+    });
+    box.querySelectorAll('[data-opt-add]').forEach(b=>{
+      b.onclick = ()=>{
+        const r = +b.dataset.rowIdx;
+        if(state.rows[r].select.options.length >= MAX_SELECT_OPTIONS){ toast('Максимум ' + MAX_SELECT_OPTIONS + ' опций', 'warn'); return; }
+        state.rows[r].select.options.push({ id: uid('opt'), label: 'Опция', value: 'opt' + (state.rows[r].select.options.length+1), description: '', emoji: '', default: false });
+        renderComp(); renderPreview(); saveDraft();
+      };
+    });
+  }
+}
+
+// --- HTML для ряда кнопок ---
+function renderButtonsRow(row, rowIdx){
+  const btnsHTML = row.buttons.map((bt, bi)=>{
+    const emojiHTML = bt.emoji ? `<span style="font-size:14px">${escapeHTML(bt.emoji)}</span>` : '';
+    return `
+      <div class="btn-preview style-${bt.style} ${bt.disabled?'disabled':''}"
+           data-btn-edit="1"
+           data-row-idx="${rowIdx}"
+           data-btn-idx="${bi}"
+           draggable="true"
+           title="Клик — редактировать, перетащи — переставить">
+        <span class="btn-idx">${bi+1}</span>
+        ${emojiHTML}
+        <span>${escapeHTML(bt.label || 'Кнопка')}</span>
+        <button class="btn-remove" data-btn-del="1" data-row-idx="${rowIdx}" data-btn-idx="${bi}" title="Удалить">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+    `;
+  }).join('');
+
+  const addBtn = row.buttons.length < MAX_BTNS_PER_ROW
+    ? `<button class="add-btn-tile" data-btn-add="1" data-row-idx="${rowIdx}"><i class="fa-solid fa-plus"></i> Кнопка</button>`
+    : '';
+
+  return `
+    <div class="btn-preview-row" data-btn-row="${rowIdx}">
+      ${btnsHTML}
+      ${addBtn}
+    </div>
+    <div class="hint" style="margin-top:8px">
+      <i class="fa-solid fa-info-circle"></i>
+      Клик — редактировать · Перетащи — изменить порядок · ПКМ — удалить
+    </div>
+  `;
+}
+
+// --- HTML для select-меню ---
+function renderSelectRow(row, rowIdx){
+  const s = row.select;
+  const optsHTML = s.options.map((o, oi)=>`
+    <div class="select-opt" data-opt-idx="${oi}">
+      <input type="text" class="opt-emoji" data-opt-edit="1" data-row-idx="${rowIdx}" data-opt-idx="${oi}" data-opt-field="emoji" maxlength="8" placeholder="😀" value="${escapeHTML(o.emoji||'')}" style="padding:8px; text-align:center">
+      <input type="text" data-opt-edit="1" data-row-idx="${rowIdx}" data-opt-idx="${oi}" data-opt-field="label" maxlength="100" placeholder="Название" value="${escapeHTML(o.label||'')}" style="padding:8px 12px">
+      <input type="text" data-opt-edit="1" data-row-idx="${rowIdx}" data-opt-idx="${oi}" data-opt-field="value" maxlength="100" placeholder="value" value="${escapeHTML(o.value||'')}" style="padding:8px 12px; font-family:'JetBrains Mono',monospace; font-size:12px">
+      <input type="text" data-opt-edit="1" data-row-idx="${rowIdx}" data-opt-idx="${oi}" data-opt-field="description" maxlength="100" placeholder="Описание" value="${escapeHTML(o.description||'')}" style="padding:8px 12px">
+      <label style="display:flex; align-items:center; gap:4px; font-size:11px; font-weight:700; color:var(--muted); white-space:nowrap">
+        <input type="checkbox" data-opt-default="1" data-row-idx="${rowIdx}" data-opt-idx="${oi}" ${o.default?'checked':''} style="width:auto; padding:0; margin:0">
+        default
+      </label>
+      <button class="opt-del" data-opt-del="1" data-row-idx="${rowIdx}" data-opt-idx="${oi}" title="Удалить опцию">
+        <i class="fa-solid fa-trash"></i>
+      </button>
+    </div>
+  `).join('');
+
+  const addOptBtn = s.options.length < MAX_SELECT_OPTIONS
+    ? `<button class="btn ghost sm" data-opt-add="1" data-row-idx="${rowIdx}" style="margin-top:6px"><i class="fa-solid fa-plus"></i> Добавить опцию</button>`
+    : `<div class="hint" style="margin-top:6px">Достигнут лимит ${MAX_SELECT_OPTIONS} опций</div>`;
+
+  return `
+    <div class="select-settings">
+      <div class="field">
+        <label>Плейсхолдер</label>
+        <div class="input-wrap"><i class="fa-solid fa-font lead"></i>
+          <input data-select-ph="1" data-row-idx="${rowIdx}" maxlength="150" placeholder="Выберите опцию…" value="${escapeHTML(s.placeholder||'')}">
+        </div>
+      </div>
+      <div class="field">
+        <label>Min values</label>
+        <div class="input-wrap"><i class="fa-solid fa-arrow-down-1-9 lead"></i>
+          <input type="number" min="0" max="25" data-select-min="1" data-row-idx="${rowIdx}" value="${s.min_values}">
+        </div>
+      </div>
+      <div class="field">
+        <label>Max values</label>
+        <div class="input-wrap"><i class="fa-solid fa-arrow-up-1-9 lead"></i>
+          <input type="number" min="1" max="25" data-select-max="1" data-row-idx="${rowIdx}" value="${s.max_values}">
+        </div>
+      </div>
+    </div>
+
+    <div class="select-preview">
+      ${escapeHTML(s.placeholder || 'Выберите…')}
+    </div>
+
+    <div class="select-options-list">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:4px">
+        <b style="font-size:12px; color:var(--muted); letter-spacing:.4px">ОПЦИИ (${s.options.length}/${MAX_SELECT_OPTIONS})</b>
+      </div>
+      ${optsHTML}
+      ${addOptBtn}
+    </div>
+  `;
+}
+
+// --- Drag-n-drop рядов ---
+function setupRowDragDrop(box){
+  let dragIdx = null;
+  box.querySelectorAll('[data-drag-row]').forEach(handle=>{
+    const row = handle.closest('.comp-row');
+    handle.addEventListener('mousedown', ()=> row.setAttribute('draggable','true'));
+    handle.addEventListener('mouseup',   ()=> row.setAttribute('draggable','false'));
+    handle.addEventListener('mouseleave',()=> row.setAttribute('draggable','false'));
+
+    row.addEventListener('dragstart', (e)=>{
+      if(row.getAttribute('draggable') !== 'true'){ e.preventDefault(); return; }
+      dragIdx = +row.dataset.rowIdx;
+      row.classList.add('dragging');
+      try{ e.dataTransfer.setData('text/plain', String(dragIdx)); }catch{}
+    });
+    row.addEventListener('dragend', ()=>{
+      row.setAttribute('draggable','false');
+      row.classList.remove('dragging');
+      box.querySelectorAll('.comp-row').forEach(c => c.classList.remove('drag-over'));
+      dragIdx = null;
+    });
+    row.addEventListener('dragover', (e)=>{
+      if(dragIdx === null) return;
+      e.preventDefault();
+      row.classList.add('drag-over');
+    });
+    row.addEventListener('dragleave', ()=> row.classList.remove('drag-over'));
+    row.addEventListener('drop', (e)=>{
+      e.preventDefault();
+      row.classList.remove('drag-over');
+      if(dragIdx === null) return;
+      const to = +row.dataset.rowIdx;
+      if(dragIdx === to) return;
+      const moved = state.rows.splice(dragIdx,1)[0];
+      state.rows.splice(to, 0, moved);
+      dragIdx = null;
+      renderComp(); renderPreview(); saveDraft();
+    });
   });
 }
-function editButton(rowI, btnI){
-  const bt = state.rows[rowI].buttons[btnI];
-  const label = prompt('Текст кнопки:', bt.label || '');
-  if(label === null) return;
-  const emoji = prompt('Эмодзи:', bt.emoji || '');
-  if(emoji === null) return;
-  const style = prompt('Стиль: primary / secondary / success / danger / link', bt.style || 'primary');
-  if(style === null) return;
-  bt.label = label.slice(0,80);
-  bt.emoji = (emoji||'').slice(0,8);
-  bt.style = ['primary','secondary','success','danger','link'].includes(style) ? style : 'primary';
-  renderComp(); renderPreview(); saveDraft();
+
+// --- Drag-n-drop кнопок внутри ряда ---
+function setupButtonDragDrop(box){
+  box.querySelectorAll('.btn-preview-row').forEach(rowEl=>{
+    let dragBi = null;
+    rowEl.querySelectorAll('.btn-preview').forEach(btn=>{
+      btn.addEventListener('dragstart', (e)=>{
+        e.stopPropagation();
+        dragBi = +btn.dataset.btnIdx;
+        btn.style.opacity = .5;
+      });
+      btn.addEventListener('dragend', ()=>{
+        btn.style.opacity = 1;
+        dragBi = null;
+      });
+      btn.addEventListener('dragover', (e)=>{
+        if(dragBi === null) return;
+        e.preventDefault();
+        btn.style.transform = 'scale(1.05)';
+      });
+      btn.addEventListener('dragleave', ()=>{
+        btn.style.transform = '';
+      });
+      btn.addEventListener('drop', (e)=>{
+        e.preventDefault();
+        e.stopPropagation();
+        btn.style.transform = '';
+        if(dragBi === null) return;
+        const r = +rowEl.dataset.btnRow;
+        const to = +btn.dataset.btnIdx;
+        if(dragBi === to) return;
+        const arr = state.rows[r].buttons;
+        const moved = arr.splice(dragBi,1)[0];
+        arr.splice(to, 0, moved);
+        dragBi = null;
+        renderComp(); renderPreview(); saveDraft();
+      });
+    });
+  });
 }
+
+// --- Модалка редактирования кнопки ---
+let _editBtnCtx = null;
+
+function editButtonModal(rowIdx, btnIdx){
+  const bt = state.rows[rowIdx].buttons[btnIdx];
+  _editBtnCtx = { rowIdx, btnIdx };
+
+  $('#btnEditTitle').textContent = `Кнопка #${btnIdx+1} в ряду #${rowIdx+1}`;
+  $('#btnEditLabel').value = bt.label || '';
+  $('#btnEditEmoji').value = bt.emoji || '';
+  $('#btnEditUrl').value = bt.url || '';
+  $('#btnEditCustomId').value = bt.custom_id || '';
+  $('#btnEditDisabled').classList.toggle('on', !!bt.disabled);
+
+  // Стиль
+  $$('#btnEditStylePicker .style-opt').forEach(el=>{
+    el.classList.toggle('active', el.dataset.style === bt.style);
+  });
+
+  // Показать/скрыть поля в зависимости от стиля
+  updateBtnEditVisibility(bt.style);
+
+  // Счётчик
+  $('#btnEditLabelCnt').textContent = (bt.label||'').length;
+
+  $('#btnEditModal').classList.add('open');
+  setTimeout(()=> $('#btnEditLabel').focus(), 50);
+}
+
+function updateBtnEditVisibility(style){
+  const urlField = $('#btnEditUrlField');
+  const cidField = $('#btnEditCustomIdField');
+  if(style === 'link'){
+    urlField.style.display = '';
+    cidField.style.display = 'none';
+  }else{
+    urlField.style.display = 'none';
+    cidField.style.display = '';
+  }
+}
+
+function closeBtnEditModal(){
+  $('#btnEditModal').classList.remove('open');
+  _editBtnCtx = null;
+}
+
+// Обработчики модалки
+$('#btnEditLabel').addEventListener('input', e=>{
+  $('#btnEditLabelCnt').textContent = e.target.value.length;
+});
+$$('#btnEditStylePicker .style-opt').forEach(el=>{
+  el.onclick = ()=>{
+    $$('#btnEditStylePicker .style-opt').forEach(x=>x.classList.remove('active'));
+    el.classList.add('active');
+    updateBtnEditVisibility(el.dataset.style);
+  };
+});
+$('#btnEditDisabled').addEventListener('click', ()=> $('#btnEditDisabled').classList.toggle('on'));
+$('#btnEditClose').addEventListener('click', closeBtnEditModal);
+$('#btnEditCancel').addEventListener('click', closeBtnEditModal);
+$('#btnEditSave').addEventListener('click', ()=>{
+  if(!_editBtnCtx) return;
+  const { rowIdx, btnIdx } = _editBtnCtx;
+  const bt = state.rows[rowIdx].buttons[btnIdx];
+
+  const style = $('#btnEditStylePicker .style-opt.active')?.dataset.style || 'primary';
+  const label = $('#btnEditLabel').value.trim() || 'Кнопка';
+
+  bt.label = label.slice(0,80);
+  bt.emoji = $('#btnEditEmoji').value.trim().slice(0,8);
+  bt.style = style;
+  bt.url = style === 'link' ? $('#btnEditUrl').value.trim() : '';
+  bt.custom_id = style !== 'link' ? ($('#btnEditCustomId').value.trim() || uid('btn_cid')) : '';
+  bt.disabled = $('#btnEditDisabled').classList.contains('on');
+
+  closeBtnEditModal();
+  renderComp(); renderPreview(); saveDraft();
+  toast('Кнопка сохранена', 'ok', 1400);
+});
+
+// Закрытие по клику вне модалки
+$('#btnEditModal').addEventListener('click', e=>{
+  if(e.target === $('#btnEditModal')) closeBtnEditModal();
+});
+
+/* ============================================================
+   ПРЕДПРОСМОТР
+============================================================ */
 function renderPreview(){
   const p = $('#hookPreview');
   p.className = 'discord-preview theme-' + state.theme;
@@ -2386,12 +2982,32 @@ function renderPreview(){
     if(e.desc) inner += `<div class="dp-desc">${escapeHTML(e.desc)}</div>`;
     if(inner) html += `<div class="dp-embed" style="border-left-color:${e.color || '#5865F2'}">${inner}</div>`;
   });
+  if(hasComp){
+    html += `<div class="dp-components">`;
+    state.rows.forEach(row=>{
+      html += `<div class="dp-row">`;
+      if(row.type === 'buttons'){
+        row.buttons.forEach(bt=>{
+          const emoji = bt.emoji ? `<span style="font-size:14px">${escapeHTML(bt.emoji)}</span>` : '';
+          html += `<button class="dp-btn style-${bt.style} ${bt.disabled?'disabled':''}" disabled>${emoji} ${escapeHTML(bt.label || 'Кнопка')}</button>`;
+        });
+      }else{
+        html += `<div class="dp-select">${escapeHTML(row.select.placeholder || 'Выберите…')}</div>`;
+      }
+      html += `</div>`;
+    });
+    html += `</div>`;
+  }
   p.innerHTML = html;
 }
 $('#themeToggle').addEventListener('click', ()=>{
   state.theme = state.theme === 'dark' ? 'light' : 'dark';
   renderPreview(); saveDraft();
 });
+
+/* ============================================================
+   ПРОВЕРКА
+============================================================ */
 function runChecklist(){
   const items = [];
   const urlOk = /^https?:\/\//.test(state.url);
@@ -2399,6 +3015,31 @@ function runChecklist(){
   items.push({ ok: (state.msg||'').length <= 2000, text: `Сообщение: ${(state.msg||'').length} / 2000` });
   items.push({ ok: state.embeds.length <= 10, text: `Embeds: ${state.embeds.length} / 10` });
   items.push({ ok: state.files.length <= MAX_FILES, text: `Файлов: ${state.files.length} / ${MAX_FILES}` });
+
+  // Проверки компонентов
+  let compOk = true;
+  let compMsg = 'Компоненты: ок';
+  if(state.rows.length > MAX_BTN_ROWS){
+    compOk = false; compMsg = `Рядов: ${state.rows.length} / ${MAX_BTN_ROWS} — превышен лимит`;
+  }else if(state.rows.length){
+    for(const [i, row] of state.rows.entries()){
+      if(row.type === 'buttons'){
+        if(row.buttons.length > MAX_BTNS_PER_ROW){ compOk = false; compMsg = `Ряд #${i+1}: ${row.buttons.length} кнопок > ${MAX_BTNS_PER_ROW}`; break; }
+        const hasEmpty = row.buttons.some(b => !(b.label||'').trim());
+        if(hasEmpty){ compOk = false; compMsg = `Ряд #${i+1}: есть пустые label`; break; }
+      }else{
+        if(row.select.options.length > MAX_SELECT_OPTIONS){ compOk = false; compMsg = `Ряд #${i+1}: ${row.select.options.length} опций > ${MAX_SELECT_OPTIONS}`; break; }
+        if(row.select.min_values > row.select.max_values){ compOk = false; compMsg = `Ряд #${i+1}: min > max`; break; }
+        const hasEmpty = row.select.options.some(o => !(o.label||'').trim() || !(o.value||'').trim());
+        if(hasEmpty){ compOk = false; compMsg = `Ряд #${i+1}: есть пустые label/value`; break; }
+      }
+    }
+    if(compOk) compMsg = `Компоненты: ${state.rows.length} рядов, ок`;
+  }else{
+    compMsg = 'Компоненты: не заданы';
+  }
+  items.push({ ok: compOk, text: compMsg });
+
   const wrap = $('#checklist'); wrap.innerHTML = '';
   items.forEach(it=>{
     const d = document.createElement('div');
@@ -2406,8 +3047,18 @@ function runChecklist(){
     d.innerHTML = `<i class="fa-solid ${it.ok ? 'fa-circle-check' : 'fa-circle-xmark'}"></i><span>${escapeHTML(it.text)}</span>`;
     wrap.appendChild(d);
   });
+  if(items.every(i=>i.ok)){
+    const d = document.createElement('div');
+    d.className = 'chk ok';
+    d.innerHTML = `<i class="fa-solid fa-circle-check"></i><span>Всё готово к отправке ✅</span>`;
+    wrap.appendChild(d);
+  }
 }
 $('#runCheck').addEventListener('click', runChecklist);
+
+/* ============================================================
+   ЭКСПОРТ
+============================================================ */
 let exportKind = 'json';
 $$('#exportTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
@@ -2432,6 +3083,51 @@ $('#copyExport').addEventListener('click', async ()=>{
   try{ await navigator.clipboard.writeText($('#exportCode').textContent); toast('Скопировано', 'ok'); }
   catch{ toast('Ошибка', 'err'); }
 });
+
+/* ============================================================
+   PAYLOAD
+============================================================ */
+function rowToDiscordJSON(row){
+  if(row.type === 'buttons'){
+    return {
+      type: 1,
+      components: row.buttons.slice(0, MAX_BTNS_PER_ROW).map(b => {
+        const styleMap = { primary:1, secondary:2, success:3, danger:4, link:5 };
+        const comp = {
+          type: 2,
+          style: styleMap[b.style] || 1,
+          label: (b.label || 'Кнопка').slice(0,80)
+        };
+        if(b.emoji) comp.emoji = { name: b.emoji };
+        if(b.style === 'link') comp.url = b.url || 'https://example.com';
+        else comp.custom_id = b.custom_id || b.id;
+        if(b.disabled) comp.disabled = true;
+        return comp;
+      })
+    };
+  }else{
+    return {
+      type: 1,
+      components: [{
+        type: 3,
+        placeholder: (row.select.placeholder || 'Выберите…').slice(0,150),
+        min_values: Math.max(0, Math.min(25, row.select.min_values || 0)),
+        max_values: Math.max(1, Math.min(25, row.select.max_values || 1)),
+        options: row.select.options.slice(0, MAX_SELECT_OPTIONS).map(o => {
+          const opt = {
+            label: (o.label || 'Опция').slice(0,100),
+            value: (o.value || 'opt').slice(0,100)
+          };
+          if(o.description) opt.description = o.description.slice(0,100);
+          if(o.emoji) opt.emoji = { name: o.emoji };
+          if(o.default) opt.default = true;
+          return opt;
+        })
+      }]
+    };
+  }
+}
+
 function buildPayload(){
   const embeds = state.embeds
     .filter(e => (e.title||'').trim() || (e.desc||'').trim())
@@ -2450,6 +3146,7 @@ function buildPayload(){
       o.timestamp = new Date().toISOString();
       return o;
     });
+
   const payload = {
     username: state.name || undefined,
     avatar_url: state.avatar || undefined,
@@ -2460,23 +3157,15 @@ function buildPayload(){
     payload.attachments = state.files.map((f, i)=>({ id: i, filename: f.name, size: f.size, content_type: f.type }));
   }
   if(state.rows.length){
-    payload.components = state.rows.map(r=>{
-      if(r.type === 'buttons'){
-        return { type:1, components: r.buttons.slice(0,5).map(b=>({
-          type:2,
-          style: { primary:1, secondary:2, success:3, danger:4, link:5 }[b.style] || 1,
-          label: b.label || undefined,
-          emoji: b.emoji ? { name: b.emoji } : undefined,
-          url: b.style === 'link' ? b.url : undefined
-        }))};
-      }else{
-        return { type:1, components:[{ type:3, placeholder: r.select.placeholder || 'Выберите…', options: r.select.options.slice(0,25).map(o=>({ label:o.label||'Опция', value:o.value||'opt' })) }]};
-      }
-    });
+    payload.components = state.rows.map(rowToDiscordJSON);
   }
   return payload;
 }
-const DRAFT_KEY = 'yurika_hook_draft_v1';
+
+/* ============================================================
+   ЧЕРНОВИК
+============================================================ */
+const DRAFT_KEY = 'yurika_hook_draft_v2';
 let saveTimer = null;
 function saveDraft(){
   clearTimeout(saveTimer);
@@ -2491,17 +3180,44 @@ function saveDraft(){
 }
 function loadDraft(){
   try{
-    const raw = localStorage.getItem(DRAFT_KEY);
+    const raw = localStorage.getItem(DRAFT_KEY) || localStorage.getItem('yurika_hook_draft_v1');
     if(!raw) return;
     const d = JSON.parse(raw);
     state.url = d.url || ''; state.name = d.name || ''; state.avatar = d.avatar || '';
     state.msg = d.msg || ''; state.theme = d.theme || 'dark';
     state.embeds = Array.isArray(d.embeds) ? d.embeds : [];
-    state.rows = Array.isArray(d.rows) ? d.rows : [];
+    // Миграция старых рядов
+    let rows = Array.isArray(d.rows) ? d.rows : [];
+    rows = rows.map(r => {
+      if(!r.id) r.id = uid('row');
+      if(r.type === 'buttons'){
+        r.buttons = (r.buttons||[]).map(b => ({
+          id: b.id || uid('btn'),
+          label: b.label || 'Кнопка',
+          emoji: b.emoji || '',
+          style: b.style || 'primary',
+          url: b.url || '',
+          custom_id: b.custom_id || '',
+          disabled: !!b.disabled
+        }));
+      }else if(r.type === 'select'){
+        if(!r.select) r.select = { placeholder:'Выберите…', min_values:1, max_values:1, options:[] };
+        r.select.options = (r.select.options||[]).map(o => ({
+          id: o.id || uid('opt'),
+          label: o.label || 'Опция',
+          value: o.value || 'opt',
+          description: o.description || '',
+          emoji: o.emoji || '',
+          default: !!o.default
+        }));
+      }
+      return r;
+    });
+    state.rows = rows;
     $('#hookUrl').value = state.url; $('#hookName').value = state.name;
     $('#hookAvatar').value = state.avatar; $('#hookMsg').value = state.msg;
     renderEmbeds(); renderComp(); updCounters(); renderPreview();
-  }catch(e){}
+  }catch(e){ console.warn(e); }
 }
 document.addEventListener('keydown', (e)=>{
   if(e.ctrlKey || e.metaKey){
@@ -2510,34 +3226,67 @@ document.addEventListener('keydown', (e)=>{
   }
 });
 
-/* ===== ШАБЛОНЫ ===== */
+/* ============================================================
+   ШАБЛОНЫ
+============================================================ */
 const TEMPLATES = {
   news: { name:'Новость', icon:'fa-newspaper', color:'#5865F2', desc:'Обновления и анонсы',
-    build(){ state.name='Yurika News'; state.msg='@everyone';
+    build(){
+      state.name='Yurika News'; state.msg='@everyone';
       state.embeds = [{ title:'🎉 Обновление Yurika Bot', desc:'Мы выпустили крупное обновление!', color:'#5865F2', author:{name:'Yurika Bot',icon:'',url:''}, footer:{text:'Yurika Bot',icon:''}, image:'', thumbnail:'', fields:[] }];
-      state.rows = [{ type:'buttons', buttons:[{label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com'}] }];
+      state.rows = [
+        { id: uid('row'), type:'buttons', buttons: [
+          { id: uid('btn'), label:'Подробнее', emoji:'📖', style:'link', url:'https://example.com', custom_id:'', disabled:false },
+          { id: uid('btn'), label:'Обсудить', emoji:'💬', style:'primary', url:'', custom_id:'discuss', disabled:false }
+        ]}
+      ];
     }
   },
   welcome: { name:'Приветствие', icon:'fa-hand-sparkles', color:'#37D67A', desc:'Новым участникам',
-    build(){ state.name='Yurika Welcome'; state.msg='';
+    build(){
+      state.name='Yurika Welcome'; state.msg='';
       state.embeds = [{ title:'Добро пожаловать!', desc:'Привет, {user}! Рады видеть тебя.', color:'#37D67A', author:{name:'',icon:'',url:''}, footer:{text:'Приятного общения!',icon:''}, image:'', thumbnail:'', fields:[] }];
-      state.rows = [];
+      state.rows = [
+        { id: uid('row'), type:'select', select: {
+          placeholder:'Выбери любимую игру…',
+          min_values: 1,
+          max_values: 2,
+          options: [
+            { id: uid('opt'), label:'Minecraft', value:'mc', description:'Песочница', emoji:'⛏️', default:false },
+            { id: uid('opt'), label:'CS2', value:'cs2', description:'Шутер', emoji:'🔫', default:false },
+            { id: uid('opt'), label:'Dota 2', value:'dota2', description:'MOBA', emoji:'⚔️', default:false }
+          ]
+        }}
+      ];
     }
   },
   giveaway: { name:'Розыгрыш', icon:'fa-gift', color:'#EB459E', desc:'Гивэвей с призом',
-    build(){ state.name='Yurika Giveaway'; state.msg='@everyone';
+    build(){
+      state.name='Yurika Giveaway'; state.msg='@everyone';
       state.embeds = [{ title:'🎁 Розыгрыш', desc:'Разыгрываем Nitro!', color:'#EB459E', author:{name:'',icon:'',url:''}, footer:{text:'Итоги через 24 часа',icon:''}, image:'', thumbnail:'', fields:[] }];
-      state.rows = [{ type:'buttons', buttons:[{label:'Участвовать', emoji:'🎉', style:'success', url:''}] }];
+      state.rows = [
+        { id: uid('row'), type:'buttons', buttons: [
+          { id: uid('btn'), label:'Участвовать', emoji:'🎉', style:'success', url:'', custom_id:'giveaway_join', disabled:false },
+          { id: uid('btn'), label:'Правила', emoji:'📜', style:'secondary', url:'', custom_id:'giveaway_rules', disabled:false }
+        ]}
+      ];
     }
   },
   rules: { name:'Правила', icon:'fa-book', color:'#ED4245', desc:'Правила сервера',
-    build(){ state.name='Yurika Rules'; state.msg='';
+    build(){
+      state.name='Yurika Rules'; state.msg='';
       state.embeds = [{ title:'📕 Правила', desc:'1. Будь вежлив.\n2. Без спама.\n3. Соблюдай тематику.', color:'#ED4245', author:{name:'',icon:'',url:''}, footer:{text:'',icon:''}, image:'', thumbnail:'', fields:[] }];
-      state.rows = [];
+      state.rows = [
+        { id: uid('row'), type:'buttons', buttons: [
+          { id: uid('btn'), label:'Принимаю', emoji:'✅', style:'success', url:'', custom_id:'rules_accept', disabled:false },
+          { id: uid('btn'), label:'Не принимаю', emoji:'❌', style:'danger', url:'', custom_id:'rules_decline', disabled:false }
+        ]}
+      ];
     }
   },
   modlog: { name:'Лог модерации', icon:'fa-clipboard-list', color:'#EB459E', desc:'Бан, мут, warn',
-    build(){ state.name='Yurika Modlog'; state.msg='';
+    build(){
+      state.name='Yurika Modlog'; state.msg='';
       state.embeds = [{ title:'🔨 Наказание', desc:'Модератор применил наказание.', color:'#EB459E', author:{name:'Модерация',icon:'',url:''}, footer:{text:'Yurika Bot',icon:''}, image:'', thumbnail:'', fields:[{name:'Участник',value:'@user',inline:true},{name:'Тип',value:'Мут',inline:true}] }];
       state.rows = [];
     }
@@ -2572,6 +3321,7 @@ function buildTemplateButtons(){
   });
 }
 buildTemplateButtons();
+
 const MY_TPL_KEY = 'yurika_hook_mytpl_v1';
 function loadMyTemplates(){ try{ return JSON.parse(localStorage.getItem(MY_TPL_KEY) || '{}'); }catch{ return {}; } }
 function saveMyTemplates(obj){ localStorage.setItem(MY_TPL_KEY, JSON.stringify(obj)); }
@@ -2620,7 +3370,6 @@ const LS = {
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
 
-// ✅ Иконка Lolka через img, остальные — через Font Awesome
 const SOCIALS = [
   { key:'discord', type:'fa', icon:'fa-discord', cls:'discord', label:'Discord', url: v=>`https://discord.com/users/${v}` },
   { key:'telegram', type:'fa', icon:'fa-telegram', cls:'telegram', label:'Telegram', url: v=>`https://t.me/${v.replace(/^@/,'')}` },
