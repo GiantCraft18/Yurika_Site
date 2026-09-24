@@ -18,7 +18,6 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 
 <style>
 /* ============ БАЗА ============ */
@@ -41,7 +40,6 @@
   --radius-sm:12px;
   --shadow:0 20px 60px rgba(0,0,0,.55);
   --ring:0 0 0 3px rgba(124,92,255,.35);
-  --sidebar-w:240px;
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
@@ -118,52 +116,6 @@ nav.tabs{margin-left:auto; display:flex; gap:6px; flex-wrap:wrap}
   box-shadow:0 10px 30px rgba(124,92,255,.35);
 }
 .tab.active i{color:#fff}
-
-.server-switcher{
-  display:flex; align-items:center; gap:8px;
-  padding:8px 12px; border-radius:12px;
-  border:1px solid var(--stroke-strong);
-  background:rgba(255,255,255,.04);
-  color:var(--text); font-weight:700; font-size:13px;
-  cursor:pointer; position:relative;
-  max-width:240px;
-}
-.server-switcher:hover{background:rgba(255,255,255,.08)}
-.server-switcher .ss-avatar{
-  width:26px;height:26px;border-radius:8px;flex:0 0 26px;
-  background:linear-gradient(135deg,#7c5cff,#22d3ee);
-  display:grid;place-items:center;color:#fff;font-size:11px;font-weight:800;
-  overflow:hidden;
-}
-.server-switcher .ss-avatar img{width:100%;height:100%;object-fit:cover}
-.server-switcher .ss-name{white-space:nowrap; overflow:hidden; text-overflow:ellipsis; flex:1; min-width:0}
-.server-switcher .ss-chevron{color:var(--muted); font-size:11px}
-
-.ss-dropdown{
-  position:absolute; top:calc(100% + 6px); left:0; right:0;
-  background:rgba(18,22,42,.98);
-  border:1px solid var(--stroke-strong);
-  border-radius:12px;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(14px);
-  padding:6px;
-  display:none;
-  z-index:60;
-  max-height:320px; overflow-y:auto;
-}
-.ss-dropdown.open{display:block}
-.ss-item{
-  display:flex; align-items:center; gap:10px;
-  padding:9px 10px; border-radius:8px;
-  cursor:pointer; font-size:13px; font-weight:700;
-  color:var(--text);
-}
-.ss-item:hover{background:rgba(255,255,255,.06)}
-.ss-item.active{background:linear-gradient(135deg,rgba(124,92,255,.35),rgba(34,211,238,.25))}
-.ss-item .ss-avatar{width:24px;height:24px;border-radius:6px;flex:0 0 24px;display:grid;place-items:center;font-size:10px;background:linear-gradient(135deg,#7c5cff,#22d3ee);color:#fff;font-weight:800;overflow:hidden}
-.ss-item .ss-avatar img{width:100%;height:100%;object-fit:cover}
-.ss-add{display:flex; align-items:center; gap:8px; padding:9px 10px; border-radius:8px; cursor:pointer; color:var(--brand-2); font-weight:800; font-size:13px}
-.ss-add:hover{background:rgba(34,211,238,.1)}
 
 main{max-width:1400px; margin:0 auto; padding:22px 18px 80px}
 .section{display:none; animation:fade .35s ease both}
@@ -263,349 +215,6 @@ main{max-width:1400px; margin:0 auto; padding:22px 18px 80px}
 .callout b{display:block; margin-bottom:4px}
 .callout p{margin:0; color:var(--text); opacity:.92; font-size:14.5px; line-height:1.6}
 
-/* ===== ПАНЕЛЬ УПРАВЛЕНИЯ СЕРВЕРОМ ===== */
-.server-dash{
-  display:grid;
-  grid-template-columns:var(--sidebar-w) 1fr;
-  gap:18px;
-  align-items:start;
-}
-.sd-sidebar{
-  position:sticky; top:80px;
-  border:1px solid var(--stroke);
-  border-radius:var(--radius);
-  background:var(--card);
-  backdrop-filter:blur(12px);
-  padding:10px;
-  display:flex; flex-direction:column; gap:4px;
-}
-.sd-nav{
-  display:flex; align-items:center; gap:10px;
-  padding:10px 12px;
-  border-radius:10px;
-  font-size:13.5px; font-weight:700;
-  color:var(--muted);
-  cursor:pointer;
-  transition:.15s background, .15s color;
-  border:1px solid transparent;
-}
-.sd-nav i{width:18px; text-align:center; font-size:13px}
-.sd-nav:hover{background:rgba(255,255,255,.04); color:var(--text)}
-.sd-nav.active{
-  background:linear-gradient(135deg, rgba(124,92,255,.25), rgba(34,211,238,.18));
-  color:#fff;
-  border-color:rgba(124,92,255,.35);
-}
-.sd-nav.active i{color:var(--brand-2)}
-.sd-content{display:flex; flex-direction:column; gap:16px; min-width:0}
-.sd-pane{display:none; flex-direction:column; gap:16px}
-.sd-pane.active{display:flex}
-
-/* ===== ГРАФИКИ ===== */
-.chart-box{
-  position:relative;
-  padding:14px;
-  border:1px solid var(--stroke);
-  border-radius:14px;
-  background:rgba(255,255,255,.02);
-  height:280px;
-}
-.chart-box canvas{max-height:100%}
-
-.stat-row{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:12px;
-}
-.stat-card{
-  padding:16px;
-  border:1px solid var(--stroke);
-  border-radius:14px;
-  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
-  position:relative;
-  overflow:hidden;
-}
-.stat-card::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg, var(--brand), var(--brand-2));
-}
-.stat-card.pink::before{background:linear-gradient(90deg, #ff5cae, #7c5cff)}
-.stat-card.green::before{background:linear-gradient(90deg, #37d67a, #22d3ee)}
-.stat-card.orange::before{background:linear-gradient(90deg, #ffb020, #ff5a6a)}
-.stat-card b{
-  display:block; font-size:26px; font-weight:800;
-  background:linear-gradient(135deg, #ffffff, #22d3ee);
-  -webkit-background-clip:text; background-clip:text; color:transparent;
-  margin-bottom:4px;
-}
-.stat-card span{font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.4px; text-transform:uppercase}
-.stat-card .delta{font-size:11.5px; color:var(--ok); margin-top:4px; font-weight:800}
-.stat-card .delta.down{color:var(--err)}
-
-/* ===== ТАБЛИЦА УЧАСТНИКОВ ===== */
-.table-wrap{
-  border:1px solid var(--stroke);
-  border-radius:14px;
-  overflow:hidden;
-  background:rgba(255,255,255,.015);
-}
-.table-toolbar{
-  display:flex; align-items:center; gap:10px; flex-wrap:wrap;
-  padding:12px 14px;
-  border-bottom:1px solid var(--stroke);
-  background:rgba(255,255,255,.02);
-}
-.table-toolbar input{padding:9px 12px 9px 36px; font-size:13px}
-.table-toolbar .input-wrap{flex:1; min-width:180px; max-width:320px}
-.member-table{
-  width:100%; border-collapse:collapse;
-  font-size:13.5px;
-}
-.member-table th{
-  text-align:left; padding:11px 14px;
-  font-size:11.5px; text-transform:uppercase;
-  color:var(--muted); font-weight:800; letter-spacing:.5px;
-  border-bottom:1px solid var(--stroke);
-  background:rgba(0,0,0,.2);
-  position:sticky; top:0; z-index:2;
-}
-.member-table td{
-  padding:11px 14px;
-  border-bottom:1px dashed rgba(255,255,255,.05);
-  vertical-align:middle;
-}
-.member-table tr:last-child td{border-bottom:none}
-.member-table tr:hover td{background:rgba(255,255,255,.025)}
-.member-table .m-avatar{
-  width:32px;height:32px;border-radius:10px;flex:0 0 32px;
-  background:linear-gradient(135deg,#7c5cff,#22d3ee);
-  display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800;
-  margin-right:10px;overflow:hidden;
-}
-.member-table .m-cell{display:flex; align-items:center}
-.member-table .m-name b{display:block; font-size:13.5px}
-.member-table .m-name span{font-size:11.5px; color:var(--muted)}
-.member-table .role-chip{
-  display:inline-flex; align-items:center; gap:5px;
-  padding:3px 8px; border-radius:999px;
-  font-size:11px; font-weight:800;
-  background:rgba(124,92,255,.16); border:1px solid rgba(124,92,255,.3);
-  color:#d7dcff;
-  margin-right:4px;
-}
-.member-table .balance{font-family:'JetBrains Mono',monospace; font-weight:700; color:#ffb020}
-.member-table .xp-val{font-family:'JetBrains Mono',monospace; color:var(--brand-2)}
-.member-table .m-actions{display:flex; gap:6px}
-.icon-btn{
-  width:30px;height:30px;border-radius:9px;
-  border:1px solid var(--stroke-strong);
-  background:rgba(255,255,255,.04);
-  color:var(--text); cursor:pointer;
-  display:grid;place-items:center;
-  font-size:12px;
-  transition:.15s background, .15s transform;
-}
-.icon-btn:hover{background:rgba(255,255,255,.1); transform:translateY(-1px)}
-.icon-btn.danger{color:#ff8a96; border-color:rgba(255,90,106,.35)}
-.icon-btn.danger:hover{background:rgba(255,90,106,.15)}
-
-/* ===== РОЛИ ===== */
-.role-item{
-  display:flex; align-items:center; gap:12px;
-  padding:12px 14px;
-  border:1px solid var(--stroke);
-  border-radius:12px;
-  background:rgba(255,255,255,.02);
-  margin-bottom:8px;
-}
-.role-dot{
-  width:14px;height:14px;border-radius:50%;flex:0 0 14px;
-  box-shadow:0 0 0 2px rgba(255,255,255,.1);
-}
-.role-info{flex:1; min-width:0}
-.role-info b{display:block; font-size:14px; margin-bottom:2px}
-.role-info span{font-size:11.5px; color:var(--muted); font-weight:600}
-.role-badges{display:flex; gap:6px; flex-wrap:wrap; margin-top:4px}
-.role-badge{
-  font-size:10.5px; font-weight:800;
-  padding:2px 7px; border-radius:999px;
-  background:rgba(255,255,255,.05); border:1px solid var(--stroke);
-  color:var(--muted);
-}
-.role-badge.ok{color:var(--ok); border-color:rgba(55,214,122,.35); background:rgba(55,214,122,.08)}
-.role-badge.warn{color:var(--warn); border-color:rgba(255,176,32,.35); background:rgba(255,176,32,.08)}
-.role-badge.err{color:var(--err); border-color:rgba(255,90,106,.35); background:rgba(255,90,106,.08)}
-
-/* ===== ЛОГИ ===== */
-.logs-container{
-  max-height:480px; overflow-y:auto;
-  border:1px solid var(--stroke);
-  border-radius:14px;
-  background:rgba(0,0,0,.25);
-  padding:10px;
-  font-family:'JetBrains Mono',monospace;
-  font-size:12.5px;
-  line-height:1.6;
-}
-.log-item{
-  display:flex; gap:10px;
-  padding:7px 10px;
-  border-radius:8px;
-  border-left:3px solid var(--brand);
-  background:rgba(255,255,255,.02);
-  margin-bottom:5px;
-  animation:logIn .3s ease both;
-}
-@keyframes logIn{from{opacity:0; transform:translateX(-8px)} to{opacity:1; transform:none}}
-.log-item.join{border-left-color:var(--ok)}
-.log-item.leave{border-left-color:var(--muted)}
-.log-item.ban{border-left-color:var(--err)}
-.log-item.warn{border-left-color:var(--warn)}
-.log-item.msg{border-left-color:var(--brand-2)}
-.log-item .log-time{color:var(--muted); flex:0 0 60px; font-size:11px}
-.log-item .log-body{flex:1; min-width:0; word-break:break-word}
-.log-item .log-body b{color:#fff}
-.log-item .log-tag{
-  font-size:9.5px; padding:2px 6px; border-radius:4px;
-  background:rgba(124,92,255,.2); color:#d7dcff;
-  align-self:flex-start;
-}
-.logs-controls{
-  display:flex; gap:8px; flex-wrap:wrap;
-  margin-bottom:10px;
-}
-.log-filter{
-  padding:6px 12px; font-size:12px; font-weight:800;
-  border-radius:999px;
-  background:rgba(255,255,255,.04);
-  border:1px solid var(--stroke);
-  color:var(--muted); cursor:pointer;
-  transition:.15s all;
-}
-.log-filter:hover{color:var(--text)}
-.log-filter.active{background:linear-gradient(135deg,rgba(124,92,255,.9),rgba(34,211,238,.7)); color:#fff; border-color:transparent}
-
-.live-dot{
-  width:8px;height:8px;border-radius:50%;
-  background:var(--ok);
-  box-shadow:0 0 0 0 rgba(55,214,122,.6);
-  animation:pulse 2s infinite;
-  display:inline-block; margin-right:6px;
-}
-@keyframes pulse{
-  0%{box-shadow:0 0 0 0 rgba(55,214,122,.6)}
-  70%{box-shadow:0 0 0 8px rgba(55,214,122,0)}
-  100%{box-shadow:0 0 0 0 rgba(55,214,122,0)}
-}
-
-/* ===== МАГАЗИН ===== */
-.shop-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  gap:12px;
-}
-.shop-item{
-  position:relative;
-  padding:14px;
-  border:1px solid var(--stroke);
-  border-radius:14px;
-  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
-  cursor:grab;
-  transition:.2s transform, .2s border-color, .2s box-shadow;
-}
-.shop-item:hover{border-color:var(--stroke-strong); transform:translateY(-2px); box-shadow:0 12px 32px rgba(0,0,0,.3)}
-.shop-item.dragging{opacity:.5; cursor:grabbing}
-.shop-item.drag-over{border-color:var(--brand-2); box-shadow:0 0 0 2px rgba(34,211,238,.3)}
-.shop-item .si-icon{
-  width:42px;height:42px;border-radius:12px;
-  background:linear-gradient(135deg, rgba(124,92,255,.5), rgba(34,211,238,.4));
-  display:grid;place-items:center;
-  color:#fff; font-size:16px;
-  margin-bottom:10px;
-}
-.shop-item b{display:block; font-size:14.5px; margin-bottom:4px}
-.shop-item .si-desc{font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.45; margin-bottom:8px}
-.shop-item .si-price{
-  font-family:'JetBrains Mono',monospace;
-  font-weight:700; font-size:15px; color:#ffb020;
-  display:flex; align-items:center; gap:4px;
-}
-.shop-item .si-remove{
-  position:absolute; top:8px; right:8px;
-  width:26px;height:26px;border-radius:8px;
-  border:1px solid rgba(255,90,106,.4);
-  background:rgba(255,90,106,.15);
-  color:#ff8a96; cursor:pointer;
-  display:grid;place-items:center; font-size:11px;
-}
-.shop-item .si-remove:hover{background:#ff5a6a; color:#fff}
-.shop-item .si-drag{
-  position:absolute; top:8px; left:8px;
-  color:var(--muted); font-size:12px; cursor:grab;
-}
-
-/* ===== БАНДЛЫ ===== */
-.bundle-card{
-  padding:16px;
-  border:1px solid var(--stroke);
-  border-radius:14px;
-  background:linear-gradient(180deg, rgba(255,255,255,.035), rgba(255,255,255,.012));
-  position:relative;
-  overflow:hidden;
-}
-.bundle-card::before{
-  content:""; position:absolute; top:0; left:0; right:0; height:3px;
-  background:linear-gradient(90deg, #ff5cae, #7c5cff, #22d3ee);
-}
-.bundle-card h4{margin:0 0 6px; font-size:15px}
-.bundle-card .bundle-desc{font-size:12.5px; color:var(--muted); font-weight:600; margin-bottom:10px}
-.bundle-card .bundle-roles{display:flex; flex-wrap:wrap; gap:5px; margin-bottom:10px}
-.bundle-card .bundle-price{
-  font-family:'JetBrains Mono',monospace; font-weight:800; color:#ffb020;
-  font-size:16px; display:flex; align-items:center; gap:4px;
-}
-
-/* ===== МОДЕРАЦИЯ ===== */
-.report-item{
-  display:flex; gap:12px; align-items:flex-start;
-  padding:12px 14px;
-  border:1px solid var(--stroke);
-  border-left:3px solid var(--warn);
-  border-radius:12px;
-  background:rgba(255,255,255,.02);
-  margin-bottom:8px;
-}
-.report-item.high{border-left-color:var(--err)}
-.report-item.low{border-left-color:var(--ok)}
-.report-item .rep-icon{
-  width:36px;height:36px;border-radius:10px;flex:0 0 36px;
-  display:grid;place-items:center;color:#fff;font-size:14px;
-  background:linear-gradient(135deg,#ffb020,#ff5a6a);
-}
-.report-item .rep-info{flex:1; min-width:0}
-.report-item b{display:block; font-size:13.5px; margin-bottom:3px}
-.report-item .rep-desc{font-size:12.5px; color:var(--muted); font-weight:600; line-height:1.5}
-.report-item .rep-meta{font-size:11px; color:var(--muted); margin-top:4px; font-family:'JetBrains Mono',monospace}
-.report-actions{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
-
-.punishment-row{
-  display:flex; align-items:center; gap:12px;
-  padding:10px 14px;
-  border:1px solid var(--stroke);
-  border-radius:10px;
-  background:rgba(255,255,255,.02);
-  margin-bottom:6px;
-  font-size:13px;
-}
-.punishment-row .p-type{
-  padding:3px 8px; border-radius:6px; font-size:11px; font-weight:800;
-  background:rgba(255,90,106,.15); color:#ff8a96;
-}
-.punishment-row .p-type.warn{background:rgba(255,176,32,.15); color:#ffb020}
-.punishment-row .p-type.mute{background:rgba(124,92,255,.15); color:#d7dcff}
-.punishment-row .p-date{color:var(--muted); font-size:11.5px; font-family:'JetBrains Mono',monospace; margin-left:auto}
-
-/* ===== ПРОЧЕЕ (из старой версии) ===== */
 .cats-strip{
   margin-top:22px;
   padding:20px 20px 18px;
@@ -702,6 +311,10 @@ main{max-width:1400px; margin:0 auto; padding:22px 18px 80px}
 .field label{font-size:12.5px; font-weight:800; color:var(--muted); letter-spacing:.4px; text-transform:uppercase}
 .input-wrap{position:relative; display:flex; align-items:center}
 .input-wrap i.lead{position:absolute; left:14px; color:var(--brand-2); font-size:14px; pointer-events:none}
+.input-wrap img.lead-img{
+  position:absolute; left:12px; width:20px; height:20px;
+  object-fit:cover; border-radius:6px; pointer-events:none;
+}
 input,textarea,select{
   width:100%;
   background:rgba(255,255,255,.04);
@@ -794,6 +407,7 @@ select option{background:#12162a; color:var(--text)}
 }
 .social:hover{transform:translateY(-2px); border-color:var(--stroke-strong); background:rgba(255,255,255,.08)}
 .social i{font-size:15px}
+.social img.social-img{width:18px; height:18px; object-fit:cover; border-radius:4px; display:block}
 .social.discord i{color:#5865F2}
 .social.telegram i{color:#29B6F6}
 .social.github i{color:#e8e8e8}
@@ -894,6 +508,21 @@ select option{background:#12162a; color:var(--text)}
 .share-row i.lead{color:var(--brand-2); font-size:16px}
 .share-row input{padding:10px 12px; font-family:'JetBrains Mono',monospace; font-size:13px; background:rgba(0,0,0,.35)}
 
+.stat-row{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px}
+.stat{
+  padding:14px;
+  border:1px solid var(--stroke);
+  border-radius:14px;
+  background:rgba(255,255,255,.025);
+  text-align:center;
+}
+.stat b{display:block; font-size:22px; font-weight:800;
+  background:linear-gradient(135deg, #ffffff, #22d3ee);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  margin-bottom:4px;
+}
+.stat span{font-size:12px; color:var(--muted); font-weight:700; letter-spacing:.3px; text-transform:uppercase}
+
 .modal-overlay{
   display:none; position:fixed; inset:0; z-index:1000;
   align-items:center; justify-content:center; padding:20px;
@@ -937,15 +566,6 @@ select option{background:#12162a; color:var(--text)}
 .toggle-row b{display:block; font-size:14px; margin-bottom:2px}
 .toggle-row span{font-size:12px; color:var(--muted); font-weight:600; display:block}
 
-.ph-row{display:flex; gap:6px; flex-wrap:wrap; margin-top:6px}
-.ph-chip{
-  font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
-  padding:3px 8px; border-radius:999px;
-  background:rgba(124,92,255,.16); border:1px solid rgba(124,92,255,.32);
-  color:#d7dcff; cursor:pointer; transition:.2s background, .2s transform;
-}
-.ph-chip:hover{background:rgba(124,92,255,.28); transform:translateY(-1px)}
-
 .hook-toolbar{
   display:flex; align-items:center; gap:6px; flex-wrap:wrap;
   padding:10px 12px;
@@ -962,7 +582,6 @@ select option{background:#12162a; color:var(--text)}
   transition:.2s background, .2s transform, .2s border-color;
 }
 .md-btn:hover{background:rgba(255,255,255,.09); transform:translateY(-1px); border-color:var(--brand)}
-.md-btn i{font-size:12.5px}
 
 .tabs-mini{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px}
 .tabs-mini .chip{padding:7px 12px; font-size:12px}
@@ -1024,7 +643,6 @@ select option{background:#12162a; color:var(--text)}
 }
 
 .mini-grid{display:grid; gap:8px; grid-template-columns:1fr 1fr}
-.mini-grid.one{grid-template-columns:1fr}
 .fields-list{display:flex; flex-direction:column; gap:8px; margin-top:8px}
 .field-item{
   border:1px dashed var(--stroke-strong);
@@ -1287,20 +905,15 @@ pre.code{
 }
 
 .hook-grid{display:grid; grid-template-columns:1.15fr .85fr; gap:16px}
-.hook-row{display:flex; align-items:center; justify-content:space-between; margin-bottom:8px}
-.hook-row label{font-size:12.5px; font-weight:800; letter-spacing:.5px; text-transform:uppercase; color:var(--muted)}
 .counter{font-size:12px; font-weight:800; color:var(--muted)}
 .counter.over{color:var(--err)}
 .embed-box{border:1px solid var(--stroke); border-radius:14px; padding:14px; margin-bottom:12px; background:rgba(255,255,255,.025); transition:border-color .2s, box-shadow .2s, opacity .2s}
 .embed-box .embed-top{display:flex; align-items:center; gap:10px; margin-bottom:10px}
 .embed-box .embed-top strong{font-size:13.5px}
 .color-line{height:5px; border-radius:99px; margin-bottom:12px}
-
 .embed-box.collapsed .emb-pane,
 .embed-box.collapsed .tabs-mini,
-.embed-box.collapsed .color-line{
-  display:none !important;
-}
+.embed-box.collapsed .color-line{display:none !important;}
 .embed-box.collapsed{padding:10px 14px}
 .embed-box.collapsed .embed-top{margin-bottom:0}
 .embed-box .collapse-btn{
@@ -1309,61 +922,29 @@ pre.code{
   background:rgba(255,255,255,.04);
   color:var(--text); cursor:pointer;
   display:grid;place-items:center;
-  transition:.2s background, .2s transform, .2s border-color;
+  transition:.2s background;
 }
 .embed-box .collapse-btn:hover{background:rgba(255,255,255,.09); border-color:var(--brand)}
-.embed-box .collapse-btn i{transition:transform .2s}
-
-.embed-box.dragging{
-  opacity:.55;
-  border-color:var(--brand);
-  box-shadow:0 20px 50px rgba(124,92,255,.35);
-}
-.embed-box.drag-over{
-  border-color:var(--brand-2);
-  box-shadow:0 0 0 2px rgba(34,211,238,.35);
-}
 .drag-handle{
   cursor:grab; color:var(--muted); font-size:14px; padding:4px 6px;
-  border-radius:8px; transition:.15s background;
+  border-radius:8px;
 }
-.drag-handle:hover{background:rgba(255,255,255,.06); color:var(--text)}
-.drag-handle:active{cursor:grabbing}
-
 input.limit-over, textarea.limit-over{
   border-color:var(--err) !important;
   box-shadow:0 0 0 3px rgba(255,90,106,.20) !important;
-  background:rgba(255,90,106,.06) !important;
 }
-
 .ph-embed{
   font-family:'JetBrains Mono',monospace; font-size:11.5px; font-weight:700;
   padding:3px 8px; border-radius:999px;
   background:rgba(34,211,238,.14); border:1px solid rgba(34,211,238,.32);
   color:#b9f3ff; cursor:pointer;
-  transition:.2s background, .2s transform;
   display:inline-flex; align-items:center; justify-content:center;
 }
-.ph-embed:hover{background:rgba(34,211,238,.26); transform:translateY(-1px)}
-.ph-embed.md{
-  background:rgba(124,92,255,.16); border-color:rgba(124,92,255,.32); color:#d7dcff;
-  min-width:26px;
-}
-.ph-embed.md:hover{background:rgba(124,92,255,.28)}
-
 .color-palette{display:flex; gap:6px; flex-wrap:wrap; margin-top:8px}
 .color-swatch{
   width:26px;height:26px;border-radius:8px;
   border:2px solid var(--stroke-strong);
   cursor:pointer;
-  transition:.2s transform, .2s border-color;
-}
-.color-swatch:hover{transform:translateY(-2px); border-color:#fff}
-
-.preview{
-  border:1px solid var(--stroke); border-radius:14px; padding:16px;
-  background:linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.15));
-  min-height:220px;
 }
 .empty{display:grid; place-items:center; text-align:center; color:var(--muted); min-height:180px; font-weight:700; gap:10px}
 .empty i{font-size:32px; color:var(--brand)}
@@ -1385,10 +966,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .hook-grid{grid-template-columns:1fr}
   .grid.cols-4{grid-template-columns:repeat(2,minmax(0,1fr))}
   .grid.cols-3{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .server-dash{grid-template-columns:1fr}
-  .sd-sidebar{position:static; flex-direction:row; overflow-x:auto; padding:8px}
-  .sd-nav{flex:0 0 auto; white-space:nowrap}
-  .stat-row{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
   .grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}
@@ -1413,20 +990,13 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   .server-item{flex-wrap:wrap}
   .server-actions{width:100%; justify-content:flex-end}
   .files-grid{grid-template-columns:repeat(auto-fill, minmax(130px, 1fr))}
-  .stat-row{grid-template-columns:1fr 1fr}
-  .stat-card b{font-size:20px}
-  .server-switcher{order:4; width:100%; max-width:none}
-  .member-table th:nth-child(3),
-  .member-table td:nth-child(3){display:none}
-  .shop-grid{grid-template-columns:1fr 1fr}
+  .stat-row{grid-template-columns:1fr}
 }
 @media (max-width:420px){
   .tab span{display:none}
   .tab{padding:10px 12px}
   .tab i{font-size:15px}
   .files-grid{grid-template-columns:1fr 1fr}
-  .stat-row{grid-template-columns:1fr}
-  .shop-grid{grid-template-columns:1fr}
 }
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important; transition:none!important}
@@ -1448,18 +1018,9 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
       </div>
     </div>
 
-    <!-- Селектор активного сервера -->
-    <div class="server-switcher" id="serverSwitcher" style="display:none">
-      <div class="ss-avatar" id="ssAvatar"><i class="fa-solid fa-server"></i></div>
-      <div class="ss-name" id="ssName">Сервер не выбран</div>
-      <i class="fa-solid fa-chevron-down ss-chevron"></i>
-      <div class="ss-dropdown" id="ssDropdown"></div>
-    </div>
-
     <nav class="tabs">
       <button class="tab active" data-tab="home"><i class="fa-solid fa-house"></i><span>Главная</span></button>
       <button class="tab" data-tab="install"><i class="fa-solid fa-download"></i><span>Установить</span></button>
-      <button class="tab" data-tab="dashboard"><i class="fa-solid fa-chart-line"></i><span>Дашборд</span></button>
       <button class="tab" data-tab="commands"><i class="fa-solid fa-terminal"></i><span>Команды</span></button>
       <button class="tab" data-tab="webhook"><i class="fa-solid fa-bolt"></i><span>Вебхук</span></button>
       <button class="tab" data-tab="profile"><i class="fa-solid fa-user-astronaut"></i><span>Профиль</span></button>
@@ -1506,8 +1067,8 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         <a class="btn" href="https://lolka.app/bot-authorize?client_id=b20e4911-4f35-48dc-a040-a49fee5c75b5" target="_blank" rel="noopener">
           <i class="fa-solid fa-rocket"></i> Установить на сервер
         </a>
-        <button class="btn ghost" data-goto="dashboard"><i class="fa-solid fa-chart-line"></i> Открыть дашборд</button>
         <button class="btn ghost" data-goto="commands"><i class="fa-solid fa-terminal"></i> Команды</button>
+        <button class="btn ghost" data-goto="webhook"><i class="fa-solid fa-bolt"></i> Вебхук-конструктор</button>
       </div>
     </div>
   </section>
@@ -1565,296 +1126,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
         <i class="fa-solid fa-plus"></i> Установить на сервер
       </a>
       <div class="install-note">lolka.app · безопасная авторизация</div>
-    </div>
-  </section>
-
-  <!-- ============ ДАШБОРД СЕРВЕРА ============ -->
-  <section class="section" id="tab-dashboard">
-    <div class="section-title">
-      <h2><i class="fa-solid fa-chart-line" style="color:var(--brand-2)"></i> Дашборд сервера</h2>
-      <span class="pill" id="dashServerName">—</span>
-    </div>
-
-    <div id="dashNoServer" class="card card-pad" style="display:none">
-      <div class="empty">
-        <i class="fa-solid fa-server"></i>
-        <div>Нет выбранного сервера</div>
-        <button class="btn" id="dashAddServer"><i class="fa-solid fa-plus"></i> Добавить сервер</button>
-      </div>
-    </div>
-
-    <div class="server-dash" id="dashContent" style="display:none">
-
-      <!-- Сайдбар -->
-      <aside class="sd-sidebar">
-        <div class="sd-nav active" data-sd="overview"><i class="fa-solid fa-gauge-high"></i> Обзор</div>
-        <div class="sd-nav" data-sd="members"><i class="fa-solid fa-users"></i> Участники</div>
-        <div class="sd-nav" data-sd="roles"><i class="fa-solid fa-user-tag"></i> Роли</div>
-        <div class="sd-nav" data-sd="logs"><i class="fa-solid fa-scroll"></i> Логи <span class="live-dot" style="margin-left:auto"></span></div>
-        <div class="sd-nav" data-sd="analytics"><i class="fa-solid fa-chart-pie"></i> Аналитика</div>
-        <div class="sd-nav" data-sd="shop"><i class="fa-solid fa-store"></i> Магазин</div>
-        <div class="sd-nav" data-sd="moderation"><i class="fa-solid fa-gavel"></i> Модерация</div>
-        <div class="sd-nav" data-sd="bundles"><i class="fa-solid fa-box-open"></i> Пакеты ролей</div>
-        <div class="sd-nav" data-sd="settings"><i class="fa-solid fa-gear"></i> Настройки</div>
-      </aside>
-
-      <div class="sd-content">
-
-        <!-- === ОБЗОР === -->
-        <div class="sd-pane active" data-pane="overview">
-          <div class="stat-row">
-            <div class="stat-card">
-              <b id="stMembers">0</b>
-              <span>Участников</span>
-              <div class="delta" id="stMembersDelta"><i class="fa-solid fa-arrow-up"></i> +0 за неделю</div>
-            </div>
-            <div class="stat-card green">
-              <b id="stOnline">0</b>
-              <span>Онлайн</span>
-              <div class="delta"><i class="fa-solid fa-circle" style="font-size:8px"></i> прямо сейчас</div>
-            </div>
-            <div class="stat-card orange">
-              <b id="stMessages">0</b>
-              <span>Сообщений</span>
-              <div class="delta" id="stMessagesDelta"><i class="fa-solid fa-arrow-up"></i> +0 за сегодня</div>
-            </div>
-            <div class="stat-card pink">
-              <b id="stCmds">0</b>
-              <span>Команд</span>
-              <div class="delta" id="stCmdsDelta"><i class="fa-solid fa-arrow-up"></i> +0 за сегодня</div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-chart-area"></i></div>
-              <h3>Активность за 14 дней</h3>
-              <span class="badge" style="margin-left:auto"><i class="fa-solid fa-signal"></i> live</span>
-            </div>
-            <div class="card-pad">
-              <div class="chart-box">
-                <canvas id="chartActivity"></canvas>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid cols-2">
-            <div class="card">
-              <div class="card-head">
-                <div class="ico"><i class="fa-solid fa-chart-pie"></i></div>
-                <h3>Распределение команд</h3>
-              </div>
-              <div class="card-pad">
-                <div class="chart-box"><canvas id="chartCommands"></canvas></div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-head">
-                <div class="ico"><i class="fa-solid fa-fire"></i></div>
-                <h3>Топ активных</h3>
-              </div>
-              <div class="card-pad" id="topActive"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- === УЧАСТНИКИ === -->
-        <div class="sd-pane" data-pane="members">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-users"></i></div>
-              <h3>Участники</h3>
-              <span class="badge" id="membersCount" style="margin-left:auto">0</span>
-            </div>
-            <div class="card-pad" style="padding:0">
-              <div class="table-toolbar">
-                <div class="input-wrap">
-                  <i class="fa-solid fa-magnifying-glass lead"></i>
-                  <input id="memberSearch" placeholder="Поиск по имени или ID…" />
-                </div>
-                <select id="memberRoleFilter" style="width:auto; padding:9px 32px 9px 12px; max-width:180px">
-                  <option value="">Все роли</option>
-                </select>
-                <select id="memberSort" style="width:auto; padding:9px 32px 9px 12px; max-width:180px">
-                  <option value="name">По имени</option>
-                  <option value="balance">По балансу</option>
-                  <option value="xp">По XP</option>
-                  <option value="joined">По дате входа</option>
-                </select>
-                <button class="btn sm ghost" id="memberRefresh" style="margin-left:auto">
-                  <i class="fa-solid fa-rotate"></i> Обновить
-                </button>
-              </div>
-              <div style="overflow-x:auto">
-                <table class="member-table">
-                  <thead>
-                    <tr>
-                      <th>Участник</th>
-                      <th>Роли</th>
-                      <th>Баланс</th>
-                      <th>XP</th>
-                      <th>Вход</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody id="membersBody"></tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- === РОЛИ === -->
-        <div class="sd-pane" data-pane="roles">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-user-tag"></i></div>
-              <h3>Роли сервера</h3>
-              <button class="btn sm" id="roleAdd" style="margin-left:auto"><i class="fa-solid fa-plus"></i> Создать</button>
-            </div>
-            <div class="card-pad" id="rolesList"></div>
-          </div>
-        </div>
-
-        <!-- === ЛОГИ === -->
-        <div class="sd-pane" data-pane="logs">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-scroll"></i></div>
-              <h3>Логи в реальном времени</h3>
-              <span class="badge ok" style="margin-left:auto"><span class="live-dot"></span> LIVE</span>
-              <button class="btn sm ghost" id="logsPause" title="Пауза"><i class="fa-solid fa-pause"></i></button>
-              <button class="btn sm ghost" id="logsClear" title="Очистить"><i class="fa-solid fa-trash"></i></button>
-            </div>
-            <div class="card-pad">
-              <div class="logs-controls" id="logFilters">
-                <button class="log-filter active" data-lf="all">Все</button>
-                <button class="log-filter" data-lf="join"><i class="fa-solid fa-right-to-bracket"></i> Входы</button>
-                <button class="log-filter" data-lf="leave"><i class="fa-solid fa-right-from-bracket"></i> Выходы</button>
-                <button class="log-filter" data-lf="msg"><i class="fa-solid fa-comment"></i> Сообщения</button>
-                <button class="log-filter" data-lf="ban"><i class="fa-solid fa-gavel"></i> Наказания</button>
-                <button class="log-filter" data-lf="warn"><i class="fa-solid fa-triangle-exclamation"></i> Warns</button>
-              </div>
-              <div class="logs-container" id="logsContainer"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- === АНАЛИТИКА === -->
-        <div class="sd-pane" data-pane="analytics">
-          <div class="grid cols-2">
-            <div class="card">
-              <div class="card-head">
-                <div class="ico"><i class="fa-solid fa-chart-bar"></i></div>
-                <h3>Топ команд</h3>
-              </div>
-              <div class="card-pad">
-                <div class="chart-box"><canvas id="chartTopCommands"></canvas></div>
-              </div>
-            </div>
-
-            <div class="card">
-              <div class="card-head">
-                <div class="ico"><i class="fa-solid fa-hourglass-half"></i></div>
-                <h3>Активность по часам</h3>
-              </div>
-              <div class="card-pad">
-                <div class="chart-box"><canvas id="chartHourly"></canvas></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-crown"></i></div>
-              <h3>Топ пользователей по командам</h3>
-            </div>
-            <div class="card-pad" id="topUsers"></div>
-          </div>
-        </div>
-
-        <!-- === МАГАЗИН === -->
-        <div class="sd-pane" data-pane="shop">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-store"></i></div>
-              <h3>Товары магазина</h3>
-              <span class="badge" style="margin-left:auto" id="shopCount">0 / 50</span>
-              <button class="btn sm" id="shopAdd"><i class="fa-solid fa-plus"></i> Добавить</button>
-            </div>
-            <div class="card-pad">
-              <p class="hint" style="margin:0 0 12px">
-                <i class="fa-solid fa-hand-pointer"></i> Перетаскивай товары, чтобы менять порядок.
-              </p>
-              <div class="shop-grid" id="shopGrid"></div>
-              <div class="empty" id="shopEmpty" style="min-height:120px">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <div>Магазин пуст</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- === МОДЕРАЦИЯ === -->
-        <div class="sd-pane" data-pane="moderation">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-flag"></i></div>
-              <h3>Очередь жалоб</h3>
-              <span class="badge warn" style="margin-left:auto" id="reportsCount">0</span>
-            </div>
-            <div class="card-pad" id="reportsList"></div>
-          </div>
-
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-clock-rotate-left"></i></div>
-              <h3>История наказаний</h3>
-            </div>
-            <div class="card-pad" id="punishmentsList"></div>
-          </div>
-        </div>
-
-        <!-- === ПАКЕТЫ РОЛЕЙ === -->
-        <div class="sd-pane" data-pane="bundles">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-box-open"></i></div>
-              <h3>Пакеты ролей</h3>
-              <button class="btn sm" id="bundleAdd" style="margin-left:auto"><i class="fa-solid fa-plus"></i> Создать</button>
-            </div>
-            <div class="card-pad">
-              <p class="hint" style="margin:0 0 14px">
-                Пакет = набор ролей, которые выдаются одним действием. Удобно для VIP, Premium, Moderator Pack.
-              </p>
-              <div class="grid cols-3" id="bundlesGrid"></div>
-              <div class="empty" id="bundlesEmpty" style="min-height:120px">
-                <i class="fa-solid fa-box-open"></i>
-                <div>Пока нет пакетов ролей</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- === НАСТРОЙКИ === -->
-        <div class="sd-pane" data-pane="settings">
-          <div class="card">
-            <div class="card-head">
-              <div class="ico"><i class="fa-solid fa-gear"></i></div>
-              <h3>Настройки сервера</h3>
-            </div>
-            <div class="card-pad" id="serverSettingsBox">
-              <div class="empty">
-                <i class="fa-solid fa-sliders"></i>
-                <div>Настройки сервера редактируются в профиле → «Мои серверы» → «Настроить»</div>
-                <button class="btn" id="openSettingsBtn"><i class="fa-solid fa-arrow-right"></i> Открыть настройки</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </div>
   </section>
 
@@ -2023,7 +1294,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <div class="card-head">
               <div class="ico"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
               <h3>Готовые шаблоны</h3>
-              <span class="badge" style="margin-left:auto"><i class="fa-solid fa-layer-group"></i> 14 шт.</span>
+              <span class="badge" style="margin-left:auto"><i class="fa-solid fa-layer-group"></i> 5 шт.</span>
             </div>
             <div class="card-pad">
               <div id="templatesList" class="tpl-grid"></div>
@@ -2242,7 +1513,10 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
             <div class="row">
               <div class="field" style="flex:1; min-width:140px">
                 <label>Lolka</label>
-                <div class="input-wrap"><i class="fa-solid fa-robot lead"></i><input id="inLolka" placeholder="username" /></div>
+                <div class="input-wrap">
+                  <img class="lead-img" src="https://play-lh.googleusercontent.com/-4TqYyAix49GdKtnvXm2lYfvVihO6n2-sc3YH18SPVJf_iLq29Q77y9rxG5fnK3FxmYFn2VsOaq7Hmp0Psu5=w480-h960" alt="Lolka" />
+                  <input id="inLolka" placeholder="username" />
+                </div>
               </div>
               <div class="field" style="flex:1; min-width:140px">
                 <label>TikTok</label>
@@ -2300,7 +1574,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
           <h3>Активность</h3>
         </div>
         <div class="card-pad">
-          <div class="stat-row" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+          <div class="stat-row">
             <div class="stat"><b id="statServers">0</b><span>Серверов</span></div>
             <div class="stat"><b id="statDays">0</b><span>Дней</span></div>
             <div class="stat"><b id="statVisits">0</b><span>Заходов</span></div>
@@ -2390,7 +1664,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 
 <footer>
   <span class="dot"></span> Yurika Bot © <span id="year"></span>
-  <span style="opacity:.6">· панель управления сервером</span>
+  <span style="opacity:.6">· панель управления</span>
 </footer>
 
 <!-- МОДАЛКИ -->
@@ -2452,267 +1726,6 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
   </div>
 </div>
 
-<div id="serverPanelModal" class="modal-overlay">
-  <div class="card modal-card wide">
-    <div class="card-head">
-      <div class="ico" id="spIcon"><i class="fa-solid fa-gear"></i></div>
-      <h3 id="spTitle">Настройки сервера</h3>
-      <button class="btn ghost sm" id="spClose2" style="margin-left:auto"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-
-    <div class="card-pad modal-body">
-      <div class="panel-section">
-        <h4><i class="fa-solid fa-circle-info"></i> Основное</h4>
-        <div class="field" style="margin:0 0 12px">
-          <label>Название</label>
-          <div class="input-wrap"><i class="fa-solid fa-signature lead"></i>
-            <input id="spName" placeholder="Мой сервер" />
-          </div>
-        </div>
-        <div class="field" style="margin:0 0 12px">
-          <label>ID</label>
-          <div class="input-wrap"><i class="fa-solid fa-hashtag lead"></i>
-            <input id="spId" placeholder="123456789" />
-          </div>
-        </div>
-        <div class="field" style="margin:0 0 12px">
-          <label>Аватар (URL)</label>
-          <div class="input-wrap"><i class="fa-solid fa-image-portrait lead"></i>
-            <input id="spAvatar" placeholder="https://…" />
-          </div>
-        </div>
-        <div class="field" style="margin:0 0 12px">
-          <label>Описание</label>
-          <textarea id="spDescription" maxlength="180" placeholder="Коротко о сервере…" style="min-height:70px"></textarea>
-          <div class="hint"><span id="spDescCount">0</span> / 180</div>
-        </div>
-        <div class="field" style="margin:0">
-          <label>Язык бота</label>
-          <div class="select-wrap"><i class="fa-solid fa-language lead"></i>
-            <select id="spLanguage">
-              <option value="ru">Русский (RU)</option>
-              <option value="en">English (EN)</option>
-              <option value="ua">Українська (UA)</option>
-            </select>
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-section">
-        <h4><i class="fa-solid fa-hashtag"></i> Каналы</h4>
-        <div class="field" style="margin:0 0 12px">
-          <label>Канал логов</label>
-          <div class="input-wrap"><i class="fa-solid fa-clipboard-list lead"></i>
-            <input id="spLogChannel" placeholder="#logs" />
-          </div>
-        </div>
-        <div class="field" style="margin:0 0 12px">
-          <label>Канал приветствий</label>
-          <div class="input-wrap"><i class="fa-solid fa-hand-sparkles lead"></i>
-            <input id="spWelcomeChannel" placeholder="#welcome" />
-          </div>
-        </div>
-        <div class="field" style="margin:0">
-          <label>Канал объявлений</label>
-          <div class="input-wrap"><i class="fa-solid fa-bullhorn lead"></i>
-            <input id="spAnnounceChannel" placeholder="#announcements" />
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-section">
-        <h4><i class="fa-solid fa-user-shield"></i> Роли и права</h4>
-        <div class="field" style="margin:0 0 12px">
-          <label>Авто-роль</label>
-          <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
-            <input id="spAutoRole" placeholder="Member" />
-          </div>
-        </div>
-        <div class="field" style="margin:0 0 12px">
-          <label>Роль модератора</label>
-          <div class="input-wrap"><i class="fa-solid fa-gavel lead"></i>
-            <input id="spModRole" placeholder="Moderator" />
-          </div>
-        </div>
-        <div class="field" style="margin:0">
-          <label>Префикс</label>
-          <div class="input-wrap"><i class="fa-solid fa-terminal lead"></i>
-            <input id="spPrefix" placeholder="/" maxlength="4" />
-          </div>
-        </div>
-      </div>
-
-      <div class="panel-section">
-        <h4><i class="fa-solid fa-puzzle-piece"></i> Модули</h4>
-        <div class="toggle-row">
-          <div class="info"><b>Экономика</b><span>Баланс, магазин, бонус</span></div>
-          <div class="switch on" data-sp="econ"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>Питомцы</b><span>Питомцы и прокачка</span></div>
-          <div class="switch on" data-sp="pets"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>Модерация</b><span>Бан, мут, warns</span></div>
-          <div class="switch on" data-sp="mod"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>Браки</b><span>Обнимашки, шип</span></div>
-          <div class="switch on" data-sp="love"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>ИИ GigaChat</b><span>Ответы на упоминания</span></div>
-          <div class="switch on" data-sp="ai"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>Авто-мод</b><span>Фильтр мата и спама</span></div>
-          <div class="switch" data-sp="autoMod"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>Приветствие</b><span>Отправлять приветствие</span></div>
-          <div class="switch on" data-sp="welcome"></div>
-        </div>
-        <div class="toggle-row">
-          <div class="info"><b>Логирование</b><span>Писать в канал логов</span></div>
-          <div class="switch on" data-sp="logging"></div>
-        </div>
-      </div>
-
-      <div class="panel-section" style="border-color:rgba(255,90,106,.35)">
-        <h4 style="color:#ff8a96"><i class="fa-solid fa-triangle-exclamation" style="color:#ff5a6a"></i> Опасная зона</h4>
-        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap">
-          <div style="flex:1; min-width:200px">
-            <b style="display:block; margin-bottom:4px">Убрать Юрику</b>
-            <span class="hint">Настройки будут удалены.</span>
-          </div>
-          <button class="btn danger sm" id="spKick"><i class="fa-solid fa-user-minus"></i> Убрать</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-head" style="border-top:1px solid var(--stroke); border-bottom:none; border-radius:0 0 var(--radius) var(--radius)">
-      <button class="btn ghost" id="spCancel">Отмена</button>
-      <button class="btn" id="spSave" style="margin-left:auto"><i class="fa-solid fa-cloud-arrow-up"></i> Сохранить</button>
-    </div>
-  </div>
-</div>
-
-<div id="roleModal" class="modal-overlay">
-  <div class="card modal-card small">
-    <div class="card-head">
-      <div class="ico"><i class="fa-solid fa-user-tag"></i></div>
-      <h3 id="roleModalTitle">Создать роль</h3>
-      <button class="btn ghost sm" id="roleCancel2" style="margin-left:auto"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="card-pad">
-      <div class="field">
-        <label>Название</label>
-        <div class="input-wrap"><i class="fa-solid fa-signature lead"></i>
-          <input id="roleName" placeholder="VIP" />
-        </div>
-      </div>
-      <div class="field">
-        <label>Цвет</label>
-        <input id="roleColor" type="color" value="#7c5cff" style="padding:6px; height:44px" />
-      </div>
-      <div class="toggle-row">
-        <div class="info"><b>Отображать отдельно</b><span>Роль показывается отдельно в списке</span></div>
-        <div class="switch on" id="roleHoist"></div>
-      </div>
-      <div class="toggle-row">
-        <div class="info"><b>Упоминаемая</b><span>Можно упоминать @роль</span></div>
-        <div class="switch on" id="roleMention"></div>
-      </div>
-      <div class="row end" style="margin-top:12px">
-        <button class="btn ghost" id="roleCancel">Отмена</button>
-        <button class="btn" id="roleSave"><i class="fa-solid fa-check"></i> Сохранить</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="shopItemModal" class="modal-overlay">
-  <div class="card modal-card small">
-    <div class="card-head">
-      <div class="ico"><i class="fa-solid fa-cart-plus"></i></div>
-      <h3 id="shopModalTitle">Добавить товар</h3>
-      <button class="btn ghost sm" id="shopCancel2" style="margin-left:auto"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="card-pad">
-      <div class="field">
-        <label>Название</label>
-        <div class="input-wrap"><i class="fa-solid fa-tag lead"></i>
-          <input id="shopName" placeholder="VIP роль" />
-        </div>
-      </div>
-      <div class="field">
-        <label>Описание</label>
-        <div class="input-wrap"><i class="fa-solid fa-align-left lead"></i>
-          <input id="shopDesc" placeholder="Что даёт товар" />
-        </div>
-      </div>
-      <div class="grid cols-2" style="gap:10px">
-        <div class="field" style="margin:0">
-          <label>Цена</label>
-          <div class="input-wrap"><i class="fa-solid fa-coins lead"></i>
-            <input id="shopPrice" type="number" min="0" placeholder="1000" />
-          </div>
-        </div>
-        <div class="field" style="margin:0">
-          <label>Иконка (FA класс)</label>
-          <div class="input-wrap"><i class="fa-solid fa-icons lead"></i>
-            <input id="shopIcon" placeholder="fa-crown" />
-          </div>
-        </div>
-      </div>
-      <div class="row end" style="margin-top:12px">
-        <button class="btn ghost" id="shopCancel">Отмена</button>
-        <button class="btn" id="shopSave"><i class="fa-solid fa-check"></i> Сохранить</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div id="bundleModal" class="modal-overlay">
-  <div class="card modal-card small">
-    <div class="card-head">
-      <div class="ico"><i class="fa-solid fa-box-open"></i></div>
-      <h3 id="bundleModalTitle">Новый пакет</h3>
-      <button class="btn ghost sm" id="bundleCancel2" style="margin-left:auto"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-    <div class="card-pad">
-      <div class="field">
-        <label>Название</label>
-        <div class="input-wrap"><i class="fa-solid fa-tag lead"></i>
-          <input id="bundleName" placeholder="VIP Pack" />
-        </div>
-      </div>
-      <div class="field">
-        <label>Описание</label>
-        <div class="input-wrap"><i class="fa-solid fa-align-left lead"></i>
-          <input id="bundleDesc" placeholder="Что даёт пакет" />
-        </div>
-      </div>
-      <div class="field">
-        <label>Роли (через запятую)</label>
-        <div class="input-wrap"><i class="fa-solid fa-user-tag lead"></i>
-          <input id="bundleRoles" placeholder="VIP, Premium, Boost" />
-        </div>
-      </div>
-      <div class="field">
-        <label>Цена (0 — бесплатно)</label>
-        <div class="input-wrap"><i class="fa-solid fa-coins lead"></i>
-          <input id="bundlePrice" type="number" min="0" placeholder="5000" />
-        </div>
-      </div>
-      <div class="row end">
-        <button class="btn ghost" id="bundleCancel">Отмена</button>
-        <button class="btn" id="bundleSave"><i class="fa-solid fa-check"></i> Сохранить</button>
-      </div>
-    </div>
-  </div>
-</div>
-
 <div class="toast-zone" id="toasts"></div>
 
 <script>
@@ -2722,6 +1735,7 @@ footer .dot{width:6px;height:6px;border-radius:50%;background:var(--brand-2)}
 const $  = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const yearEl = $('#year'); if(yearEl) yearEl.textContent = new Date().getFullYear();
+const LOLKA_IMG = 'https://play-lh.googleusercontent.com/-4TqYyAix49GdKtnvXm2lYfvVihO6n2-sc3YH18SPVJf_iLq29Q77y9rxG5fnK3FxmYFn2VsOaq7Hmp0Psu5=w480-h960';
 
 function toast(text, type='info', ms=2600){
   const t = document.createElement('div');
@@ -2744,7 +1758,6 @@ function initials(name){
   const n = (name||'?').trim();
   return n ? n[0].toUpperCase() : '?';
 }
-function clamp(v,min,max){ return Math.min(max, Math.max(min, v)); }
 function humanSize(bytes){
   if(!bytes) return '0 B';
   const u = ['B','KB','MB','GB']; let i = 0, v = bytes;
@@ -2780,7 +1793,6 @@ function switchTab(name){
   $$('.tab').forEach(b=>b.classList.toggle('active', b.dataset.tab === name));
   $$('.section').forEach(s=>s.classList.toggle('active', s.id === 'tab-' + name));
   window.scrollTo({top:0, behavior:'smooth'});
-  if(name === 'dashboard') initDashboard();
 }
 $$('.tab').forEach(btn=> btn.addEventListener('click', ()=> switchTab(btn.dataset.tab)));
 $$('[data-goto]').forEach(b=> b.addEventListener('click', ()=> switchTab(b.dataset.goto)));
@@ -2913,814 +1925,11 @@ $('#cmdSearch').addEventListener('input', e=>{ search = e.target.value; renderCo
 renderCatTabs(); renderCommands();
 
 /* ============================================================
-   ДАШБОРД СЕРВЕРА
-============================================================ */
-let currentServerIdx = -1;
-let charts = {};
-let logsPaused = false;
-let logFilter = 'all';
-let memberSearch = '', memberRoleFilter = '', memberSort = 'name';
-
-const MOCK_NAMES = ['Алекс','Мария','Дмитрий','Ольга','Иван','Екатерина','Сергей','Анна','Никита','Юлия','Павел','Дарья','Артём','София','Максим','Виктория'];
-const MOCK_ROLES = ['Member','VIP','Moderator','Admin','Premium','Boost','Active','Muted'];
-
-function genMockMembers(n=40){
-  const arr = [];
-  for(let i=0;i<n;i++){
-    const name = MOCK_NAMES[i % MOCK_NAMES.length] + '#' + (1000+Math.floor(Math.random()*9000));
-    const roles = [MOCK_ROLES[0]];
-    if(Math.random() > 0.7) roles.push(MOCK_ROLES[1]);
-    if(Math.random() > 0.85) roles.push(MOCK_ROLES[2]);
-    if(Math.random() > 0.9) roles.push(MOCK_ROLES[4]);
-    arr.push({
-      id: String(100000000000000000 + Math.floor(Math.random()*800000000000000000)),
-      name,
-      roles,
-      balance: Math.floor(Math.random()*50000),
-      xp: Math.floor(Math.random()*8000),
-      joined: new Date(Date.now() - Math.floor(Math.random()*365*86400000))
-    });
-  }
-  return arr;
-}
-let currentMembers = genMockMembers();
-
-function initDashboard(){
-  const list = loadServers();
-  if(!list.length){
-    $('#dashContent').style.display = 'none';
-    $('#dashNoServer').style.display = 'block';
-    return;
-  }
-  $('#dashContent').style.display = 'grid';
-  $('#dashNoServer').style.display = 'none';
-
-  if(currentServerIdx < 0 || currentServerIdx >= list.length) currentServerIdx = 0;
-  const s = list[currentServerIdx];
-  $('#dashServerName').textContent = s.name || 'Сервер';
-
-  renderDashOverview();
-  renderMembers();
-  renderRoles();
-  renderLogs();
-  renderAnalytics();
-  renderShop();
-  renderReports();
-  renderPunishments();
-  renderBundles();
-  initCharts();
-}
-
-$$('.sd-nav').forEach(nav=>{
-  nav.addEventListener('click', ()=>{
-    $$('.sd-nav').forEach(n=>n.classList.remove('active'));
-    nav.classList.add('active');
-    const target = nav.dataset.sd;
-    $$('.sd-pane').forEach(p=>p.classList.toggle('active', p.dataset.pane === target));
-  });
-});
-
-/* ==== ОБЗОР ==== */
-function renderDashOverview(){
-  const members = currentMembers.length + 200;
-  $('#stMembers').textContent = members.toLocaleString('ru-RU');
-  $('#stOnline').textContent = Math.floor(members * 0.15);
-  $('#stMessages').textContent = (Math.floor(Math.random()*50000) + 10000).toLocaleString('ru-RU');
-  $('#stCmds').textContent = (Math.floor(Math.random()*8000) + 2000).toLocaleString('ru-RU');
-
-  $('#stMembersDelta').innerHTML = `<i class="fa-solid fa-arrow-up"></i> +${Math.floor(Math.random()*50)+5} за неделю`;
-  $('#stMessagesDelta').innerHTML = `<i class="fa-solid fa-arrow-up"></i> +${Math.floor(Math.random()*500)+50} за сегодня`;
-  $('#stCmdsDelta').innerHTML = `<i class="fa-solid fa-arrow-up"></i> +${Math.floor(Math.random()*200)+20} за сегодня`;
-
-  // Топ активных
-  const top = [...currentMembers].sort((a,b)=>b.xp - a.xp).slice(0,5);
-  $('#topActive').innerHTML = top.map((m,i)=>`
-    <div style="display:flex; align-items:center; gap:10px; padding:8px 0; border-bottom:1px dashed rgba(255,255,255,.06)">
-      <span style="width:22px; text-align:center; font-weight:800; color:${i===0?'#ffb020':i===1?'#c0c0c0':i===2?'#cd7f32':'var(--muted)'}">#${i+1}</span>
-      <div style="width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,#7c5cff,#22d3ee);display:grid;place-items:center;color:#fff;font-size:12px;font-weight:800">${initials(m.name)}</div>
-      <div style="flex:1; min-width:0">
-        <b style="font-size:13.5px; display:block; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${escapeHTML(m.name)}</b>
-        <span style="font-size:11.5px; color:var(--muted)">XP: ${m.xp.toLocaleString('ru-RU')}</span>
-      </div>
-    </div>
-  `).join('');
-}
-
-/* ==== ГРАФИКИ ==== */
-function destroyChart(name){
-  if(charts[name]){ charts[name].destroy(); charts[name] = null; }
-}
-function initCharts(){
-  if(typeof Chart === 'undefined') return;
-  Chart.defaults.color = '#9aa3c7';
-  Chart.defaults.font.family = 'Manrope';
-
-  // Активность
-  const days = Array.from({length:14}, (_,i)=>{
-    const d = new Date(Date.now() - (13-i)*86400000);
-    return d.toLocaleDateString('ru-RU', {day:'2-digit', month:'2-digit'});
-  });
-  const msgs = days.map(()=>Math.floor(Math.random()*2000)+500);
-  const joins = days.map(()=>Math.floor(Math.random()*30)+2);
-
-  destroyChart('activity');
-  const ctxA = $('#chartActivity');
-  if(ctxA){
-    charts.activity = new Chart(ctxA, {
-      type: 'line',
-      data: {
-        labels: days,
-        datasets: [
-          {
-            label: 'Сообщений',
-            data: msgs,
-            borderColor: '#7c5cff',
-            backgroundColor: 'rgba(124,92,255,.15)',
-            fill: true, tension: .35, borderWidth: 2, pointRadius: 2
-          },
-          {
-            label: 'Новых участников',
-            data: joins,
-            borderColor: '#22d3ee',
-            backgroundColor: 'rgba(34,211,238,.1)',
-            fill: true, tension: .35, borderWidth: 2, pointRadius: 2,
-            yAxisID: 'y1'
-          }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 12 } } } },
-        scales: {
-          x: { grid: { color: 'rgba(255,255,255,.05)' } },
-          y: { grid: { color: 'rgba(255,255,255,.05)' }, beginAtZero: true },
-          y1: { position: 'right', grid: { display: false }, beginAtZero: true }
-        }
-      }
-    });
-  }
-
-  // Распределение команд
-  destroyChart('commands');
-  const ctxC = $('#chartCommands');
-  if(ctxC){
-    charts.commands = new Chart(ctxC, {
-      type: 'doughnut',
-      data: {
-        labels: ['Экономика','Питомцы','Модерация','ИИ','Браки','Другое'],
-        datasets: [{
-          data: [30,20,15,12,8,15],
-          backgroundColor: ['#7c5cff','#22d3ee','#ff5a6a','#37d67a','#ff5cae','#ffb020'],
-          borderWidth: 0
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'right', labels: { boxWidth: 12, font: { size: 12 }, padding: 10 } } },
-        cutout: '62%'
-      }
-    });
-  }
-
-  // Топ команд (в аналитике)
-  destroyChart('topCommands');
-  const ctxT = $('#chartTopCommands');
-  if(ctxT){
-    charts.topCommands = new Chart(ctxT, {
-      type: 'bar',
-      data: {
-        labels: ['/работа','/баланс','/бонус','/питомец','/обнять','/шип','/ai'],
-        datasets: [{
-          label: 'Вызовов',
-          data: [1250, 980, 760, 640, 520, 430, 380],
-          backgroundColor: 'rgba(124,92,255,.7)',
-          borderRadius: 6,
-          borderSkipped: false
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false } },
-          y: { grid: { color: 'rgba(255,255,255,.05)' }, beginAtZero: true }
-        }
-      }
-    });
-  }
-
-  // По часам
-  destroyChart('hourly');
-  const ctxH = $('#chartHourly');
-  if(ctxH){
-    charts.hourly = new Chart(ctxH, {
-      type: 'bar',
-      data: {
-        labels: Array.from({length:24}, (_,i)=>String(i).padStart(2,'0')),
-        datasets: [{
-          label: 'Сообщений',
-          data: Array.from({length:24}, (_,h)=>{
-            const base = h >= 18 && h <= 23 ? 800 : h >= 10 && h <= 17 ? 500 : 150;
-            return base + Math.floor(Math.random()*300);
-          }),
-          backgroundColor: 'rgba(34,211,238,.6)',
-          borderRadius: 6,
-          borderSkipped: false
-        }]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false } },
-        scales: {
-          x: { grid: { display: false } },
-          y: { grid: { color: 'rgba(255,255,255,.05)' }, beginAtZero: true }
-        }
-      }
-    });
-  }
-}
-
-/* ==== УЧАСТНИКИ ==== */
-function renderMembers(){
-  const tbody = $('#membersBody');
-  const roleFilter = $('#memberRoleFilter');
-  const allRoles = [...new Set(currentMembers.flatMap(m=>m.roles))].sort();
-  roleFilter.innerHTML = '<option value="">Все роли</option>' + allRoles.map(r=>`<option value="${r}">${r}</option>`).join('');
-
-  let list = [...currentMembers];
-  if(memberSearch){
-    const q = memberSearch.toLowerCase();
-    list = list.filter(m => m.name.toLowerCase().includes(q) || m.id.includes(q));
-  }
-  if(memberRoleFilter){
-    list = list.filter(m => m.roles.includes(memberRoleFilter));
-  }
-  list.sort((a,b)=>{
-    if(memberSort === 'balance') return b.balance - a.balance;
-    if(memberSort === 'xp') return b.xp - a.xp;
-    if(memberSort === 'joined') return b.joined - a.joined;
-    return a.name.localeCompare(b.name);
-  });
-
-  $('#membersCount').textContent = list.length;
-  tbody.innerHTML = list.map((m,i)=>`
-    <tr data-mi="${currentMembers.indexOf(m)}">
-      <td>
-        <div class="m-cell">
-          <div class="m-avatar">${initials(m.name)}</div>
-          <div class="m-name">
-            <b>${escapeHTML(m.name.split('#')[0])}</b>
-            <span>#${escapeHTML(m.name.split('#')[1] || m.id.slice(-4))}</span>
-          </div>
-        </div>
-      </td>
-      <td>${m.roles.map(r=>`<span class="role-chip">${escapeHTML(r)}</span>`).join('')}</td>
-      <td><span class="balance">${m.balance.toLocaleString('ru-RU')}</span></td>
-      <td><span class="xp-val">${m.xp.toLocaleString('ru-RU')}</span></td>
-      <td style="font-size:12px; color:var(--muted)">${m.joined.toLocaleDateString('ru-RU')}</td>
-      <td>
-        <div class="m-actions">
-          <button class="icon-btn" data-mact="msg" data-mi="${currentMembers.indexOf(m)}" title="Написать"><i class="fa-solid fa-comment"></i></button>
-          <button class="icon-btn" data-mact="coins" data-mi="${currentMembers.indexOf(m)}" title="Выдать монеты"><i class="fa-solid fa-coins"></i></button>
-          <button class="icon-btn danger" data-mact="ban" data-mi="${currentMembers.indexOf(m)}" title="Бан"><i class="fa-solid fa-gavel"></i></button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
-
-  tbody.querySelectorAll('[data-mact]').forEach(b=>{
-    b.onclick = ()=>{
-      const m = currentMembers[+b.dataset.mi];
-      const act = b.dataset.mact;
-      if(!m) return;
-      if(act === 'coins'){
-        const amt = prompt(`Сколько монет выдать ${m.name.split('#')[0]}?`, '1000');
-        if(amt && !isNaN(+amt)){
-          m.balance += +amt;
-          renderMembers(); renderDashOverview();
-          toast(`Выдано ${amt} монет игроку ${m.name.split('#')[0]}`, 'ok');
-        }
-      }else if(act === 'ban'){
-        if(confirm(`Забанить ${m.name.split('#')[0]}?`)){
-          addLog('ban', `Участник <b>${m.name}</b> забанен`);
-          toast(`${m.name.split('#')[0]} забанен`, 'warn');
-        }
-      }else{
-        toast(`Написать ${m.name.split('#')[0]}`, 'info');
-      }
-    };
-  });
-}
-$('#memberSearch').addEventListener('input', e=>{ memberSearch = e.target.value; renderMembers(); });
-$('#memberRoleFilter').addEventListener('change', e=>{ memberRoleFilter = e.target.value; renderMembers(); });
-$('#memberSort').addEventListener('change', e=>{ memberSort = e.target.value; renderMembers(); });
-$('#memberRefresh').addEventListener('click', ()=>{
-  currentMembers = genMockMembers();
-  renderMembers();
-  toast('Список обновлён', 'ok');
-});
-
-/* ==== РОЛИ ==== */
-const mockRoles = [
-  { name:'Admin', color:'#ff5a6a', count:2, hoist:true, mention:true, perms:['Управление сервером','Бан','Кик','Управление ролями'] },
-  { name:'Moderator', color:'#ffb020', count:5, hoist:true, mention:true, perms:['Кик','Мут','Warn'] },
-  { name:'VIP', color:'#ff5cae', count:23, hoist:true, mention:true, perms:['Доступ к VIP-каналу'] },
-  { name:'Premium', color:'#7c5cff', count:8, hoist:true, mention:true, perms:['Доступ к Premium-каналу','Кастомный цвет'] },
-  { name:'Boost', color:'#22d3ee', count:4, hoist:true, mention:false, perms:['Буст-бонусы'] },
-  { name:'Member', color:'#9aa3c7', count:180, hoist:false, mention:true, perms:[] }
-];
-function renderRoles(){
-  $('#rolesList').innerHTML = mockRoles.map((r,i)=>`
-    <div class="role-item">
-      <div class="role-dot" style="background:${r.color}"></div>
-      <div class="role-info">
-        <b>${escapeHTML(r.name)}</b>
-        <span>${r.count} участников · цвет ${r.color.toUpperCase()}</span>
-        <div class="role-badges">
-          ${r.hoist ? '<span class="role-badge ok">Отдельно</span>' : ''}
-          ${r.mention ? '<span class="role-badge">Упоминаемая</span>' : '<span class="role-badge warn">Не упоминаемая</span>'}
-          ${r.perms.length ? `<span class="role-badge">${r.perms.length} прав</span>` : ''}
-        </div>
-      </div>
-      <div style="display:flex; gap:6px">
-        <button class="icon-btn" data-redit="${i}" title="Изменить"><i class="fa-solid fa-pen"></i></button>
-        <button class="icon-btn danger" data-rdel="${i}" title="Удалить"><i class="fa-solid fa-trash"></i></button>
-      </div>
-    </div>
-  `).join('');
-
-  $$('#rolesList [data-redit]').forEach(b=>{
-    b.onclick = ()=>{
-      const r = mockRoles[+b.dataset.redit];
-      $('#roleModalTitle').textContent = 'Изменить роль';
-      $('#roleName').value = r.name;
-      $('#roleColor').value = r.color;
-      $('#roleHoist').classList.toggle('on', r.hoist);
-      $('#roleMention').classList.toggle('on', r.mention);
-      $('#roleModal').classList.add('open');
-      $('#roleSave').dataset.editIdx = b.dataset.redit;
-    };
-  });
-  $$('#rolesList [data-rdel]').forEach(b=>{
-    b.onclick = ()=>{
-      if(confirm('Удалить роль?')){
-        mockRoles.splice(+b.dataset.rdel,1);
-        renderRoles();
-        toast('Роль удалена', 'warn');
-      }
-    };
-  });
-}
-$('#roleAdd').addEventListener('click', ()=>{
-  $('#roleModalTitle').textContent = 'Создать роль';
-  $('#roleName').value = '';
-  $('#roleColor').value = '#7c5cff';
-  $('#roleHoist').classList.add('on');
-  $('#roleMention').classList.add('on');
-  delete $('#roleSave').dataset.editIdx;
-  $('#roleModal').classList.add('open');
-});
-$('#roleCancel').addEventListener('click', ()=> $('#roleModal').classList.remove('open'));
-$('#roleCancel2').addEventListener('click', ()=> $('#roleModal').classList.remove('open'));
-$$('#roleModal .switch').forEach(sw=>{
-  sw.addEventListener('click', ()=> sw.classList.toggle('on'));
-});
-$('#roleSave').addEventListener('click', ()=>{
-  const name = $('#roleName').value.trim();
-  if(!name){ toast('Введите название', 'err'); return; }
-  const role = {
-    name,
-    color: $('#roleColor').value,
-    count: 0,
-    hoist: $('#roleHoist').classList.contains('on'),
-    mention: $('#roleMention').classList.contains('on'),
-    perms: []
-  };
-  const idx = $('#roleSave').dataset.editIdx;
-  if(idx !== undefined) mockRoles[+idx] = role;
-  else mockRoles.push(role);
-  renderRoles();
-  $('#roleModal').classList.remove('open');
-  toast('Роль сохранена', 'ok');
-});
-
-/* ==== ЛОГИ ==== */
-const logMessages = [
-  {type:'msg', text:'<b>Алекс</b>: Привет всем!'},
-  {type:'join', text:'Участник <b>Мария#1234</b> присоединился'},
-  {type:'leave', text:'Участник <b>Иван#5678</b> покинул сервер'},
-  {type:'ban', text:'<b>Дмитрий</b> забанил <b>Спамер#0001</b> (причина: реклама)'},
-  {type:'warn', text:'<b>Модератор</b> выдал warn <b>Ольга#2345</b> (причина: флуд)'},
-  {type:'msg', text:'<b>Сергей</b>: /работа'},
-  {type:'msg', text:'<b>Анна</b>: /баланс'},
-  {type:'join', text:'Участник <b>Никита#9988</b> присоединился'},
-];
-let logsBuffer = [];
-function addLog(type, text){
-  const item = { type, text, time: new Date() };
-  logsBuffer.unshift(item);
-  if(logsBuffer.length > 200) logsBuffer.pop();
-  if(!logsPaused && logFilter === 'all' || logFilter === type) appendLog(item);
-}
-function appendLog(item){
-  const c = $('#logsContainer');
-  if(!c) return;
-  const el = document.createElement('div');
-  el.className = 'log-item ' + item.type;
-  const time = item.time.toLocaleTimeString('ru-RU', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-  const tagMap = {msg:'MSG', join:'JOIN', leave:'LEAVE', ban:'BAN', warn:'WARN'};
-  el.innerHTML = `
-    <span class="log-time">${time}</span>
-    <span class="log-body">${item.text}</span>
-    <span class="log-tag">${tagMap[item.type] || 'LOG'}</span>
-  `;
-  c.insertBefore(el, c.firstChild);
-}
-function renderLogs(){
-  const c = $('#logsContainer');
-  if(!c) return;
-  c.innerHTML = '';
-  for(let i=0;i<20;i++){
-    const t = logMessages[i % logMessages.length];
-    addLog(t.type, t.text);
-  }
-}
-$$('#logFilters .log-filter').forEach(f=>{
-  f.addEventListener('click', ()=>{
-    $$('#logFilters .log-filter').forEach(x=>x.classList.remove('active'));
-    f.classList.add('active');
-    logFilter = f.dataset.lf;
-    const c = $('#logsContainer');
-    c.innerHTML = '';
-    logsBuffer
-      .filter(l => logFilter === 'all' || l.type === logFilter)
-      .slice(0,50)
-      .forEach(l => appendLog(l));
-  });
-});
-$('#logsPause').addEventListener('click', ()=>{
-  logsPaused = !logsPaused;
-  $('#logsPause').innerHTML = logsPaused ? '<i class="fa-solid fa-play"></i>' : '<i class="fa-solid fa-pause"></i>';
-  toast(logsPaused ? 'Логи на паузе' : 'Логи возобновлены', logsPaused ? 'warn' : 'ok');
-});
-$('#logsClear').addEventListener('click', ()=>{
-  logsBuffer = [];
-  $('#logsContainer').innerHTML = '';
-  toast('Логи очищены', 'warn');
-});
-
-// Генерация логов
-setInterval(()=>{
-  if(logsPaused) return;
-  const t = logMessages[Math.floor(Math.random() * logMessages.length)];
-  addLog(t.type, t.text);
-}, 4500);
-
-/* ==== АНАЛИТИКА ==== */
-function renderAnalytics(){
-  const top = [...currentMembers].sort((a,b)=>b.xp - a.xp).slice(0,8);
-  $('#topUsers').innerHTML = `
-    <div class="table-wrap">
-      <table class="member-table">
-        <thead>
-          <tr><th>#</th><th>Участник</th><th>Команд</th><th>XP</th><th>Доля</th></tr>
-        </thead>
-        <tbody>
-          ${top.map((m,i)=>{
-            const commands = Math.floor(Math.random()*900) + 100;
-            const pct = Math.floor(Math.random()*25) + 5;
-            return `
-              <tr>
-                <td><b style="color:${i<3?'#ffb020':'var(--muted)'}">#${i+1}</b></td>
-                <td><div class="m-cell"><div class="m-avatar">${initials(m.name)}</div>
-                  <div class="m-name"><b>${escapeHTML(m.name.split('#')[0])}</b></div></div></td>
-                <td><span class="xp-val">${commands}</span></td>
-                <td>${m.xp.toLocaleString('ru-RU')}</td>
-                <td>
-                  <div style="display:flex; align-items:center; gap:8px">
-                    <div style="flex:1; height:6px; background:rgba(255,255,255,.08); border-radius:999px; overflow:hidden">
-                      <div style="height:100%; width:${pct}%; background:linear-gradient(90deg,#7c5cff,#22d3ee)"></div>
-                    </div>
-                    <span style="font-size:11.5px; color:var(--muted); width:32px; text-align:right">${pct}%</span>
-                  </div>
-                </td>
-              </tr>
-            `;
-          }).join('')}
-        </tbody>
-      </table>
-    </div>
-  `;
-}
-
-/* ==== МАГАЗИН ==== */
-let shopItems = [
-  { id:'i1', name:'VIP роль', desc:'Доступ к VIP-каналу', price:5000, icon:'fa-crown' },
-  { id:'i2', name:'Premium', desc:'Premium + кастомный цвет', price:15000, icon:'fa-star' },
-  { id:'i3', name:'Boost x2', desc:'Двойной буст на неделю', price:8000, icon:'fa-rocket' },
-  { id:'i4', name:'Кастомный ник', desc:'Свой цвет ника', price:3000, icon:'fa-palette' },
-];
-function renderShop(){
-  const grid = $('#shopGrid');
-  const empty = $('#shopEmpty');
-  $('#shopCount').textContent = `${shopItems.length} / 50`;
-  if(!shopItems.length){
-    grid.innerHTML = '';
-    empty.style.display = 'grid';
-    return;
-  }
-  empty.style.display = 'none';
-  grid.innerHTML = shopItems.map((it,i)=>`
-    <div class="shop-item" draggable="true" data-sidx="${i}">
-      <i class="fa-solid fa-grip-vertical si-drag"></i>
-      <button class="si-remove" data-sdel="${i}" title="Удалить"><i class="fa-solid fa-xmark"></i></button>
-      <div class="si-icon"><i class="fa-solid ${it.icon || 'fa-box'}"></i></div>
-      <b>${escapeHTML(it.name)}</b>
-      <div class="si-desc">${escapeHTML(it.desc)}</div>
-      <div class="si-price"><i class="fa-solid fa-coins" style="color:#ffb020"></i> ${it.price.toLocaleString('ru-RU')}</div>
-    </div>
-  `).join('');
-
-  grid.querySelectorAll('[data-sdel]').forEach(b=>{
-    b.onclick = (e)=>{
-      e.stopPropagation();
-      shopItems.splice(+b.dataset.sdel, 1);
-      renderShop();
-      toast('Товар удалён', 'warn');
-    };
-  });
-
-  // Drag-n-drop
-  let dragIdx = null;
-  grid.querySelectorAll('.shop-item').forEach(card=>{
-    card.addEventListener('dragstart', (e)=>{
-      dragIdx = +card.dataset.sidx;
-      card.classList.add('dragging');
-      e.dataTransfer.effectAllowed = 'move';
-    });
-    card.addEventListener('dragend', ()=>{
-      card.classList.remove('dragging');
-      grid.querySelectorAll('.shop-item').forEach(c=>c.classList.remove('drag-over'));
-      dragIdx = null;
-    });
-    card.addEventListener('dragover', (e)=>{
-      if(dragIdx === null) return;
-      e.preventDefault();
-      card.classList.add('drag-over');
-    });
-    card.addEventListener('dragleave', ()=> card.classList.remove('drag-over'));
-    card.addEventListener('drop', (e)=>{
-      e.preventDefault();
-      card.classList.remove('drag-over');
-      if(dragIdx === null) return;
-      const to = +card.dataset.sidx;
-      if(dragIdx === to) return;
-      const moved = shopItems.splice(dragIdx, 1)[0];
-      shopItems.splice(to, 0, moved);
-      dragIdx = null;
-      renderShop();
-      toast('Порядок обновлён', 'ok', 1400);
-    });
-  });
-}
-$('#shopAdd').addEventListener('click', ()=>{
-  $('#shopModalTitle').textContent = 'Добавить товар';
-  $('#shopName').value = '';
-  $('#shopDesc').value = '';
-  $('#shopPrice').value = '';
-  $('#shopIcon').value = '';
-  delete $('#shopSave').dataset.editIdx;
-  $('#shopItemModal').classList.add('open');
-});
-$('#shopCancel').addEventListener('click', ()=> $('#shopItemModal').classList.remove('open'));
-$('#shopCancel2').addEventListener('click', ()=> $('#shopItemModal').classList.remove('open'));
-$('#shopSave').addEventListener('click', ()=>{
-  const name = $('#shopName').value.trim();
-  const price = parseInt($('#shopPrice').value, 10);
-  if(!name){ toast('Введите название', 'err'); return; }
-  if(isNaN(price) || price < 0){ toast('Некорректная цена', 'err'); return; }
-  const item = {
-    id: 'i' + Date.now(),
-    name,
-    desc: $('#shopDesc').value.trim(),
-    price,
-    icon: $('#shopIcon').value.trim() || 'fa-box'
-  };
-  const idx = $('#shopSave').dataset.editIdx;
-  if(idx !== undefined) shopItems[+idx] = item;
-  else shopItems.push(item);
-  renderShop();
-  $('#shopItemModal').classList.remove('open');
-  toast('Товар сохранён', 'ok');
-});
-
-/* ==== МОДЕРАЦИЯ ==== */
-let reports = [
-  { id:'r1', user:'Спамер#0001', by:'Алекс', reason:'Реклама', level:'high', time:'5 мин назад' },
-  { id:'r2', user:'Флудер#2345', by:'Мария', reason:'Флуд в чате', level:'mid', time:'12 мин назад' },
-  { id:'r3', user:'Тролль#9988', by:'Сергей', reason:'Оскорбления', level:'high', time:'1 час назад' },
-  { id:'r4', user:'Новичок#1111', by:'Анна', reason:'Спам эмодзи', level:'low', time:'2 часа назад' },
-];
-function renderReports(){
-  const box = $('#reportsList');
-  $('#reportsCount').textContent = reports.length;
-  if(!reports.length){
-    box.innerHTML = `<div class="empty"><i class="fa-solid fa-check"></i><div>Очередь пуста</div></div>`;
-    return;
-  }
-  box.innerHTML = reports.map((r,i)=>`
-    <div class="report-item ${r.level}">
-      <div class="rep-icon"><i class="fa-solid fa-flag"></i></div>
-      <div class="rep-info">
-        <b>Жалоба на ${escapeHTML(r.user)}</b>
-        <div class="rep-desc">${escapeHTML(r.reason)}</div>
-        <div class="rep-meta">от ${escapeHTML(r.by)} · ${escapeHTML(r.time)}</div>
-        <div class="report-actions">
-          <button class="btn sm danger" data-ract="ban" data-ri="${i}"><i class="fa-solid fa-gavel"></i> Бан</button>
-          <button class="btn sm ghost" data-ract="warn" data-ri="${i}"><i class="fa-solid fa-triangle-exclamation"></i> Warn</button>
-          <button class="btn sm ghost" data-ract="skip" data-ri="${i}"><i class="fa-solid fa-xmark"></i> Отклонить</button>
-        </div>
-      </div>
-    </div>
-  `).join('');
-
-  box.querySelectorAll('[data-ract]').forEach(b=>{
-    b.onclick = ()=>{
-      const r = reports[+b.dataset.ri];
-      const act = b.dataset.ract;
-      if(act === 'ban'){ addLog('ban', `<b>${r.user}</b> забанен по жалобе`); toast(`Бан: ${r.user}`, 'warn'); }
-      if(act === 'warn'){ addLog('warn', `<b>${r.user}</b> получил warn`); toast(`Warn: ${r.user}`, 'warn'); }
-      if(act === 'skip'){ toast('Жалоба отклонена', 'info'); }
-      reports.splice(+b.dataset.ri, 1);
-      renderReports();
-    };
-  });
-}
-const punishments = [
-  { type:'ban', user:'Спамер#0001', mod:'Алекс', reason:'Реклама', date:'10.02.2026' },
-  { type:'mute', user:'Флудер#2345', mod:'Мария', reason:'Флуд', date:'10.02.2026' },
-  { type:'warn', user:'Тролль#9988', mod:'Сергей', reason:'Оскорбления', date:'09.02.2026' },
-  { type:'ban', user:'Бот#7777', mod:'System', reason:'Авто-мод', date:'08.02.2026' },
-];
-function renderPunishments(){
-  const box = $('#punishmentsList');
-  if(!box) return;
-  box.innerHTML = punishments.map(p=>`
-    <div class="punishment-row">
-      <span class="p-type ${p.type}">${p.type.toUpperCase()}</span>
-      <b style="flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${escapeHTML(p.user)}</b>
-      <span style="color:var(--muted); font-size:12px">${escapeHTML(p.reason)}</span>
-      <span class="p-date">${escapeHTML(p.date)}</span>
-    </div>
-  `).join('');
-}
-
-/* ==== БАНДЛЫ ==== */
-let bundles = [
-  { id:'b1', name:'VIP Pack', desc:'Быстрый доступ к VIP-каналу', roles:['VIP'], price:5000 },
-  { id:'b2', name:'Premium Pack', desc:'Всё из VIP + Premium + кастомный цвет', roles:['VIP','Premium'], price:15000 },
-];
-function renderBundles(){
-  const grid = $('#bundlesGrid');
-  const empty = $('#bundlesEmpty');
-  if(!bundles.length){
-    grid.innerHTML = '';
-    empty.style.display = 'grid';
-    return;
-  }
-  empty.style.display = 'none';
-  grid.innerHTML = bundles.map((b,i)=>`
-    <div class="bundle-card">
-      <h4>${escapeHTML(b.name)}</h4>
-      <div class="bundle-desc">${escapeHTML(b.desc)}</div>
-      <div class="bundle-roles">
-        ${b.roles.map(r=>`<span class="role-chip">${escapeHTML(r)}</span>`).join('')}
-      </div>
-      <div class="bundle-price">
-        ${b.price ? `<i class="fa-solid fa-coins"></i> ${b.price.toLocaleString('ru-RU')}` : '<i class="fa-solid fa-gift"></i> Бесплатно'}
-      </div>
-      <div class="row" style="margin-top:10px">
-        <button class="btn sm ghost" data-bgive="${i}"><i class="fa-solid fa-hand-holding-heart"></i> Выдать</button>
-        <button class="btn sm ghost" data-bdel="${i}" style="margin-left:auto"><i class="fa-solid fa-trash"></i></button>
-      </div>
-    </div>
-  `).join('');
-
-  grid.querySelectorAll('[data-bgive]').forEach(b=>{
-    b.onclick = ()=>{
-      const bundle = bundles[+b.dataset.bgive];
-      toast(`Пакет «${bundle.name}» выдан`, 'ok');
-    };
-  });
-  grid.querySelectorAll('[data-bdel]').forEach(b=>{
-    b.onclick = ()=>{
-      bundles.splice(+b.dataset.bdel, 1);
-      renderBundles();
-      toast('Пакет удалён', 'warn');
-    };
-  });
-}
-$('#bundleAdd').addEventListener('click', ()=>{
-  $('#bundleModalTitle').textContent = 'Новый пакет';
-  $('#bundleName').value = '';
-  $('#bundleDesc').value = '';
-  $('#bundleRoles').value = '';
-  $('#bundlePrice').value = '';
-  $('#bundleModal').classList.add('open');
-});
-$('#bundleCancel').addEventListener('click', ()=> $('#bundleModal').classList.remove('open'));
-$('#bundleCancel2').addEventListener('click', ()=> $('#bundleModal').classList.remove('open'));
-$('#bundleSave').addEventListener('click', ()=>{
-  const name = $('#bundleName').value.trim();
-  const rolesStr = $('#bundleRoles').value.trim();
-  if(!name || !rolesStr){ toast('Заполните название и роли', 'err'); return; }
-  bundles.push({
-    id: 'b' + Date.now(),
-    name,
-    desc: $('#bundleDesc').value.trim(),
-    roles: rolesStr.split(',').map(r=>r.trim()).filter(Boolean),
-    price: parseInt($('#bundlePrice').value, 10) || 0
-  });
-  renderBundles();
-  $('#bundleModal').classList.remove('open');
-  toast('Пакет создан', 'ok');
-});
-
-$('#dashAddServer').addEventListener('click', ()=> $('#serverModal').classList.add('open'));
-$('#openSettingsBtn').addEventListener('click', ()=>{
-  if(currentServerIdx >= 0) openServerPanel(currentServerIdx);
-});
-
-/* ============================================================
-   СЕЛЕКТОР АКТИВНОГО СЕРВЕРА
-============================================================ */
-function renderServerSwitcher(){
-  const list = loadServers();
-  const switcher = $('#serverSwitcher');
-  if(!list.length){
-    switcher.style.display = 'none';
-    return;
-  }
-  switcher.style.display = 'flex';
-  if(currentServerIdx < 0 || currentServerIdx >= list.length) currentServerIdx = 0;
-  const s = list[currentServerIdx];
-
-  $('#ssName').textContent = s.name || 'Сервер';
-  const av = $('#ssAvatar');
-  if(s.avatar){
-    av.innerHTML = `<img src="${escapeHTML(s.avatar)}" onerror="this.parentNode.innerHTML='<i class=\\'fa-solid fa-server\\'></i>'">`;
-  }else{
-    av.innerHTML = `<i class="fa-solid fa-server"></i>`;
-  }
-
-  const dropdown = $('#ssDropdown');
-  dropdown.innerHTML = list.map((srv, i)=>`
-    <div class="ss-item ${i === currentServerIdx ? 'active' : ''}" data-ss="${i}">
-      <div class="ss-avatar">${srv.avatar ? `<img src="${escapeHTML(srv.avatar)}" onerror="this.replaceWith(document.createTextNode('${escapeHTML(initials(srv.name))}'))">` : escapeHTML(initials(srv.name))}</div>
-      <span style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${escapeHTML(srv.name || 'Сервер')}</span>
-    </div>
-  `).join('') + `<div class="ss-add" id="ssAddBtn"><i class="fa-solid fa-plus"></i> Добавить сервер</div>`;
-
-  dropdown.querySelectorAll('[data-ss]').forEach(el=>{
-    el.onclick = ()=>{
-      currentServerIdx = +el.dataset.ss;
-      dropdown.classList.remove('open');
-      renderServerSwitcher();
-      if($('#tab-dashboard').classList.contains('active')) initDashboard();
-      toast(`Активный сервер: ${list[currentServerIdx].name}`, 'ok', 1800);
-    };
-  });
-  const addBtn = dropdown.querySelector('#ssAddBtn');
-  if(addBtn) addBtn.onclick = ()=>{ dropdown.classList.remove('open'); $('#serverModal').classList.add('open'); };
-}
-$('#serverSwitcher').addEventListener('click', (e)=>{
-  if(e.target.closest('.ss-dropdown')) return;
-  $('#ssDropdown').classList.toggle('open');
-});
-document.addEventListener('click', (e)=>{
-  if(!e.target.closest('#serverSwitcher')) $('#ssDropdown').classList.remove('open');
-});
-
-/* ============================================================
    ВЕБХУК
 ============================================================ */
-const MAX_EMBEDS = 10;
-const MAX_BTN_ROWS = 5;
-const MAX_BTNS_PER_ROW = 5;
-const MAX_FILES = 10;
-
-const DISCORD_COLORS = [
-  '#5865F2', '#57F287', '#FEE75C', '#EB459E', '#ED4245',
-  '#3BA55C', '#FAA61A', '#FF73FA', '#FFFFFF', '#000000'
-];
-
-const state = {
-  url:'', name:'', avatar:'', msg:'',
-  files:[],
-  embeds:[],
-  rows:[],
-  theme:'dark'
-};
+const MAX_EMBEDS = 10, MAX_BTN_ROWS = 5, MAX_BTNS_PER_ROW = 5, MAX_FILES = 10;
+const DISCORD_COLORS = ['#5865F2','#57F287','#FEE75C','#EB459E','#ED4245','#3BA55C','#FAA61A','#FF73FA','#FFFFFF','#000000'];
+const state = { url:'', name:'', avatar:'', msg:'', files:[], embeds:[], rows:[], theme:'dark' };
 
 $$('#hookTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
@@ -3734,14 +1943,12 @@ $$('#hookTabs .chip').forEach(chip=>{
     if(t === 'export')  renderExport();
   });
 });
-
 function applyMd(wrap){
   const ta = $('#hookMsg');
   const start = ta.selectionStart, end = ta.selectionEnd;
   const value = ta.value;
   const sel = value.slice(start, end);
-  const before = value.slice(0, start);
-  const after = value.slice(end);
+  const before = value.slice(0, start), after = value.slice(end);
   let insert = '';
   if(wrap === 'link'){ insert = `[${sel || 'текст'}](https://example.com)`; }
   else if(wrap === 'codeblock'){ insert = '```\n' + (sel || 'код') + '\n```'; }
@@ -3752,35 +1959,15 @@ function applyMd(wrap){
   ta.selectionStart = ta.selectionEnd = pos;
   state.msg = ta.value; updCounters(); renderPreview(); saveDraft();
 }
-$$('.md-btn[data-md]').forEach(b=>{
-  b.addEventListener('click', ()=> applyMd(b.dataset.md));
-});
-
-function counter(el, val, max){
-  if(!el) return;
-  el.textContent = `${val} / ${max}`;
-  el.classList.toggle('over', val > max);
-}
+$$('.md-btn[data-md]').forEach(b=> b.addEventListener('click', ()=> applyMd(b.dataset.md)));
+function counter(el, val, max){ if(!el) return; el.textContent = `${val} / ${max}`; el.classList.toggle('over', val > max); }
 function updCounters(){
   counter($('#cntUrl'), state.url.length, 80);
   counter($('#cntMsg'), state.msg.length, 2000);
-  const eBadge = $('#cntEmbBadge');
-  if(eBadge){
-    eBadge.textContent = `${state.embeds.length} / ${MAX_EMBEDS}`;
-    eBadge.classList.toggle('warn', state.embeds.length >= MAX_EMBEDS);
-  }
-  const cBadge = $('#cntCompBadge');
-  if(cBadge){
-    cBadge.textContent = `${state.rows.length} / ${MAX_BTN_ROWS} рядов`;
-    cBadge.classList.toggle('warn', state.rows.length >= MAX_BTN_ROWS);
-  }
-  const fBadge = $('#cntFilesBadge');
-  if(fBadge){
-    fBadge.textContent = `${state.files.length} / ${MAX_FILES}`;
-    fBadge.classList.toggle('warn', state.files.length >= MAX_FILES);
-  }
+  const eBadge = $('#cntEmbBadge'); if(eBadge) eBadge.textContent = `${state.embeds.length} / ${MAX_EMBEDS}`;
+  const cBadge = $('#cntCompBadge'); if(cBadge) cBadge.textContent = `${state.rows.length} / ${MAX_BTN_ROWS} рядов`;
+  const fBadge = $('#cntFilesBadge'); if(fBadge) fBadge.textContent = `${state.files.length} / ${MAX_FILES}`;
 }
-
 $('#hookUrl').addEventListener('input', e=>{ state.url = e.target.value; updCounters(); saveDraft(); });
 $('#hookName').addEventListener('input', e=>{ state.name = e.target.value; renderPreview(); saveDraft(); });
 $('#hookAvatar').addEventListener('input', e=>{ state.avatar = e.target.value; renderPreview(); saveDraft(); });
@@ -3795,10 +1982,7 @@ attachZone.addEventListener('drop', (e)=>{
   e.preventDefault(); attachZone.classList.remove('dragover');
   if(e.dataTransfer && e.dataTransfer.files) addFiles([...e.dataTransfer.files]);
 });
-fileInput.addEventListener('change', e=>{
-  addFiles([...e.target.files]);
-  fileInput.value = '';
-});
+fileInput.addEventListener('change', e=>{ addFiles([...e.target.files]); fileInput.value = ''; });
 function addFiles(fileList){
   const remaining = MAX_FILES - state.files.length;
   if(remaining <= 0){ toast('Максимум ' + MAX_FILES + ' файлов', 'warn'); return; }
@@ -3857,10 +2041,8 @@ function renderFiles(){
 $('#hookClearFiles').addEventListener('click', ()=>{
   if(!state.files.length){ toast('Нет файлов', 'warn', 1400); return; }
   if(!confirm('Удалить все вложения?')) return;
-  state.files = [];
-  renderFiles(); updCounters(); renderPreview(); saveDraft();
+  state.files = []; renderFiles(); updCounters(); renderPreview(); saveDraft();
 });
-
 $('#hookLoad').addEventListener('click', async ()=>{
   const ref = $('#hookLoadBy').value.trim();
   if(!ref){ toast('Укажите ссылку или ID', 'warn'); return; }
@@ -3875,7 +2057,6 @@ $('#hookLoad').addEventListener('click', async ()=>{
     toast('Загружено', 'ok');
   }catch(err){ toast('Не удалось загрузить', 'err', 3200); }
 });
-
 $('#hookSend').addEventListener('click', async ()=>{
   if(!state.url){ toast('Укажите URL', 'err'); return; }
   try{
@@ -3908,30 +2089,15 @@ $('#hookShare').addEventListener('click', async ()=>{
     toast('Ссылка скопирована', 'ok', 3200);
   }catch{ toast('Ошибка', 'err'); }
 });
-
 $('#hookAddEmbed').addEventListener('click', ()=>{
   if(state.embeds.length >= MAX_EMBEDS) return;
   state.embeds.push({ title:'', desc:'', color:'#5865F2', author:{name:'',icon:'',url:''}, footer:{text:'',icon:''}, image:'', thumbnail:'', fields:[] });
   renderEmbeds(); updCounters(); renderPreview(); saveDraft();
 });
-
 function buildColorPalette(current, idx, prop){
   return `<div class="color-palette">${
     DISCORD_COLORS.map(c=>`<div class="color-swatch" style="background:${c}" data-color="${c}" data-emb="${idx}" data-prop="${prop}" title="${c}"></div>`).join('')
   }</div>`;
-}
-function updateEmbedCounters(i, wrap){
-  const em = state.embeds[i]; if(!em) return;
-  const set = (key, val, max)=>{
-    const el = wrap.querySelector(`[data-cnt="${key}-${i}"]`);
-    if(!el) return;
-    el.textContent = `${val} / ${max}`;
-    el.classList.toggle('over', val > max);
-  };
-  set('title', (em.title||'').length, 256);
-  set('desc', (em.desc||'').length, 4096);
-  set('authorName', (em.author.name||'').length, 256);
-  set('footerText', (em.footer.text||'').length, 2048);
 }
 function renderEmbeds(){
   const box = $('#embeds'); box.innerHTML = '';
@@ -4112,7 +2278,6 @@ function renderEmbeds(){
     b.onclick = ()=>{ state.embeds[+b.dataset.fieldsAdd].fields.push({name:'',value:'',inline:false}); renderEmbeds(); renderPreview(); saveDraft(); };
   });
 }
-
 $('#hookAddRow').addEventListener('click', ()=>{
   if(state.rows.length >= MAX_BTN_ROWS) return;
   state.rows.push({ type:'buttons', buttons:[{label:'Кнопка', emoji:'', style:'primary', url:''}] });
@@ -4192,7 +2357,6 @@ function editButton(rowI, btnI){
   bt.style = ['primary','secondary','success','danger','link'].includes(style) ? style : 'primary';
   renderComp(); renderPreview(); saveDraft();
 }
-
 function renderPreview(){
   const p = $('#hookPreview');
   p.className = 'discord-preview theme-' + state.theme;
@@ -4228,10 +2392,8 @@ $('#themeToggle').addEventListener('click', ()=>{
   state.theme = state.theme === 'dark' ? 'light' : 'dark';
   renderPreview(); saveDraft();
 });
-
 function runChecklist(){
   const items = [];
-  const payload = buildPayload();
   const urlOk = /^https?:\/\//.test(state.url);
   items.push({ ok:urlOk, text: urlOk ? 'URL корректный' : 'URL пустой/некорректный' });
   items.push({ ok: (state.msg||'').length <= 2000, text: `Сообщение: ${(state.msg||'').length} / 2000` });
@@ -4246,7 +2408,6 @@ function runChecklist(){
   });
 }
 $('#runCheck').addEventListener('click', runChecklist);
-
 let exportKind = 'json';
 $$('#exportTabs .chip').forEach(chip=>{
   chip.addEventListener('click', ()=>{
@@ -4271,7 +2432,6 @@ $('#copyExport').addEventListener('click', async ()=>{
   try{ await navigator.clipboard.writeText($('#exportCode').textContent); toast('Скопировано', 'ok'); }
   catch{ toast('Ошибка', 'err'); }
 });
-
 function buildPayload(){
   const embeds = state.embeds
     .filter(e => (e.title||'').trim() || (e.desc||'').trim())
@@ -4316,7 +2476,6 @@ function buildPayload(){
   }
   return payload;
 }
-
 const DRAFT_KEY = 'yurika_hook_draft_v1';
 let saveTimer = null;
 function saveDraft(){
@@ -4344,7 +2503,6 @@ function loadDraft(){
     renderEmbeds(); renderComp(); updCounters(); renderPreview();
   }catch(e){}
 }
-
 document.addEventListener('keydown', (e)=>{
   if(e.ctrlKey || e.metaKey){
     if(e.key === 'Enter'){ e.preventDefault(); $('#hookSend').click(); }
@@ -4414,7 +2572,6 @@ function buildTemplateButtons(){
   });
 }
 buildTemplateButtons();
-
 const MY_TPL_KEY = 'yurika_hook_mytpl_v1';
 function loadMyTemplates(){ try{ return JSON.parse(localStorage.getItem(MY_TPL_KEY) || '{}'); }catch{ return {}; } }
 function saveMyTemplates(obj){ localStorage.setItem(MY_TPL_KEY, JSON.stringify(obj)); }
@@ -4450,7 +2607,6 @@ function buildMyTemplateButtons(){
   });
 }
 buildMyTemplateButtons();
-
 loadDraft();
 renderFiles();
 updCounters(); renderEmbeds(); renderComp(); renderPreview();
@@ -4463,16 +2619,18 @@ const LS = {
   prefs: 'yurika_privacy_v1', servers: 'yurika_servers_v1', meta: 'yurika_meta_v1'
 };
 const DEFAULT_AVATAR = 'https://api.dicebear.com/9.x/bottts-neutral/svg?seed=Yurika';
+
+// ✅ Иконка Lolka через img, остальные — через Font Awesome
 const SOCIALS = [
-  { key:'discord', icon:'fa-discord', cls:'discord', label:'Discord', url: v=>`https://discord.com/users/${v}` },
-  { key:'telegram', icon:'fa-telegram', cls:'telegram', label:'Telegram', url: v=>`https://t.me/${v.replace(/^@/,'')}` },
-  { key:'github', icon:'fa-github', cls:'github', label:'GitHub', url: v=>`https://github.com/${v}` },
-  { key:'youtube', icon:'fa-youtube', cls:'youtube', label:'YouTube', url: v=>`https://youtube.com/${v.startsWith('@') ? v : '@'+v}` },
-  { key:'twitch', icon:'fa-twitch', cls:'twitch', label:'Twitch', url: v=>`https://twitch.tv/${v}` },
-  { key:'vk', icon:'fa-vk', cls:'vk', label:'ВКонтакте', url: v=>`https://vk.com/${v}` },
-  { key:'lolka', icon:'fa-robot', cls:'lolka', label:'Lolka', url: v=>`https://lolka.app/users/${v}` },
-  { key:'tiktok', icon:'fa-tiktok', cls:'tiktok', label:'TikTok', url: v=>`https://tiktok.com/@${v.replace(/^@/,'')}` },
-  { key:'twitter', icon:'fa-x-twitter', cls:'twitter', label:'X', url: v=>`https://x.com/${v}` }
+  { key:'discord', type:'fa', icon:'fa-discord', cls:'discord', label:'Discord', url: v=>`https://discord.com/users/${v}` },
+  { key:'telegram', type:'fa', icon:'fa-telegram', cls:'telegram', label:'Telegram', url: v=>`https://t.me/${v.replace(/^@/,'')}` },
+  { key:'github', type:'fa', icon:'fa-github', cls:'github', label:'GitHub', url: v=>`https://github.com/${v}` },
+  { key:'youtube', type:'fa', icon:'fa-youtube', cls:'youtube', label:'YouTube', url: v=>`https://youtube.com/${v.startsWith('@') ? v : '@'+v}` },
+  { key:'twitch', type:'fa', icon:'fa-twitch', cls:'twitch', label:'Twitch', url: v=>`https://twitch.tv/${v}` },
+  { key:'vk', type:'fa', icon:'fa-vk', cls:'vk', label:'ВКонтакте', url: v=>`https://vk.com/${v}` },
+  { key:'lolka', type:'img', img:LOLKA_IMG, cls:'lolka', label:'Lolka', url: v=>`https://lolka.app/users/${v}` },
+  { key:'tiktok', type:'fa', icon:'fa-tiktok', cls:'tiktok', label:'TikTok', url: v=>`https://tiktok.com/@${v.replace(/^@/,'')}` },
+  { key:'twitter', type:'fa', icon:'fa-x-twitter', cls:'twitter', label:'X', url: v=>`https://x.com/${v}` }
 ];
 
 let mode = 'auth';
@@ -4486,7 +2644,6 @@ $$('[data-auth]').forEach(b=>{
     $('#authSubmit').innerHTML = isReg ? '<i class="fa-solid fa-user-plus"></i> Создать аккаунт' : '<i class="fa-solid fa-right-to-bracket"></i> Войти';
   });
 });
-
 function loadProfileLocal(){ try{ return JSON.parse(localStorage.getItem(LS.profile) || 'null'); }catch{ return null; } }
 function saveProfileLocal(p){ localStorage.setItem(LS.profile, JSON.stringify(p)); }
 function getCreds(){ try{ return JSON.parse(localStorage.getItem(LS.creds) || 'null'); }catch{ return null; } }
@@ -4500,7 +2657,6 @@ function loadServers(){ try{ return JSON.parse(localStorage.getItem(LS.servers) 
 function saveServers(arr){ localStorage.setItem(LS.servers, JSON.stringify(arr)); }
 function loadMeta(){ try{ return JSON.parse(localStorage.getItem(LS.meta) || 'null') || {}; }catch{ return {}; } }
 function saveMeta(m){ localStorage.setItem(LS.meta, JSON.stringify(m)); }
-
 function touchMeta(){
   const m = loadMeta();
   if(!m.firstSeen) m.firstSeen = Date.now();
@@ -4516,7 +2672,10 @@ function renderMeta(profile){
   const uname = (profile && profile.username) ? profile.username : 'user';
   $('#shareLink').value = `${location.origin}${location.pathname}#u=${encodeURIComponent(uname)}`;
 }
-
+function socialIconHTML(s){
+  if(s.type === 'img') return `<img class="social-img" src="${s.img}" alt="${escapeHTML(s.label)}">`;
+  return `<i class="fa-brands ${s.icon}"></i>`;
+}
 function showCabinet(profile){
   $('#authView').style.display = 'none';
   $('#cabinetView').style.display = 'grid';
@@ -4532,9 +2691,9 @@ function showCabinet(profile){
   SOCIALS.forEach(s=>{
     const val = (profile[s.key]||'').trim();
     if(val){
-      soc.insertAdjacentHTML('beforeend', `<a class="social ${s.cls}" href="${s.url(val)}" target="_blank" rel="noopener"><i class="fa-brands ${s.icon}"></i> ${s.label}</a>`);
+      soc.insertAdjacentHTML('beforeend', `<a class="social ${s.cls}" href="${s.url(val)}" target="_blank" rel="noopener">${socialIconHTML(s)} ${s.label}</a>`);
     }else{
-      soc.insertAdjacentHTML('beforeend', `<span class="social ${s.cls} empty"><i class="fa-brands ${s.icon}"></i> ${s.label}</span>`);
+      soc.insertAdjacentHTML('beforeend', `<span class="social ${s.cls} empty">${socialIconHTML(s)} ${s.label}</span>`);
     }
   });
   const bio = (profile.bio||'').trim();
@@ -4561,7 +2720,6 @@ function showCabinet(profile){
   renderPrivacySwitches();
   renderServers();
   renderMeta(profile);
-  renderServerSwitcher();
 }
 function showAuth(){
   $('#cabinetView').style.display = 'none';
@@ -4573,7 +2731,6 @@ function setAvatar(url){
   img.src = url || DEFAULT_AVATAR;
 }
 $('#inBio').addEventListener('input', e=>{ $('#bioCount').textContent = e.target.value.length; });
-
 $('#profileForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const profile = Object.assign(loadProfileLocal() || {}, {
@@ -4598,7 +2755,6 @@ $('#profileForm').addEventListener('submit', async e=>{
   showCabinet(profile);
   toast('Профиль сохранён', 'ok');
 });
-
 $('#passForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const p1 = $('#newPass').value, p2 = $('#newPass2').value;
@@ -4611,7 +2767,6 @@ $('#passForm').addEventListener('submit', async e=>{
     $('#newPass').value = ''; $('#newPass2').value = '';
   }catch(err){ toast('Ошибка', 'err'); }
 });
-
 $('#btnApplyAvatar').addEventListener('click', ()=>{
   const url = $('#avatarUrl').value.trim();
   if(!url){ toast('Вставьте ссылку', 'warn'); return; }
@@ -4640,7 +2795,6 @@ $('#avatarFile').addEventListener('change', e=>{
   };
   reader.readAsDataURL(f);
 });
-
 $('#btnLogout').addEventListener('click', async ()=>{
   try{ if(fbReady && fbAuth) await fbAuth.signOut(); }catch{}
   clearSession();
@@ -4654,7 +2808,6 @@ $('#btnLocal').addEventListener('click', ()=>{
   showCabinet(profile);
   toast('Профиль загружен', 'ok');
 });
-
 $('#authForm').addEventListener('submit', async e=>{
   e.preventDefault();
   const email = $('#authEmail').value.trim();
@@ -4699,7 +2852,6 @@ $('#authForm').addEventListener('submit', async e=>{
     toast('Вход выполнен', 'ok');
   }
 });
-
 const PRIVACY_LABELS = {
   publicProfile: 'Публичный профиль', showEmail: 'Показывать e-mail',
   showSocials: 'Показывать соцсети', showServers: 'Показывать серверы',
@@ -4728,7 +2880,6 @@ function initPrivacySwitches(){
     });
   });
 }
-
 function renderServers(){
   const prefs = loadPrefs();
   const show = prefs.showServers !== undefined ? !!prefs.showServers : true;
@@ -4753,8 +2904,7 @@ function renderServers(){
         </div>
       </div>
       <div class="server-actions">
-        <button class="btn sm ghost" data-act="dashboard" data-i="${i}"><i class="fa-solid fa-chart-line"></i> Дашборд</button>
-        <button class="btn sm ghost" data-act="settings" data-i="${i}"><i class="fa-solid fa-gear"></i></button>
+        <button class="btn sm ghost" data-act="open" data-i="${i}"><i class="fa-solid fa-arrow-up-right-from-square"></i> Открыть</button>
         <button class="btn sm danger" data-act="kick" data-i="${i}"><i class="fa-solid fa-trash"></i></button>
       </div>
     `;
@@ -4763,24 +2913,23 @@ function renderServers(){
   wrap.querySelectorAll('[data-act]').forEach(btn=>{
     btn.addEventListener('click', ()=>{
       const i = +btn.dataset.i, act = btn.dataset.act;
-      if(act === 'dashboard'){
-        currentServerIdx = i;
-        switchTab('dashboard');
+      if(act === 'open'){
+        const list = loadServers();
+        const s = list[i]; if(!s) return;
+        const url = s.id ? `https://lolka.app/servers/${encodeURIComponent(s.id)}` : 'https://lolka.app/';
+        window.open(url, '_blank', 'noopener');
       }
-      if(act === 'settings') openServerPanel(i);
       if(act === 'kick'){
         const list = loadServers();
         if(!confirm(`Убрать «${list[i].name}»?`)) return;
         list.splice(i,1);
         saveServers(list);
-        renderServers(); renderMeta(loadProfileLocal()); renderServerSwitcher();
+        renderServers(); renderMeta(loadProfileLocal());
         toast('Сервер удалён', 'warn');
       }
     });
   });
-  renderServerSwitcher();
 }
-
 function openServerModal(){
   $('#serverModal').classList.add('open');
   $('#srvName').value = ''; $('#srvId').value = ''; $('#srvAvatar').value = '';
@@ -4790,136 +2939,50 @@ function closeServerModal(){ $('#serverModal').classList.remove('open'); }
 $('#serversAdd').addEventListener('click', openServerModal);
 $('#srvCancel').addEventListener('click', closeServerModal);
 $('#srvCancel2').addEventListener('click', closeServerModal);
-$('#srvSave').addEventListener('click', ()=>{
+$('#srvSave').addEventListener('click', async ()=>{
   const name = $('#srvName').value.trim();
   const id = $('#srvId').value.trim();
   const avatar = $('#srvAvatar').value.trim();
   if(!name){ toast('Введите название', 'err'); return; }
+
   const list = loadServers();
-  list.push({
+  const newServer = {
     name, id, avatar,
     addedAt: new Date().toLocaleDateString('ru-RU'),
-    description: '',
-    settings: { language:'ru', logChannel:'', welcomeChannel:'', announceChannel:'', autoRole:'', modRole:'', prefix:'/', welcomeText:'', goodbyeText:'', autoRoleDelay:0,
-      modules:{ econ:true, pets:true, mod:true, love:true, ai:true, autoMod:false, welcome:true, logging:true } }
-  });
+    description: ''
+  };
+  list.push(newServer);
   saveServers(list);
+
+  if(id && fbReady && fbDb){
+    const user = fbAuth && fbAuth.currentUser;
+    if(user){
+      try{
+        await fbDb.collection('servers').doc(id).set({
+          id: id,
+          name: name,
+          avatar: avatar || '',
+          ownerId: user.uid,
+          admins: [user.uid],
+          moderators: [],
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+      }catch(err){
+        console.warn('[Firestore] save server failed:', err.code, err.message);
+      }
+    }
+  }
   closeServerModal();
-  renderServers(); renderMeta(loadProfileLocal()); renderServerSwitcher();
+  renderServers(); renderMeta(loadProfileLocal());
   toast('Сервер добавлен', 'ok');
 });
-
-let spIndex = -1;
-$$('.ph-chip').forEach(chip=>{
-  chip.addEventListener('click', ()=>{
-    const id = chip.dataset.target;
-    const el = document.getElementById(id);
-    if(!el) return;
-    const pos = el.selectionStart ?? el.value.length;
-    const txt = chip.textContent.trim();
-    el.value = el.value.slice(0,pos) + txt + el.value.slice(pos);
-    el.focus();
-    el.selectionStart = el.selectionEnd = pos + txt.length;
-  });
-});
-
-function openServerPanel(index){
-  const list = loadServers();
-  const s = list[index];
-  if(!s){ toast('Сервер не найден', 'err'); return; }
-  spIndex = index;
-  const st = s.settings || {};
-  $('#spName').value = s.name || '';
-  $('#spId').value = s.id || '';
-  $('#spAvatar').value = s.avatar || '';
-  $('#spDescription').value = s.description || '';
-  $('#spDescCount').textContent = (s.description || '').length;
-  $('#spLanguage').value = st.language || 'ru';
-  $('#spLogChannel').value = st.logChannel || '';
-  $('#spWelcomeChannel').value = st.welcomeChannel || '';
-  $('#spAnnounceChannel').value = st.announceChannel || '';
-  $('#spAutoRole').value = st.autoRole || '';
-  $('#spModRole').value = st.modRole || '';
-  $('#spPrefix').value = st.prefix || '/';
-  const icon = $('#spIcon');
-  if(s.avatar) icon.innerHTML = `<img src="${escapeHTML(s.avatar)}" style="width:100%;height:100%;object-fit:cover;border-radius:12px">`;
-  else icon.innerHTML = `<i class="fa-solid fa-gear"></i>`;
-  $('#spTitle').textContent = s.name ? `Настройки · ${s.name}` : 'Настройки сервера';
-  const mods = st.modules || {};
-  const DEFAULTS_ON = ['econ','pets','mod','love','ai','welcome','logging'];
-  $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
-    const key = sw.dataset.sp;
-    const on = mods[key] !== undefined ? !!mods[key] : DEFAULTS_ON.includes(key);
-    sw.classList.toggle('on', on);
-  });
-  $('#serverPanelModal').classList.add('open');
-}
-function closeServerPanel(){ $('#serverPanelModal').classList.remove('open'); spIndex = -1; }
-$('#spClose2').addEventListener('click', closeServerPanel);
-$('#spCancel').addEventListener('click', closeServerPanel);
-$('#spDescription').addEventListener('input', e=>{ $('#spDescCount').textContent = e.target.value.length; });
-$$('#serverPanelModal .switch[data-sp]').forEach(sw=>{
-  sw.addEventListener('click', ()=> sw.classList.toggle('on'));
-});
-$('#spSave').addEventListener('click', async ()=>{
-  if(spIndex < 0){ toast('Сервер не выбран', 'err'); return; }
-  const list = loadServers();
-  const s = list[spIndex]; if(!s) return;
-  const mods = {};
-  $$('#serverPanelModal .switch[data-sp]').forEach(sw=>{ mods[sw.dataset.sp] = sw.classList.contains('on'); });
-  s.name = $('#spName').value.trim() || s.name;
-  s.id = $('#spId').value.trim() || s.id;
-  s.avatar = $('#spAvatar').value.trim();
-  s.description = $('#spDescription').value.trim();
-  s.settings = {
-    language: $('#spLanguage').value || 'ru',
-    logChannel: $('#spLogChannel').value.trim(),
-    welcomeChannel: $('#spWelcomeChannel').value.trim(),
-    announceChannel: $('#spAnnounceChannel').value.trim(),
-    autoRole: $('#spAutoRole').value.trim(),
-    modRole: $('#spModRole').value.trim(),
-    prefix: $('#spPrefix').value.trim() || '/',
-    welcomeText: $('#spWelcomeText') ? $('#spWelcomeText').value : '',
-    goodbyeText: $('#spGoodbyeText') ? $('#spGoodbyeText').value : '',
-    autoRoleDelay: 0,
-    modules: mods
-  };
-  saveServers(list);
-  renderServers(); renderMeta(loadProfileLocal()); renderServerSwitcher();
-  try{
-    if(fbReady && fbDb && s.id){
-      await fbDb.collection('servers').doc(s.id).set({
-        id: s.id, name: s.name, avatar: s.avatar, description: s.description,
-        settings: s.settings, updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-      }, { merge: true });
-      toast('Сохранено и отправлено боту', 'ok');
-    }else{
-      toast('Сохранено локально', 'warn', 2600);
-    }
-  }catch(err){ toast('Локально, но Firestore не принял', 'warn', 3600); }
-  closeServerPanel();
-});
-$('#spKick').addEventListener('click', async ()=>{
-  if(spIndex < 0) return;
-  const list = loadServers();
-  const s = list[spIndex]; if(!s) return;
-  if(!confirm(`Убрать Юрику с «${s.name}»?`)) return;
-  const sid = s.id;
-  list.splice(spIndex, 1);
-  saveServers(list);
-  renderServers(); renderMeta(loadProfileLocal()); renderServerSwitcher();
-  closeServerPanel();
-  toast('Бот убран', 'warn');
-  try{ if(sid && fbReady && fbDb) await fbDb.collection('servers').doc(sid).delete(); }catch(err){}
-});
-
 $('#shareCopy').addEventListener('click', async ()=>{
   const val = $('#shareLink').value;
   if(!val){ toast('Сначала сохрани никнейм', 'warn'); return; }
   try{ await navigator.clipboard.writeText(val); toast('Ссылка скопирована', 'ok'); }
   catch{ toast('Ошибка', 'err'); }
 });
-
 $('#deleteOpen').addEventListener('click', ()=>{
   $('#deleteModal').classList.add('open');
   $('#deleteConfirm').value = '';
@@ -4953,7 +3016,6 @@ $('#deleteConfirmBtn').addEventListener('click', async ()=>{
   $$('.modal-overlay').forEach(m=>{
     m.addEventListener('click', e=>{ if(e.target === m) m.classList.remove('open'); });
   });
-  renderServerSwitcher();
   const s = getSession();
   if(s){
     const profile = loadProfileLocal();
